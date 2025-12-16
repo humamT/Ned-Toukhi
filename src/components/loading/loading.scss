@@ -1,0 +1,62 @@
+@property --hole {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+
+  display: grid;
+  place-items: center;
+
+  // filter: blur(200px);
+
+  /* start: hole radius = 0% (fully covered) */
+  --hole: 0%;
+
+  -webkit-mask-image: radial-gradient(circle at center,
+      transparent var(--hole),
+      rgba(0, 0, 0, 0.8) calc(var(--hole) + 8%),
+      black calc(var(--hole) + 16%));
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 100% 100%;
+
+  mask-image: radial-gradient(circle at center,
+      transparent var(--hole),
+      rgba(0, 0, 0, 0.8) calc(var(--hole) + 8%),
+      black calc(var(--hole) + 16%));
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 100%;
+
+  transition: --hole 2s ease-in-out;
+}
+
+/* end: hole radius grows beyond the screen */
+.loader--exit {
+  --hole: 100%;
+}
+
+
+
+.bg-white {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+
+
+.loader-content {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  display: grid;
+  place-items: center;
+}

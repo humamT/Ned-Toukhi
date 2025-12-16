@@ -1,0 +1,42 @@
+/* orbHero.scss */
+
+.orb-hero {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  place-items: center;
+
+  pointer-events: none;
+
+  justify-content: center;
+}
+
+.orb-hero-logo {
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  z-index: 25;
+}
+
+
+.orb-hero {
+  transform: scale(1);
+  filter: brightness(1) saturate(1);
+  transition:
+    transform 1s ease-in-out,
+    filter 1s ease-in-out;
+}
+
+/* during loader fade */
+.orb-hero.exploding {
+  transform: scale(1.25);
+  filter: brightness(1.2) saturate(1.1);
+}
+
+/* return after fade */
+.orb-hero.returning {
+  transform: scale(1);
+  filter: brightness(1) saturate(1);
+}
