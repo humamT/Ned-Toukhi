@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Loading from "../../components/loading/loading.jsx";
 import Landing from "../../components/landing/landing.jsx";
 import OrbHero from "../../components/orbHero/orbHero.jsx";
+import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 
 const LOADING_DURATION = 2500;
 const EXIT_DURATION = 2000;
@@ -35,6 +36,7 @@ export default function Home() {
       <OrbHero orbState={orbState} />
       {showLoader && <Loading isLoading={isLoading} />}
       <Landing />
+      <ScrollIndicator visible={!showLoader} />
     </>
   );
 }
