@@ -6,10 +6,13 @@ import ContactPage from "./pages/contact/Contact.jsx";
 import GalleryPage from "./pages/gallery/Gallery.jsx";
 import QuotationsPage from "./pages/quotations/Quotations.jsx";
 import StorePage from "./pages/store/Store.jsx";
+import Footer from "./components/footer/footer.jsx";
+import Header from "./components/header/header.jsx";
 
 function App() {
   return (
     <BrowserRouter>
+      <Header/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -18,6 +21,7 @@ function App() {
         <Route path="/quotations" element={<QuotationsPage />} />
         <Route path="/store" element={<StorePage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

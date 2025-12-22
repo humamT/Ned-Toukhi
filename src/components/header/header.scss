@@ -1,0 +1,186 @@
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 2%;
+}
+
+.site-header__inner {
+    height: 56px;
+    // padding: 0 2%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* ensures center column width matches others */
+    align-items: center;
+}
+
+.site-header__nav {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-link {
+    // font: 500 13px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+
+    padding: 8px 10px;
+    border-radius: 5px;
+
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.nav-link.is-active {
+    background: rgba(255, 255, 255, 0.95);
+    color: #45b29d;
+}
+
+.nav-link--dropdown .chev {
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+.site-header__logo {
+    position: relative;
+    justify-self: center;
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.site-header__logo img {
+    height: 40px;
+    width: auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* spotlight behind logo */
+.logo-spotlight {
+    position: absolute;
+    top: -20px;
+    /* pull it above header */
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 320px;
+    /* wider beam */
+    height: 110px;
+    /* taller beam */
+
+    border-radius: 999px;
+    z-index: 1;
+
+    background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.6),
+            rgba(255, 255, 255, 0.4) 35%,
+            rgba(255, 255, 255, 0.18) 55%,
+            rgba(255, 255, 255, 0.0) 75%);
+
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+
+
+.site-header__right {
+    justify-self: end;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.site-header__langs {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.pill {
+    font: 600 11px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    color: rgba(255, 255, 255, 0.85);
+
+    padding: 6px 8px;
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0);
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.pill.is-active {
+    background: rgba(255, 255, 255, 0.95);
+    color: #0a1722;
+    border-color: transparent;
+}
+
+.site-header__social {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.icon {
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+
+
+    text-decoration: none;
+
+    color: rgba(255, 255, 255, 0.85);
+
+}
+
+.icon svg {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    /* or #45b29d if you want brand color */
+}
+
+.site-header__divider {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    /* cut 2% on each side */
+    margin: 0 auto;
+    /* center it */
+
+    height: 3px;
+}
+
+
+/* Main line: Home → عربي */
+.divider-main {
+    flex: 1;
+    height: 2px;
+    background: rgb(255, 255, 255);
+}
+
+/* Accent colors: after عربي → end */
+.divider-accent {
+  display: flex;
+  height: 3px;
+  width: 98px;
+}
+
+.divider-accent i {
+  flex: 1;
+}
+
+.divider-accent .c1 { background: #344e5d; }
+.divider-accent .c2 { background: #45b29d; }
+.divider-accent .c3 { background: #efca4d; }
+.divider-accent .c4 { background: #f79226; }
+.divider-accent .c5 { background: #df5b49; }
