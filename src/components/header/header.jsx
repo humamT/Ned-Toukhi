@@ -9,9 +9,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 
-export default function Header() {
+export default function Header({ visible }) {
     return (
-        <header className="site-header">
+        <header className={`site-header ${visible ? "is-visible" : ""}`}>
             <div className="site-header__inner">
                 {/* LEFT: main nav */}
                 <nav className="site-header__nav" aria-label="Primary">
@@ -24,9 +24,23 @@ export default function Header() {
                     </NavLink>
 
                     {/* Gallery dropdown comes in Step 2 */}
-                    <button className="nav-link nav-link--dropdown" type="button">
-                        Gallery <span className="chev">▾</span>
-                    </button>
+                    <div className="nav-dropdown">
+                        <button
+                            className="nav-link nav-link--dropdown"
+                            type="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Gallery <span className="chev">▾</span>
+                        </button>
+
+                        <div className="dropdown-menu" role="menu">
+                            <a href="/gallery/illustrations" role="menuitem">Illustrations</a>
+                            <a href="/gallery/featured" role="menuitem">Featured</a>
+                            <a href="/gallery/identities" role="menuitem">Identities</a>
+                        </div>
+                    </div>
+
 
                     <NavLink to="/quotations" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
                         Quotations

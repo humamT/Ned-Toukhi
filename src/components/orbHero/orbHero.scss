@@ -1,42 +1,87 @@
-/* orbHero.scss */
-
+/* BASE */
 .orb-hero {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-
-  display: flex;
-  place-items: center;
+  --orb-move-duration: 0.9s;               // how long position/scale tweens
+  --orb-move-ease: cubic-bezier(0.22, 1, 0.36, 1); // easing for moves
+  --orb-fade-duration: 0.7s;               // general opacity fades
+  --orb-transition-duration: 0.9s;         // fade-out/in on stage 0⇄1
 
   pointer-events: none;
+  opacity: 1;
+  will-change: transform, opacity, left; // hint GPU for moving props
 
-  justify-content: center;
+  transition:
+    opacity var(--orb-fade-duration) ease,                     // fades
+    left var(--orb-move-duration) var(--orb-move-ease),        // horizontal moves
+    transform var(--orb-move-duration) var(--orb-move-ease);   // scale + centering
 }
 
+/* Fade-out then fade-in used ONLY on 0<->1 boundary */
+.orb-hero.is-transitioning {
+  animation: orbFadeOutIn var(--orb-transition-duration) ease-in-out forwards; // used only for 0⇄1
+  transition:
+    opacity var(--orb-transition-duration) ease-in-out, // keep fade
+    left 0s linear,                                    // no slide during fade
+    transform 0s linear;                               // lock scale/translate during fade
+}
+
+/* out → in */
+/* Fade out quickly, then fade in */
+@keyframes orbFadeOutIn {
+  0%   { opacity: 1; }  // start visible
+  40%  { opacity: 0; }  // fade out
+  60%  { opacity: 0; }  // stay hidden (mode swap)
+  100% { opacity: 1; }  // fade back in
+}
+
+.orb-hero.is-hidden {
+  opacity: 0;
+}
+
+.orb-hero.is-visible {
+  opacity: 1;
+}
+
+/* LANDING MODE */
+.orb-hero.is-landing {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20; // sits above landing background
+}
+
+/* STAGED MODE */
+.orb-hero.is-staged {
+  position: fixed;
+  top: 50%;
+  z-index: 20; // above page content while staged
+}
+
+/* Positions */
+.orb-hero--center     { left: 50%; } // stage 0,6,9 base
+.orb-hero--right      { left: 72%; } // stage 1
+.orb-hero--left       { left: 25%; } // stage 7
+.orb-hero--left-more  { left: 22%; } // stage 8
+.orb-hero--far-left   { left: -5%; } // stages 3-5
+
+/* Scale */
+.orb-hero--scale-normal {
+  transform: translate(-50%, -50%) scale(1);    // default size
+}
+
+.orb-hero--scale-about {
+  transform: translate(-50%, -60%) scale(0.9); // smaller on contact stage
+}
+
+.orb-hero--scale-large {
+  transform: translate(-50%, -50%) scale(1.25); // bigger on stage 9
+}
+
+/* Logo */
 .orb-hero-logo {
   position: absolute;
   width: 15%;
   height: 15%;
   z-index: 25;
-}
-
-
-.orb-hero {
-  transform: scale(1);
-  filter: brightness(1) saturate(1);
-  transition:
-    transform 1s ease-in-out,
-    filter 1s ease-in-out;
-}
-
-/* during loader fade */
-.orb-hero.exploding {
-  transform: scale(1.25);
-  filter: brightness(1.2) saturate(1.1);
-}
-
-/* return after fade */
-.orb-hero.returning {
-  transform: scale(1);
-  filter: brightness(1) saturate(1);
 }

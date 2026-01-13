@@ -27,14 +27,14 @@
   z-index: 2;
   width: 60%;
   height: 60%;
-  filter: saturate(300%);
+  filter: saturate(1.5) brightness(1.1);
 }
 
-.white-orb {
-  position: absolute;
-  width: 40%;
-  height: 40%;
-  z-index: 3;
-  opacity: 1;
-  filter: blur(10px);
-}
+// .white-orb {
+//   position: absolute;
+//   width: 40%;
+//   height: 40%;
+//   z-index: 3;
+//   opacity: 1;
+//   filter: blur(10px);
+// }
