@@ -32,6 +32,7 @@ export default function ScrollStageController({
 
 
     const [stageIndex, setStageIndex] = useState(0);
+    const stageIndexRef = useRef(0); // track current stage without triggering effects
 
     // Prevent rapid wheel spam from skipping stages
     const lockRef = useRef(false);
@@ -43,6 +44,7 @@ export default function ScrollStageController({
     // Helper: change stage safely
     const goToStage = (next) => {
         const clamped = Math.max(0, Math.min(stages.length - 1, next));
+        stageIndexRef.current = clamped;
         setStageIndex(clamped);
     };
 
@@ -93,16 +95,16 @@ export default function ScrollStageController({
             // Decide direction
             if (dy > 0) {
                 // Scroll DOWN → next stage
-                if (stageIndex === stages.length - 1) {
+                if (stageIndexRef.current === stages.length - 1) {
                     // already at last stage, user keeps scrolling down:
                     // this is where we can "release" to normal scrolling later
                     onDone?.();
                     return;
                 }
-                goToStage(stageIndex + 1);
+                goToStage(stageIndexRef.current + 1);
             } else {
                 // Scroll UP → previous stage
-                goToStage(stageIndex - 1);
+                goToStage(stageIndexRef.current - 1);
             }
         };
 
@@ -111,10 +113,8 @@ export default function ScrollStageController({
 
         return () => {
             window.removeEventListener("wheel", onWheel);
-            if (lockTimeoutRef.current) clearTimeout(lockTimeoutRef.current);
-            lockRef.current = false;
         };
-    }, [enabled, stageIndex, stages.length, onDone]);
+    }, [enabled, stages.length, onDone]);
 
     // Touch support (mobile)
     useEffect(() => {
@@ -145,13 +145,13 @@ export default function ScrollStageController({
             }, TOUCH_COOLDOWN_MS);
 
             if (dy > 0) {
-                if (stageIndex === stages.length - 1) {
+                if (stageIndexRef.current === stages.length - 1) {
                     onDone?.();
                     return;
                 }
-                goToStage(stageIndex + 1);
+                goToStage(stageIndexRef.current + 1);
             } else {
-                goToStage(stageIndex - 1);
+                goToStage(stageIndexRef.current - 1);
             }
 
             // reset start so one swipe doesn't trigger multiple changes
@@ -164,11 +164,8 @@ export default function ScrollStageController({
         return () => {
             window.removeEventListener("touchstart", onTouchStart);
             window.removeEventListener("touchmove", onTouchMove);
-            if (lockTimeoutRef.current) clearTimeout(lockTimeoutRef.current);
-            lockRef.current = false;
-            touchStartYRef.current = null;
         };
-    }, [enabled, stageIndex, stages.length, onDone]);
+    }, [enabled, stages.length, onDone]);
 
     return (
         <div className="scroll-stage">

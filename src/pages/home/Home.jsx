@@ -165,7 +165,7 @@ export default function Home({ setHeaderVisible }) {
       <Landing visible={stageIndex === 0} />
 
       <ScrollStageController
-        enabled={true}
+        enabled={!isLoading}
         onStageChange={(index) => setStageIndex(index)}
       />
     </div>
