@@ -4,6 +4,7 @@ import Landing from "../../components/landing/landing.jsx";
 import OrbHero from "../../components/orbHero/orbHero.jsx";
 import ScrollStageController from "../../components/scroll-stage/ScrollStageController.jsx";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
+import StageContent from "../../components/stage-content/StageContent.jsx";
 
 /* Timings (must match orbHero.scss) */
 const LOADER_SHOW_MS = 2500;   // loader stays visible
@@ -163,6 +164,10 @@ export default function Home({ setHeaderVisible }) {
       {showLoader && <Loading isLoading={isLoading} />}
 
       <Landing visible={stageIndex === 0} />
+
+      <StageContent stageIndex={stageIndex} />
+
+      <ScrollIndicator visible={!isLoading && stageIndex !== 10} />
 
       <ScrollStageController
         enabled={!isLoading}

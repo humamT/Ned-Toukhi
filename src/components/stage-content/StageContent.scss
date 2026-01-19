@@ -1,0 +1,160 @@
+.stage-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* Base stage styling */
+.stage-content__stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    pointer-events: none;
+
+    &.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* STAGE 1: Boutique intro */
+.stage-content__stage-1 {
+    justify-content: center;
+    //   gap: 5rem;
+    padding: 0 5vw;
+}
+
+.stage-1__orb-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 72%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+// .stage-1__text-section {
+//     display: flex;
+//     align-items: center;
+//     //   gap: 2rem;
+//     position: relative;
+// }
+
+.stage-1__main-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.stage-1__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage-1__title-en {
+    font-size: 80px;
+    font-family: 'Diodrum Arabic';
+    color: white;
+    line-height: 1;
+    translate: 22%;
+}
+
+.stage-1__title-ar {
+    font-size: 80px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 400;
+    color: white;
+    line-height: 1;
+}
+
+.stage-1__title-fr {
+    font-size: 80px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 400;
+    color: white;
+    line-height: 1;
+    translate: 35%;
+}
+
+.stage-1__subtitle {
+    font-size: 15px;
+    width: 60%;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    margin-top: 2rem;
+    line-height: 1.4;
+    font-family: 'Diodrum Arabic';
+}
+
+.shop-now {
+    margin-top: 1.5rem;
+    color: white;
+    font-size: 1.1rem;
+    padding: 0 10% 2% 10%;
+    background: none;
+    border-radius: 30px;
+    border-color: white;
+    border-style: solid;
+    font-family: "Diodrum Arabic";
+    font-weight: 600;
+}
+
+.stage-1__sticker {
+    translate: -5% -15%;
+    width: 40%;
+    height: auto;
+    object-fit: contain;
+    animation: stickerBounce 15s ease-in-out infinite;
+}
+
+@keyframes stickerBounce {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+.stage-1__posters-section {
+    position: absolute;
+    left: 6vw;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 12;
+}
+
+.stage-1__posters {
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    animation: postersHover 15s ease-in-out infinite;
+}
+
+@keyframes postersHover {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+}
