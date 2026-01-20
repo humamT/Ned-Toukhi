@@ -2,6 +2,7 @@
 .orb-hero {
   --orb-move-duration: 0.9s; // how long position/scale tweens
   --orb-move-ease: cubic-bezier(0.22, 1, 0.36, 1); // easing for moves
+  --orb-move-delay: 0.4s; // delay orb movement to start after content fade-out
   --orb-fade-duration: 0.7s; // general opacity fades
   --orb-transition-duration: 0.9s; // fade-out/in on stage 0⇄1
   --orb-size: 66vw; // default size for staged mode
@@ -12,8 +13,8 @@
 
   transition:
     opacity var(--orb-fade-duration) ease, // fades
-    left var(--orb-move-duration) var(--orb-move-ease), // horizontal moves
-    transform var(--orb-move-duration) var(--orb-move-ease); // scale + centering
+    left var(--orb-move-duration) var(--orb-move-ease) var(--orb-move-delay), // horizontal moves with delay
+    transform var(--orb-move-duration) var(--orb-move-ease) var(--orb-move-delay); // scale + centering with delay
 }
 
 /* Fade-out then fade-in used ONLY on 0<->1 boundary */
@@ -91,7 +92,7 @@
 
 // stage 1
 .orb-hero--left {
-  left: 40%;
+  left: 35%;
 }
 
 // stage 7
@@ -108,15 +109,15 @@
 
 /* Scale */
 .orb-hero--scale-normal {
-  transform: translate(-50%, -50%) scale(1); // default size
+  transform: translate(-50%, -50%) scale(1.5); // default size
 }
 
 .orb-hero--scale-about {
-  transform: translate(-50%, -60%) scale(0.9); // smaller on contact stage
+  transform: translate(-60%, -60%) scale(1); // smaller on contact stage
 }
 
 .orb-hero--scale-large {
-  transform: translate(-50%, -50%) scale(1.25); // bigger on stage 9
+  transform: translate(-50%, -50%) scale(1.55); // bigger on stage 9
 }
 
 /* Logo */
