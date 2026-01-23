@@ -78,6 +78,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
 }
 
 .stage-1__title {
@@ -121,17 +122,21 @@
     margin-top: 2rem;
     line-height: 1.4;
     font-family: 'Diodrum Arabic';
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
 }
 
 .shop-now {
     margin-top: 1.5rem;
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
     color: white;
-    font-size: 1.15rem;
-    padding: 0 10% 2% 10%;
+    font-size: 2rem;
+    line-height: 1.5;
+    padding: 0% 20%;
     background: none;
-    border-radius: 30px;
+    border-radius: 60px;
     border-color: white;
     border-style: solid;
+    border-width: 2px;
     font-family: "Diodrum Arabic";
     font-weight: 600;
 }
@@ -182,3 +187,430 @@
         transform: translateY(-30px);
     }
 }
+
+// =========================== -stage 2- ===========================  //
+
+.stage-2__orb-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.stage-2__main-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.stage-2__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage-2__title-en {
+    font-size: 100px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+}
+
+.stage-2__title-ar {
+    font-size: 100px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+    translate: -20%;
+}
+
+.stage-2__title-fr {
+    font-size: 100px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+    margin-top: 10px;
+}
+
+.stage-2__subtitle {
+    font-size: 25px;
+    width: 50%;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    margin-top: 2rem;
+    line-height: 1.4;
+    font-family: 'Diodrum Arabic';
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.explore-now {
+    margin-top: 1.5rem;
+    color: white;
+    font-size: 2rem;
+    line-height: 1.5;
+    padding: 0% 10%;
+    background: none;
+    border-radius: 60px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+    font-family: "Diodrum Arabic";
+    font-weight: 600;
+}
+
+.gallery-orbs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.gallery1 {
+    width: 40%;
+    translate: 40% -125%;
+    background-image: url("../../assets/PNGS+SVGs/1.png");
+    animation: float 6s ease-in-out infinite;
+
+}
+
+.gallery2 {
+    width: 20%;
+    translate: 100% -20%;
+    background-image: url("../../assets/PNGS+SVGs/2.png");
+    animation: float 4s ease-in-out infinite;
+}
+
+.gallery3 {
+    width: 40%;
+    translate: -160% -65%;
+    background-image: url("../../assets/PNGS+SVGs/4.png");
+    animation: float 8s ease-in-out infinite;
+}
+
+.gallery4 {
+    width: 20%;
+    translate: -170% -270%;
+    background-image: url("../../assets/PNGS+SVGs/5.png");
+    animation: float 10s ease-in-out infinite;
+}
+
+// =========================== -stage 3 - Gallery Tab 1- ===========================  //
+
+
+.stage-3__orb-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    left: 9.5%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.stage-3__main-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    translate: 20%;
+}
+
+.stage-3__title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stage-3__title-en {
+    font-size: 100px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+}
+
+.stage-3__title-ar {
+    font-size: 100px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+    // translate: -20%;
+}
+
+.stage-3__title-fr {
+    font-size: 100px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+    margin-top: 10px;
+}
+
+.explore-now-tabs {
+    translate: 20%;
+    margin-top: 1.5rem;
+    color: white;
+    font-size: 2rem;
+    line-height: 1.5;
+    padding: 0% 13%;
+    background: none;
+    border-radius: 60px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+    font-family: "Diodrum Arabic";
+    font-weight: 600;
+}
+
+.tabs-rectangles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    gap: 5.5rem;
+    top: 55%;
+    left: 50%;
+    transform: translate(95%, -50%);
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    filter: brightness(0.95);
+}
+
+.tab-rectangle1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -20%;
+    width: 320px;
+    height: 150px;
+    pointer-events: auto;
+    // cursor: pointer;
+}
+
+.tab-rectangle2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -2.3%;
+    width: 320px;
+    height: 150px;
+    pointer-events: auto;
+    // cursor: pointer;
+}
+
+.tab-rectangle3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -20%;
+    width: 320px;
+    height: 150px;
+    pointer-events: auto;
+    // cursor: pointer;
+}
+
+.illustrationsBox {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    position: absolute;
+    z-index: 22;
+}
+
+.featuredBox {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    position: absolute;
+    z-index: 22;
+}
+
+.identitiesBox {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    position: absolute;
+    z-index: 22;
+}
+
+.illustrations-txt,
+.featured-txt,
+.identities-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 23;
+    font-size: 24px;
+    font-family: 'Diodrum Arabic';
+    font-weight: 500;
+    color: white;
+    line-height: 1.5;
+    position: absolute;
+    transform: translate(-50%, -15%);
+    pointer-events: none;
+    text-align: center;
+}
+
+.illustrations-en{
+    translate: 10%;
+}
+.illustrations-ar{
+    translate: 50%;
+}
+.illustrations-fr{
+    translate: 80%;
+}
+
+.featured-en{
+    // translate: 45% -30%;
+    translate: 45% ;
+}
+.featured-ar{
+    translate: 38%;
+}
+.featured-fr{
+    // translate: 34% 30%;
+    translate: 30% ;
+}
+
+.identities-en{
+    translate: 125%;
+}
+.identities-ar{
+    translate: 80%;
+}
+.identities-fr{
+    translate: 40%;
+}
+
+.click-txt{
+    z-index: 30;
+    width: 35%;
+    height: auto;
+    font-size: 123%;
+    font-family: 'Diodrum Arabic';
+    font-weight: 400;
+    color: rgb(0, 0, 0);
+    fill: rgb(0, 0, 0);
+    position: absolute;
+    pointer-events: none;
+    /* offsets injected per tab below */
+    --click-txt-x: 0%;
+    --click-txt-y: 0%;
+    transform: translate(var(--click-txt-x), var(--click-txt-y)) rotate(0deg);
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    animation: clickTxt 20s linear infinite;
+}
+
+.tab-rectangle1 .click-txt {
+    --click-txt-x: 90%;
+    --click-txt-y: -15%;
+}
+
+.tab-rectangle2 .click-txt {
+    --click-txt-x: 105%;
+    --click-txt-y: -15%;
+}
+
+.tab-rectangle3 .click-txt {
+    --click-txt-x: 110%;
+    --click-txt-y: -45%;
+}
+
+@keyframes clickTxt {
+    to {
+        transform: translate(var(--click-txt-x), var(--click-txt-y)) rotate(360deg);
+    }
+}
+
+.click1{
+    z-index: 23;
+    width: 35%;
+    height: auto;
+    position: absolute;
+    transform: translate(90%, -15%);
+    pointer-events: auto;
+    // cursor: pointer;
+}
+
+.click2{
+    z-index: 23;
+    width: 35%;
+    height: auto;
+    position: absolute;
+    transform: translate(105%, -15%);
+    pointer-events: auto;
+    // cursor: pointer;
+}
+
+.click3 {
+    z-index: 23;
+    width: 35%;
+    height: auto;
+    position: absolute;
+    transform: translate(110%, -45%);
+    pointer-events: auto;
+    // cursor: pointer;
+}
+
+.tabs-all-lines {
+    position: absolute;
+    top: -58%;
+    translate: -30%;
+    width: 230%;
+    height: auto;
+    pointer-events: none;
+}
+
+.lines{
+    position: absolute;
+}
+
+
+.tab-teal-line{
+    // filter: brightness(0.8);
+}
+
+// .tabs-colored-lines{
+//     position: absolute;
+//     translate: 50% 0%;
+//     width: 100%;
+//     height: auto;
+//     pointer-events: none;
+// }
