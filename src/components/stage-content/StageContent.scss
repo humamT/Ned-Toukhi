@@ -321,7 +321,7 @@
     animation: float 10s ease-in-out infinite;
 }
 
-// =========================== -stage 3 - Gallery Tab 1- ===========================  //
+// =========================== -stage 3/4/5 - Gallery Tab 1- ===========================  //
 
 
 .stage-3__orb-content {
@@ -420,6 +420,7 @@
     // cursor: pointer;
 }
 
+
 .tab-rectangle2 {
     display: flex;
     align-items: center;
@@ -442,6 +443,39 @@
     height: 150px;
     pointer-events: auto;
     // cursor: pointer;
+}
+
+.tab-rectangle1,
+.tab-rectangle2,
+.tab-rectangle3 {
+    &.not-stage {
+        animation: rectangleOpacitylow 1s ease forwards;
+        pointer-events: auto;
+    }
+
+    &:not(.not-stage) {
+        animation: rectangleOpacityhigh 1s ease forwards;
+    }
+}
+
+@keyframes rectangleOpacitylow {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.5;
+    }
+}
+
+@keyframes rectangleOpacityhigh {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .illustrationsBox {
@@ -486,39 +520,45 @@
     text-align: center;
 }
 
-.illustrations-en{
+.illustrations-en {
     translate: 10%;
 }
-.illustrations-ar{
+
+.illustrations-ar {
     translate: 50%;
 }
-.illustrations-fr{
+
+.illustrations-fr {
     translate: 80%;
 }
 
-.featured-en{
+.featured-en {
     // translate: 45% -30%;
-    translate: 45% ;
+    translate: 45%;
 }
-.featured-ar{
+
+.featured-ar {
     translate: 38%;
 }
-.featured-fr{
+
+.featured-fr {
     // translate: 34% 30%;
-    translate: 30% ;
+    translate: 30%;
 }
 
-.identities-en{
+.identities-en {
     translate: 125%;
 }
-.identities-ar{
+
+.identities-ar {
     translate: 80%;
 }
-.identities-fr{
+
+.identities-fr {
     translate: 40%;
 }
 
-.click-txt{
+.click-txt {
     z-index: 30;
     width: 35%;
     height: auto;
@@ -535,8 +575,19 @@
     transform: translate(var(--click-txt-x), var(--click-txt-y)) rotate(0deg);
     transform-origin: 50% 50%;
     transform-box: fill-box;
-    animation: clickTxt 20s linear infinite;
+    // animation: clickTxt 20s linear infinite;
+
+    &.not-stage-txt {
+        animation: clickOpacitylow 1s ease forwards, clickTxt 20s linear infinite;
+        pointer-events: none;
+    }
+
+    &:not(.not-stage-txt) {
+        animation: clickOpacityhigh 1s ease forwards, clickTxt 20s linear infinite;
+    }
 }
+
+
 
 .tab-rectangle1 .click-txt {
     --click-txt-x: 90%;
@@ -559,7 +610,7 @@
     }
 }
 
-.click1{
+.click1 {
     z-index: 23;
     width: 35%;
     height: auto;
@@ -569,7 +620,7 @@
     // cursor: pointer;
 }
 
-.click2{
+.click2 {
     z-index: 23;
     width: 35%;
     height: auto;
@@ -589,6 +640,39 @@
     // cursor: pointer;
 }
 
+.click1,
+.click2,
+.click3 {
+    &.not-stage-txt {
+        animation: clickOpacitylow 1s ease forwards;
+        pointer-events: none;
+    }
+
+    &:not(.not-stage-txt) {
+        animation: clickOpacityhigh 1s ease forwards;
+    }
+}
+
+@keyframes clickOpacitylow {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes clickOpacityhigh {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 .tabs-all-lines {
     position: absolute;
     top: -58%;
@@ -598,14 +682,43 @@
     pointer-events: none;
 }
 
-.lines{
+.lines {
     position: absolute;
+
+    &.not-stage-line {
+        animation: lineOpacitylow 1s ease forwards;
+        pointer-events: auto;
+    }
+
+    &:not(.not-stage-line) {
+        animation: lineOpacityhigh 1s ease forwards;
+    }
 }
 
+@keyframes lineOpacitylow {
+    from {
+        filter: brightness(1);
+    }
 
-.tab-teal-line{
-    // filter: brightness(0.8);
+    to {
+        filter: brightness(0.5);
+    }
 }
+
+@keyframes lineOpacityhigh {
+    from {
+        filter: brightness(0.5);
+    }
+
+    to {
+        filter: brightness(1);
+    }
+}
+
+// .not-stage-txt {
+//     display: none;
+// }
+
 
 // .tabs-colored-lines{
 //     position: absolute;

@@ -22,6 +22,10 @@ export default function StageContent({ stageIndex }) {
     const isStage1 = stageIndex === 1;
     const isStage2 = stageIndex === 2;
     const isStage3 = stageIndex === 3;
+    const isStage4 = stageIndex === 4;
+    const isStage5 = stageIndex === 5;
+    const isStage6 = stageIndex === 6;
+    const isStage7 = stageIndex === 7;
 
     return (
         <div className="stage-content">
@@ -75,9 +79,9 @@ export default function StageContent({ stageIndex }) {
                 </div>
             </div>
 
-            {/* STAGE 3: Gallery Tab 1 */}
+            {/* STAGE 3-4-5: Gallery Tab 1 */}
 
-            <div className={`stage-content__stage stage-content__stage-3 ${isStage3 ? "is-visible" : ""}`}>
+            <div className={`stage-content__stage stage-content__stage-3 ${isStage3 || isStage4 || isStage5 ? "is-visible" : ""}`}>
                 <div className="stage-3__orb-content">
                     <div className="stage-3__main-text">
                         <div className="stage-3__title">
@@ -89,7 +93,8 @@ export default function StageContent({ stageIndex }) {
                     <a className="explore-now-tabs">Explore NOW!</a>
 
                     <div className="tabs-rectangles">
-                        <div className="tab-rectangle1">
+                        {/* 1st row of tabs */}
+                        <div className={`tab-rectangle1 ${ isStage4 || isStage5 ? "not-stage" : ""}`}>
                             <img className="illustrationsBox" src={illustrationsBox} alt="illustrations Box" />
                             <div className="illustrations-txt">
                                 <div className="illustrations-en">Illustrations</div>
@@ -97,7 +102,7 @@ export default function StageContent({ stageIndex }) {
                                 <div className="illustrations-fr">Dessins</div>
                             </div>
                             <svg
-                                className="click-txt"
+                                className={`click-txt ${ isStage4 || isStage5 ? "not-stage-txt" : ""}`}
                                 viewBox="0 0 200 200"
                                 aria-hidden="true"
                                 role="img"
@@ -114,9 +119,10 @@ export default function StageContent({ stageIndex }) {
                                     </textPath>
                                 </text>
                             </svg>
-                            <img className="click1" src={click1} alt="illustrations Box clickable circle" />
+                            <img className={`click1 ${ isStage4 || isStage5 ? "not-stage-txt" : ""}`} src={click1} alt="illustrations Box clickable circle" />
                         </div>
-                        <div className="tab-rectangle2">
+                        {/* 2nd row of tabs */}
+                        <div className={`tab-rectangle2 ${ isStage3 || isStage5 ? "not-stage" : ""}`}>
                             <img className="featuredBox" src={featuredBox} alt="featured Box" />
                             <div className="featured-txt">
                                 <div className="featured-en">Featured</div>
@@ -125,7 +131,7 @@ export default function StageContent({ stageIndex }) {
                             </div>
 
                             <svg
-                                className="click-txt"
+                                className={`click-txt ${ isStage3 || isStage5 ? "not-stage-txt" : ""}`}
                                 viewBox="0 0 200 200"
                                 aria-hidden="true"
                                 role="img"
@@ -143,9 +149,10 @@ export default function StageContent({ stageIndex }) {
                                 </text>
                             </svg>
 
-                            <img className="click2" src={click2} alt="featured Box clickable circle" />
+                            <img className={`click2 ${ isStage3 || isStage5 ? "not-stage-txt" : ""}`} src={click2} alt="featured Box clickable circle" />
                         </div>
-                        <div className="tab-rectangle3">
+                        {/* 3rd row of tabs  */}
+                        <div className={`tab-rectangle3 ${ isStage3 || isStage4 ? "not-stage" : ""}`}>
                             <img className="identitiesBox" src={identitiesBox} alt="identities Box" />
                             <div className="identities-txt">
                                 <div className="identities-en">Identities</div>
@@ -153,7 +160,7 @@ export default function StageContent({ stageIndex }) {
                                 <div className="identities-fr">Charts graphiques</div>
                             </div>
                             <svg
-                                className="click-txt"
+                                className={`click-txt ${ isStage3 || isStage4 ? "not-stage-txt" : ""}`}
                                 viewBox="0 0 200 200"
                                 aria-hidden="true"
                                 role="img"
@@ -170,16 +177,16 @@ export default function StageContent({ stageIndex }) {
                                     </textPath>
                                 </text>
                             </svg>
-                            <img className="click3" src={click3} alt="identities Box clickable circle" />
+                            <img className={`click3 ${ isStage3 || isStage4 ? "not-stage-txt" : ""}`} src={click3} alt="identities Box clickable circle" />
                         </div>
                     </div>
 
                     <div className="tabs-all-lines">
                         <img className="white-line lines" src={whiteLine} alt="" />
 
-                        <img className="tab-yellow-line lines" src={yellowLine} alt="" />
-                        <img className="tab-red-line lines" src={redLine} alt="" />
-                        <img className="tab-teal-line lines" src={tealLine} alt="" />
+                        <img className={`tab-yellow-line lines ${ isStage4 || isStage5 ? "not-stage-line" : ""}`} src={yellowLine} alt="" />
+                        <img className={`tab-red-line lines ${ isStage3 || isStage5 ? "not-stage-line" : ""}`} src={redLine} alt="" />
+                        <img className={`tab-teal-line lines ${ isStage3 || isStage4 ? "not-stage-line" : ""}`} src={tealLine} alt="" />
 
                     </div>
                 </div>
