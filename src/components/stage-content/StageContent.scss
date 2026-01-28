@@ -729,20 +729,20 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &.slide-up-fade-out {
-        animation: slideUpFadeOut 0.6s $transition-ease forwards;
+        animation: slideUpFadeOut 0.2s $transition-ease forwards;
         pointer-events: none;
     }
 
     &.slide-up-fade-in {
-        animation: slideUpFadeIn 0.6s $transition-ease forwards;
+        animation: slideUpFadeIn 0.4s $transition-ease forwards;
     }
 
     &.slide-down-fade-in {
-        animation: slideDownFadeIn 0.6s $transition-ease forwards;
+        animation: slideDownFadeIn 0.4s $transition-ease forwards;
     }
 
     &.slide-down-fade-out {
-        animation: slideDownFadeOut 0.6s $transition-ease forwards;
+        animation: slideDownFadeOut 0.2s $transition-ease forwards;
         pointer-events: none;
     }
 
@@ -1010,123 +1010,89 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideUpFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideUpFadeOutA 0.7s $transition-ease forwards;
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideUpFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideUpFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideUpFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideUpFadeOutB 0.7s $transition-ease forwards;
         }
+
     }
 
     &.slide-down-fade-in {
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideDownFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideDownFadeInA 0.7s $transition-ease forwards;
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideDownFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideDownFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideDownFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideDownFadeInB 0.7s $transition-ease forwards;
         }
+
     }
 
     &.slide-down-fade-out {
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideDownFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideDownFadeOutA 0.7s $transition-ease forwards;
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideDownFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideDownFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideDownFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideDownFadeOutB 0.7s $transition-ease forwards;
         }
+
     }
 
     &.slide-up-fade-in {
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideUpFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideUpFadeInA 0.7s $transition-ease forwards;
+
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideUpFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideUpFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideUpFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideUpFadeInB 0.7s $transition-ease forwards;
+
         }
+
     }
 }
