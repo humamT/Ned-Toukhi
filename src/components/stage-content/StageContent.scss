@@ -1,3 +1,18 @@
+// ========================================
+// Variables
+// ========================================
+$primary-font: 'Diodrum Arabic';
+$text-shadow-base: 0 0px 50px rgba(0, 0, 0, 0.5);
+$title-size: 100px;
+$subtitle-size: 25px;
+$button-size: 2rem;
+$border-radius-button: 60px;
+$border-radius-card: 24px;
+$transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+// ========================================
+// Base Container
+// ========================================
 .stage-content {
     position: fixed;
     top: 0;
@@ -8,7 +23,9 @@
     z-index: 20;
 }
 
-/* Base stage styling */
+// ========================================
+// Base Stage Styling
+// ========================================
 .stage-content__stage {
     position: absolute;
     inset: 0;
@@ -28,6 +45,9 @@
     }
 }
 
+// ========================================
+// Base Animations
+// ========================================
 @keyframes stageContentFadeOut {
     from {
         opacity: 1;
@@ -48,10 +68,12 @@
     }
 }
 
-/* STAGE 1: Boutique intro */
+
+// ========================================
+// STAGE 1: Boutique Intro
+// ========================================
 .stage-content__stage-1 {
     justify-content: center;
-    //   gap: 5rem;
     padding: 0 5vw;
 }
 
@@ -67,18 +89,11 @@
     pointer-events: none;
 }
 
-// .stage-1__text-section {
-//     display: flex;
-//     align-items: center;
-//     //   gap: 2rem;
-//     position: relative;
-// }
-
 .stage-1__main-text {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    text-shadow: $text-shadow-base;
 }
 
 .stage-1__title {
@@ -87,57 +102,47 @@
     align-items: center;
 }
 
-.stage-1__title-en {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
+.stage-1__title-en,
+.stage-1__title-ar,
+.stage-1__title-fr {
+    font-size: $title-size;
+    font-family: $primary-font;
     font-weight: 500;
     color: white;
     line-height: 1;
+}
+
+.stage-1__title-en {
     translate: 22%;
 }
 
-.stage-1__title-ar {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
-    font-weight: 500;
-    color: white;
-    line-height: 1;
-}
-
 .stage-1__title-fr {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
-    font-weight: 500;
-    color: white;
-    line-height: 1;
     translate: 35%;
 }
 
 .stage-1__subtitle {
-    font-size: 25px;
+    font-size: $subtitle-size;
     width: 80%;
     text-align: center;
     font-weight: 400;
     color: white;
     margin-top: 2rem;
     line-height: 1.4;
-    font-family: 'Diodrum Arabic';
-    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    font-family: $primary-font;
+    text-shadow: $text-shadow-base;
 }
 
 .shop-now {
     margin-top: 1.5rem;
-    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    text-shadow: $text-shadow-base;
     color: white;
-    font-size: 2rem;
+    font-size: $button-size;
     line-height: 1.5;
     padding: 0% 20%;
     background: none;
-    border-radius: 60px;
-    border-color: white;
-    border-style: solid;
-    border-width: 2px;
-    font-family: "Diodrum Arabic";
+    border-radius: $border-radius-button;
+    border: 2px solid white;
+    font-family: $primary-font;
     font-weight: 600;
 }
 
@@ -188,8 +193,10 @@
     }
 }
 
-// =========================== -stage 2- ===========================  //
 
+// ========================================
+// STAGE 2: Gallery Introduction
+// ========================================
 .stage-2__orb-content {
     display: flex;
     flex-direction: column;
@@ -206,7 +213,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    text-shadow: $text-shadow-base;
 }
 
 .stage-2__title {
@@ -215,59 +222,50 @@
     align-items: center;
 }
 
-.stage-2__title-en {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
+.stage-2__title-en,
+.stage-2__title-ar,
+.stage-2__title-fr {
+    font-size: $title-size;
+    font-family: $primary-font;
     font-weight: 500;
     color: white;
     line-height: 1;
 }
 
 .stage-2__title-ar {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
-    font-weight: 500;
-    color: white;
-    line-height: 1;
     translate: -20%;
 }
 
 .stage-2__title-fr {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
-    font-weight: 500;
-    color: white;
-    line-height: 1;
     margin-top: 10px;
 }
 
 .stage-2__subtitle {
-    font-size: 25px;
+    font-size: $subtitle-size;
     width: 50%;
     text-align: center;
     font-weight: 400;
     color: white;
     margin-top: 2rem;
     line-height: 1.4;
-    font-family: 'Diodrum Arabic';
-    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    font-family: $primary-font;
+    text-shadow: $text-shadow-base;
 }
 
 .explore-now {
     margin-top: 1.5rem;
     color: white;
-    font-size: 2rem;
+    font-size: $button-size;
     line-height: 1.5;
     padding: 0% 10%;
     background: none;
-    border-radius: 60px;
-    border-color: white;
-    border-style: solid;
-    border-width: 2px;
-    font-family: "Diodrum Arabic";
+    border-radius: $border-radius-button;
+    border: 2px solid white;
+    font-family: $primary-font;
     font-weight: 600;
 }
 
+// Gallery Orbs
 .gallery-orbs {
     display: flex;
     align-items: center;
@@ -279,16 +277,14 @@
 }
 
 @keyframes float {
-    0% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
 
     50% {
         transform: translateY(-20px);
-    }
-
-    100% {
-        transform: translateY(0);
     }
 }
 
@@ -297,7 +293,6 @@
     translate: 40% -125%;
     background-image: url("../../assets/PNGS+SVGs/1.png");
     animation: float 6s ease-in-out infinite;
-
 }
 
 .gallery2 {
@@ -321,9 +316,10 @@
     animation: float 10s ease-in-out infinite;
 }
 
-// =========================== -stage 3/4/5 - Gallery Tab 1- ===========================  //
 
-
+// ========================================
+// STAGE 3/4/5: Gallery Tabs
+// ========================================
 .stage-3__orb-content {
     display: flex;
     flex-direction: column;
@@ -340,7 +336,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    text-shadow: $text-shadow-base;
     translate: 20%;
 }
 
@@ -350,29 +346,17 @@
     align-items: flex-start;
 }
 
-.stage-3__title-en {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
+.stage-3__title-en,
+.stage-3__title-ar,
+.stage-3__title-fr {
+    font-size: $title-size;
+    font-family: $primary-font;
     font-weight: 500;
     color: white;
     line-height: 1;
-}
-
-.stage-3__title-ar {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
-    font-weight: 500;
-    color: white;
-    line-height: 1;
-    // translate: -20%;
 }
 
 .stage-3__title-fr {
-    font-size: 100px;
-    font-family: 'Diodrum Arabic';
-    font-weight: 500;
-    color: white;
-    line-height: 1;
     margin-top: 10px;
 }
 
@@ -380,18 +364,17 @@
     translate: 20%;
     margin-top: 1.5rem;
     color: white;
-    font-size: 2rem;
+    font-size: $button-size;
     line-height: 1.5;
     padding: 0% 13%;
     background: none;
-    border-radius: 60px;
-    border-color: white;
-    border-style: solid;
-    border-width: 2px;
-    font-family: "Diodrum Arabic";
+    border-radius: $border-radius-button;
+    border: 2px solid white;
+    font-family: $primary-font;
     font-weight: 600;
 }
 
+// Tab Rectangles
 .tabs-rectangles {
     display: flex;
     flex-direction: column;
@@ -408,46 +391,17 @@
     filter: brightness(0.95);
 }
 
-.tab-rectangle1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: -20%;
-    width: 320px;
-    height: 150px;
-    pointer-events: auto;
-    // cursor: pointer;
-}
-
-
-.tab-rectangle2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: -2.3%;
-    width: 320px;
-    height: 150px;
-    pointer-events: auto;
-    // cursor: pointer;
-}
-
-.tab-rectangle3 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: -20%;
-    width: 320px;
-    height: 150px;
-    pointer-events: auto;
-    // cursor: pointer;
-}
-
 .tab-rectangle1,
 .tab-rectangle2,
 .tab-rectangle3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 320px;
+    height: 150px;
+    pointer-events: auto;
+
     &.not-stage {
         animation: rectangleOpacitylow 1s ease forwards;
         pointer-events: auto;
@@ -458,19 +412,31 @@
     }
 }
 
+.tab-rectangle1 {
+    left: -20%;
+}
+
+.tab-rectangle2 {
+    left: -2.3%;
+}
+
+.tab-rectangle3 {
+    left: -20%;
+}
+
 @keyframes rectangleOpacitylow {
     from {
         opacity: 1;
     }
 
     to {
-        opacity: 0.5;
+        opacity: 0.3;
     }
 }
 
 @keyframes rectangleOpacityhigh {
     from {
-        opacity: 0.5;
+        opacity: 0.3;
     }
 
     to {
@@ -478,22 +444,9 @@
     }
 }
 
-.illustrationsBox {
-    width: 100%;
-    height: auto;
-    margin-bottom: 2rem;
-    position: absolute;
-    z-index: 22;
-}
-
-.featuredBox {
-    width: 100%;
-    height: auto;
-    margin-bottom: 2rem;
-    position: absolute;
-    z-index: 22;
-}
-
+// Tab Box Images
+.illustrationsBox,
+.featuredBox,
 .identitiesBox {
     width: 100%;
     height: auto;
@@ -502,6 +455,7 @@
     z-index: 22;
 }
 
+// Tab Text Labels
 .illustrations-txt,
 .featured-txt,
 .identities-txt {
@@ -510,7 +464,7 @@
     align-items: flex-start;
     z-index: 23;
     font-size: 24px;
-    font-family: 'Diodrum Arabic';
+    font-family: $primary-font;
     font-weight: 500;
     color: white;
     line-height: 1.5;
@@ -533,7 +487,6 @@
 }
 
 .featured-en {
-    // translate: 45% -30%;
     translate: 45%;
 }
 
@@ -542,7 +495,6 @@
 }
 
 .featured-fr {
-    // translate: 34% 30%;
     translate: 30%;
 }
 
@@ -558,24 +510,23 @@
     translate: 40%;
 }
 
+// Click Text
 .click-txt {
     z-index: 30;
     width: 35%;
     height: auto;
     font-size: 123%;
-    font-family: 'Diodrum Arabic';
+    font-family: $primary-font;
     font-weight: 400;
     color: rgb(0, 0, 0);
     fill: rgb(0, 0, 0);
     position: absolute;
     pointer-events: none;
-    /* offsets injected per tab below */
     --click-txt-x: 0%;
     --click-txt-y: 0%;
     transform: translate(var(--click-txt-x), var(--click-txt-y)) rotate(0deg);
     transform-origin: 50% 50%;
     transform-box: fill-box;
-    // animation: clickTxt 20s linear infinite;
 
     &.not-stage-txt {
         animation: clickOpacitylow 1s ease forwards, clickTxt 20s linear infinite;
@@ -586,8 +537,6 @@
         animation: clickOpacityhigh 1s ease forwards, clickTxt 20s linear infinite;
     }
 }
-
-
 
 .tab-rectangle1 .click-txt {
     --click-txt-x: 90%;
@@ -610,39 +559,16 @@
     }
 }
 
-.click1 {
-    z-index: 23;
-    width: 35%;
-    height: auto;
-    position: absolute;
-    transform: translate(90%, -15%);
-    pointer-events: auto;
-    // cursor: pointer;
-}
-
-.click2 {
-    z-index: 23;
-    width: 35%;
-    height: auto;
-    position: absolute;
-    transform: translate(105%, -15%);
-    pointer-events: auto;
-    // cursor: pointer;
-}
-
-.click3 {
-    z-index: 23;
-    width: 35%;
-    height: auto;
-    position: absolute;
-    transform: translate(110%, -45%);
-    pointer-events: auto;
-    // cursor: pointer;
-}
-
+// Click Elements
 .click1,
 .click2,
 .click3 {
+    z-index: 23;
+    width: 35%;
+    height: auto;
+    position: absolute;
+    pointer-events: auto;
+
     &.not-stage-txt {
         animation: clickOpacitylow 1s ease forwards;
         pointer-events: none;
@@ -651,6 +577,18 @@
     &:not(.not-stage-txt) {
         animation: clickOpacityhigh 1s ease forwards;
     }
+}
+
+.click1 {
+    transform: translate(90%, -15%);
+}
+
+.click2 {
+    transform: translate(105%, -15%);
+}
+
+.click3 {
+    transform: translate(110%, -45%);
 }
 
 @keyframes clickOpacitylow {
@@ -673,6 +611,7 @@
     }
 }
 
+// Tab Lines
 .tabs-all-lines {
     position: absolute;
     top: -58%;
@@ -701,13 +640,13 @@
     }
 
     to {
-        filter: brightness(0.5);
+        filter: brightness(0.9) opacity(0.95) grayscale(0.5);
     }
 }
 
 @keyframes lineOpacityhigh {
     from {
-        filter: brightness(0.5);
+        filter: brightness(0.9) opacity(0.95) grayscale(0.5);
     }
 
     to {
@@ -715,15 +654,479 @@
     }
 }
 
-// .not-stage-txt {
-//     display: none;
-// }
+
+// ========================================
+// Gallery Cards System
+// ========================================
+.gallery-content {
+    width: 100%;
+}
+
+.scroll {
+    position: absolute;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    right: -14.5%;
+    top: 10%;
+}
+
+.scroll-line {
+    width: 7%;
+    object-fit: contain;
+}
+
+.scroll-tic {
+    width: 7%;
+    object-fit: contain;
+    position: absolute;
+    top: 10%;
+}
+
+.gallery-cards {
+    display: flex;
+    justify-content: flex-end;
+    transform: translate(-20%, 0px);
+    position: relative;
+}
+
+.gallery-stack {
+    --gW: min(650px, 40vw);
+    width: var(--gW);
+    height: calc(var(--gW) * 4 / 3 - 8px);
+    position: relative;
+}
+
+// Gallery Container Animations
+.gallery-illustrations,
+.gallery-featured,
+.gallery-identities {
+    position: absolute;
+    inset: 0; // ✅ important
+    width: 100%; // ✅ important
+    height: 100%; // ✅ important
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    place-items: center;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    will-change: transform, opacity;
+    transition: opacity 0.5s ease, visibility 0s linear 0s;
+
+    &.not-stage-gallery {
+        // opacity: 0;
+        // pointer-events: none;
+        // visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    }
+
+    &.slide-up-fade-out {
+        animation: slideUpFadeOut 0.6s $transition-ease forwards;
+        pointer-events: none;
+    }
+
+    &.slide-up-fade-in {
+        animation: slideUpFadeIn 0.6s $transition-ease forwards;
+    }
+
+    &.slide-down-fade-in {
+        animation: slideDownFadeIn 0.6s $transition-ease forwards;
+    }
+
+    &.slide-down-fade-out {
+        animation: slideDownFadeOut 0.6s $transition-ease forwards;
+        pointer-events: none;
+    }
 
 
-// .tabs-colored-lines{
-//     position: absolute;
-//     translate: 50% 0%;
-//     width: 100%;
-//     height: auto;
-//     pointer-events: none;
-// }
+}
+
+@keyframes slideUpFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+}
+
+@keyframes slideDownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Spotlight Effects
+.spotlight-yellow,
+.spotlight-red,
+.spotlight-teal {
+    position: absolute;
+    width: 100%;
+    height: 75%;
+    border-radius: 50%;
+    filter: blur(300px);
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.spotlight-yellow {
+    background: #ebbe25;
+}
+
+.spotlight-red {
+    background: #e54b3e;
+}
+
+.spotlight-teal {
+    background: #08ae97;
+}
+
+
+// ========================================
+// Gallery Card Components
+// ========================================
+
+// Shared Card Base Styles
+.illustration1,
+.illustration2,
+.illustration3,
+.illustration4,
+.featured1,
+.featured2,
+.featured3,
+.featured4,
+.identities1,
+.identities2,
+.identities3,
+.identities4 {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: $border-radius-card;
+    overflow: hidden;
+}
+
+// Stagger Positions (Odd Cards)
+.illustration1,
+.illustration3,
+.featured1,
+.featured3,
+.identities1,
+.identities3 {
+    transform: translateY(70px);
+}
+
+// Stagger Positions (Even Cards)
+.illustration2,
+.illustration4,
+.featured2,
+.featured4,
+.identities2,
+.identities4 {
+    transform: translateY(-70px);
+}
+
+// Card Images and Borders
+.illustration-img,
+.illustration-border,
+.featured-img,
+.featured-border,
+.identities-img,
+.identities-border {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.illustration-img,
+.featured-img,
+.identities-img {
+    object-fit: cover;
+    z-index: 1;
+}
+
+.illustration-border,
+.featured-border,
+.identities-border {
+    z-index: 2;
+    pointer-events: none;
+}
+
+// ========================================
+// Card-Level Staggered Animations
+// ========================================
+
+// Exit Forward (Up + Fade Out)
+@keyframes cardSlideUpFadeOutA {
+    from {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+}
+
+@keyframes cardSlideUpFadeOutB {
+    from {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-220px);
+    }
+}
+
+// Enter Forward (Down + Fade In)
+@keyframes cardSlideDownFadeInA {
+    from {
+        opacity: 0;
+        transform: translateY(180px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+}
+
+@keyframes cardSlideDownFadeInB {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+}
+
+// Exit Backward (Down + Fade Out)
+@keyframes cardSlideDownFadeOutA {
+    from {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(180px);
+    }
+}
+
+@keyframes cardSlideDownFadeOutB {
+    from {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+}
+
+// Enter Backward (Up + Fade In)
+@keyframes cardSlideUpFadeInA {
+    from {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+}
+
+@keyframes cardSlideUpFadeInB {
+    from {
+        opacity: 0;
+        transform: translateY(-220px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+}
+
+// ========================================
+// Apply Stagger Animations to Gallery Cards
+// ========================================
+.gallery-illustrations,
+.gallery-featured,
+.gallery-identities {
+    &.slide-up-fade-out {
+
+        .illustration1,
+        .featured1,
+        .identities1 {
+            animation: cardSlideUpFadeOutA 0.5s $transition-ease forwards;
+            animation-delay: 0s;
+        }
+
+        .illustration2,
+        .featured2,
+        .identities2 {
+            animation: cardSlideUpFadeOutB 0.5s $transition-ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideUpFadeOutA 0.5s $transition-ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .illustration4,
+        .featured4,
+        .identities4 {
+            animation: cardSlideUpFadeOutB 0.5s $transition-ease forwards;
+            animation-delay: 0.3s;
+        }
+    }
+
+    &.slide-down-fade-in {
+
+        .illustration1,
+        .featured1,
+        .identities1 {
+            animation: cardSlideDownFadeInA 0.5s $transition-ease forwards;
+            animation-delay: 0s;
+        }
+
+        .illustration2,
+        .featured2,
+        .identities2 {
+            animation: cardSlideDownFadeInB 0.5s $transition-ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideDownFadeInA 0.5s $transition-ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .illustration4,
+        .featured4,
+        .identities4 {
+            animation: cardSlideDownFadeInB 0.5s $transition-ease forwards;
+            animation-delay: 0.3s;
+        }
+    }
+
+    &.slide-down-fade-out {
+
+        .illustration1,
+        .featured1,
+        .identities1 {
+            animation: cardSlideDownFadeOutA 0.5s $transition-ease forwards;
+            animation-delay: 0s;
+        }
+
+        .illustration2,
+        .featured2,
+        .identities2 {
+            animation: cardSlideDownFadeOutB 0.5s $transition-ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideDownFadeOutA 0.5s $transition-ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .illustration4,
+        .featured4,
+        .identities4 {
+            animation: cardSlideDownFadeOutB 0.5s $transition-ease forwards;
+            animation-delay: 0.3s;
+        }
+    }
+
+    &.slide-up-fade-in {
+
+        .illustration1,
+        .featured1,
+        .identities1 {
+            animation: cardSlideUpFadeInA 0.5s $transition-ease forwards;
+            animation-delay: 0s;
+        }
+
+        .illustration2,
+        .featured2,
+        .identities2 {
+            animation: cardSlideUpFadeInB 0.5s $transition-ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideUpFadeInA 0.5s $transition-ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .illustration4,
+        .featured4,
+        .identities4 {
+            animation: cardSlideUpFadeInB 0.5s $transition-ease forwards;
+            animation-delay: 0.3s;
+        }
+    }
+}

@@ -1,5 +1,6 @@
-import { useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./StageContent.scss";
+
 import stickerImg from "../../assets/images/sticker-op.png";
 import postersCluster from "../../assets/images/posters-cluster.png";
 import galleryBubble from "../../assets/PNGS+SVGs/photo-pubble.svg";
@@ -14,26 +15,119 @@ import yellowLine from "../../assets/PNGS+SVGs/yellow-line.svg";
 import redLine from "../../assets/PNGS+SVGs/red-line.svg";
 import tealLine from "../../assets/PNGS+SVGs/teal-line.svg";
 
-/**
- * StageContent
- * Displays stage-specific elements that fade in/out based on stageIndex
- */
+import illustration1 from "../../assets/PNGS+SVGs/Illustrations/y1.png";
+import illustration2 from "../../assets/PNGS+SVGs/Illustrations/y2.png";
+import illustration3 from "../../assets/PNGS+SVGs/Illustrations/y3.png";
+import illustration4 from "../../assets/PNGS+SVGs/Illustrations/y4.png";
+
+import featured1 from "../../assets/PNGS+SVGs/Featured/r1.png";
+import featured2 from "../../assets/PNGS+SVGs/Featured/r2.png";
+import featured3 from "../../assets/PNGS+SVGs/Featured/r3.png";
+import featured4 from "../../assets/PNGS+SVGs/Featured/r4.png";
+
+import identities1 from "../../assets/PNGS+SVGs/Identities/g1.png";
+import identities2 from "../../assets/PNGS+SVGs/Identities/g2.png";
+import identities3 from "../../assets/PNGS+SVGs/Identities/g3.png";
+import identities4 from "../../assets/PNGS+SVGs/Identities/g4.png";
+
+import galleryborder from "../../assets/PNGS+SVGs/gallery-border-1.svg";
+import scrollBar from "../../assets/PNGS+SVGs/scroll-bar.svg";
+import scrollTic from "../../assets/PNGS+SVGs/scroll-tic.svg";
+
 export default function StageContent({ stageIndex }) {
     const isStage1 = stageIndex === 1;
     const isStage2 = stageIndex === 2;
     const isStage3 = stageIndex === 3;
     const isStage4 = stageIndex === 4;
     const isStage5 = stageIndex === 5;
-    const isStage6 = stageIndex === 6;
-    const isStage7 = stageIndex === 7;
+
+    // ----------------------------
+    // NEW: gallery animation state
+    // ----------------------------
+    const ANIM_MS = 600;
+
+    const [activeGalleryStage, setActiveGalleryStage] = useState(() =>
+        stageIndex >= 3 && stageIndex <= 5 ? stageIndex : 3
+    );
+    const [leavingGalleryStage, setLeavingGalleryStage] = useState(null);
+    const [direction, setDirection] = useState("forward");
+
+    const prevStageRef = useRef(stageIndex);
+    const activeRef = useRef(activeGalleryStage);
+    const timeoutRef = useRef(null);
+
+    useEffect(() => {
+        activeRef.current = activeGalleryStage;
+    }, [activeGalleryStage]);
+
+    useEffect(() => {
+        const prev = prevStageRef.current;
+        const next = stageIndex;
+        prevStageRef.current = next;
+
+        const wasGallery = prev >= 3 && prev <= 5;
+        const isGallery = next >= 3 && next <= 5;
+
+        if (!wasGallery && isGallery) {
+            setActiveGalleryStage(next);
+            setLeavingGalleryStage(null);
+            return;
+        }
+
+        if (!isGallery) return;
+
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+        const dir = next > prev ? "forward" : "backward";
+        setDirection(dir);
+
+        const currentActive = activeRef.current;
+
+        // 🔑 NEW: activate the new gallery IMMEDIATELY
+        setActiveGalleryStage(next);
+
+        // old one will animate out
+        setLeavingGalleryStage(currentActive);
+
+        timeoutRef.current = setTimeout(() => {
+            setLeavingGalleryStage(null);
+            timeoutRef.current = null;
+        }, ANIM_MS);
+
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, [stageIndex]);
+
+
+
+    const getGalleryClasses = (galleryStage) => {
+        const isActive = activeGalleryStage === galleryStage;
+        const isLeaving = leavingGalleryStage === galleryStage;
+
+        const hidden = !isActive && !isLeaving ? "not-stage-gallery" : "";
+
+        const leaveAnim = isLeaving
+            ? direction === "forward"
+                ? "slide-up-fade-out"
+                : "slide-down-fade-out"
+            : "";
+
+        const enterAnim =
+            isActive && leavingGalleryStage
+                ? direction === "forward"
+                    ? "slide-down-fade-in"
+                    : "slide-up-fade-in"
+                : "";
+
+        return `${hidden} ${leaveAnim} ${enterAnim}`.trim();
+    };
 
     return (
         <div className="stage-content">
-
-            {/* STAGE 1: Boutique intro */}
+            {/* STAGE 1 */}
             <div className={`stage-content__stage stage-content__stage-1 ${isStage1 ? "is-visible" : ""}`}>
                 <div className="stage-1__orb-content">
-
                     <div className="stage-1__main-text">
                         <div className="stage-1__title">
                             <div className="stage-1__title-en">Store</div>
@@ -43,20 +137,19 @@ export default function StageContent({ stageIndex }) {
                         <img src={stickerImg} alt="Sticker" className="stage-1__sticker" />
                     </div>
 
-                    <div className="stage-1__subtitle">Postcards, stickers, posters, BUY THEM ALL!,
-                        chose between a wide selection of original
-                        art projects and get them delevered.</div>
+                    <div className="stage-1__subtitle">
+                        Postcards, stickers, posters, BUY THEM ALL!, chose between a wide selection of original art
+                        projects and get them delevered.
+                    </div>
                     <a className="shop-now">Shop NOW!</a>
                 </div>
 
-                {/* Posters cluster next to the orb (left side) with hover animation */}
                 <div className="stage-1__posters-section">
                     <img src={postersCluster} alt="Posters cluster" className="stage-1__posters" />
                 </div>
             </div>
 
-            {/* STAGE 2: Gallery intro */}
-
+            {/* STAGE 2 */}
             <div className={`stage-content__stage stage-content__stage-2 ${isStage2 ? "is-visible" : ""}`}>
                 <div className="stage-2__orb-content">
                     <div className="stage-2__main-text">
@@ -66,21 +159,24 @@ export default function StageContent({ stageIndex }) {
                             <div className="stage-2__title-fr">Galerie</div>
                         </div>
                     </div>
-                    <div className="stage-2__subtitle">Discover 3 categories of %100 human-made
-                        art, from illustrations and logo designs to
-                        standout featured projects.</div>
+
+                    <div className="stage-2__subtitle">
+                        Discover 3 categories of %100 human-made art, from illustrations and logo designs to standout
+                        featured projects.
+                    </div>
+
                     <div>
                         <img className="gallery1 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                         <img className="gallery2 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                         <img className="gallery3 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                         <img className="gallery4 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                     </div>
+
                     <a className="explore-now">Explore NOW!</a>
                 </div>
             </div>
 
-            {/* STAGE 3-4-5: Gallery Tab 1 */}
-
+            {/* STAGE 3/4/5 wrapper */}
             <div className={`stage-content__stage stage-content__stage-3 ${isStage3 || isStage4 || isStage5 ? "is-visible" : ""}`}>
                 <div className="stage-3__orb-content">
                     <div className="stage-3__main-text">
@@ -92,26 +188,18 @@ export default function StageContent({ stageIndex }) {
                     </div>
                     <a className="explore-now-tabs">Explore NOW!</a>
 
+                    {/* tabs */}
                     <div className="tabs-rectangles">
-                        {/* 1st row of tabs */}
-                        <div className={`tab-rectangle1 ${ isStage4 || isStage5 ? "not-stage" : ""}`}>
+                        <div className={`tab-rectangle1 ${isStage4 || isStage5 ? "not-stage" : ""}`}>
                             <img className="illustrationsBox" src={illustrationsBox} alt="illustrations Box" />
                             <div className="illustrations-txt">
                                 <div className="illustrations-en">Illustrations</div>
                                 <div className="illustrations-ar">رسومات</div>
                                 <div className="illustrations-fr">Dessins</div>
                             </div>
-                            <svg
-                                className={`click-txt ${ isStage4 || isStage5 ? "not-stage-txt" : ""}`}
-                                viewBox="0 0 200 200"
-                                aria-hidden="true"
-                                role="img"
-                            >
+                            <svg className={`click-txt ${isStage4 || isStage5 ? "not-stage-txt" : ""}`} viewBox="0 0 200 200" aria-hidden="true" role="img">
                                 <defs>
-                                    <path
-                                        id="scroll-circle-path"
-                                        d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
-                                    />
+                                    <path id="scroll-circle-path" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
                                 </defs>
                                 <text textAnchor="middle" dominantBaseline="middle">
                                     <textPath xlinkHref="#scroll-circle-path" startOffset="50%">
@@ -119,28 +207,19 @@ export default function StageContent({ stageIndex }) {
                                     </textPath>
                                 </text>
                             </svg>
-                            <img className={`click1 ${ isStage4 || isStage5 ? "not-stage-txt" : ""}`} src={click1} alt="illustrations Box clickable circle" />
+                            <img className={`click1 ${isStage4 || isStage5 ? "not-stage-txt" : ""}`} src={click1} alt="illustrations Box clickable circle" />
                         </div>
-                        {/* 2nd row of tabs */}
-                        <div className={`tab-rectangle2 ${ isStage3 || isStage5 ? "not-stage" : ""}`}>
+
+                        <div className={`tab-rectangle2 ${isStage3 || isStage5 ? "not-stage" : ""}`}>
                             <img className="featuredBox" src={featuredBox} alt="featured Box" />
                             <div className="featured-txt">
                                 <div className="featured-en">Featured</div>
                                 <div className="featured-ar">أعمال خاصة</div>
                                 <div className="featured-fr">Sélectionnés</div>
                             </div>
-
-                            <svg
-                                className={`click-txt ${ isStage3 || isStage5 ? "not-stage-txt" : ""}`}
-                                viewBox="0 0 200 200"
-                                aria-hidden="true"
-                                role="img"
-                            >
+                            <svg className={`click-txt ${isStage3 || isStage5 ? "not-stage-txt" : ""}`} viewBox="0 0 200 200" aria-hidden="true" role="img">
                                 <defs>
-                                    <path
-                                        id="scroll-circle-path"
-                                        d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
-                                    />
+                                    <path id="scroll-circle-path" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
                                 </defs>
                                 <text textAnchor="middle" dominantBaseline="middle">
                                     <textPath xlinkHref="#scroll-circle-path" startOffset="50%">
@@ -148,28 +227,19 @@ export default function StageContent({ stageIndex }) {
                                     </textPath>
                                 </text>
                             </svg>
-
-                            <img className={`click2 ${ isStage3 || isStage5 ? "not-stage-txt" : ""}`} src={click2} alt="featured Box clickable circle" />
+                            <img className={`click2 ${isStage3 || isStage5 ? "not-stage-txt" : ""}`} src={click2} alt="featured Box clickable circle" />
                         </div>
-                        {/* 3rd row of tabs  */}
-                        <div className={`tab-rectangle3 ${ isStage3 || isStage4 ? "not-stage" : ""}`}>
+
+                        <div className={`tab-rectangle3 ${isStage3 || isStage4 ? "not-stage" : ""}`}>
                             <img className="identitiesBox" src={identitiesBox} alt="identities Box" />
                             <div className="identities-txt">
                                 <div className="identities-en">Identities</div>
-                                <div className="identities-ar">هويات بصرية </div>
+                                <div className="identities-ar">هويات بصرية</div>
                                 <div className="identities-fr">Charts graphiques</div>
                             </div>
-                            <svg
-                                className={`click-txt ${ isStage3 || isStage4 ? "not-stage-txt" : ""}`}
-                                viewBox="0 0 200 200"
-                                aria-hidden="true"
-                                role="img"
-                            >
+                            <svg className={`click-txt ${isStage3 || isStage4 ? "not-stage-txt" : ""}`} viewBox="0 0 200 200" aria-hidden="true" role="img">
                                 <defs>
-                                    <path
-                                        id="scroll-circle-path"
-                                        d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
-                                    />
+                                    <path id="scroll-circle-path" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
                                 </defs>
                                 <text textAnchor="middle" dominantBaseline="middle">
                                     <textPath xlinkHref="#scroll-circle-path" startOffset="50%">
@@ -177,22 +247,102 @@ export default function StageContent({ stageIndex }) {
                                     </textPath>
                                 </text>
                             </svg>
-                            <img className={`click3 ${ isStage3 || isStage4 ? "not-stage-txt" : ""}`} src={click3} alt="identities Box clickable circle" />
+                            <img className={`click3 ${isStage3 || isStage4 ? "not-stage-txt" : ""}`} src={click3} alt="identities Box clickable circle" />
                         </div>
                     </div>
 
                     <div className="tabs-all-lines">
                         <img className="white-line lines" src={whiteLine} alt="" />
+                        <img className={`tab-yellow-line lines ${isStage4 || isStage5 ? "not-stage-line" : ""}`} src={yellowLine} alt="" />
+                        <img className={`tab-red-line lines ${isStage3 || isStage5 ? "not-stage-line" : ""}`} src={redLine} alt="" />
+                        <img className={`tab-teal-line lines ${isStage3 || isStage4 ? "not-stage-line" : ""}`} src={tealLine} alt="" />
+                    </div>
+                </div>
 
-                        <img className={`tab-yellow-line lines ${ isStage4 || isStage5 ? "not-stage-line" : ""}`} src={yellowLine} alt="" />
-                        <img className={`tab-red-line lines ${ isStage3 || isStage5 ? "not-stage-line" : ""}`} src={redLine} alt="" />
-                        <img className={`tab-teal-line lines ${ isStage3 || isStage4 ? "not-stage-line" : ""}`} src={tealLine} alt="" />
+                {/* Right-side galleries */}
+                <div className="gallery-content">
+                    <div className="gallery-cards">
+                        <div className="scroll">
+                            <img className="scroll-line" src={scrollBar} alt="scroll Bar" />
+                            <img
+                                className="scroll-tic"
+                                src={scrollTic}
+                                alt="scroll Tic"
+                                style={{
+                                    top: activeGalleryStage === 3 ? '10%' : activeGalleryStage === 4 ? '39%' : '75%',
+                                    transition: 'top 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+                                }}
+                            />
+                        </div>
+                        <div className="gallery-stack">
+                            {/* Illustrations = stage 3 */}
+                            <div className={`gallery-illustrations ${getGalleryClasses(3)}`}>
+                                <div className="spotlight-yellow"></div>
+
+                                <div className="illustration1">
+                                    <img className="illustration-border" src={galleryborder} alt="" />
+                                    <img className="illustration-img" src={illustration1} alt="" />
+                                </div>
+                                <div className="illustration2">
+                                    <img className="illustration-border" src={galleryborder} alt="" />
+                                    <img className="illustration-img" src={illustration2} alt="" />
+                                </div>
+                                <div className="illustration3">
+                                    <img className="illustration-border" src={galleryborder} alt="" />
+                                    <img className="illustration-img" src={illustration3} alt="" />
+                                </div>
+                                <div className="illustration4">
+                                    <img className="illustration-border" src={galleryborder} alt="" />
+                                    <img className="illustration-img" src={illustration4} alt="" />
+                                </div>
+                            </div>
+
+                            {/* Featured = stage 4 */}
+                            <div className={`gallery-featured ${getGalleryClasses(4)}`}>
+                                <div className="spotlight-red"></div>
+                                <div className="featured1">
+                                    <img className="featured-border" src={galleryborder} alt="" />
+                                    <img className="featured-img" src={featured1} alt="" />
+                                </div>
+                                <div className="featured2">
+                                    <img className="featured-border" src={galleryborder} alt="" />
+                                    <img className="featured-img" src={featured2} alt="" />
+                                </div>
+                                <div className="featured3">
+                                    <img className="featured-border" src={galleryborder} alt="" />
+                                    <img className="featured-img" src={featured3} alt="" />
+                                </div>
+                                <div className="featured4">
+                                    <img className="featured-border" src={galleryborder} alt="" />
+                                    <img className="featured-img" src={featured4} alt="" />
+                                </div>
+                            </div>
+
+                            {/* Identities = stage 5 */}
+                            <div className={`gallery-identities ${getGalleryClasses(5)}`}>
+                                <div className="spotlight-teal"></div>
+                                <div className="identities1">
+                                    <img className="identities-border" src={galleryborder} alt="" />
+                                    <img className="identities-img" src={identities1} alt="" />
+                                </div>
+                                <div className="identities2">
+                                    <img className="identities-border" src={galleryborder} alt="" />
+                                    <img className="identities-img" src={identities2} alt="" />
+                                </div>
+                                <div className="identities3">
+                                    <img className="identities-border" src={galleryborder} alt="" />
+                                    <img className="identities-img" src={identities3} alt="" />
+                                </div>
+                                <div className="identities4">
+                                    <img className="identities-border" src={galleryborder} alt="" />
+                                    <img className="identities-img" src={identities4} alt="" />
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
             </div>
-
-
         </div>
     );
 }

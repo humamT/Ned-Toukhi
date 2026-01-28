@@ -22,7 +22,7 @@ export default function ScrollIndicator({ visible = false }) {
         </defs>
         <text textAnchor="middle" dominantBaseline="middle">
           <textPath xlinkHref="#scroll-circle-path" startOffset="50%">
-            Scroll down · Faire défiler · اسحب إلى الأسفل ·
+          Scroll down · Faire défiler · اسحب إلى الأسفل ·
           </textPath>
         </text>
       </svg>
