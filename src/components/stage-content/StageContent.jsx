@@ -15,6 +15,8 @@ import yellowLine from "../../assets/PNGS+SVGs/yellow-line.svg";
 import redLine from "../../assets/PNGS+SVGs/red-line.svg";
 import tealLine from "../../assets/PNGS+SVGs/teal-line.svg";
 
+import emptyOrb from "../../assets/images/Circle-empty.svg";
+
 import illustration1 from "../../assets/PNGS+SVGs/Illustrations/y1.png";
 import illustration2 from "../../assets/PNGS+SVGs/Illustrations/y2.png";
 import illustration3 from "../../assets/PNGS+SVGs/Illustrations/y3.png";
@@ -34,12 +36,20 @@ import galleryborder from "../../assets/PNGS+SVGs/gallery-border-1.svg";
 import scrollBar from "../../assets/PNGS+SVGs/scroll-bar.svg";
 import scrollTic from "../../assets/PNGS+SVGs/scroll-tic.svg";
 
+import theMask from "../../assets/PNGS+SVGs/Quotations/devis.png";
+import Letterhead from "../../assets/PNGS+SVGs/Quotations/Letterhead-Mockup.png";
+
+import contactEnvelope from "../../assets/PNGS+SVGs/Contact/contact.png";
+import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
+
 export default function StageContent({ stageIndex }) {
     const isStage1 = stageIndex === 1;
     const isStage2 = stageIndex === 2;
     const isStage3 = stageIndex === 3;
     const isStage4 = stageIndex === 4;
     const isStage5 = stageIndex === 5;
+    const isStage6 = stageIndex === 6;
+    const isStage7 = stageIndex === 7;
 
     // ----------------------------
     // NEW: gallery animation state
@@ -341,6 +351,58 @@ export default function StageContent({ stageIndex }) {
                         </div>
 
                     </div>
+                </div>
+            </div>
+
+            {/* STAGE 6 */}
+
+            <div className={`stage-content__stage stage-content__stage-6 ${isStage6 ? "is-visible" : ""}`}>
+                <div className="stage-6__orb-content">
+                    <div className="stage-6__main-text">
+                        <div className="stage-6__title">
+                            <div className="stage-6__title-en">Quotations</div>
+                            <div className="stage-6__title-ar">تقييم التكلفة</div>
+                            <div className="stage-6__title-fr">Devis</div>
+                        </div>
+                        <div className="stage-6__subtitle">
+                            Get your estimated, personalized quotation
+                            for your project depending on your location
+                            and business in just a few clicks...
+                        </div>
+                        <a className="first-click">First click ;)</a>
+                    </div>
+
+                    <div className="stage-6__Devis-imgs">
+                        <img src={Letterhead} alt="Letterhead Mockup" className="letterhead-mockup" />
+                        <img src={theMask} alt="The Mask illustration" className="the-mask" />
+                    </div>
+
+                </div>
+            </div>
+
+            {/* STAGE 7 */}
+
+            <div className={`stage-content__stage stage-content__stage-7 ${isStage7 ? "is-visible" : ""}`}>
+                <div className="stage-7__orb-content">
+                    <img className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
+                    <img className="Envelope-emptyOrb" src={emptyOrb} alt="" />
+
+                    <img className="contactBox" src={contactBox} alt="contact box" />
+
+                    <div className="stage-7__main-text">
+                        <div className="stage-7__title">
+                            <div className="stage-7__title-en">Contact</div>
+                            <div className="stage-7__title-ar">تواصل</div>
+                            <div className="stage-7__title-fr">Écris-moi</div>
+                        </div>
+                        <div className="stage-7__subtitle">
+                            If you have a question, need an estimate, or
+                            simply want to say hello, feel free to email
+                            me and I’ll get back to you as soon as possible!
+                        </div>
+                        <a className="contact-btn">Contact</a>
+                    </div>
+
                 </div>
             </div>
         </div>
