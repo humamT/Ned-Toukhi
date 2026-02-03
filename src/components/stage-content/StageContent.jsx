@@ -32,6 +32,18 @@ import identities2 from "../../assets/PNGS+SVGs/Identities/g2.png";
 import identities3 from "../../assets/PNGS+SVGs/Identities/g3.png";
 import identities4 from "../../assets/PNGS+SVGs/Identities/g4.png";
 
+import aboutCard1 from "../../assets/PNGS+SVGs/About/p1.png";
+import aboutCard2 from "../../assets/PNGS+SVGs/About/p2.png";
+import aboutCard3 from "../../assets/PNGS+SVGs/About/p3.png";
+import aboutCard4 from "../../assets/PNGS+SVGs/About/p4.png";
+
+import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
+
+import aboutBox from "../../assets/PNGS+SVGs/about/about-box.svg";
+
+import featuredClientsBox from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-box.svg";
+import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-logos.svg";
+
 import galleryborder from "../../assets/PNGS+SVGs/gallery-border-1.svg";
 import scrollBar from "../../assets/PNGS+SVGs/scroll-bar.svg";
 import scrollTic from "../../assets/PNGS+SVGs/scroll-tic.svg";
@@ -50,6 +62,8 @@ export default function StageContent({ stageIndex }) {
     const isStage5 = stageIndex === 5;
     const isStage6 = stageIndex === 6;
     const isStage7 = stageIndex === 7;
+    const isStage8 = stageIndex === 8;
+    const isStage9 = stageIndex === 9;
 
     // ----------------------------
     // NEW: gallery animation state
@@ -405,6 +419,61 @@ export default function StageContent({ stageIndex }) {
 
                 </div>
             </div>
+
+            {/* STAGE 8 */}
+
+            <div className={`stage-content__stage stage-content__stage-8 ${isStage8 ? "is-visible" : ""}`}>
+                <div className="stage-8__orb-content">
+                    <div className="personal-img-bubble">
+                        <img className="personalImg" src={personalImg} alt="profile img" />
+                        <img className="personalBubble" src={galleryBubble} alt="the orb around the profile img" />
+                    </div>
+
+                    <img className="aboutBox" src={aboutBox} alt="about box" />
+
+
+                    <div className="stage-8__subtitle">
+                        <p>Muhanad ALTOUKHI, Syrian graphic designer and illustrator.</p>
+                        <p>Originally from Douma, on the outskirts of Damascus, I began
+                            learning graphic design in 2014 during the military siege of Eastern
+                            Ghouta. In 2024, I completed my DNMADE in Graphic Design in Paris.</p>
+                        <p>Living between these two worlds has shaped my creative vision,
+                            allowing me to develop hybrid, multicultural projects enriched by a
+                            unique perspective one that I’m excited to share and work with you.</p>
+                    </div>
+
+                    <div className="about-cards">
+                        <div className="about-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard1} alt="" />
+                        </div>
+                        <div className="about-card higher-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard2} alt="" />
+                        </div>
+                        <div className="about-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard3} alt="" />
+                        </div>
+                        <div className="about-card higher-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard4} alt="" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {/* STAGE 9 */}
+
+            <div className={`stage-content__stage stage-content__stage-9 ${isStage9 ? "is-visible" : ""}`}>
+                <div className="stage-9__orb-content">
+                    <div className="stage-9__main-text">Featured Clients</div>
+                    <img className="featuredClientsBox" src={featuredClientsBox} alt="featured Box" />
+                    <img className="featuredLogos" src={featuredLogos} alt="featured Logos" />
+                </div>
+            </div>
+            
         </div>
     );
 }

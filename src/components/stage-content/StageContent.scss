@@ -1263,7 +1263,7 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
     justify-content: center;
     text-shadow: $text-shadow-base;
     transform: translateX(27%);
-        z-index: 22;
+    z-index: 22;
 }
 
 .stage-7__title {
@@ -1280,14 +1280,6 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
     color: white;
     line-height: 1;
-}
-
-.stage-7__title-en {
-    // translate: 22%;
-}
-
-.stage-7__title-fr {
-    // translate: 95%;
 }
 
 .stage-7__subtitle {
@@ -1317,4 +1309,142 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
     font-family: "Diodrum Arabic";
     font-weight: 600;
     text-align: center;
+}
+
+// ========================================
+// STAGE 8: About
+// ========================================
+
+.stage-8__orb-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -75%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.aboutBox {
+    width: 55%;
+    z-index: 20;
+    position: absolute;
+    object-fit: contain;
+    /* or cover */
+    pointer-events: none;
+    /* set to 1 if you really need the image visible */
+}
+
+.personal-img-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    transform: translateY(-35%) translateX(-110%);
+}
+
+.personalImg {
+    width: 90%;
+}
+
+.personalBubble {
+    position: absolute;
+    animation: orbSpin 25s linear infinite;
+}
+
+.stage-8__subtitle {
+    position: absolute;
+    color: white;
+    width: 30%;
+    transform: translateX(40%) translateY(-50%);
+    font-size: 20px;
+    font-family: "Diodrum Arabic";
+    text-wrap-style: balance;
+    line-height: 100%;
+    letter-spacing: 0.4px;
+}
+
+.stage-8__subtitle :first-child {
+    font-weight: 600;
+}
+
+.about-cards {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    position: absolute;
+    transform: translateY(75%);
+    gap: 2%;
+    z-index: 22;
+}
+
+.higher-card {
+    translate: 0 20%;
+}
+
+.about-card {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: auto;
+}
+
+.about-border {
+    position: absolute;
+    height: 100%;
+}
+
+.about-img {
+    // position: absolute;
+    // height: 100%;
+    object-fit: cover;
+}
+
+// ========================================
+// STAGE 9: featured clients
+// ========================================
+
+.stage-9__orb-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.stage-9__main-text {
+    position: absolute;
+    font-family: "Diodrum Arabic";
+    color: white;
+    align-self: baseline;
+    font-weight: 500;
+    font-size: 170%;
+    translate: 0 -18%;
+    z-index: 22;
+    background-color: #354f5e;
+    border: solid white 1.5px;
+    border-radius: 50px;
+    padding: 0.5% 2.5% 0.5% 2.5%;
+    // padding-right: 1%;
+    line-height: 100%;
+}
+
+.featuredClientsBox {
+    position: relative;
+    width: 70%;
+}
+
+.featuredLogos {
+    position: absolute;
+    width: 70%;
 }
