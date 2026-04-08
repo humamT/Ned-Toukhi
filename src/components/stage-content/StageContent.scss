@@ -9,6 +9,8 @@ $button-size: 2rem;
 $border-radius-button: 60px;
 $border-radius-card: 24px;
 $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+$design-width: 2560px;
+$design-height: 1440px;
 
 // ========================================
 // Base Container
@@ -19,6 +21,7 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
     left: 0;
     width: 100%;
     height: 100vh;
+    overflow: hidden;
     pointer-events: none;
     z-index: 20;
 }
@@ -28,20 +31,26 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 // ========================================
 .stage-content__stage {
     position: absolute;
-    inset: 0;
+    top: 50%;
+    left: 50%;
+    width: $design-width;
+    height: $design-height;
+    transform: translate(-50%, -50%) scale(var(--stage-scale));
+    transform-origin: center;
     display: flex;
     align-items: center;
     justify-content: space-between;
     opacity: 0;
     pointer-events: none;
+    will-change: transform, opacity;
 
     &.is-visible {
-        animation: stageContentFadeIn 0.4s ease 1.0s forwards;
+        animation: stageContentFadeIn 0.3s ease 1.0s forwards;
         pointer-events: auto;
     }
 
     &:not(.is-visible) {
-        animation: stageContentFadeOut 0.4s ease forwards;
+        animation: stageContentFadeOut 0.3s ease forwards;
     }
 }
 
@@ -65,6 +74,18 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
     to {
         opacity: 1;
+    }
+}
+
+@keyframes slideUpFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -147,7 +168,7 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stage-1__sticker {
-    translate: -5% -25%;
+    translate: -5% -40%;
     width: 50%;
     height: auto;
     object-fit: contain;
@@ -729,20 +750,20 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &.slide-up-fade-out {
-        animation: slideUpFadeOut 0.6s $transition-ease forwards;
+        animation: slideUpFadeOut 0.2s $transition-ease forwards;
         pointer-events: none;
     }
 
     &.slide-up-fade-in {
-        animation: slideUpFadeIn 0.6s $transition-ease forwards;
+        animation: slideUpFadeIn 0.4s $transition-ease forwards;
     }
 
     &.slide-down-fade-in {
-        animation: slideDownFadeIn 0.6s $transition-ease forwards;
+        animation: slideDownFadeIn 0.4s $transition-ease forwards;
     }
 
     &.slide-down-fade-out {
-        animation: slideDownFadeOut 0.6s $transition-ease forwards;
+        animation: slideDownFadeOut 0.2s $transition-ease forwards;
         pointer-events: none;
     }
 
@@ -1010,123 +1031,819 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideUpFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideUpFadeOutA 0.7s $transition-ease forwards;
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideUpFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideUpFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideUpFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideUpFadeOutB 0.7s $transition-ease forwards;
         }
+
     }
 
     &.slide-down-fade-in {
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideDownFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideDownFadeInA 0.7s $transition-ease forwards;
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideDownFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideDownFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideDownFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideDownFadeInB 0.7s $transition-ease forwards;
         }
+
     }
 
     &.slide-down-fade-out {
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideDownFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideDownFadeOutA 0.7s $transition-ease forwards;
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideDownFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideDownFadeOutA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideDownFadeOutB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideDownFadeOutB 0.7s $transition-ease forwards;
         }
+
     }
 
     &.slide-up-fade-in {
 
         .illustration1,
         .featured1,
-        .identities1 {
-            animation: cardSlideUpFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0s;
+        .identities1,
+        .illustration3,
+        .featured3,
+        .identities3 {
+            animation: cardSlideUpFadeInA 0.7s $transition-ease forwards;
+
         }
 
         .illustration2,
         .featured2,
-        .identities2 {
-            animation: cardSlideUpFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.1s;
-        }
-
-        .illustration3,
-        .featured3,
-        .identities3 {
-            animation: cardSlideUpFadeInA 0.5s $transition-ease forwards;
-            animation-delay: 0.2s;
-        }
-
+        .identities2,
         .illustration4,
         .featured4,
         .identities4 {
-            animation: cardSlideUpFadeInB 0.5s $transition-ease forwards;
-            animation-delay: 0.3s;
+            animation: cardSlideUpFadeInB 0.7s $transition-ease forwards;
+
         }
+
+    }
+}
+
+
+// ========================================
+// STAGE 6: Quotations
+// ========================================
+
+
+
+.stage-6__orb-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.stage-6__main-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-shadow: $text-shadow-base;
+}
+
+.stage-6__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    translate: -19%;
+}
+
+.stage-6__title-en,
+.stage-6__title-ar,
+.stage-6__title-fr {
+    font-size: $title-size;
+    font-family: $primary-font;
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+}
+
+.stage-6__title-en {
+    translate: 22%;
+}
+
+.stage-6__title-fr {
+    translate: 95%;
+}
+
+.stage-6__subtitle {
+    font-size: 25px;
+    align-self: center;
+    width: 40%;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    margin-top: 2rem;
+    line-height: 1.4;
+    font-family: "Diodrum Arabic";
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.first-click {
+    margin-top: 1.5rem;
+    align-self: center;
+    width: 25%;
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    line-height: 1.5;
+    background: none;
+    border-radius: 60px;
+    border: 2px solid white;
+    font-family: "Diodrum Arabic";
+    font-weight: 600;
+    text-align: center;
+}
+
+.stage-6__Devis-imgs {
+    position: absolute;
+    width: 100%;
+    z-index: 12;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.letterhead-mockup {
+    translate: (-20% 40%);
+    width: 45%;
+    height: auto;
+    object-fit: contain;
+    animation: stickerBounce 15s ease-in-out infinite;
+    position: absolute;
+}
+
+.the-mask {
+    translate: (85% 0%);
+    width: 65%;
+    height: auto;
+    object-fit: contain;
+    // animation: stickerBounce 15s ease-in-out infinite;
+    position: absolute;
+}
+
+// ========================================
+// STAGE 7: Contact
+// ========================================
+
+
+.stage-7__orb-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.Envelope {
+    position: absolute;
+    width: 75%;
+    transform: translateX(-35%);
+    height: auto;
+    z-index: 22;
+}
+
+.Envelope-emptyOrb {
+    position: absolute;
+    width: 200%;
+    translate: -15% 0;
+    height: auto;
+    z-index: 10;
+    opacity: 1;
+    filter: blur(60px) saturate(1.3);
+    animation: orbSpin 20s linear infinite;
+}
+
+
+/* if you keep the image, make sure it doesn’t cover the aurora */
+.contactBox {
+    width: 110%;
+    z-index: 20;
+    // height: 100%;
+    position: absolute;
+    object-fit: contain;
+    /* or cover */
+    pointer-events: none;
+    /* set to 1 if you really need the image visible */
+}
+
+
+
+.stage-7__main-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-shadow: $text-shadow-base;
+    transform: translateX(27%);
+    z-index: 22;
+}
+
+.stage-7__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage-7__title-en,
+.stage-7__title-ar,
+.stage-7__title-fr {
+    font-size: $title-size;
+    font-family: $primary-font;
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+}
+
+.stage-7__subtitle {
+    font-size: 25px;
+    align-self: center;
+    width: 40%;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    margin-top: 2rem;
+    line-height: 1.4;
+    font-family: "Diodrum Arabic";
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.contact-btn {
+    margin-top: 1.5rem;
+    align-self: center;
+    width: 25%;
+    text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    line-height: 1.5;
+    background: none;
+    border-radius: 60px;
+    border: 2px solid white;
+    font-family: "Diodrum Arabic";
+    font-weight: 600;
+    text-align: center;
+}
+
+// ========================================
+// STAGE 8: About
+// ========================================
+
+.stage-8__orb-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -90%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.aboutBox {
+    width: 55%;
+    z-index: 20;
+    position: absolute;
+    object-fit: contain;
+    /* or cover */
+    pointer-events: none;
+    /* set to 1 if you really need the image visible */
+}
+
+.personal-img-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    transform: translateY(-35%) translateX(-110%);
+}
+
+.personalImg {
+    width: 90%;
+}
+
+.personalBubble {
+    position: absolute;
+    animation: orbSpin 25s linear infinite;
+}
+
+.stage-8__subtitle {
+    position: absolute;
+    color: white;
+    width: 30%;
+    transform: translateX(40%) translateY(-50%);
+    font-size: 20px;
+    font-family: "Diodrum Arabic";
+    text-wrap-style: balance;
+    line-height: 100%;
+    letter-spacing: 0.4px;
+}
+
+.stage-8__subtitle :first-child {
+    font-weight: 600;
+}
+
+.about-cards {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    position: absolute;
+    transform: translateY(75%);
+    gap: 2%;
+    z-index: 22;
+}
+
+.higher-card {
+    translate: 0 20%;
+}
+
+.about-card {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: auto;
+}
+
+.about-border {
+    position: absolute;
+    height: 100%;
+}
+
+.about-img {
+    // position: absolute;
+    // height: 100%;
+    object-fit: cover;
+}
+
+// ========================================
+// STAGE 9: featured clients
+// ========================================
+
+.stage-9__orb-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+.stage-9__main-text {
+    position: absolute;
+    font-family: "Diodrum Arabic";
+    color: white;
+    align-self: baseline;
+    font-weight: 500;
+    font-size: 170%;
+    translate: 0 -18%;
+    z-index: 22;
+    background-color: #354f5e;
+    border: solid white 1.5px;
+    border-radius: 50px;
+    padding: 0.5% 2.5% 0.5% 2.5%;
+    // padding-right: 1%;
+    line-height: 100%;
+}
+
+.featuredClientsBox {
+    position: relative;
+    width: 70%;
+}
+
+.featuredLogos {
+    position: absolute;
+    width: 70%;
+}
+
+// ========================================
+// STAGE 10: footer
+// ========================================
+
+.stage-content__stage-10 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    justify-content: center;
+    align-items: flex-end;
+    background: transparent;
+    overflow: hidden;
+
+    &.is-visible {
+        animation: slideUpFromBottom 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.0s forwards;
+        pointer-events: auto;
+    }
+
+    &:not(.is-visible) {
+        animation: stageContentFadeOut 0.4s ease forwards;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(180deg, rgba(52, 78, 93, 0) 0%, rgba(52, 78, 93, 0.8) 100%);
+        pointer-events: none;
+        z-index: 21;
+    }
+
+    .gradient-bg {
+        position: absolute;
+        translate: 0 109%;
+        // bottom: 50%;
+        // left: 0;
+        width: 100%;
+        height: 48%;
+        overflow: hidden;
+        box-shadow: 0px 0px 20px 0px #0000008a;
+    }
+}
+
+.stage-10__footer-content {
+    position: absolute;
+    left: 50%;
+    bottom: 13%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+    z-index: 22;
+    display: flex;
+    justify-content: space-evenly;
+    width: 65%;
+    max-width: 1320px;
+    height: auto;
+    padding: 40px 60px;
+    background: rgb(0 0 0 / 15%);
+    align-items: center;
+    flex-direction: row;
+}
+
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // max-width: 1400px;
+    // gap: 60px;
+}
+
+// Left Section
+.footer-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.footer-logo {
+    // width: 25%;
+    height: 180px;
+}
+
+.footer-logo-line {
+    height: 180px;
+}
+
+// Middle Section - Navigation Columns
+.footer-middle {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    margin: 20px;
+}
+
+.hr {
+    display: block;
+    position: absolute;
+    height: 1px;
+    width: 45%;
+    top: 41%;
+    border: 0;
+    border-top: 2px solid #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10%;
+}
+
+.footer-column-title {
+    display: flex;
+    flex-direction: row;
+    font-family: "Diodrum Arabic";
+    gap: 10px;
+    font-family: $primary-font;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 5px 0;
+    letter-spacing: 0.5px;
+}
+
+.footer-store-links,
+.footer-gallery-links,
+.footer-info-links {
+    font-family: "Diodrum Arabic";
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 200%;
+    font-weight: 500;
+
+    li {
+        margin: 0;
+    }
+
+    a {
+        font-family: $primary-font;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.2s ease, transform 0.2s ease;
+        display: inline-block;
+
+        &:hover {
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+    }
+}
+
+// Right Section
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 35%;
+}
+
+.lang-social {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.footer-social {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $primary-font;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.6);
+        transform: translateY(-2px);
+    }
+}
+
+.footer-ai-badge {
+    background-color: #e54b3e;
+    display: flex;
+    color: white;
+    font-family: "Diodrum Arabic";
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 150%;
+    padding-left: 10px;
+
+    img {
+        width: 11%;
+        height: auto;
+    }
+}
+
+.footer-copyright {
+    font-family: "Diodrum Arabic";
+    font-size: 13px;
+    color: rgb(255 255 255);
+    text-align: right;
+    font-weight: 600;
+    line-height: 100%;
+}
+
+.footer-alien {
+    display: flex;
+    flex-direction: row;
+    translate: 35% 0.5%;
+    position: absolute;
+    bottom: 26%;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+.footer-alien-hand {
+    position: absolute;
+}
+
+.footer-alien-body {
+    position: relative;
+}
+
+// ========================================
+// Mobile Layout Overrides
+// ========================================
+@media (max-width: 768px) {
+    .stage-content__stage {
+        justify-content: center;
+    }
+
+    .stage-1__orb-content,
+    .stage-2__orb-content,
+    .stage-3__orb-content,
+    .stage-6__orb-content,
+    .stage-7__orb-content,
+    .stage-8__orb-content,
+    .stage-9__orb-content {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        align-items: center;
+        text-align: center;
+    }
+
+    .stage-1__main-text,
+    .stage-2__main-text,
+    .stage-3__main-text {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .stage-3__main-text {
+        translate: 0;
+    }
+
+    .stage-1__title-en,
+    .stage-1__title-fr,
+    .stage-2__title-ar,
+    .stage-3__title-fr,
+    .stage-6__title-en,
+    .stage-6__title-fr {
+        translate: 0;
+    }
+
+    .stage-1__sticker {
+        translate: 0 -10%;
+        width: 35%;
+    }
+
+    .stage-1__posters-section {
+        display: none;
+    }
+
+    .gallery-orbs,
+    .tabs-rectangles,
+    .tabs-all-lines,
+    .scroll {
+        display: none;
+    }
+
+    .gallery-cards {
+        transform: translate(0, 0);
+        justify-content: center;
+    }
+
+    .stage-6__Devis-imgs,
+    .Envelope,
+    .Envelope-emptyOrb,
+    .contactBox,
+    .about-cards,
+    .footer-alien {
+        display: none;
+    }
+
+    .stage-7__main-text {
+        transform: none;
+    }
+
+    .stage-8__subtitle {
+        position: relative;
+        width: 70%;
+        transform: translateY(60%);
+        text-align: center;
+    }
+
+    .featuredClientsBox,
+    .featuredLogos {
+        width: 90%;
+    }
+
+    .stage-10__footer-content {
+        width: 90%;
+        height: auto;
+        padding: 20px 24px;
+        flex-direction: column;
+        gap: 16px;
+        bottom: 6%;
+    }
+
+    .footer-main {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer-left {
+        justify-content: center;
+    }
+
+    .footer-right {
+        width: 100%;
+        align-items: center;
+    }
+
+    .footer-logo,
+    .footer-logo-line {
+        height: 120px;
+    }
+
+    .footer-middle {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hr {
+        width: 70%;
+        top: 52%;
     }
 }

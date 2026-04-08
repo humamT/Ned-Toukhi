@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import "./StageContent.scss";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faSquareFacebook,
+    faInstagram,
+    faBehance
+} from "@fortawesome/free-brands-svg-icons";
+import GradientBackground from "../background/background.jsx";
 
 import stickerImg from "../../assets/images/sticker-op.png";
 import postersCluster from "../../assets/images/posters-cluster.png";
@@ -14,6 +22,8 @@ import whiteLine from "../../assets/PNGS+SVGs/Circle-white-line.svg";
 import yellowLine from "../../assets/PNGS+SVGs/yellow-line.svg";
 import redLine from "../../assets/PNGS+SVGs/red-line.svg";
 import tealLine from "../../assets/PNGS+SVGs/teal-line.svg";
+
+import emptyOrb from "../../assets/images/Circle-empty.svg";
 
 import illustration1 from "../../assets/PNGS+SVGs/Illustrations/y1.png";
 import illustration2 from "../../assets/PNGS+SVGs/Illustrations/y2.png";
@@ -30,9 +40,33 @@ import identities2 from "../../assets/PNGS+SVGs/Identities/g2.png";
 import identities3 from "../../assets/PNGS+SVGs/Identities/g3.png";
 import identities4 from "../../assets/PNGS+SVGs/Identities/g4.png";
 
+import aboutCard1 from "../../assets/PNGS+SVGs/About/p1.png";
+import aboutCard2 from "../../assets/PNGS+SVGs/About/p2.png";
+import aboutCard3 from "../../assets/PNGS+SVGs/About/p3.png";
+import aboutCard4 from "../../assets/PNGS+SVGs/About/p4.png";
+
+import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
+
+import aboutBox from "../../assets/PNGS+SVGs/About/about-box.svg";
+
+import featuredClientsBox from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-box.svg";
+import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-logos.svg";
+
+import footerLogo from "../../assets/PNGS+SVGs/Footer/muhanad-logo.svg";
+import footerLogoLine from "../../assets/PNGS+SVGs/Footer/logo-line-footer.svg";
+import noAiBadge from "../../assets/PNGS+SVGs/Footer/no-ai.svg";
+import alienHand from "../../assets/PNGS+SVGs/Footer/Alien-hand.png";
+import Alien from "../../assets/PNGS+SVGs/Footer/Alien.png";
+
 import galleryborder from "../../assets/PNGS+SVGs/gallery-border-1.svg";
 import scrollBar from "../../assets/PNGS+SVGs/scroll-bar.svg";
 import scrollTic from "../../assets/PNGS+SVGs/scroll-tic.svg";
+
+import theMask from "../../assets/PNGS+SVGs/Quotations/devis.png";
+import Letterhead from "../../assets/PNGS+SVGs/Quotations/Letterhead-Mockup.png";
+
+import contactEnvelope from "../../assets/PNGS+SVGs/Contact/contact.png";
+import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
 
 export default function StageContent({ stageIndex }) {
     const isStage1 = stageIndex === 1;
@@ -40,6 +74,11 @@ export default function StageContent({ stageIndex }) {
     const isStage3 = stageIndex === 3;
     const isStage4 = stageIndex === 4;
     const isStage5 = stageIndex === 5;
+    const isStage6 = stageIndex === 6;
+    const isStage7 = stageIndex === 7;
+    const isStage8 = stageIndex === 8;
+    const isStage9 = stageIndex === 9;
+    const isStage10 = stageIndex === 10;
 
     // ----------------------------
     // NEW: gallery animation state
@@ -343,6 +382,220 @@ export default function StageContent({ stageIndex }) {
                     </div>
                 </div>
             </div>
+
+            {/* STAGE 6 */}
+
+            <div className={`stage-content__stage stage-content__stage-6 ${isStage6 ? "is-visible" : ""}`}>
+                <div className="stage-6__orb-content">
+                    <div className="stage-6__main-text">
+                        <div className="stage-6__title">
+                            <div className="stage-6__title-en">Quotations</div>
+                            <div className="stage-6__title-ar">تقييم التكلفة</div>
+                            <div className="stage-6__title-fr">Devis</div>
+                        </div>
+                        <div className="stage-6__subtitle">
+                            Get your estimated, personalized quotation
+                            for your project depending on your location
+                            and business in just a few clicks...
+                        </div>
+                        <a className="first-click">First click ;)</a>
+                    </div>
+
+                    <div className="stage-6__Devis-imgs">
+                        <img src={Letterhead} alt="Letterhead Mockup" className="letterhead-mockup" />
+                        <img src={theMask} alt="The Mask illustration" className="the-mask" />
+                    </div>
+
+                </div>
+            </div>
+
+            {/* STAGE 7 */}
+
+            <div className={`stage-content__stage stage-content__stage-7 ${isStage7 ? "is-visible" : ""}`}>
+                <div className="stage-7__orb-content">
+                    <img className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
+                    <img className="Envelope-emptyOrb" src={emptyOrb} alt="" />
+
+                    <img className="contactBox" src={contactBox} alt="contact box" />
+
+                    <div className="stage-7__main-text">
+                        <div className="stage-7__title">
+                            <div className="stage-7__title-en">Contact</div>
+                            <div className="stage-7__title-ar">تواصل</div>
+                            <div className="stage-7__title-fr">Écris-moi</div>
+                        </div>
+                        <div className="stage-7__subtitle">
+                            If you have a question, need an estimate, or
+                            simply want to say hello, feel free to email
+                            me and I’ll get back to you as soon as possible!
+                        </div>
+                        <a className="contact-btn">Contact</a>
+                    </div>
+
+                </div>
+            </div>
+
+            {/* STAGE 8 */}
+
+            <div className={`stage-content__stage stage-content__stage-8 ${isStage8 ? "is-visible" : ""}`}>
+                <div className="stage-8__orb-content">
+                    <div className="personal-img-bubble">
+                        <img className="personalImg" src={personalImg} alt="profile img" />
+                        <img className="personalBubble" src={galleryBubble} alt="the orb around the profile img" />
+                    </div>
+
+                    <img className="aboutBox" src={aboutBox} alt="about box" />
+
+
+                    <div className="stage-8__subtitle">
+                        <p>Muhanad ALTOUKHI, Syrian graphic designer and illustrator.</p>
+                        <p>Originally from Douma, on the outskirts of Damascus, I began
+                            learning graphic design in 2014 during the military siege of Eastern
+                            Ghouta. In 2024, I completed my DNMADE in Graphic Design in Paris.</p>
+                        <p>Living between these two worlds has shaped my creative vision,
+                            allowing me to develop hybrid, multicultural projects enriched by a
+                            unique perspective one that I’m excited to share and work with you.</p>
+                    </div>
+
+                    <div className="about-cards">
+                        <div className="about-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard1} alt="" />
+                        </div>
+                        <div className="about-card higher-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard2} alt="" />
+                        </div>
+                        <div className="about-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard3} alt="" />
+                        </div>
+                        <div className="about-card higher-card">
+                            <img className="about-border" src={galleryborder} alt="" />
+                            <img className="about-img" src={aboutCard4} alt="" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {/* STAGE 9 */}
+
+            <div className={`stage-content__stage stage-content__stage-9 ${isStage9 ? "is-visible" : ""}`}>
+                <div className="stage-9__orb-content">
+                    <div className="stage-9__main-text">Featured Clients</div>
+                    <img className="featuredClientsBox" src={featuredClientsBox} alt="featured Box" />
+                    <img className="featuredLogos" src={featuredLogos} alt="featured Logos" />
+                </div>
+            </div>
+
+            {/* STAGE 10 - Footer */}
+
+            <div className={`stage-content__stage stage-content__stage-10 ${isStage10 ? "is-visible" : ""}`}>
+                <GradientBackground hideInteractive={true} hideG6={true} />
+                <div className="stage-10__footer-content">
+
+                    <div className="footer-main">
+                        {/* Left Section - Logo */}
+                        <div className="footer-left">
+                            <img src={footerLogo} alt="Muhamad Aldoukhi" className="footer-logo" />
+                            <img src={footerLogoLine} alt="" className="footer-logo-line" />
+                        </div>
+
+                        {/* Middle Section - Navigation Links */}
+                        <div className="footer-middle">
+                            <hr className="hr" />
+                            <div className="footer-column">
+                                <h3 className="footer-column-title">Store</h3>
+                                <ul className="footer-store-links">
+                                    <li><a href="/store">Stickers</a></li>
+                                    <li><a href="/store">Post cards</a></li>
+                                    <li><a href="/store">Posters</a></li>
+                                </ul>
+                            </div>
+                            <div className="footer-column">
+                                <h3 className="footer-column-title">Gallery</h3>
+                                <ul className="footer-gallery-links">
+                                    <li><a href="/gallery">Illustrations</a></li>
+                                    <li><a href="/gallery">Visual Identities</a></li>
+                                    <li><a href="/gallery">Featured Projects</a></li>
+                                </ul>
+                            </div>
+
+                            <div className="footer-column">
+                                <h3 className="footer-column-title">Infos</h3>
+                                <ul className="footer-info-links">
+                                    <li><a href="/quotations">Quotations</a></li>
+                                    <li><a href="/contact">Contact</a></li>
+                                    <li><a href="/about">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Right Section - Social & Badge */}
+                        <div className="footer-right">
+                            <div className="lang-social">
+                                <div className="site-header__langs" aria-label="Languages">
+                                    <button className="pill is-active" type="button">EN</button>
+                                    <button className="pill" type="button">FR</button>
+                                    <button className="pill" type="button">عربي</button>
+                                </div>
+                                <div className="footer-social">
+                                    <a
+                                        className="icon"
+                                        href="https://www.facebook.com/nedtoukhi"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Facebook"
+                                    >
+                                        <FontAwesomeIcon icon={faSquareFacebook} />
+                                    </a>
+
+                                    <a
+                                        className="icon"
+                                        href="https://www.instagram.com/nedtoukhi"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Instagram"
+                                    >
+                                        <FontAwesomeIcon icon={faInstagram} />
+                                    </a>
+
+                                    <a
+                                        className="icon"
+                                        href="https://www.behance.net/nedtoukhi"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Behance"
+                                    >
+                                        <FontAwesomeIcon icon={faBehance} />
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <div className="footer-ai-badge">
+                                NO AI GENERATIONAL TOOLS WERE USED
+                                IN ANY ART CREATED IN THIS WEBSITE
+                                <img src={noAiBadge} alt="No AI Tools Used" />
+                            </div>
+
+                            <div className="footer-copyright">
+                                Muhamad ALDOUKHI 2026 - All Rights Reserved ©
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="footer-alien">
+                    <img src={Alien} alt="" className="footer-alien-body" />
+                    <img src={alienHand} alt="" className="footer-alien-hand" />
+                </div>
+
+            </div>
         </div>
+
+        // </div >
     );
 }

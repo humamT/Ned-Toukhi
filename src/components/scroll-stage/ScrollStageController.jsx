@@ -25,6 +25,7 @@ export default function ScrollStageController({
             "contact",          // 7
             "about",            // 8
             "featuredClients",  // 9
+            "footer",           // 10
         ],
         []
     );

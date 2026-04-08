@@ -28,6 +28,7 @@ const ORB_STAGE_MAP = {
   8: { position: "left-more", scale: "about" }, // about
 
   9: { position: "center", scale: "large" },     // featured clients (bigger orb)
+  10: { position: "center", scale: "normal" },   // footer
 };
 
 export default function Home({ setHeaderVisible }) {
