@@ -1,0 +1,25 @@
+/**
+ * Deploy this Vite app as a Cloudflare Worker that serves the production build from ./dist.
+ *
+ * Build & deploy (from repo root):
+ *   npm run build
+ *   npx wrangler deploy
+ *
+ * In Cloudflare dashboard (Workers build): set build command to `npm run build` and
+ * deploy command to `npx wrangler deploy`, root directory to the repository root.
+ *
+ * Secrets belong in the dashboard / `wrangler secret`, not in this file.
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "ned-toukhi",
+	"compatibility_date": "2025-12-05",
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"directory": "./dist",
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "single-page-application"
+	}
+}

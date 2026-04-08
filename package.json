@@ -21,9 +21,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node --max-old-space-size=6144 ./node_modules/vite/bin/vite.js build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "deploy": "npm run build && wrangler deploy"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +48,10 @@
     "@vitejs/plugin-react-swc": "^3.7.2",
     "sass": "^1.94.2",
     "vite": "^6.0.7",
-    "vitest": "^3.2.0"
+    "vitest": "^3.2.0",
+    "wrangler": "^4.53.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
