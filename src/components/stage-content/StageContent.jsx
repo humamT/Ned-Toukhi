@@ -47,7 +47,7 @@ import aboutCard4 from "../../assets/PNGS+SVGs/About/p4.png";
 
 import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
 
-import aboutBox from "../../assets/PNGS+SVGs/about/about-box.svg";
+import aboutBox from "../../assets/PNGS+SVGs/About/about-box.svg";
 
 import featuredClientsBox from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-box.svg";
 import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-logos.svg";
