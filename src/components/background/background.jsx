@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./background.scss";
 
-export default function Background() {
+export default function Background({ hideInteractive = false, hideG6 = false }) {
   const interactiveRef = useRef(null);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function Background() {
       curY += (tgY - curY) / 50;
 
       interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-      
+
       updateBubbles();
       requestAnimationFrame(move);
     }
@@ -138,7 +138,7 @@ export default function Background() {
       </svg>
 
       {/* GRADIENT BUBBLES */}
-              <div className="g6"></div>
+      {!hideG6 && <div className="g6"></div>}
       <div className="gradients-container">
         <div className="g1"></div>
         <div className="g2"></div>
@@ -148,7 +148,8 @@ export default function Background() {
 
 
         {/* INTERACTIVE BUBBLE */}
-        <div className="interactive" ref={interactiveRef}></div>
+        {/* <div className="interactive" ref={interactiveRef}></div> */}
+        {!hideInteractive && <div className="interactive" ref={interactiveRef}></div>}
       </div>
 
       {/* NOISE OVERLAY */}

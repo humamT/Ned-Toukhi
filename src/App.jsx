@@ -1,6 +1,6 @@
 import "./App.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import HomePage from "./pages/home/Home.jsx";
 import AboutPage from "./pages/about/About.jsx";
@@ -12,11 +12,21 @@ import StorePage from "./pages/store/Store.jsx";
 import Footer from "./components/footer/footer.jsx";
 import Header from "./components/header/header.jsx";
 
-function App() {
-  const [headerVisible, setHeaderVisible] = useState(false);
+function AppContent({ headerVisible, setHeaderVisible }) {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  // Show header on all non-home pages by default
+  useEffect(() => {
+    if (isHomePage) {
+      setHeaderVisible(false);
+    } else {
+      setHeaderVisible(true);
+    }
+  }, [location.pathname, setHeaderVisible]);
 
   return (
-    <BrowserRouter>
+    <>
       <Header visible={headerVisible} />
 
       <Routes>
@@ -31,7 +41,17 @@ function App() {
         <Route path="/store" element={<StorePage />} />
       </Routes>
 
-      {/* <Footer /> */}
+      {!isHomePage && <Footer />}
+    </>
+  );
+}
+
+function App() {
+  const [headerVisible, setHeaderVisible] = useState(false);
+
+  return (
+    <BrowserRouter>
+      <AppContent headerVisible={headerVisible} setHeaderVisible={setHeaderVisible} />
     </BrowserRouter>
   );
 }

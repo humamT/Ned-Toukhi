@@ -1,3 +1,44 @@
+/* Responsive scale presets for 2k, FHD, 720p, and mobile */
+:root {
+  --stage-scale: 1;
+}
+
+@media (max-width: 1920px) {
+  :root {
+    --stage-scale: 0.75;
+  }
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --stage-scale: 0.5;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --stage-scale: 0.4;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --stage-scale: 0.3;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --stage-scale: 0.22;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --stage-scale: 0.18;
+  }
+}
+
 body {
   margin: 0;
   /* Unified family with weight mapping + fallback to specific face */
