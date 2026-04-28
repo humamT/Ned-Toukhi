@@ -80,10 +80,9 @@ export default function StageContent({ stageIndex }) {
     const isStage9 = stageIndex === 9;
     const isStage10 = stageIndex === 10;
 
-    // ----------------------------
-    // NEW: gallery animation state
-    // ----------------------------
-    const ANIM_MS = 600;
+    // Keep the three gallery card groups mounted long enough for their
+    // directional enter/exit animations to overlap.
+    const GALLERY_ANIM_MS = 700;
 
     const [activeGalleryStage, setActiveGalleryStage] = useState(() =>
         stageIndex >= 3 && stageIndex <= 5 ? stageIndex : 3
@@ -108,12 +107,28 @@ export default function StageContent({ stageIndex }) {
         const isGallery = next >= 3 && next <= 5;
 
         if (!wasGallery && isGallery) {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+            setDirection(next > prev ? "forward" : "backward");
             setActiveGalleryStage(next);
+            setLeavingGalleryStage("outside-gallery");
+
+            timeoutRef.current = setTimeout(() => {
+                setLeavingGalleryStage(null);
+                timeoutRef.current = null;
+            }, GALLERY_ANIM_MS);
+
+            return () => {
+                if (timeoutRef.current) clearTimeout(timeoutRef.current);
+            };
+        }
+
+        if (!isGallery) {
             setLeavingGalleryStage(null);
             return;
         }
 
-        if (!isGallery) return;
+        if (next === activeRef.current) return;
 
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
@@ -122,7 +137,7 @@ export default function StageContent({ stageIndex }) {
 
         const currentActive = activeRef.current;
 
-        // 🔑 NEW: activate the new gallery IMMEDIATELY
+        // Activate the new gallery immediately while the previous set animates out.
         setActiveGalleryStage(next);
 
         // old one will animate out
@@ -131,7 +146,7 @@ export default function StageContent({ stageIndex }) {
         timeoutRef.current = setTimeout(() => {
             setLeavingGalleryStage(null);
             timeoutRef.current = null;
-        }, ANIM_MS);
+        }, GALLERY_ANIM_MS);
 
         return () => {
             if (timeoutRef.current) clearTimeout(timeoutRef.current);

@@ -750,72 +750,20 @@ $design-height: 1440px;
     }
 
     &.slide-up-fade-out {
-        animation: slideUpFadeOut 0.2s $transition-ease forwards;
         pointer-events: none;
     }
 
     &.slide-up-fade-in {
-        animation: slideUpFadeIn 0.4s $transition-ease forwards;
     }
 
     &.slide-down-fade-in {
-        animation: slideDownFadeIn 0.4s $transition-ease forwards;
     }
 
     &.slide-down-fade-out {
-        animation: slideDownFadeOut 0.2s $transition-ease forwards;
         pointer-events: none;
     }
 
 
-}
-
-@keyframes slideUpFadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-100px);
-    }
-}
-
-@keyframes slideDownFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(100px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideDownFadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(100px);
-    }
-}
-
-@keyframes slideUpFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-100px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 // Spotlight Effects
