@@ -1,10 +1,11 @@
 import "./landing.scss";
 import GradientBackground from "../background/background.jsx";
 
-export default function Landing({ visible }) {
+export default function Landing({ children }) {
   return (
-    <section className={`landing ${visible ? "is-visible" : "is-hidden"}`}>
+    <section id="landing" className="landing">
       <GradientBackground />
+      {children}
     </section>
   );
 }

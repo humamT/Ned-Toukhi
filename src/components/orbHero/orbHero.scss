@@ -4,7 +4,7 @@
   --orb-move-ease: cubic-bezier(0.22, 1, 0.36, 1); // easing for moves
   --orb-move-delay: 0.4s; // delay orb movement to start after content fade-out
   --orb-fade-duration: 0.7s; // general opacity fades
-  --orb-transition-duration: 0.9s; // fade-out/in on stage 0⇄1
+  --orb-transition-duration: 0.9s; // fade-out/in between landing and scroll content
   --orb-size: calc(1700px * var(--stage-scale)); // sized from 2k design base
   --orb-bg: none; // set per mode
   --orb-bg-size: 100%; // set per mode
@@ -103,31 +103,40 @@
 
   position: fixed;
   top: 50%;
-  z-index: 20; // above page content while staged
+  z-index: -20; // above page content while staged
   filter: blur(25px);
+  will-change: filter;
 }
+
+/* Safari/WebKit: heavy blurs are expensive */
+@supports (-webkit-touch-callout: none) {
+  .orb-hero.is-staged {
+    filter: blur(14px);
+  }
+}
+
 
 /* Positions */
 .orb-hero--center {
   left: 50%;
 }
 
-// stage 0,6,9 base
+// common offset preset
 .orb-hero--right {
   left: 72%;
 }
 
-// stage 1
+// offset preset
 .orb-hero--left {
   left: 35%;
 }
 
-// stage 7
+// offset preset
 .orb-hero--left-more {
   left: 40%;
 }
 
-// stage 8
+// offset preset
 .orb-hero--far-left {
   left: 8.5%;
 }
@@ -144,7 +153,7 @@
 }
 
 .orb-hero--scale-large {
-  transform: translate(-50%, -50%) scale(2); // bigger on stage 9
+  transform: translate(-50%, -50%) scale(2);
 }
 
 /* Logo */

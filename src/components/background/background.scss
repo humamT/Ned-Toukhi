@@ -109,6 +109,8 @@ body {
   background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2), var(--color-bg3), var(--color-bg4), var(--color-bg5));
   top: 0;
   left: 0;
+  // Keep painted surfaces bounded on large viewports.
+  --circle-size: clamp(900px, 110vmax, 1400px);
 
   svg {
     position: fixed;
@@ -120,9 +122,10 @@ body {
 
 
   .gradients-container {
-    filter: url(#goo) blur(40px);
+    filter: url(#goo) blur(clamp(18px, 2.2vw, 32px));
     width: 100%;
     height: 100%;
+    will-change: filter;
   }
 
   .g1 {
@@ -134,6 +137,7 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
+    will-change: transform;
   }
 
   .g2 {
@@ -145,6 +149,7 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
+    will-change: transform;
   }
 
   .g3 {
@@ -156,6 +161,7 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
+    will-change: transform;
   }
 
   .g4 {
@@ -167,6 +173,7 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
+    will-change: transform;
   }
 
   .g5 {
@@ -178,6 +185,7 @@ body {
     height: calc(var(--circle-size));
 
     opacity: 1;
+    will-change: transform;
   }
 
   .g6 {
@@ -207,6 +215,7 @@ body {
     left: -18%;
 
     opacity: 0.4;
+    will-change: transform;
   }
 
   .noise-overlay {
@@ -219,5 +228,35 @@ body {
     z-index: 2;
     opacity: 0.23;
     filter: url(#noise);
+  }
+}
+
+// WebKit/Safari perf mode: avoid the most expensive effects.
+.gradient-bg[data-perf="low"] {
+  .gradients-container {
+    // SVG goo + big blur + blend modes are a common WebKit bottleneck.
+    filter: blur(clamp(8px, 1vw, 12px));
+    will-change: filter;
+  }
+
+  .g1,
+  .g2,
+  .g3,
+  .g4,
+  .g5,
+  .g6,
+  .interactive {
+    mix-blend-mode: normal;
+  }
+
+  .noise-overlay {
+    display: none;
+  }
+}
+
+/* Extra Safari/WebKit safety: avoid expensive SVG goo filtering. */
+.gradient-bg[data-webkit="true"] {
+  .gradients-container {
+    filter: blur(clamp(8px, 1vw, 12px));
   }
 }

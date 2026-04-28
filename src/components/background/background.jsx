@@ -3,23 +3,56 @@ import "./background.scss";
 
 export default function Background({ hideInteractive = false, hideG6 = false }) {
   const interactiveRef = useRef(null);
+  const rootRef = useRef(null);
 
   useEffect(() => {
     const interBubble = interactiveRef.current;
-    if (!interBubble) return;
+    const rootEl = rootRef.current;
+    if (!rootEl) return;
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+    const isWebKit =
+      /AppleWebKit/i.test(ua) &&
+      !/Chrome/i.test(ua) &&
+      !/Chromium/i.test(ua) &&
+      !/Edg/i.test(ua);
+
+    const computePerfMode = () => {
+      // Larger viewports = exponentially more pixels to blend/blur/filter.
+      // Switch to cheaper mode when the window is "big enough" to hurt WebKit.
+      const area = window.innerWidth * window.innerHeight;
+      const isHugeViewport = area >= 2_000_000; // ~1080p and above
+      const low = prefersReducedMotion || isWebKit || isHugeViewport;
+      rootEl.dataset.perf = low ? "low" : "high";
+    };
+
+    computePerfMode();
+    rootEl.dataset.webkit = isWebKit ? "true" : "false";
 
     let curX = 0;
     let curY = 0;
     let tgX = 0;
     let tgY = 0;
+    let rafId = null;
+    let lastFrameTs = 0;
+    let running = true;
 
-    // Bubble physics setup (without interactive bubble)
+    const targetFps = isWebKit ? 30 : 60;
+    const minFrameMs = 1000 / targetFps;
+
+    // Bubble physics setup (use smaller viewport dimension for sizing)
+    const base = Math.min(window.innerWidth, window.innerHeight);
     const bubbles = [
-      { el: document.querySelector('.g1'), x: window.innerWidth * 0.85, y: window.innerHeight * 0.1, vx: 1.2, vy: 0.8, radius: window.innerWidth * 0.15 },
-      { el: document.querySelector('.g2'), x: window.innerWidth * 0.15, y: window.innerHeight * 0.8, vx: -0.9, vy: -1.1, radius: window.innerWidth * 0.15 },
-      { el: document.querySelector('.g3'), x: window.innerWidth * 0.85, y: window.innerHeight * 0.8, vx: -1.1, vy: 0.7, radius: window.innerWidth * 0.15 },
-      { el: document.querySelector('.g4'), x: window.innerWidth * 0.5, y: window.innerHeight * 0.1, vx: 0.7, vy: 1.3, radius: window.innerWidth * 0.15 },
-      { el: document.querySelector('.g5'), x: window.innerWidth * 0.15, y: window.innerHeight * 0.1, vx: 1.0, vy: 1.0, radius: window.innerWidth * 0.3 }
+      { el: document.querySelector('.g1'), x: window.innerWidth * 0.85, y: window.innerHeight * 0.1, vx: 1.2, vy: 0.8, radius: base * 0.15 },
+      { el: document.querySelector('.g2'), x: window.innerWidth * 0.15, y: window.innerHeight * 0.8, vx: -0.9, vy: -1.1, radius: base * 0.15 },
+      { el: document.querySelector('.g3'), x: window.innerWidth * 0.85, y: window.innerHeight * 0.8, vx: -1.1, vy: 0.7, radius: base * 0.15 },
+      { el: document.querySelector('.g4'), x: window.innerWidth * 0.5, y: window.innerHeight * 0.1, vx: 0.7, vy: 1.3, radius: base * 0.15 },
+      { el: document.querySelector('.g5'), x: window.innerWidth * 0.15, y: window.innerHeight * 0.1, vx: 1.0, vy: 1.0, radius: base * 0.3 }
     ];
 
     function checkCollision(b1, b2) {
@@ -78,24 +111,35 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
           checkCollision(bubble, bubbles[j]);
         }
 
-        // Update DOM
+        // Update DOM (transform-only to avoid layout thrash)
         if (bubble.el) {
-          bubble.el.style.left = `${bubble.x}px`;
-          bubble.el.style.top = `${bubble.y}px`;
-          bubble.el.style.transform = 'translate(-50%, -50%)';
+          bubble.el.style.transform = `translate3d(${bubble.x}px, ${bubble.y}px, 0) translate3d(-50%, -50%, 0)`;
         }
       });
     }
 
-    function move() {
-      // Smooth cursor following for interactive bubble
-      curX += (tgX - curX) / 50;
-      curY += (tgY - curY) / 50;
+    function tick(ts) {
+      if (!running) return;
+      if (document.hidden) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
 
-      interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+      if (ts - lastFrameTs < minFrameMs) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+      lastFrameTs = ts;
+
+      // Smooth cursor following for interactive bubble (if enabled)
+      if (interBubble && !hideInteractive) {
+        curX += (tgX - curX) / 50;
+        curY += (tgY - curY) / 50;
+        interBubble.style.transform = `translate3d(${Math.round(curX)}px, ${Math.round(curY)}px, 0)`;
+      }
 
       updateBubbles();
-      requestAnimationFrame(move);
+      rafId = requestAnimationFrame(tick);
     }
 
     const handleMouseMove = (e) => {
@@ -103,16 +147,37 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
       tgY = e.clientY;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    move();
+    const handleVisibility = () => {
+      // No-op: `tick` reads `document.hidden`, but this helps WebKit “settle” faster.
+      rootEl.dataset.hidden = document.hidden ? "true" : "false";
+    };
+
+    let resizeRaf = null;
+    const handleResize = () => {
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => {
+        computePerfMode();
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibility, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    rafId = requestAnimationFrame(tick);
 
     return () => {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
       window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [hideInteractive]);
 
   return (
-    <div className="gradient-bg">
+    <div className="gradient-bg" ref={rootRef}>
       {/* SVG FILTERS */}
       <svg xmlns="http://www.w3.org/2000/svg" className="goo-svg">
         <defs>

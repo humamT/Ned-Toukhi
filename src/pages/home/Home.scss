@@ -1,0 +1,37 @@
+.home-scroll {
+  position: relative;
+  z-index: 1;
+}
+
+.home-scroll__spacer {
+  height: 100vh;
+}
+
+html.is-home {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 0px;
+  scroll-behavior: smooth;
+}
+
+html.is-home body {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  height: auto;
+}
+
+html.is-home .home-scroll__spacer,
+html.is-home .stage-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* Inside the gallery (stage 3), snap between internal steps instead of the whole tall section */
+html.is-home .stage-section--gallery {
+  scroll-snap-align: none;
+}
+
+html.is-home .gallery-step {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+

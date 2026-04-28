@@ -3,7 +3,7 @@ import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 import "./orb.scss";
 import whiteOrb from "../../assets/images/white-orb.svg";
 
-export default function Orb() {
+export default function Orb({ quality = "auto" }) {
   const containerRef = useRef(null);
 
   const vertex = `
@@ -81,10 +81,22 @@ export default function Orb() {
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    container.appendChild(gl.canvas);
+    // Skip in environments without WebGL (e.g. jsdom tests, some old Safari modes)
+    if (typeof window === "undefined" || typeof window.WebGLRenderingContext === "undefined") {
+      return;
+    }
+
+    let renderer = null;
+    let gl = null;
+    try {
+      renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+      gl = renderer.gl;
+      gl.clearColor(0, 0, 0, 0);
+      container.appendChild(gl.canvas);
+    } catch {
+      // Test / non-WebGL environments (e.g. jsdom) can't create a GL context.
+      return;
+    }
 
     const geometry = new Triangle(gl);
 
@@ -106,10 +118,35 @@ export default function Orb() {
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    let running = true;
+    let rafId = null;
+    let isVisible = true;
+    let lastTs = 0;
+
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+    const isWebKit =
+      /AppleWebKit/i.test(ua) &&
+      !/Chrome/i.test(ua) &&
+      !/Chromium/i.test(ua) &&
+      !/Edg/i.test(ua);
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     function resize() {
-      const dpr = window.devicePixelRatio || 1;
+      const dprRaw = window.devicePixelRatio || 1;
       const w = container.clientWidth;
       const h = container.clientHeight;
+
+      // Clamp DPR to avoid huge fragment workloads (esp. WebKit + large windows).
+      const dprCap =
+        quality === "low" ? 1 :
+        quality === "high" ? 2 :
+        (prefersReducedMotion ? 1.25 : (isWebKit ? 1 : 2));
+      const dpr = Math.min(dprRaw, dprCap);
+
       renderer.setSize(w * dpr, h * dpr);
       gl.canvas.style.width = w + "px";
       gl.canvas.style.height = h + "px";
@@ -125,20 +162,48 @@ export default function Orb() {
 
     let start = performance.now();
 
-    const update = (t) => {
+    const targetFps = prefersReducedMotion ? 30 : (isWebKit ? 30 : 60);
+    const minFrameMs = 1000 / targetFps;
+
+    const tick = (t) => {
+      if (!running) return;
+      if (document.hidden || !isVisible) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+      if (t - lastTs < minFrameMs) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+      lastTs = t;
+
       program.uniforms.iTime.value = (t - start) * 0.001;
       renderer.render({ scene: mesh });
-      requestAnimationFrame(update);
+      rafId = requestAnimationFrame(tick);
     };
 
-    requestAnimationFrame(update);
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisible = Boolean(entry?.isIntersecting);
+      },
+      { root: null, threshold: 0.05 }
+    );
+    io.observe(container);
+
+    rafId = requestAnimationFrame(tick);
 
     return () => {
+      running = false;
       window.removeEventListener("resize", resize);
-      container.removeChild(gl.canvas);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      if (rafId) cancelAnimationFrame(rafId);
+      io.disconnect();
+      if (gl?.canvas && gl.canvas.parentNode === container) {
+        container.removeChild(gl.canvas);
+      }
+      gl?.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, []);
+  }, [quality]);
 
   return (
     <div className="orb-wrapper">

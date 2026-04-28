@@ -18,9 +18,7 @@ function AppContent({ headerVisible, setHeaderVisible }) {
 
   // Show header on all non-home pages by default
   useEffect(() => {
-    if (isHomePage) {
-      setHeaderVisible(false);
-    } else {
+    if (!isHomePage) {
       setHeaderVisible(true);
     }
   }, [location.pathname, setHeaderVisible]);
@@ -41,7 +39,7 @@ function AppContent({ headerVisible, setHeaderVisible }) {
         <Route path="/store" element={<StorePage />} />
       </Routes>
 
-      {!isHomePage && <Footer />}
+      <Footer />
     </>
   );
 }
