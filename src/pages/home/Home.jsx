@@ -4,15 +4,9 @@ import Loading from "../../components/loading/loading.jsx";
 import Landing from "../../components/landing/landing.jsx";
 import OrbHero from "../../components/orbHero/orbHero.jsx";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
+import Footer from "../../components/footer/footer.jsx";
 import "../../components/stage-content/StageContent.scss";
 import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSquareFacebook,
-  faInstagram,
-  faBehance,
-} from "@fortawesome/free-brands-svg-icons";
-import GradientBackground from "../../components/background/background.jsx";
 
 import stickerImg from "../../assets/images/sticker-op.png";
 import postersCluster from "../../assets/images/posters-cluster.png";
@@ -56,12 +50,6 @@ import aboutBox from "../../assets/PNGS+SVGs/About/about-box.svg";
 
 import featuredClientsBox from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-box.svg";
 import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-logos.svg";
-
-import footerLogo from "../../assets/PNGS+SVGs/Footer/muhanad-logo.svg";
-import footerLogoLine from "../../assets/PNGS+SVGs/Footer/logo-line-footer.svg";
-import noAiBadge from "../../assets/PNGS+SVGs/Footer/no-ai.svg";
-import alienHand from "../../assets/PNGS+SVGs/Footer/Alien-hand.png";
-import Alien from "../../assets/PNGS+SVGs/Footer/Alien.png";
 
 import galleryborder from "../../assets/PNGS+SVGs/gallery-border-1.svg";
 import scrollBar from "../../assets/PNGS+SVGs/scroll-bar.svg";
@@ -605,108 +593,13 @@ export default function Home({ setHeaderVisible }) {
           {/* Footer */}
           <section className="stage-section stage-section--footer">
             <div className="stage-content__stage stage-content__stage-10">
-              <div>
-                <GradientBackground hideInteractive={true} hideG6={true} />
-                <div className="stage-10__footer-content">
-                  <div className="footer-main">
-                    <div className="footer-left">
-                      <img src={footerLogo} alt="Muhamad Aldoukhi" className="footer-logo" />
-                      <img src={footerLogoLine} alt="" className="footer-logo-line" />
-                    </div>
-
-                    <div className="footer-middle">
-                      <hr className="hr" />
-                      <div className="footer-column">
-                        <h3 className="footer-column-title">Store</h3>
-                        <ul className="footer-store-links">
-                          <li><a href="/store">Stickers</a></li>
-                          <li><a href="/store">Post cards</a></li>
-                          <li><a href="/store">Posters</a></li>
-                        </ul>
-                      </div>
-                      <div className="footer-column">
-                        <h3 className="footer-column-title">Gallery</h3>
-                        <ul className="footer-gallery-links">
-                          <li><a href="/gallery">Illustrations</a></li>
-                          <li><a href="/gallery">Visual Identities</a></li>
-                          <li><a href="/gallery">Featured Projects</a></li>
-                        </ul>
-                      </div>
-
-                      <div className="footer-column">
-                        <h3 className="footer-column-title">Infos</h3>
-                        <ul className="footer-info-links">
-                          <li><a href="/quotations">Quotations</a></li>
-                          <li><a href="/contact">Contact</a></li>
-                          <li><a href="/about">About</a></li>
-                        </ul>
-                      </div>
-                    </div>
-
-                    <div className="footer-right">
-                      <div className="lang-social">
-                        <div className="site-header__langs" aria-label="Languages">
-                          <button className="pill is-active" type="button">EN</button>
-                          <button className="pill" type="button">FR</button>
-                          <button className="pill" type="button">عربي</button>
-                        </div>
-                        <div className="footer-social">
-                          <a
-                            className="icon"
-                            href="https://www.facebook.com/nedtoukhi"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Facebook"
-                          >
-                            <FontAwesomeIcon icon={faSquareFacebook} />
-                          </a>
-
-                          <a
-                            className="icon"
-                            href="https://www.instagram.com/nedtoukhi"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Instagram"
-                          >
-                            <FontAwesomeIcon icon={faInstagram} />
-                          </a>
-
-                          <a
-                            className="icon"
-                            href="https://www.behance.net/nedtoukhi"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Behance"
-                          >
-                            <FontAwesomeIcon icon={faBehance} />
-                          </a>
-                        </div>
-                      </div>
-
-                      <div className="footer-ai-badge">
-                        NO AI GENERATIONAL TOOLS WERE USED
-                        IN ANY ART CREATED IN THIS WEBSITE
-                        <img src={noAiBadge} alt="No AI Tools Used" />
-                      </div>
-
-                      <div className="footer-copyright">
-                        Muhamad ALDOUKHI 2026 - All Rights Reserved ©
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="footer-alien">
-                  <img src={Alien} alt="" className="footer-alien-body" />
-                  <img src={alienHand} alt="" className="footer-alien-hand" />
-                </div>
-              </div>
+              <Footer />
             </div>
           </section>
         </div>
       </div>
 
-      <ScrollIndicator visible={!isLoading && logoVisible} />
+      <ScrollIndicator visible={!isLoading} />
     </div>
   );
 }
