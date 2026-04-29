@@ -26,10 +26,8 @@ export default function GalleryPage() {
         setLoading(true);
         setError("");
 
-        const [rows, images] = await Promise.all([
-          getGalleryProjects(),
-          getGalleryCoverImages(),
-        ]);
+        const rows = await getGalleryProjects();
+        const images = await getGalleryCoverImages();
 
         const imageByGalleryId = new Map();
         for (const im of Array.isArray(images) ? images : []) {

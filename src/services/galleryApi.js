@@ -13,7 +13,9 @@ function normalizeJsonBody(value) {
 async function fetchJson(url) {
   const res = await fetch(url, {
     method: "GET",
-    credentials: "include", // send HttpOnly cookie
+    // Keep cookies enabled; harmless for public endpoints and needed if any
+    // endpoint remains protected in some environments.
+    credentials: "include",
     headers: {
       Accept: "application/json",
     },
@@ -34,7 +36,12 @@ export async function getGalleryProjects() {
 
 // Fetch all images, then filter client-side for `gallery_id != null`.
 export async function getGalleryCoverImages() {
-  const json = await fetchJson(`${API_BASE_URL}/images?limit=500`);
-  return normalizeJsonBody(json);
+  try {
+    const json = await fetchJson(`${API_BASE_URL}/images?limit=500`);
+    return normalizeJsonBody(json);
+  } catch {
+    // Images may be protected while gallery is public. Treat covers as optional.
+    return [];
+  }
 }
 
