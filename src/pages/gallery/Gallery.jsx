@@ -5,7 +5,7 @@ import "./Gallery.scss";
 
 import galleryBubble from "../../assets/PNGS+SVGs/photo-pubble.svg";
 
-import { getGalleryCoverImages, getGalleryProjects } from "../../services/galleryApi";
+import { getGalleryProjects } from "../../services/galleryApi";
 import BehanceModal from "../../components/gallery/BehanceModal";
 import ProjectCard from "../../components/gallery/ProjectCard";
 import OrbHero from "../../components/orbHero/orbHero.jsx";
@@ -30,19 +30,11 @@ export default function GalleryPage() {
         setError("");
 
         const rows = await getGalleryProjects();
-        const images = await getGalleryCoverImages();
-
-        const imageByGalleryId = new Map();
-        for (const im of Array.isArray(images) ? images : []) {
-          // One image per gallery item is expected; keep the first we find.
-          if (im?.gallery_id != null && !imageByGalleryId.has(im.gallery_id)) {
-            imageByGalleryId.set(im.gallery_id, im.publicUrl ?? "");
-          }
-        }
 
         const enrichedProjects = (Array.isArray(rows) ? rows : []).map((p) => ({
           ...p,
-          imageUrl: imageByGalleryId.get(p.id) ?? "",
+          imageUrl: p?.images?.[0]?.publicUrl ?? "",
+          imageCount: Array.isArray(p?.images) ? p.images.length : 0,
         }));
 
         if (!cancelled) setProjects(enrichedProjects);

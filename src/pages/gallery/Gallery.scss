@@ -159,6 +159,9 @@
   background: transparent;
   cursor: pointer;
   text-align: left;
+  position: relative;
+  width: 100%;
+  min-height: 180px;
 }
 
 .gallery-project-card__media img {
@@ -172,6 +175,23 @@
   width: 100%;
   height: 180px;
   background: rgba(255, 255, 255, 0.06);
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+}
+
+.gallery-project-card__media-badge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .gallery-project-card__body {

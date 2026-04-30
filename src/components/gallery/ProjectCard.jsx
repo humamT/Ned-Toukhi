@@ -2,6 +2,8 @@ import ToolIcons from "./ToolIcons";
 
 export default function ProjectCard({ project, onOpenBehance }) {
   const imageUrl = project?.imageUrl ?? "";
+  const imageCount = Number(project?.imageCount ?? 0);
+  const extraImagesCount = Math.max(0, imageCount - 1);
   const title = project?.title ?? "";
   const type = project?.type ?? "";
   const date = project?.date ?? "";
@@ -17,7 +19,8 @@ export default function ProjectCard({ project, onOpenBehance }) {
         onClick={() => onOpenBehance?.(embedLink)}
         aria-label={title ? `Open ${title} on Behance` : "Open project on Behance"}
       >
-        {imageUrl ? <img src={imageUrl} alt={title} /> : <div className="gallery-project-card__media-placeholder" />}
+        {imageUrl ? <img src={imageUrl} alt={title} loading="lazy" /> : <div className="gallery-project-card__media-placeholder">No image</div>}
+        {extraImagesCount > 0 ? <span className="gallery-project-card__media-badge">+{extraImagesCount}</span> : null}
       </button>
 
       <div className="gallery-project-card__body">
