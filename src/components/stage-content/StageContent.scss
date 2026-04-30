@@ -33,7 +33,6 @@ $design-height: 1440px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     pointer-events: auto;
 }
 
@@ -179,7 +178,7 @@ $design-height: 1440px;
 .stage-1__title-en,
 .stage-1__title-ar,
 .stage-1__title-fr {
-    font-size: $title-size;
+    font-size: var(--stage-title-size);
     font-family: $primary-font;
     font-weight: 500;
     color: white;
@@ -195,7 +194,7 @@ $design-height: 1440px;
 }
 
 .stage-1__subtitle {
-    font-size: $subtitle-size;
+    font-size: var(--stage-subtitle-size);
     width: 80%;
     text-align: center;
     font-weight: 400;
@@ -210,7 +209,7 @@ $design-height: 1440px;
     margin-top: 1.5rem;
     text-shadow: $text-shadow-base;
     color: white;
-    font-size: $button-size;
+    font-size: var(--stage-button-size);
     line-height: 1.5;
     padding: 0% 20%;
     background: none;
@@ -299,7 +298,7 @@ $design-height: 1440px;
 .stage-2__title-en,
 .stage-2__title-ar,
 .stage-2__title-fr {
-    font-size: $title-size;
+    font-size: var(--stage-title-size);
     font-family: $primary-font;
     font-weight: 500;
     color: white;
@@ -315,7 +314,7 @@ $design-height: 1440px;
 }
 
 .stage-2__subtitle {
-    font-size: $subtitle-size;
+    font-size: var(--stage-subtitle-size);
     width: 50%;
     text-align: center;
     font-weight: 400;
@@ -329,7 +328,7 @@ $design-height: 1440px;
 .explore-now {
     margin-top: 1.5rem;
     color: white;
-    font-size: $button-size;
+    font-size: var(--stage-button-size);
     line-height: 1.5;
     padding: 0% 10%;
     background: none;
@@ -423,7 +422,7 @@ $design-height: 1440px;
 .stage-3__title-en,
 .stage-3__title-ar,
 .stage-3__title-fr {
-    font-size: $title-size;
+    font-size: var(--stage-title-size);
     font-family: $primary-font;
     font-weight: 500;
     color: white;
@@ -438,7 +437,7 @@ $design-height: 1440px;
     translate: 20%;
     margin-top: 1.5rem;
     color: white;
-    font-size: $button-size;
+    font-size: var(--stage-button-size);
     line-height: 1.5;
     padding: 0% 13%;
     background: none;
@@ -1210,7 +1209,7 @@ $design-height: 1440px;
 .stage-6__title-en,
 .stage-6__title-ar,
 .stage-6__title-fr {
-    font-size: $title-size;
+    font-size: var(--stage-title-size);
     font-family: $primary-font;
     font-weight: 500;
     color: white;
@@ -1226,7 +1225,7 @@ $design-height: 1440px;
 }
 
 .stage-6__subtitle {
-    font-size: 25px;
+    font-size: var(--stage-subtitle-size);
     align-self: center;
     width: 40%;
     text-align: center;
@@ -1244,7 +1243,7 @@ $design-height: 1440px;
     width: 25%;
     text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
     color: white;
-    font-size: 2rem;
+    font-size: var(--stage-button-size);
     line-height: 1.5;
     background: none;
     border-radius: 60px;
@@ -1352,7 +1351,7 @@ $design-height: 1440px;
 .stage-7__title-en,
 .stage-7__title-ar,
 .stage-7__title-fr {
-    font-size: $title-size;
+    font-size: var(--stage-title-size);
     font-family: $primary-font;
     font-weight: 500;
     color: white;
@@ -1360,7 +1359,7 @@ $design-height: 1440px;
 }
 
 .stage-7__subtitle {
-    font-size: 25px;
+    font-size: var(--stage-subtitle-size);
     align-self: center;
     width: 40%;
     text-align: center;
@@ -1378,7 +1377,7 @@ $design-height: 1440px;
     width: 25%;
     text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
     color: white;
-    font-size: 2rem;
+    font-size: var(--stage-button-size);
     line-height: 1.5;
     background: none;
     border-radius: 60px;

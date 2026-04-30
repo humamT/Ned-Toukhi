@@ -98,7 +98,7 @@ export default function Footer() {
             </div>
 
             <div className="footer-copyright">
-              Muhamad ALDOUKHI 2026 - All Rights Reserved ©
+              Muhanad ALTOUKHI 2026 - All Rights Reserved ©
             </div>
           </div>
         </div>

@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Gallery.scss";
 
+// import emptyOrb from "../../assets/images/Circle-empty.svg";
+
 import galleryBubble from "../../assets/PNGS+SVGs/photo-pubble.svg";
 
 import { getGalleryCoverImages, getGalleryProjects } from "../../services/galleryApi";
 import BehanceModal from "../../components/gallery/BehanceModal";
 import ProjectCard from "../../components/gallery/ProjectCard";
+import OrbHero from "../../components/orbHero/orbHero.jsx";
 
 const CATEGORIES = ["Illustrations", "Featured", "Identities"];
 
@@ -62,26 +65,30 @@ export default function GalleryPage() {
   return (
     <div className="gallery-page">
       <section className="gallery-head">
-        <div className="gallery-head-title">
-          <h1>Gallery</h1>
-          <h2>المعرض</h2>
-          <h3>Galerie</h3>
-        </div>
 
-        <div className="gallery-head-subtitle">
-          <p>
+        <div className="gallery-head-orb .orb-hero.is-staged" aria-hidden="true">
+          <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} />
+        </div>
+        {/* <img className="Envelope-emptyOrb" src={emptyOrb} alt="" /> */}
+
+        <div className="gallery-head-text">
+          <h1 className="stage-2__title-en gallery-head-title">Gallery</h1>
+          <h2 className="stage-2__title-ar gallery-head-title">المعرض</h2>
+          <h3 className="stage-2__title-fr gallery-head-title">Galerie</h3>
+
+          <p className="stage-2__subtitle gallery-head-subtitle">
             Discover 3 categories of %100 human-made art, from illustrations and logo designs to standout featured
             projects.
           </p>
         </div>
 
         <div className="gallery-head-bubbles" aria-hidden="true">
-          <img src={galleryBubble} alt="" />
-          <img src={galleryBubble} alt="" />
-          <img src={galleryBubble} alt="" />
-          <img src={galleryBubble} alt="" />
-          <img src={galleryBubble} alt="" />
-          <img src={galleryBubble} alt="" />
+          <img className="gallery1 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+          <img className="gallery2 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+          <img className="gallery3 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+          <img className="gallery4 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+          <img className="gallery5 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+          <img className="gallery6 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
         </div>
       </section>
 

@@ -5,9 +5,10 @@
   --orb-move-delay: 0.4s; // delay orb movement to start after content fade-out
   --orb-fade-duration: 0.7s; // general opacity fades
   --orb-transition-duration: 0.9s; // fade-out/in between landing and scroll content
-  --orb-size: calc(1700px * var(--stage-scale)); // sized from 2k design base
+  /* Must match `.orb-wrapper` size so the background circle fits exactly */
+  --orb-frame-size: calc(1200px * var(--stage-scale));
   --orb-bg: none; // set per mode
-  --orb-bg-size: 100%; // set per mode
+  --orb-bg-size: 100% 100%;
 
   position: relative;
   pointer-events: none;
@@ -86,10 +87,14 @@
 /* LANDING MODE */
 .orb-hero.is-landing {
   --orb-bg: url("../../assets/images/Circle-empty.svg");
-  --orb-bg-size: var(--orb-size) 70%;
+  --orb-bg-size: 100% 100%;
 
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  width: var(--orb-frame-size);
+  height: var(--orb-frame-size);
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,10 +104,12 @@
 /* STAGED MODE */
 .orb-hero.is-staged {
   --orb-bg: url("../../assets/images/Circle-full.svg");
-  --orb-bg-size: 66%;
+  --orb-bg-size: 100% 100%;
 
   position: fixed;
   top: 50%;
+  width: var(--orb-frame-size);
+  height: var(--orb-frame-size);
   z-index: -20; // above page content while staged
   filter: blur(25px);
   will-change: filter;
@@ -145,15 +152,15 @@
 
 /* Scale */
 .orb-hero--scale-normal {
-  transform: translate(-50%, -50%) scale(1.5); // default size
+  transform: translate(-50%, -50%) scale(1.25); // default size
 }
 
 .orb-hero--scale-about {
-  transform: translate(-65%, -70%) scale(1.3); // smaller on about stage
+  transform: translate(-65%, -70%) scale(1.15); // smaller on about stage
 }
 
 .orb-hero--scale-large {
-  transform: translate(-50%, -50%) scale(2);
+  transform: translate(-50%, -50%) scale(1.6);
 }
 
 /* Logo */
@@ -173,15 +180,15 @@
   }
 
   .orb-hero--scale-normal {
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1.05);
   }
 
   .orb-hero--scale-about {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(0.95);
   }
 
   .orb-hero--scale-large {
-    transform: translate(-50%, -50%) scale(1.5);
+    transform: translate(-50%, -50%) scale(1.25);
   }
 
   .orb-hero-logo {

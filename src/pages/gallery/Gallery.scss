@@ -1,31 +1,112 @@
 .gallery-page {
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
   color: white;
 }
 
 .gallery-head {
   display: flex;
-  justify-content: space-between;
+  margin-top: 8vh;
   gap: 2rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
 }
 
-.gallery-head-title h1,
-.gallery-head-title h2,
-.gallery-head-title h3 {
+.gallery-head-orb {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* OrbHero's landing mode defaults to z-index: 100; override for background usage here */
+.gallery-head-orb .orb-hero.is-landing {
+  z-index: 0;
+}
+
+.gallery-head-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-head-title {
+  margin: 8px 0px;
+}
+
+.gallery-head-text h1 {
+  // translate: -10%;
+}
+
+.gallery-head-text h2 {
+  translate: 25%;
+}
+
+.gallery-head-text h3 {
+  translate: 30px 15px;
 }
 
 .gallery-head-subtitle {
-  max-width: 700px;
+  max-width: 1000px;
 }
 
-.gallery-head-bubbles img {
-  width: 72px;
-  height: auto;
-  margin-right: 6px;
-  opacity: 0.95;
+// .gallery-head-bubbles {
+//   width: 72px;
+//   height: auto;
+//   margin-right: 6px;
+//   opacity: 0.95;
+// }
+
+// .gallery-head-bubbles img {
+//   width: 15%;
+// }
+
+.gallery-head-bubbles img.gallery1 {
+  translate: -220% -210%;
+  width: 200px;
+}
+
+.gallery-head-bubbles img.gallery2 {
+  translate: 350% -180%;
+  width: 200px;
+}
+
+.gallery-head-bubbles img.gallery3 {
+  translate: 80% -65%;
+  width: 350px;
+}
+
+.gallery-head-bubbles img.gallery4 {
+  translate: -280% -140%;
+  width: 380px;
+}
+
+.gallery-head-bubbles img.gallery5 {
+  translate: 115% -230%;
+  width: 250px;
+  background-image: url(/src/assets/PNGS+SVGs/3.png);
+  animation: float 7s ease-in-out infinite;
+}
+
+.gallery-head-bubbles img.gallery6 {
+  translate: -280% -70%;
+  width: 230px;
+  background-image: url(/src/assets/PNGS+SVGs/6.png);
+  animation: float 3s ease-in-out infinite;
+}
+
+.gallery-head-bubbles {
+  position: relative;
+  z-index: 1;
 }
 
 .gallery-content {
