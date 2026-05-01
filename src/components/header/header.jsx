@@ -35,9 +35,9 @@ export default function Header({ visible }) {
                         </button>
 
                         <div className="dropdown-menu" role="menu">
-                            <a href="/gallery/illustrations" role="menuitem">Illustrations</a>
-                            <a href="/gallery/featured" role="menuitem">Featured</a>
-                            <a href="/gallery/identities" role="menuitem">Identities</a>
+                            <NavLink to="/gallery/illustrations" role="menuitem">Illustrations</NavLink>
+                            <NavLink to="/gallery/featured" role="menuitem">Featured</NavLink>
+                            <NavLink to="/gallery/identities" role="menuitem">Identities</NavLink>
                         </div>
                     </div>
 

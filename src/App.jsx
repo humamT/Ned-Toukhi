@@ -16,6 +16,10 @@ function AppContent({ headerVisible, setHeaderVisible }) {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, location.search]);
+
   // Show header on all non-home pages by default
   useEffect(() => {
     if (!isHomePage) {
@@ -35,6 +39,7 @@ function AppContent({ headerVisible, setHeaderVisible }) {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/gallery/:categorySlug" element={<GalleryPage />} />
         <Route path="/quotations" element={<QuotationsPage />} />
         <Route path="/store" element={<StorePage />} />
       </Routes>

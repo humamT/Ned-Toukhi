@@ -1,5 +1,6 @@
 import "../stage-content/StageContent.scss";
 import "./footer.scss";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareFacebook, faInstagram, faBehance } from "@fortawesome/free-brands-svg-icons";
 import GradientBackground from "../background/background.jsx";
@@ -35,9 +36,9 @@ export default function Footer() {
             <div className="footer-column">
               <h3 className="footer-column-title">Gallery</h3>
               <ul className="footer-gallery-links">
-                <li><a href="/gallery">Illustrations</a></li>
-                <li><a href="/gallery">Visual Identities</a></li>
-                <li><a href="/gallery">Featured Projects</a></li>
+                <li><NavLink to="/gallery/illustrations">Illustrations</NavLink></li>
+                <li><NavLink to="/gallery/identities">Visual Identities</NavLink></li>
+                <li><NavLink to="/gallery/featured">Featured Projects</NavLink></li>
               </ul>
             </div>
 
