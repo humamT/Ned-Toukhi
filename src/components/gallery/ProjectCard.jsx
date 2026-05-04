@@ -1,5 +1,15 @@
 import ToolIcons from "./ToolIcons";
 
+function updateMediaGlowPosition(event) {
+  const el = event.currentTarget;
+  const r = el.getBoundingClientRect();
+  if (!r.width || !r.height) return;
+  const x = ((event.clientX - r.left) / r.width) * 100;
+  const y = ((event.clientY - r.top) / r.height) * 100;
+  el.style.setProperty("--glow-x", `${x}%`);
+  el.style.setProperty("--glow-y", `${y}%`);
+}
+
 export default function ProjectCard({ project, onOpenBehance }) {
   const imageUrl = project?.imageUrl ?? "";
   const imageCount = Number(project?.imageCount ?? 0);
@@ -17,20 +27,23 @@ export default function ProjectCard({ project, onOpenBehance }) {
         type="button"
         className="gallery-project-card__media"
         onClick={() => onOpenBehance?.(embedLink)}
+        onPointerMove={updateMediaGlowPosition}
         aria-label={title ? `Open ${title} on Behance` : "Open project on Behance"}
       >
         {imageUrl ? <img src={imageUrl} alt={title} loading="lazy" /> : <div className="gallery-project-card__media-placeholder">No image</div>}
+        <span className="gallery-project-card__media-glow" aria-hidden />
         {extraImagesCount > 0 ? <span className="gallery-project-card__media-badge">+{extraImagesCount}</span> : null}
       </button>
 
       <div className="gallery-project-card__body">
         <h3 className="gallery-project-card__title">{title}</h3>
-        <div className="gallery-project-card__sub">
-          {type ? <span>{type}</span> : null}
-          {date ? <span>{date}</span> : null}
-        </div>
-
-        <ToolIcons tools={tools} />
+        {type || tools ? (
+          <div className="gallery-project-card__meta-row">
+            {type ? <span className="gallery-project-card__type">{type}</span> : null}
+            <ToolIcons tools={tools} />
+          </div>
+        ) : null}
+        {date ? <div className="gallery-project-card__date">{date}</div> : null}
       </div>
     </article>
   );

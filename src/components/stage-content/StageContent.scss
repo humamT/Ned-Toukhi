@@ -25,11 +25,84 @@ $design-height: 1440px;
     background: linear-gradient(90deg, rgba(69, 178, 157, 1) 0%, rgba(52, 78, 93, 1) 100%);
 }
 
+// ========================================
+// Reusable "Stage Orbs" (Home)
+// Edit per-orb size + position by changing the CSS vars below.
+// ========================================
+.stage-orb {
+    --orb-size: 900px;
+    --orb-left: 50%;
+    --orb-top: 50%;
+    --orb-rotate: 0deg;
+    --orb-opacity: 0.28;
+    --orb-blur: 18px;
+    --orb-spin-duration: 35s;
+    --orb-pulse-duration: 6s;
+
+    position: absolute;
+    left: var(--orb-left);
+    top: var(--orb-top);
+    width: calc(var(--orb-size) * var(--stage-scale));
+    height: calc(var(--orb-size) * var(--stage-scale));
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: none;
+    z-index: -1; // behind its local content (anchor must isolate)
+
+    animation: stageOrbPulse var(--orb-pulse-duration) ease-in-out infinite;
+    will-change: transform;
+}
+
+.stage-orb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: url("../../assets/images/Circle-full.svg") no-repeat center;
+    background-size: 100% 100%;
+    opacity: var(--orb-opacity);
+    filter: blur(var(--orb-blur));
+
+    transform-origin: center;
+    animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
+    will-change: transform;
+}
+
+@keyframes stageOrbSpin {
+    from { transform: rotate(var(--orb-rotate)); }
+    to { transform: rotate(calc(var(--orb-rotate) + 360deg)); }
+}
+
+@keyframes stageOrbPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.04); }
+}
+
+// Anchor containers that hold stage orbs
+.stage-1__orb-content,
+.stage-content__stage-2,
+.gallery-sidebar,
+.stage-6__orb-content,
+.stage-7__envelope-wrap,
+.personal-img-bubble,
+.stage-9__orb-content {
+    position: relative;
+    isolation: isolate;
+}
+
+// Per-orb defaults (edit these)
+.stage-orb--s1 { --orb-size: 300%; --orb-opacity: 1; }
+.stage-orb--s2 { --orb-size: 130%; --orb-opacity: 1; }
+.stage-orb--s3 { --orb-size: 1000px; --orb-left: 7%; --orb-opacity: 1; }
+.stage-orb--s4 { --orb-size: 350%; --orb-opacity: 1; }
+.stage-orb--s5 { --orb-size: 275%; --orb-left: 22%;--orb-opacity: 1; }
+.stage-orb--s6 { --orb-size: 500%; --orb-left: 80%; --orb-top: 80%; --orb-opacity: 1; }
+.stage-orb--s7 { --orb-size: 260%; --orb-opacity: 1; }
+
 // Each section is a real scroll section.
 .stage-section {
     // height: 100vh;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +131,7 @@ $design-height: 1440px;
 .gallery-sidebar {
     position: sticky;
     top: 50%;
-    width: min(520px, 42vw);
+    width: min(40%, 40vw);
     z-index: 40;
     margin: 27% 0% 27% 0%;
 }
@@ -405,6 +478,19 @@ $design-height: 1440px;
     pointer-events: none;
 }
 
+/* Title + CTA block (split from tabs for markup only; same flex column as before). */
+.stage-3__orb-content-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Stay position: static so .tabs-rectangles / .tabs-all-lines (position: absolute) still use .stage-3__orb-content as containing block, like when tabs were direct children. */
+.gallery-tabs-container {
+    width: 100%;
+}
+
 .stage-3__main-text {
     display: flex;
     flex-direction: row;
@@ -454,10 +540,10 @@ $design-height: 1440px;
     align-items: center;
     justify-content: center;
     position: absolute;
-    gap: 5.5rem;
-    top: 55%;
+    gap: 4rem;
+    top: 54%;
     left: 50%;
-    transform: translate(95%, -50%);
+    transform: translate(100%, -50%);
     width: 100%;
     height: auto;
     pointer-events: none;
@@ -523,7 +609,7 @@ $design-height: 1440px;
 .identitiesBox {
     width: 100%;
     height: auto;
-    margin-bottom: 2rem;
+    // margin-bottom: 2rem;
     position: absolute;
     z-index: 22;
 }
@@ -542,7 +628,7 @@ $design-height: 1440px;
     color: white;
     line-height: 1.5;
     position: absolute;
-    transform: translate(-50%, -15%);
+    transform: translate(-50%, 0%);
     pointer-events: none;
     text-align: center;
 }
@@ -685,14 +771,27 @@ $design-height: 1440px;
     }
 }
 
+.gallery-tabs-container {
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    // z-index: 21;
+    // pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
 // Tab Lines
 .tabs-all-lines {
     position: absolute;
-    top: -58%;
+    top: -50%;
     translate: -30%;
     width: 230%;
     height: auto;
     pointer-events: none;
+    align-self: center;
 }
 
 .lines {
@@ -1613,4 +1712,33 @@ $design-height: 1440px;
     }
 
     /* footer-specific rules moved to `src/components/footer/footer.scss` */
+}
+
+// ---------------------------------------------------------------------------
+// Home — scroll snap on stage sections (`home-stage-snap` on `<html>` from Home.jsx).
+// Both `html` and `body` get `scroll-snap-type`: index.scss sets overflow-y on both, so
+// the scrollport can be either; snapping on one alone often does nothing.
+// ---------------------------------------------------------------------------
+html.home-stage-snap,
+html.home-stage-snap body {
+    scroll-snap-type: y proximity;
+}
+
+html.home-stage-snap .home-scroll__spacer {
+    scroll-snap-align: unset;
+    scroll-snap-stop: normal;
+}
+
+html.home-stage-snap #stage-content > .stage-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
+html.home-stage-snap #stage-content > .stage-section.stage-section--gallery {
+    scroll-snap-align: none;
+}
+
+html.home-stage-snap #stage-content .gallery-step {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
 }

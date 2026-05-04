@@ -98,7 +98,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100; // sits above landing background
+  z-index: 100; // above `::before` ring; on Home, `.home-landing-orb` stacks this subtree above the loader
 }
 
 /* STAGED MODE */
@@ -168,7 +168,8 @@
   position: absolute;
   width: 15%;
   height: 15%;
-  z-index: 25;
+  /* Above `.orb-hero::before` ring; parent `.home-landing-orb` stacks above the loader */
+  z-index: 2;
 }
 
 @media (max-width: 768px) {

@@ -136,7 +136,10 @@ export default function GalleryPage() {
         {error ? <div className="gallery-error">{error}</div> : null}
         {loading ? <div className="gallery-loading">Loading...</div> : null}
 
-        <div className="gallery-projects">
+        <div
+          className="gallery-projects"
+          data-active-filter={CATEGORY_TO_SLUG[category]}
+        >
           {filteredProjects.map((p) => (
             <ProjectCard
               key={p.id}

@@ -65,6 +65,11 @@ import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
 const LOADER_SHOW_MS = 2500;   // loader stays visible
 const LOADER_EXIT_MS = 2000;   // loader exit animation
 
+/** Toggled on `<html>` for scroll-snap rules in `StageContent.scss` */
+const HOME_STAGE_SNAP_CLASS = "home-stage-snap";
+/** Pixels from viewport top: show header once stage / landing spacer has passed this band */
+const STAGE_HEADER_REVEAL_PX = 96;
+
 
 
 export default function Home({ setHeaderVisible }) {
@@ -338,6 +343,12 @@ export default function Home({ setHeaderVisible }) {
   }, []);
 
   useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add(HOME_STAGE_SNAP_CLASS);
+    return () => root.classList.remove(HOME_STAGE_SNAP_CLASS);
+  }, []);
+
+  useEffect(() => {
     if (!isLoading) {
       setOrbState("exploding");
 
@@ -351,45 +362,61 @@ export default function Home({ setHeaderVisible }) {
     }
   }, [isLoading]);
 
-  /* Header appears once we scroll past landing */
+  /* Header + orb logo: past landing — use spacer + stage geometry; listen on document (capture)
+     and scrollend so we still run after scroll-snap settles (window scroll alone can miss). */
   useEffect(() => {
-    if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
+    if (typeof window === "undefined") return;
 
-    const el = document.getElementById("stage-content");
-    if (!el) return;
+    const stage = () => document.getElementById("stage-content");
+    const spacer = () => document.querySelector(".home-scroll__spacer");
 
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        const inStageContent = Boolean(entry?.isIntersecting);
-        setHeaderVisible(inStageContent);
-        setLogoVisible(!inStageContent);
-      },
-      // Only consider it "reached" when the top of stage-content enters the top band.
-      { threshold: 0, rootMargin: "0px 0px -99% 0px" }
-    );
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const el = stage();
+      if (!el) return;
+      const stageTop = el.getBoundingClientRect().top;
+      const sp = spacer();
+      const spacerBottom = sp instanceof HTMLElement ? sp.getBoundingClientRect().bottom : Number.POSITIVE_INFINITY;
+      const pastByStage = stageTop <= STAGE_HEADER_REVEAL_PX;
+      const pastBySpacer = spacerBottom <= STAGE_HEADER_REVEAL_PX;
+      const inStageContent = pastByStage || pastBySpacer;
+      setHeaderVisible(inStageContent);
+      setLogoVisible(!inStageContent);
+    };
 
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [setHeaderVisible]);
+    const schedule = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+
+    const scrollOpts = { passive: true, capture: true };
+    document.addEventListener("scroll", schedule, scrollOpts);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    const rootEl = document.documentElement;
+    rootEl.addEventListener("scrollend", schedule);
+    window.addEventListener("scrollend", schedule);
+
+    return () => {
+      document.removeEventListener("scroll", schedule, scrollOpts);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      rootEl.removeEventListener("scrollend", schedule);
+      window.removeEventListener("scrollend", schedule);
+    };
+  }, [setHeaderVisible, setLogoVisible]);
 
 
 
   return (
     <div>
-      {showLoader && <Loading isLoading={isLoading} />}
-
-      <Landing>
-        {/* Landing orb is anchored to the landing section */}
-        <OrbHero
-          orbState={orbState}
-          mode="landing"
-          position="center"
-          scale="normal"
-          logoVisible={logoVisible}
-          transitioning={orbTransitioning}
-        />
-      </Landing>
+      <Landing />
 
       <div className="home-scroll">
         <div className="home-scroll__spacer" aria-hidden="true" />
@@ -398,6 +425,7 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-1">
               <div className="stage-1__orb-content">
+                <div className="stage-orb stage-orb--s1" aria-hidden="true" />
                 <div className="stage-1__main-text">
                   <div className="stage-1__title">
                     <div className="stage-1__title-en">Store</div>
@@ -423,6 +451,7 @@ export default function Home({ setHeaderVisible }) {
           {/* Gallery intro */}
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-2">
+              <div className="stage-orb stage-orb--s2" aria-hidden="true" />
               <div className="stage-2__orb-content">
                 <div className="stage-2__main-text">
                   <div className="stage-2__title">
@@ -453,23 +482,28 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section stage-section--gallery">
             <div className="gallery-layout">
               <div className="gallery-sidebar">
+                <div className="stage-orb stage-orb--s3" aria-hidden="true" />
                 <div className="stage-3__orb-content">
-                  <div className="stage-3__main-text">
-                    <div className="stage-3__title">
-                      <div className="stage-3__title-en">Gallery</div>
-                      <div className="stage-3__title-ar">المعرض</div>
-                      <div className="stage-3__title-fr">Galerie</div>
+                  <div className="stage-3__orb-content-top">
+                    <div className="stage-3__main-text">
+                      <div className="stage-3__title">
+                        <div className="stage-3__title-en">Gallery</div>
+                        <div className="stage-3__title-ar">المعرض</div>
+                        <div className="stage-3__title-fr">Galerie</div>
+                      </div>
                     </div>
+                    <a className="explore-now-tabs">Explore NOW!</a>
                   </div>
-                  <a className="explore-now-tabs">Explore NOW!</a>
 
-                  <GalleryTabs activeId={activeGalleryId} />
+                  <div className="gallery-tabs-container">
+                    <GalleryTabs activeId={activeGalleryId} />
 
-                  <div className="tabs-all-lines">
-                    <img className="white-line lines" src={whiteLine} alt="" />
-                    <img className={`tab-yellow-line lines ${activeGalleryId !== 3 ? "not-stage-line" : ""}`} src={yellowLine} alt="" />
-                    <img className={`tab-red-line lines ${activeGalleryId !== 4 ? "not-stage-line" : ""}`} src={redLine} alt="" />
-                    <img className={`tab-teal-line lines ${activeGalleryId !== 5 ? "not-stage-line" : ""}`} src={tealLine} alt="" />
+                    <div className="tabs-all-lines">
+                      <img className="white-line lines" src={whiteLine} alt="" />
+                      <img className={`tab-yellow-line lines ${activeGalleryId !== 3 ? "not-stage-line" : ""}`} src={yellowLine} alt="" />
+                      <img className={`tab-red-line lines ${activeGalleryId !== 4 ? "not-stage-line" : ""}`} src={redLine} alt="" />
+                      <img className={`tab-teal-line lines ${activeGalleryId !== 5 ? "not-stage-line" : ""}`} src={tealLine} alt="" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -488,6 +522,7 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-6">
               <div className="stage-6__orb-content">
+                <div className="stage-orb stage-orb--s4" aria-hidden="true" />
                 <div className="stage-6__main-text">
                   <div className="stage-6__title">
                     <div className="stage-6__title-en">Quotations</div>
@@ -514,7 +549,10 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-7">
               <div className="stage-7__orb-content">
-                <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
+                {/* <div className="stage-7__envelope-wrap"> */}
+                  <div className="stage-orb stage-orb--s5" aria-hidden="true" />
+                  <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
+                {/* </div> */}
                 <img className="Envelope-emptyOrb" src={emptyOrb} alt="" />
 
                 <img {...lazyImgProps} className="contactBox" src={contactBox} alt="contact box" />
@@ -541,6 +579,7 @@ export default function Home({ setHeaderVisible }) {
             <div className="stage-content__stage stage-content__stage-8">
               <div className="stage-8__orb-content">
                 <div className="personal-img-bubble">
+                  <div className="stage-orb stage-orb--s6" aria-hidden="true" />
                   <img {...lazyImgProps} className="personalImg" src={personalImg} alt="profile img" />
                   <img className="personalBubble" src={galleryBubble} alt="the orb around the profile img" />
                 </div>
@@ -583,6 +622,7 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-9">
               <div className="stage-9__orb-content">
+                <div className="stage-orb stage-orb--s7" aria-hidden="true" />
                 <div className="stage-9__main-text">Featured Clients</div>
                 <img {...lazyImgProps} className="featuredClientsBox" src={featuredClientsBox} alt="featured Box" />
                 <img {...lazyImgProps} className="featuredLogos" src={featuredLogos} alt="featured Logos" />
@@ -591,12 +631,26 @@ export default function Home({ setHeaderVisible }) {
           </section>
 
           {/* Footer */}
-          <section className="stage-section stage-section--footer">
+          {/* <section className="stage-section stage-section--footer">
             <div className="stage-content__stage stage-content__stage-10">
               <Footer />
             </div>
-          </section>
+          </section> */}
         </div>
+      </div>
+
+      {showLoader && <Loading isLoading={isLoading} />}
+
+      {/* Own stacking layer so orb/logo sit above `.loader` (z-index 99); gradient stays in `.landing` (0) */}
+      <div className="home-landing-orb">
+        <OrbHero
+          orbState={orbState}
+          mode="landing"
+          position="center"
+          scale="normal"
+          logoVisible={logoVisible}
+          transitioning={orbTransitioning}
+        />
       </div>
 
       <ScrollIndicator visible={!isLoading} />

@@ -45,9 +45,11 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   /* Unified family with weight mapping + fallback to specific face */
-  font-family: 'Diodrum Arabic', 'DiodrumArabic-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  // font-family: 'Diodrum Arabic', 'DiodrumArabic-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  //   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  //   sans-serif;
+  font-family: 'Diodrum Arabic';
+    line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
