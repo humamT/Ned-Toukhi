@@ -439,7 +439,7 @@ export default function Home({ setHeaderVisible }) {
                   Postcards, stickers, posters, BUY THEM ALL!, chose between a wide selection of original art
                   projects and get them delevered.
                 </div>
-                <a className="shop-now">Shop NOW!</a>
+                <NavLink to="/store" className="shop-now">Shop NOW!</NavLink>
               </div>
 
               <div className="stage-1__posters-section">
@@ -473,7 +473,7 @@ export default function Home({ setHeaderVisible }) {
                   <img className="gallery4 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                 </div>
 
-                <a className="explore-now">Explore NOW!</a>
+                <NavLink to="/gallery" className="explore-now">Explore NOW!</NavLink>
               </div>
             </div>
           </section>
@@ -492,7 +492,7 @@ export default function Home({ setHeaderVisible }) {
                         <div className="stage-3__title-fr">Galerie</div>
                       </div>
                     </div>
-                    <a className="explore-now-tabs">Explore NOW!</a>
+                    <NavLink to="/gallery/illustrations" className="explore-now-tabs">Explore NOW!</NavLink>
                   </div>
 
                   <div className="gallery-tabs-container">
@@ -534,7 +534,7 @@ export default function Home({ setHeaderVisible }) {
                     for your project depending on your location
                     and business in just a few clicks...
                   </div>
-                  <a className="first-click">First click ;)</a>
+                  <NavLink to="/quotations" className="first-click">First click ;)</NavLink>
                 </div>
 
                 <div className="stage-6__Devis-imgs">
@@ -568,7 +568,7 @@ export default function Home({ setHeaderVisible }) {
                     simply want to say hello, feel free to email
                     me and I’ll get back to you as soon as possible!
                   </div>
-                  <a className="contact-btn">Contact</a>
+                  <NavLink to="/contact" className="contact-btn">Contact</NavLink>
                 </div>
               </div>
             </div>
