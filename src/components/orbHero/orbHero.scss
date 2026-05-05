@@ -86,7 +86,8 @@
 
 /* LANDING MODE */
 .orb-hero.is-landing {
-  --orb-bg: url("../../assets/images/Circle-empty.svg");
+  // --orb-bg: url("../../assets/images/Circle-empty.svg");
+  --orb-bg: url("../../assets/images/Circle-full.svg");
   --orb-bg-size: 100% 100%;
 
   position: absolute;
@@ -99,6 +100,22 @@
   justify-content: center;
   align-items: center;
   z-index: 100; // above `::before` ring; on Home, `.home-landing-orb` stacks this subtree above the loader
+}
+
+/* Soft white spotlight behind logo + intro */
+.orb-hero-spotlight {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--orb-frame-size) * 0.55);
+  height: calc(var(--orb-frame-size) * 0.55);
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.62) 25%, rgba(255, 255, 255, 0.18) 80%, rgba(255, 255, 255, 0) 75%);
+  filter: blur(50px);
+  opacity: 1;
 }
 
 /* STAGED MODE */
@@ -166,13 +183,112 @@
 /* Logo */
 .orb-hero-logo {
   position: absolute;
-  width: 15%;
-  height: 15%;
+  // width: 15%;
+  height: 20%;
   /* Above `.orb-hero::before` ring; parent `.home-landing-orb` stacks above the loader */
   z-index: 2;
+  transform: translateY(0) scale(1.15);
+  transform-origin: center;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.orb-hero.is-loading .orb-hero-logo {
+  transform: translateY(0) scale(1.45);
+}
+
+/* After the white loader animation finishes (showLoader=false) */
+.orb-hero.is-intro-visible .orb-hero-logo {
+  transform: translateY(-30%) scale(0.9);
+}
+
+.orb-hero-intro {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%) translateY(14px);
+  width: min(820px, 90vw);
+  text-align: center;
+  z-index: 3;
+
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+  transition-delay: 220ms;
+}
+
+.orb-hero.is-intro-visible .orb-hero-intro {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(26px);
+}
+
+.orb-hero-intro__name {
+  margin: 0;
+  font: 600 50px / 1.2 "Diodrum Arabic";
+  letter-spacing: 0.01em;
+  color: #344e5d;
+  text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.orb-hero-intro__tagline {
+  margin: 10px 0 0;
+  font: 600 30px / 1 "Diodrum Arabic";
+  color: #344e5d;
+  text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.orb-hero-intro__location {
+  margin: 10px 0 0;
+  font: 500 25px / 1 "Diodrum Arabic";
+  color: #344e5d;
+  text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.orb-hero-intro__divider {
+  width: min(520px, 92vw);
+  margin: 18px auto 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+  transition-delay: 380ms;
+}
+
+.orb-hero-intro__divider .c1 {
+  height: 4px;
+  align-self: center;
+  border-radius: 5px;
+}
+
+.orb-hero-intro__divider .c2 {
+  height: 6px;
+  align-self: center;
+}
+
+.orb-hero-intro__divider .c3 {
+  height: 6px;
+  align-self: center;
+}
+
+.orb-hero-intro__divider .c4 {
+  height: 6px;
+  align-self: center;
+}
+
+.orb-hero-intro__divider .c5 {
+  height: 4px;
+  align-self: center;
+  border-radius: 5px;
+}
+
+.orb-hero.is-intro-visible .orb-hero-intro__divider {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
+
   .orb-hero--right,
   .orb-hero--left,
   .orb-hero--left-more,
@@ -195,5 +311,25 @@
   .orb-hero-logo {
     width: 22%;
     height: 22%;
+  }
+
+  .orb-hero-spotlight {
+    width: calc(var(--orb-frame-size) * 0.44);
+    height: calc(var(--orb-frame-size) * 0.44);
+    transform: translate(-50%, -54%);
+    filter: blur(22px);
+    opacity: 0.92;
+  }
+
+  .orb-hero-intro__name {
+    font-size: 34px;
+  }
+
+  .orb-hero-intro__tagline {
+    font-size: 15px;
+  }
+
+  .orb-hero-intro__location {
+    font-size: 16px;
   }
 }

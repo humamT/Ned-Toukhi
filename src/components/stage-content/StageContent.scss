@@ -67,16 +67,6 @@ $design-height: 1440px;
     will-change: transform;
 }
 
-@keyframes stageOrbSpin {
-    from { transform: rotate(var(--orb-rotate)); }
-    to { transform: rotate(calc(var(--orb-rotate) + 360deg)); }
-}
-
-@keyframes stageOrbPulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.04); }
-}
-
 // Anchor containers that hold stage orbs
 .stage-1__orb-content,
 .stage-content__stage-2,
@@ -102,7 +92,7 @@ $design-height: 1440px;
 .stage-section {
     // height: 100vh;
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,42 +168,6 @@ $design-height: 1440px;
 }
 
 // Sections are no longer visibility-toggled; keep animations as-authored within sections.
-
-// ========================================
-// Base Animations
-// ========================================
-@keyframes stageContentFadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes stageContentFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUpFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 
 // ========================================
 // STAGE 1: Boutique Intro
@@ -300,18 +254,6 @@ $design-height: 1440px;
     animation: stickerBounce 15s ease-in-out infinite;
 }
 
-@keyframes stickerBounce {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(-5deg);
-    }
-
-    50% {
-        transform: translateY(-15px) rotate(5deg);
-    }
-}
-
 .stage-1__posters-section {
     position: absolute;
     left: 6vw;
@@ -325,18 +267,6 @@ $design-height: 1440px;
     height: auto;
     object-fit: contain;
     animation: postersHover 15s ease-in-out infinite;
-}
-
-@keyframes postersHover {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-30px);
-    }
 }
 
 
@@ -420,18 +350,6 @@ $design-height: 1440px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 90%;
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
 }
 
 .gallery1 {
@@ -583,26 +501,6 @@ $design-height: 1440px;
     left: -20%;
 }
 
-@keyframes rectangleOpacitylow {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0.3;
-    }
-}
-
-@keyframes rectangleOpacityhigh {
-    from {
-        opacity: 0.3;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 // Tab Box Images
 .illustrationsBox,
 .featuredBox,
@@ -713,12 +611,6 @@ $design-height: 1440px;
     --click-txt-y: -45%;
 }
 
-@keyframes clickTxt {
-    to {
-        transform: translate(var(--click-txt-x), var(--click-txt-y)) rotate(360deg);
-    }
-}
-
 // Click Elements
 .click1,
 .click2,
@@ -749,26 +641,6 @@ $design-height: 1440px;
 
 .click3 {
     transform: translate(110%, -45%);
-}
-
-@keyframes clickOpacitylow {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes clickOpacityhigh {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
 
 .gallery-tabs-container {
@@ -804,26 +676,6 @@ $design-height: 1440px;
 
     &:not(.not-stage-line) {
         animation: lineOpacityhigh 1s ease forwards;
-    }
-}
-
-@keyframes lineOpacitylow {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0.75;
-    }
-}
-
-@keyframes lineOpacityhigh {
-    from {
-        opacity: 0.75;
-    }
-
-    to {
-        opacity: 1;
     }
 }
 
@@ -920,54 +772,6 @@ $design-height: 1440px;
     }
 
 
-}
-
-@keyframes slideUpFadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-100px);
-    }
-}
-
-@keyframes slideDownFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(100px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideDownFadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(100px);
-    }
-}
-
-@keyframes slideUpFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-100px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 // Spotlight Effects
@@ -1073,106 +877,6 @@ $design-height: 1440px;
 // ========================================
 // Card-Level Staggered Animations
 // ========================================
-
-// Exit Forward (Up + Fade Out)
-@keyframes cardSlideUpFadeOutA {
-    from {
-        opacity: 1;
-        transform: translateY(70px);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-80px);
-    }
-}
-
-@keyframes cardSlideUpFadeOutB {
-    from {
-        opacity: 1;
-        transform: translateY(-70px);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-220px);
-    }
-}
-
-// Enter Forward (Down + Fade In)
-@keyframes cardSlideDownFadeInA {
-    from {
-        opacity: 0;
-        transform: translateY(180px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(70px);
-    }
-}
-
-@keyframes cardSlideDownFadeInB {
-    from {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(-70px);
-    }
-}
-
-// Exit Backward (Down + Fade Out)
-@keyframes cardSlideDownFadeOutA {
-    from {
-        opacity: 1;
-        transform: translateY(70px);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(180px);
-    }
-}
-
-@keyframes cardSlideDownFadeOutB {
-    from {
-        opacity: 1;
-        transform: translateY(-70px);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-}
-
-// Enter Backward (Up + Fade In)
-@keyframes cardSlideUpFadeInA {
-    from {
-        opacity: 0;
-        transform: translateY(-80px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(70px);
-    }
-}
-
-@keyframes cardSlideUpFadeInB {
-    from {
-        opacity: 0;
-        transform: translateY(-220px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(-70px);
-    }
-}
 
 // ========================================
 // Apply Stagger Animations to Gallery Cards
@@ -1624,96 +1328,6 @@ $design-height: 1440px;
     width: 70%;
 }
 
-// ========================================
-// Mobile Layout Overrides
-// ========================================
-@media (max-width: 768px) {
-    .stage-content__stage {
-        justify-content: center;
-    }
-
-    .stage-1__orb-content,
-    .stage-2__orb-content,
-    .stage-3__orb-content,
-    .stage-6__orb-content,
-    .stage-7__orb-content,
-    .stage-8__orb-content,
-    .stage-9__orb-content {
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        align-items: center;
-        text-align: center;
-    }
-
-    .stage-1__main-text,
-    .stage-2__main-text,
-    .stage-3__main-text {
-        justify-content: center;
-        text-align: center;
-    }
-
-    .stage-3__main-text {
-        translate: 0;
-    }
-
-    .stage-1__title-en,
-    .stage-1__title-fr,
-    .stage-2__title-ar,
-    .stage-3__title-fr,
-    .stage-6__title-en,
-    .stage-6__title-fr {
-        translate: 0;
-    }
-
-    .stage-1__sticker {
-        translate: 0 -10%;
-        width: 35%;
-    }
-
-    .stage-1__posters-section {
-        display: none;
-    }
-
-    .gallery-orbs,
-    .tabs-rectangles,
-    .tabs-all-lines,
-    .scroll {
-        display: none;
-    }
-
-    .gallery-cards {
-        transform: translate(0, 0);
-        justify-content: center;
-    }
-
-    .stage-6__Devis-imgs,
-    .Envelope,
-    .Envelope-emptyOrb,
-    .contactBox,
-    .about-cards {
-        display: none;
-    }
-
-    .stage-7__main-text {
-        transform: none;
-    }
-
-    .stage-8__subtitle {
-        position: relative;
-        width: 70%;
-        transform: translateY(60%);
-        text-align: center;
-    }
-
-    .featuredClientsBox,
-    .featuredLogos {
-        width: 90%;
-    }
-
-    /* footer-specific rules moved to `src/components/footer/footer.scss` */
-}
-
 // ---------------------------------------------------------------------------
 // Home — scroll snap on stage sections (`home-stage-snap` on `<html>` from Home.jsx).
 // Both `html` and `body` get `scroll-snap-type`: index.scss sets overflow-y on both, so
@@ -1742,3 +1356,384 @@ html.home-stage-snap #stage-content .gallery-step {
     scroll-snap-align: start;
     scroll-snap-stop: normal;
 }
+
+// ========================================
+// Animations (@keyframes)
+// ========================================
+@keyframes stageOrbSpin {
+    from { transform: rotate(var(--orb-rotate)); }
+    to { transform: rotate(calc(var(--orb-rotate) + 360deg)); }
+}
+
+@keyframes stageOrbPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.04); }
+}
+
+@keyframes stageContentFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes stageContentFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes stickerBounce {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+@keyframes postersHover {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes rectangleOpacitylow {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.3;
+    }
+}
+
+@keyframes rectangleOpacityhigh {
+    from {
+        opacity: 0.3;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes clickTxt {
+    to {
+        transform: translate(var(--click-txt-x), var(--click-txt-y)) rotate(360deg);
+    }
+}
+
+@keyframes clickOpacitylow {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes clickOpacityhigh {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes lineOpacitylow {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.75;
+    }
+}
+
+@keyframes lineOpacityhigh {
+    from {
+        opacity: 0.75;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+}
+
+@keyframes slideDownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardSlideUpFadeOutA {
+    from {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+}
+
+@keyframes cardSlideUpFadeOutB {
+    from {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-220px);
+    }
+}
+
+@keyframes cardSlideDownFadeInA {
+    from {
+        opacity: 0;
+        transform: translateY(180px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+}
+
+@keyframes cardSlideDownFadeInB {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+}
+
+@keyframes cardSlideDownFadeOutA {
+    from {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(180px);
+    }
+}
+
+@keyframes cardSlideDownFadeOutB {
+    from {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+}
+
+@keyframes cardSlideUpFadeInA {
+    from {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(70px);
+    }
+}
+
+@keyframes cardSlideUpFadeInB {
+    from {
+        opacity: 0;
+        transform: translateY(-220px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-70px);
+    }
+}
+
+// ========================================
+// Responsive
+// ========================================
+// @media (max-width: 768px) {
+//     .stage-content__stage {
+//         justify-content: center;
+//     }
+
+//     .stage-1__orb-content,
+//     .stage-2__orb-content,
+//     .stage-3__orb-content,
+//     .stage-6__orb-content,
+//     .stage-7__orb-content,
+//     .stage-8__orb-content,
+//     .stage-9__orb-content {
+//         left: 50%;
+//         top: 50%;
+//         transform: translate(-50%, -50%);
+//         align-items: center;
+//         text-align: center;
+//     }
+
+//     .stage-1__main-text,
+//     .stage-2__main-text,
+//     .stage-3__main-text {
+//         justify-content: center;
+//         text-align: center;
+//     }
+
+//     .stage-3__main-text {
+//         translate: 0;
+//     }
+
+//     .stage-1__title-en,
+//     .stage-1__title-fr,
+//     .stage-2__title-ar,
+//     .stage-3__title-fr,
+//     .stage-6__title-en,
+//     .stage-6__title-fr {
+//         translate: 0;
+//     }
+
+//     .stage-1__sticker {
+//         translate: 0 -10%;
+//         width: 35%;
+//     }
+
+//     .stage-1__posters-section {
+//         display: none;
+//     }
+
+//     .gallery-orbs,
+//     .tabs-rectangles,
+//     .tabs-all-lines,
+//     .scroll {
+//         display: none;
+//     }
+
+//     .gallery-cards {
+//         transform: translate(0, 0);
+//         justify-content: center;
+//     }
+
+//     .stage-6__Devis-imgs,
+//     .Envelope,
+//     .Envelope-emptyOrb,
+//     .contactBox,
+//     .about-cards {
+//         display: none;
+//     }
+
+//     .stage-7__main-text {
+//         transform: none;
+//     }
+
+//     .stage-8__subtitle {
+//         position: relative;
+//         width: 70%;
+//         transform: translateY(60%);
+//         text-align: center;
+//     }
+
+//     .featuredClientsBox,
+//     .featuredLogos {
+//         width: 90%;
+//     }
+
+//     /* footer-specific rules moved to `src/components/footer/footer.scss` */
+// }

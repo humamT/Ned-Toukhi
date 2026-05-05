@@ -61,9 +61,10 @@ import Letterhead from "../../assets/PNGS+SVGs/Quotations/Letterhead-Mockup.png"
 import contactEnvelope from "../../assets/PNGS+SVGs/Contact/contact.png";
 import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
 
-/* Timings (must match orbHero.scss) */
-const LOADER_SHOW_MS = 2500;   // loader stays visible
-const LOADER_EXIT_MS = 2000;   // loader exit animation
+/* Timings (exit must match orbHero.scss) */
+const LOADER_MIN_SHOW_MS = 450;  // avoid flash on fast loads
+const LOADER_MAX_SHOW_MS = 12000; // safety: never block forever
+const LOADER_EXIT_MS = 2000;     // loader exit animation
 
 /** Toggled on `<html>` for scroll-snap rules in `StageContent.scss` */
 const HOME_STAGE_SNAP_CLASS = "home-stage-snap";
@@ -329,8 +330,35 @@ export default function Home({ setHeaderVisible }) {
 
   /* Loader */
   useEffect(() => {
-    const t = setTimeout(() => setIsLoading(false), LOADER_SHOW_MS);
-    return () => clearTimeout(t);
+    let finished = false;
+    const start = typeof performance !== "undefined" ? performance.now() : Date.now();
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+
+      const now = typeof performance !== "undefined" ? performance.now() : Date.now();
+      const elapsed = now - start;
+      const remaining = Math.max(0, LOADER_MIN_SHOW_MS - elapsed);
+      window.setTimeout(() => setIsLoading(false), remaining);
+    };
+
+    // If everything is already loaded (e.g. bfcache), finish immediately.
+    if (document.readyState === "complete") {
+      finish();
+      return;
+    }
+
+    // Finish when the window load event fires (images/styles/fonts complete).
+    window.addEventListener("load", finish, { once: true });
+
+    // Safety timeout in case something prevents the load event.
+    const maxT = window.setTimeout(finish, LOADER_MAX_SHOW_MS);
+
+    return () => {
+      window.removeEventListener("load", finish);
+      window.clearTimeout(maxT);
+    };
   }, []);
 
   /* Ensure native page scrolling is enabled on Home */
@@ -631,11 +659,11 @@ export default function Home({ setHeaderVisible }) {
           </section>
 
           {/* Footer */}
-          {/* <section className="stage-section stage-section--footer">
+          <section className="stage-section stage-section--footer">
             <div className="stage-content__stage stage-content__stage-10">
               <Footer />
             </div>
-          </section> */}
+          </section>
         </div>
       </div>
 
@@ -650,6 +678,8 @@ export default function Home({ setHeaderVisible }) {
           scale="normal"
           logoVisible={logoVisible}
           transitioning={orbTransitioning}
+          isLoading={isLoading}
+          introVisible={!showLoader}
         />
       </div>
 
