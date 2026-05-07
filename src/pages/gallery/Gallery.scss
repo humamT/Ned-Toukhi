@@ -3,7 +3,7 @@ $primary-font: 'Diodrum Arabic';
 .gallery-page {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: var(--spacing-md);
   color: white;
   gap: 10vh;
 }
@@ -16,6 +16,9 @@ $primary-font: 'Diodrum Arabic';
   justify-content: center;
   flex-direction: column;
   position: relative;
+  /* Allow cinematic vertical bleed, but never widen the page. */
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .gallery-head-orb {
@@ -28,6 +31,9 @@ $primary-font: 'Diodrum Arabic';
   place-items: center;
   z-index: 0;
   pointer-events: none;
+  /* The orb is huge + blurred; clip only horizontally to prevent sideways scroll. */
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* OrbHero's landing mode defaults to z-index: 100; override for background usage here */
@@ -164,8 +170,19 @@ $primary-font: 'Diodrum Arabic';
 }
 
 .gallery-head-bubbles {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  pointer-events: none;
+  align-self: flex-end;
+}
+
+.gallery-head-bubbles img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: auto;
+  max-width: min(92vw, 420px);
 }
 
 .gallery-head-scroll-indicator {
@@ -198,7 +215,7 @@ $primary-font: 'Diodrum Arabic';
   --gf-underline: #ffffff;
   --gf-stroke: rgba(255, 255, 255, 0.72);
 
-  font-size: 25px;
+  font-size: clamp(1rem, 1.6vw, 25px);
   font-weight: 500;
   line-height: 2;
   font-family: "Diodrum Arabic";
@@ -211,7 +228,7 @@ $primary-font: 'Diodrum Arabic';
       color-mix(in srgb, var(--gf-accent) 85%, #000000 18%) 100%);
   border: 2px solid var(--gf-stroke);
   color: #ffffff;
-  padding: 0rem 6rem;
+  padding: 0rem clamp(1.25rem, 4vw, 6rem);
   border-radius: 999px;
   font-family: "Diodrum Arabic", inherit;
   box-shadow:
@@ -232,7 +249,7 @@ $primary-font: 'Diodrum Arabic';
   left: 50%;
   bottom: -16px;
   transform: translateX(-50%);
-  width: 30rem;
+  width: min(30rem, 90vw);
   height: 3px;
   border-radius: 999px;
   background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.94) 40%, rgba(255, 255, 255, 0.94) 40%, transparent 100%);
@@ -300,6 +317,9 @@ $primary-font: 'Diodrum Arabic';
   width: 100%;
   align-self: stretch;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-right: 5%;
+  padding-left: 5%;
+  gap: 6%;
   // gap: 6rem;
   justify-items: center;
   position: relative;
@@ -384,6 +404,11 @@ $primary-font: 'Diodrum Arabic';
     transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
     margin-top: 5rem;
     margin-bottom: 5rem;
+
+    /* Perf: skip rendering work for offscreen cards. */
+    content-visibility: auto;
+    contain: layout paint style;
+    contain-intrinsic-size: 680px;
 }
 
 .gallery-project-card:hover {
@@ -426,8 +451,9 @@ $primary-font: 'Diodrum Arabic';
 }
 
 .gallery-project-card__media img {
-  width: 400px;
-  height: 550px;
+  width: min(400px, 100%);
+  height: auto;
+  aspect-ratio: 400 / 550;
   object-fit: cover;
   display: block;
   border-radius: 25px;

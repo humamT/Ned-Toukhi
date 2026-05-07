@@ -45,15 +45,39 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
     const targetFps = isWebKit ? 30 : 60;
     const minFrameMs = 1000 / targetFps;
 
+    // If the component is used as a decorative layer (e.g. Footer),
+    // prefer a static background to avoid always-on rAF work.
+    const disableMotion = Boolean(hideInteractive && hideG6) || prefersReducedMotion;
+
+    const isLowPerf = rootEl.dataset.perf === "low" || disableMotion;
+
+    if (disableMotion) {
+      // Still tag the DOM for CSS perf fallbacks.
+      rootEl.dataset.perf = "low";
+      rootEl.dataset.webkit = isWebKit ? "true" : "false";
+      return;
+    }
+
     // Bubble physics setup (use smaller viewport dimension for sizing)
+    // In low-perf mode: fewer bubbles + no collisions (big CPU saver on WebKit).
     const base = Math.min(window.innerWidth, window.innerHeight);
-    const bubbles = [
-      { el: document.querySelector('.g1'), x: window.innerWidth * 0.85, y: window.innerHeight * 0.1, vx: 1.2, vy: 0.8, radius: base * 0.15 },
-      { el: document.querySelector('.g2'), x: window.innerWidth * 0.15, y: window.innerHeight * 0.8, vx: -0.9, vy: -1.1, radius: base * 0.15 },
-      { el: document.querySelector('.g3'), x: window.innerWidth * 0.85, y: window.innerHeight * 0.8, vx: -1.1, vy: 0.7, radius: base * 0.15 },
-      { el: document.querySelector('.g4'), x: window.innerWidth * 0.5, y: window.innerHeight * 0.1, vx: 0.7, vy: 1.3, radius: base * 0.15 },
-      { el: document.querySelector('.g5'), x: window.innerWidth * 0.15, y: window.innerHeight * 0.1, vx: 1.0, vy: 1.0, radius: base * 0.3 }
+    const bubbleDefs = [
+      { sel: ".g1", x: window.innerWidth * 0.85, y: window.innerHeight * 0.1, vx: 1.2, vy: 0.8, r: base * 0.15 },
+      { sel: ".g2", x: window.innerWidth * 0.15, y: window.innerHeight * 0.8, vx: -0.9, vy: -1.1, r: base * 0.15 },
+      { sel: ".g3", x: window.innerWidth * 0.85, y: window.innerHeight * 0.8, vx: -1.1, vy: 0.7, r: base * 0.15 },
+      { sel: ".g4", x: window.innerWidth * 0.5, y: window.innerHeight * 0.1, vx: 0.7, vy: 1.3, r: base * 0.15 },
+      { sel: ".g5", x: window.innerWidth * 0.15, y: window.innerHeight * 0.1, vx: 1.0, vy: 1.0, r: base * 0.3 },
     ];
+
+    const bubbleCount = isLowPerf ? 2 : bubbleDefs.length;
+    const bubbles = bubbleDefs.slice(0, bubbleCount).map((b) => ({
+      el: document.querySelector(b.sel),
+      x: b.x,
+      y: b.y,
+      vx: b.vx,
+      vy: b.vy,
+      radius: b.r,
+    }));
 
     function checkCollision(b1, b2) {
       const dx = b2.x - b1.x;
@@ -106,9 +130,11 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
           bubble.y = Math.max(bubble.radius * 0.3, Math.min(window.innerHeight - bubble.radius * 0.3, bubble.y));
         }
 
-        // Check collisions with other bubbles
-        for (let j = i + 1; j < bubbles.length; j++) {
-          checkCollision(bubble, bubbles[j]);
+        // Check collisions with other bubbles (disabled in low-perf mode)
+        if (!isLowPerf) {
+          for (let j = i + 1; j < bubbles.length; j++) {
+            checkCollision(bubble, bubbles[j]);
+          }
         }
 
         // Update DOM (transform-only to avoid layout thrash)
@@ -160,7 +186,10 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    // Skip global mouse tracking in low-perf mode; it wakes the main thread constantly.
+    if (!isLowPerf) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
     document.addEventListener("visibilitychange", handleVisibility, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
 
@@ -174,7 +203,7 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
     };
-  }, [hideInteractive]);
+  }, [hideInteractive, hideG6]);
 
   return (
     <div className="gradient-bg" ref={rootRef}>

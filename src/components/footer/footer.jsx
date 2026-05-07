@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareFacebook, faInstagram, faBehance } from "@fortawesome/free-brands-svg-icons";
 import GradientBackground from "../background/background.jsx";
+import { memo } from "react";
 
 import footerLogo from "../../assets/PNGS+SVGs/Footer/muhanad-logo.svg";
 import footerLogoLine from "../../assets/PNGS+SVGs/Footer/logo-line-footer.svg";
@@ -11,7 +12,7 @@ import noAiBadge from "../../assets/PNGS+SVGs/Footer/no-ai.svg";
 import alienHand from "../../assets/PNGS+SVGs/Footer/Alien-hand.png";
 import Alien from "../../assets/PNGS+SVGs/Footer/Alien.png";
 
-export default function Footer() {
+function Footer() {
   return (
     <footer className="site-footer">
       <GradientBackground hideInteractive={true} hideG6={true} />
@@ -112,3 +113,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default memo(Footer);

@@ -659,11 +659,11 @@ export default function Home({ setHeaderVisible }) {
           </section>
 
           {/* Footer */}
-          <section className="stage-section stage-section--footer">
+          {/* <section className="stage-section stage-section--footer">
             <div className="stage-content__stage stage-content__stage-10">
               <Footer />
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
 

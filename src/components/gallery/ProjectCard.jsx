@@ -1,13 +1,33 @@
 import ToolIcons from "./ToolIcons";
 
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// rAF throttle per element (prevents pointermove from spamming layout/style work)
+const rafByEl = new WeakMap();
+
 function updateMediaGlowPosition(event) {
+  if (prefersReducedMotion) return;
+  // Only enable this premium effect on mouse/trackpad. (Touch can fire noisy moves.)
+  if (event.pointerType && event.pointerType !== "mouse") return;
+
   const el = event.currentTarget;
-  const r = el.getBoundingClientRect();
-  if (!r.width || !r.height) return;
-  const x = ((event.clientX - r.left) / r.width) * 100;
-  const y = ((event.clientY - r.top) / r.height) * 100;
-  el.style.setProperty("--glow-x", `${x}%`);
-  el.style.setProperty("--glow-y", `${y}%`);
+  if (!el) return;
+
+  if (rafByEl.get(el)) return;
+  const rafId = requestAnimationFrame(() => {
+    rafByEl.delete(el);
+
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    const x = ((event.clientX - r.left) / r.width) * 100;
+    const y = ((event.clientY - r.top) / r.height) * 100;
+    el.style.setProperty("--glow-x", `${x}%`);
+    el.style.setProperty("--glow-y", `${y}%`);
+  });
+  rafByEl.set(el, rafId);
 }
 
 export default function ProjectCard({ project, onOpenBehance }) {

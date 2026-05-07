@@ -1,7 +1,8 @@
 import "./ScrollIndicator.scss";
 import mouseIcon from "../../assets/images/mouse.svg";
+import { memo } from "react";
 
-export default function ScrollIndicator({ visible = false }) {
+function ScrollIndicator({ visible = false }) {
   return (
     <div className={`scroll-indicator ${visible ? "is-visible" : ""}`}>
       <div className="scroll-indicator__mouse">
@@ -29,3 +30,5 @@ export default function ScrollIndicator({ visible = false }) {
     </div>
   );
 }
+
+export default memo(ScrollIndicator);

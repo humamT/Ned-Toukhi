@@ -44,11 +44,12 @@
 .site-header::before {
     content: "";
     position: absolute;
-    left: 50%;
     top: 0;
     bottom: -3.5rem;
-    width: 100vw;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    width: auto;
+    transform: none;
     z-index: 0;
     pointer-events: none;
     -webkit-backdrop-filter: blur(18px) saturate(1.12);
@@ -76,6 +77,22 @@
     );
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
+}
+
+/* WebKit/Safari: `backdrop-filter` is a frequent perf cliff (fans + jank).
+   Keep the premium gradient tint, but avoid live background blur. */
+@supports (-webkit-touch-callout: none) {
+    .site-header::before {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        background: linear-gradient(
+            180deg,
+            rgb(52 78 93 / 0.82) 0%,
+            rgb(52 78 93 / 0.58) 45%,
+            rgb(52 78 93 / 0.22) 78%,
+            transparent 100%
+        );
+    }
 }
 
 .site-header__inner {

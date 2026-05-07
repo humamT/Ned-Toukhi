@@ -19,7 +19,10 @@ $design-height: 1440px;
     position: relative;
     width: 100%;
     height: auto;
-    overflow: visible;
+    /* Decorative layers can visually overflow without extending the page scroll range.
+       Clip at the stage-stack boundary so overshooting blurs/transforms don't add phantom
+       whitespace past the footer (common in WebKit). */
+    overflow: clip;
     pointer-events: auto;
     z-index: 1;
     background: linear-gradient(90deg, rgba(69, 178, 157, 1) 0%, rgba(52, 78, 93, 1) 100%);
@@ -97,6 +100,7 @@ $design-height: 1440px;
     align-items: center;
     justify-content: center;
     pointer-events: auto;
+    overflow-x: clip;
 }
 
 /* Stage 3 (Gallery): one tall section with a sticky viewport inside */
@@ -116,6 +120,7 @@ $design-height: 1440px;
     align-items: flex-start;
     gap: 30px;
     padding: 0 5vw;
+    min-width: 0;
 }
 
 .gallery-sidebar {
@@ -124,6 +129,7 @@ $design-height: 1440px;
     width: min(40%, 40vw);
     z-index: 40;
     margin: 27% 0% 27% 0%;
+    min-width: 0;
 }
 
 .gallery-right {
@@ -443,7 +449,7 @@ $design-height: 1440px;
     color: white;
     font-size: var(--stage-button-size);
     line-height: 1.5;
-    padding: 0% 13%;
+    padding: 0% 10%;
     background: none;
     border-radius: $border-radius-button;
     border: 2px solid white;

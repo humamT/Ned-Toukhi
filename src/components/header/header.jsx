@@ -2,6 +2,7 @@ import "./header.scss";
 import logo from "../../assets/images/Logo-icon-2.svg";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { memo } from "react";
 import {
     faSquareFacebook,
     faInstagram,
@@ -9,7 +10,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 
-export default function Header({ visible }) {
+function Header({ visible }) {
     return (
         <header className={`site-header ${visible ? "is-visible" : ""}`}>
             <div className="site-header__inner">
@@ -119,3 +120,5 @@ export default function Header({ visible }) {
         </header>
     );
 }
+
+export default memo(Header);
