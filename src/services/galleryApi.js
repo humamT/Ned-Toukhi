@@ -1,8 +1,8 @@
 // IMPORTANT:
-// Your API currently does not allow cross-origin browser requests (no CORS headers).
-// So in production, the frontend must call an API that is reachable on the SAME origin
-// (e.g. `https://beta.nedtoukhi.com/api/v1/...` via a reverse-proxy to `dev.nedtoukhi.com`).
-const API_BASE_URL = "https://dev.nedtoukhi.com/api/v1";
+// Production deployments can provide a same-origin API/proxy here (for example,
+// `/api/v1`) so browser CORS policy does not depend on the dev API host.
+const API_BASE_URL =
+  (import.meta.env.VITE_API_BASE_URL || "https://dev.nedtoukhi.com/api/v1").replace(/\/+$/, "");
 
 function normalizeJsonBody(value) {
   // Some endpoints may return `{ success, data }`; others return raw arrays.
