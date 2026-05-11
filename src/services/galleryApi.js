@@ -2,7 +2,11 @@
 // Your API currently does not allow cross-origin browser requests (no CORS headers).
 // So in production, the frontend must call an API that is reachable on the SAME origin
 // (e.g. `https://beta.nedtoukhi.com/api/v1/...` via a reverse-proxy to `dev.nedtoukhi.com`).
-const API_BASE_URL = "https://dev.nedtoukhi.com/api/v1";
+const DEFAULT_API_BASE_URL = "https://dev.nedtoukhi.com/api/v1";
+
+function getApiBaseUrl() {
+  return import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
+}
 
 function normalizeJsonBody(value) {
   // Some endpoints may return `{ success, data }`; others return raw arrays.
@@ -30,7 +34,7 @@ async function fetchJson(url) {
 }
 
 export async function getGalleryProjects() {
-  const json = await fetchJson(`${API_BASE_URL}/gallery`);
+  const json = await fetchJson(`${getApiBaseUrl()}/gallery`);
   return normalizeJsonBody(json);
 }
 
