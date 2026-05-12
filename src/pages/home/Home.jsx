@@ -448,6 +448,7 @@ export default function Home({ setHeaderVisible }) {
 
       <div className="home-scroll">
         <div className="home-scroll__spacer" aria-hidden="true" />
+        <div className="home-scroll__landing-stage-seam" aria-hidden="true" />
         <div id="stage-content" className="stage-content">
           {/* Store */}
           <section className="stage-section">

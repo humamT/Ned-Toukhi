@@ -1,6 +1,60 @@
 .home-scroll {
   position: relative;
   z-index: 100;
+  overflow: clip;
+  /* Blur band height at landing ↔ stage boundary (Home only) */
+  --landing-stage-seam: clamp(56px, 12vh, 160px);
+}
+
+/* Softens the hard edge between fixed landing and scrolling stage via backdrop blur */
+.home-scroll__landing-stage-seam {
+  position: relative;
+  height: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.home-scroll__landing-stage-seam::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-0.5 * var(--landing-stage-seam));
+  height: var(--landing-stage-seam);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+  /* Soften blur into landing above and stage below */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(0 0 0 / 0.92) 28%,
+    rgb(0 0 0 / 0.92) 72%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(0 0 0 / 0.92) 28%,
+    rgb(0 0 0 / 0.92) 72%,
+    transparent 100%
+  );
+}
+
+/* iOS/WebKit: heavy live blur is costly; keep a light blend without backdrop */
+@supports (-webkit-touch-callout: none) {
+  .home-scroll__landing-stage-seam::before {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(52 78 93 / 0.22) 45%,
+      rgb(52 78 93 / 0.18) 55%,
+      transparent 100%
+    );
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
 
 /* Fixed viewport layer: above `.loader` (99), below nothing critical; transparent except orb */

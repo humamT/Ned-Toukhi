@@ -390,11 +390,20 @@ $design-height: 1440px;
 // ========================================
 // STAGE 3/4/5: Gallery Tabs
 // ========================================
-.stage-3__orb-content {
+.gallery-sidebar .stage-3__orb-content {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: flex-start;
+    // position: absolute;
+    // left: 9.5%;
+    // top: 50%;
+    // transform: translate(-50%, -50%);
+    // z-index: 21;
+    // pointer-events: none;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
     left: 9.5%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -403,19 +412,38 @@ $design-height: 1440px;
 }
 
 /* Title + CTA block (split from tabs for markup only; same flex column as before). */
-.stage-3__orb-content-top {
+.gallery-sidebar .stage-3__orb-content-top {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+   //--------
+   position: absolute;
+   left: 25%;
 }
 
 /* Stay position: static so .tabs-rectangles / .tabs-all-lines (position: absolute) still use .stage-3__orb-content as containing block, like when tabs were direct children. */
-.gallery-tabs-container {
+.gallery-sidebar .gallery-tabs-container {
+    // width: 100%;
+    // display: flex;
+    // flex-direction: row-reverse;
+    // align-items: center;
+    // position: absolute;
+    // /* Shared: tab rectangles + decorative lines scale together (baseline 320×150) */
+    // --tab-rect-w: 320px;
+    // --tab-rect-h: 150px;
+    // --tab-scale: calc(var(--tab-rect-w) / 320px);
     width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    --tab-rect-w: 320px;
+    --tab-rect-h: 150px;
+    --tab-scale: calc(var(--tab-rect-w) / 235px);
+    transform: translateX(15%) scale(0.9);
 }
 
-.stage-3__main-text {
+.gallery-sidebar .stage-3__main-text {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -423,15 +451,15 @@ $design-height: 1440px;
     translate: 20%;
 }
 
-.stage-3__title {
+.gallery-sidebar .stage-3__title {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.stage-3__title-en,
-.stage-3__title-ar,
-.stage-3__title-fr {
+.gallery-sidebar .stage-3__title-en,
+.gallery-sidebar .stage-3__title-ar,
+.gallery-sidebar .stage-3__title-fr {
     font-size: var(--stage-title-size);
     font-family: $primary-font;
     font-weight: 500;
@@ -439,17 +467,17 @@ $design-height: 1440px;
     line-height: 1;
 }
 
-.stage-3__title-fr {
+.gallery-sidebar .stage-3__title-fr {
     margin-top: 10px;
 }
 
-.explore-now-tabs {
+.gallery-sidebar .explore-now-tabs {
     translate: 20%;
     margin-top: 1.5rem;
     color: white;
     font-size: var(--stage-button-size);
     line-height: 1.5;
-    padding: 0% 10%;
+    padding: 0% 5%;
     background: none;
     border-radius: $border-radius-button;
     border: 2px solid white;
@@ -458,31 +486,44 @@ $design-height: 1440px;
 }
 
 // Tab Rectangles
-.tabs-rectangles {
+.gallery-sidebar .tabs-rectangles {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    // // position: absolute;
+    // gap: 4rem;
+    // top: 54%;
+    // left: 50%;
+    // // transform: translate(100%, -50%);
+    // width: 100%;
+    // height: auto;
+    // pointer-events: none;
+    // filter: brightness(0.95);
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
     gap: 4rem;
     top: 54%;
     left: 50%;
-    transform: translate(100%, -50%);
     width: 100%;
     height: auto;
     pointer-events: none;
     filter: brightness(0.95);
+    transform: translateX(100px) scale(1.09);
 }
 
-.tab-rectangle1,
-.tab-rectangle2,
-.tab-rectangle3 {
+.gallery-sidebar .tab-rectangle1,
+.gallery-sidebar .tab-rectangle2,
+.gallery-sidebar .tab-rectangle3 {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 320px;
-    height: 150px;
+    width: var(--tab-rect-w);
+    height: var(--tab-rect-h);
     pointer-events: auto;
 
     &.not-stage {
@@ -495,22 +536,22 @@ $design-height: 1440px;
     }
 }
 
-.tab-rectangle1 {
+.gallery-sidebar .tab-rectangle1 {
     left: -20%;
 }
 
-.tab-rectangle2 {
+.gallery-sidebar .tab-rectangle2 {
     left: -2.3%;
 }
 
-.tab-rectangle3 {
+.gallery-sidebar .tab-rectangle3 {
     left: -20%;
 }
 
 // Tab Box Images
-.illustrationsBox,
-.featuredBox,
-.identitiesBox {
+.gallery-sidebar .illustrationsBox,
+.gallery-sidebar .featuredBox,
+.gallery-sidebar .identitiesBox {
     width: 100%;
     height: auto;
     // margin-bottom: 2rem;
@@ -519,9 +560,9 @@ $design-height: 1440px;
 }
 
 // Tab Text Labels
-.illustrations-txt,
-.featured-txt,
-.identities-txt {
+.gallery-sidebar .illustrations-txt,
+.gallery-sidebar .featured-txt,
+.gallery-sidebar .identities-txt {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -537,44 +578,44 @@ $design-height: 1440px;
     text-align: center;
 }
 
-.illustrations-en {
+.gallery-sidebar .illustrations-en {
     translate: 10%;
 }
 
-.illustrations-ar {
+.gallery-sidebar .illustrations-ar {
     translate: 50%;
 }
 
-.illustrations-fr {
+.gallery-sidebar .illustrations-fr {
     translate: 80%;
 }
 
-.featured-en {
+.gallery-sidebar .featured-en {
     translate: 45%;
 }
 
-.featured-ar {
+.gallery-sidebar .featured-ar {
     translate: 38%;
 }
 
-.featured-fr {
+.gallery-sidebar .featured-fr {
     translate: 30%;
 }
 
-.identities-en {
+.gallery-sidebar .identities-en {
     translate: 125%;
 }
 
-.identities-ar {
+.gallery-sidebar .identities-ar {
     translate: 80%;
 }
 
-.identities-fr {
+.gallery-sidebar .identities-fr {
     translate: 40%;
 }
 
 // Click Text
-.click-txt {
+.gallery-sidebar .click-txt {
     z-index: 30;
     width: 35%;
     height: auto;
@@ -602,25 +643,25 @@ $design-height: 1440px;
     }
 }
 
-.tab-rectangle1 .click-txt {
+.gallery-sidebar .tab-rectangle1 .click-txt {
     --click-txt-x: 90%;
     --click-txt-y: -15%;
 }
 
-.tab-rectangle2 .click-txt {
+.gallery-sidebar .tab-rectangle2 .click-txt {
     --click-txt-x: 105%;
     --click-txt-y: -15%;
 }
 
-.tab-rectangle3 .click-txt {
+.gallery-sidebar .tab-rectangle3 .click-txt {
     --click-txt-x: 110%;
     --click-txt-y: -45%;
 }
 
 // Click Elements
-.click1,
-.click2,
-.click3 {
+.gallery-sidebar .click1,
+.gallery-sidebar .click2,
+.gallery-sidebar .click3 {
     z-index: 23;
     width: 35%;
     height: auto;
@@ -637,43 +678,41 @@ $design-height: 1440px;
     }
 }
 
-.click1 {
+.gallery-sidebar .click1 {
     transform: translate(90%, -15%);
 }
 
-.click2 {
+.gallery-sidebar .click2 {
     transform: translate(105%, -15%);
 }
 
-.click3 {
+.gallery-sidebar .click3 {
     transform: translate(110%, -45%);
 }
 
-.gallery-tabs-container {
+// Tab Lines — size/position tied to .gallery-tabs-container --tab-* (same scale as rectangles)
+.gallery-sidebar .tabs-all-lines {
     // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
-    // z-index: 21;
+    // top: -50%;
+    // width: 230%;
+    // height: auto;
     // pointer-events: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-// Tab Lines
-.tabs-all-lines {
-    position: absolute;
-    top: -50%;
-    translate: -30%;
-    width: 230%;
-    height: auto;
-    pointer-events: none;
-    align-self: center;
+    // align-self: center;
+    // transform: translateX(-30%) scale(var(--tab-scale));
+    // transform-origin: 62% 52%;
+        /* position: absolute; */
+        top: -50%;
+        width: 228%;
+        height: auto;
+        pointer-events: none;
+        align-self: center;
+        transform: scale(var(--tab-scale));
+        /* transform-origin: 62% 52%; */
 }
 
-.lines {
+.gallery-sidebar .lines {
     position: absolute;
+    align-self: center;
 
     &.not-stage-line {
         animation: lineOpacitylow 1s ease forwards;
@@ -1361,6 +1400,56 @@ html.home-stage-snap #stage-content > .stage-section.stage-section--gallery {
 html.home-stage-snap #stage-content .gallery-step {
     scroll-snap-align: start;
     scroll-snap-stop: normal;
+}
+
+/* Home FHD (~1440–2200px): smaller gallery grid + synced tab / line scale */
+@media (min-width: 1440px) and (max-width: 2200px) {
+    html.home-stage-snap .gallery-stack {
+        --gW: min(480px, 28vw);
+    }
+
+    html.home-stage-snap .gallery-illustrations,
+    html.home-stage-snap .gallery-featured,
+    html.home-stage-snap .gallery-identities {
+        gap: 18px;
+    }
+
+    html.home-stage-snap .illustration1,
+    html.home-stage-snap .illustration3,
+    html.home-stage-snap .featured1,
+    html.home-stage-snap .featured3,
+    html.home-stage-snap .identities1,
+    html.home-stage-snap .identities3 {
+        transform: translateY(52px);
+    }
+
+    html.home-stage-snap .illustration2,
+    html.home-stage-snap .illustration4,
+    html.home-stage-snap .featured2,
+    html.home-stage-snap .featured4,
+    html.home-stage-snap .identities2,
+    html.home-stage-snap .identities4 {
+        transform: translateY(-52px);
+    }
+
+    html.home-stage-snap .gallery-tabs-container {
+        --tab-rect-w: 237px;
+        --tab-rect-h: 111px;
+    }
+    html.home-stage-snap .tabs-all-lines {
+        --tab-scale: calc(var(--tab-rect-w) / 170px);
+    }
+
+    html.home-stage-snap .tabs-rectangles {
+        gap: 3rem;
+        transform: translateX(80px) scale(1.12);
+    }
+
+    html.home-stage-snap .illustrations-txt,
+    html.home-stage-snap .featured-txt,
+    html.home-stage-snap .identities-txt {
+        font-size: 18px;
+    }
 }
 
 // ========================================
