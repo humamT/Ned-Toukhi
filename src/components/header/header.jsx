@@ -1,8 +1,8 @@
 import "./header.scss";
 import logo from "../../assets/images/Logo-icon-2.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import {
     faSquareFacebook,
     faInstagram,
@@ -11,16 +11,46 @@ import {
 
 
 function Header({ visible }) {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        setMobileMenuOpen(false);
+    }, [location.pathname, location.search]);
+
+    useEffect(() => {
+        if (!visible) setMobileMenuOpen(false);
+    }, [visible]);
+
+    const closeMobileMenu = () => setMobileMenuOpen(false);
+
     return (
         <header className={`site-header ${visible ? "is-visible" : ""}`}>
             <div className="site-header__inner">
+                <button
+                    className={`mobile-menu-toggle ${mobileMenuOpen ? "is-open" : ""}`}
+                    type="button"
+                    aria-label="Toggle menu"
+                    aria-controls="primary-nav"
+                    aria-expanded={mobileMenuOpen}
+                    onClick={() => setMobileMenuOpen((prev) => !prev)}
+                >
+                    <span className="bars" id="bar1" />
+                    <span className="bars" id="bar2" />
+                    <span className="bars" id="bar3" />
+                </button>
+
                 {/* LEFT: main nav */}
-                <nav className="site-header__nav" aria-label="Primary">
-                    <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
+                <nav
+                    id="primary-nav"
+                    className={`site-header__nav ${mobileMenuOpen ? "is-open" : ""}`}
+                    aria-label="Primary"
+                >
+                    <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`} onClick={closeMobileMenu}>
                         Home
                     </NavLink>
 
-                    <NavLink to="/store" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
+                    <NavLink to="/store" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`} onClick={closeMobileMenu}>
                         Store
                     </NavLink>
 
@@ -36,22 +66,22 @@ function Header({ visible }) {
                         </button>
 
                         <div className="dropdown-menu" role="menu">
-                            <NavLink to="/gallery/illustrations" role="menuitem">Illustrations</NavLink>
-                            <NavLink to="/gallery/featured" role="menuitem">Featured</NavLink>
-                            <NavLink to="/gallery/identities" role="menuitem">Identities</NavLink>
+                            <NavLink to="/gallery/illustrations" role="menuitem" onClick={closeMobileMenu}>Illustrations</NavLink>
+                            <NavLink to="/gallery/featured" role="menuitem" onClick={closeMobileMenu}>Featured</NavLink>
+                            <NavLink to="/gallery/identities" role="menuitem" onClick={closeMobileMenu}>Identities</NavLink>
                         </div>
                     </div>
 
 
-                    <NavLink to="/quotations" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
+                    <NavLink to="/quotations" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`} onClick={closeMobileMenu}>
                         Quotations
                     </NavLink>
 
-                    <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
+                    <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`} onClick={closeMobileMenu}>
                         Contact
                     </NavLink>
 
-                    <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
+                    <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`} onClick={closeMobileMenu}>
                         About
                     </NavLink>
                 </nav>

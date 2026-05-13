@@ -1828,89 +1828,137 @@ html.home-stage-snap #stage-content .gallery-step {
 // ========================================
 // Responsive
 // ========================================
-// @media (max-width: 768px) {
-//     .stage-content__stage {
-//         justify-content: center;
-//     }
+@media (max-width: 768px) {
+    .stage-section {
+        // min-height: auto;
+        // padding: 7vh 0;
+    }
 
-//     .stage-1__orb-content,
-//     .stage-2__orb-content,
-//     .stage-3__orb-content,
-//     .stage-6__orb-content,
-//     .stage-7__orb-content,
-//     .stage-8__orb-content,
-//     .stage-9__orb-content {
-//         left: 50%;
-//         top: 50%;
-//         transform: translate(-50%, -50%);
-//         align-items: center;
-//         text-align: center;
-//     }
+    .orb-hero.is-landing {
+        transform: translate(-50%, -50%) scale(2.5);
+    }
 
-//     .stage-1__main-text,
-//     .stage-2__main-text,
-//     .stage-3__main-text {
-//         justify-content: center;
-//         text-align: center;
-//     }
+    .orb-hero.is-intro-visible .orb-hero-intro {
+        transform: translate(-50%, -50%) translateY(15px) scale(0.35);
+    }
 
-//     .stage-3__main-text {
-//         translate: 0;
-//     }
+    .stage-content__stage {
+        height: auto;
+        min-height: auto;
+        justify-content: center;
+        transform: none;
+    }
 
-//     .stage-1__title-en,
-//     .stage-1__title-fr,
-//     .stage-2__title-ar,
-//     .stage-3__title-fr,
-//     .stage-6__title-en,
-//     .stage-6__title-fr {
-//         translate: 0;
-//     }
+    .stage-1__orb-content,
+    .stage-2__orb-content,
+    .stage-3__orb-content,
+    .stage-6__orb-content,
+    .stage-7__orb-content,
+    .stage-8__orb-content,
+    .stage-9__orb-content {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        align-items: center;
+        text-align: center;
+        width: min(92vw, 680px);
+        margin-inline: auto;
+    }
 
-//     .stage-1__sticker {
-//         translate: 0 -10%;
-//         width: 35%;
-//     }
+    .stage-orb--s1 {
+        width: calc(var(--orb-size) * 2);
+        height: calc(var(--orb-size) * 2);
+        --orb-size: 130%;
+    }
 
-//     .stage-1__posters-section {
-//         display: none;
-//     }
+    .stage-1__main-text,
+    .stage-2__main-text,
+    .stage-3__main-text {
+        justify-content: center;
+        text-align: center;
+    }
 
-//     .gallery-orbs,
-//     .tabs-rectangles,
-//     .tabs-all-lines,
-//     .scroll {
-//         display: none;
-//     }
+    .stage-3__main-text {
+        translate: 0;
+    }
 
-//     .gallery-cards {
-//         transform: translate(0, 0);
-//         justify-content: center;
-//     }
+    .stage-1__title-en,
+    .stage-1__title-fr,
+    .stage-2__title-ar,
+    .stage-3__title-fr,
+    .stage-6__title-en,
+    .stage-6__title-fr {
+        translate: 0;
+    }
 
-//     .stage-6__Devis-imgs,
-//     .Envelope,
-//     .Envelope-emptyOrb,
-//     .contactBox,
-//     .about-cards {
-//         display: none;
-//     }
+    .stage-1__sticker {
+        translate: 0 -10%;
+        width: 35%;
+    }
 
-//     .stage-7__main-text {
-//         transform: none;
-//     }
+    .stage-1__posters-section {
+        display: none;
+    }
 
-//     .stage-8__subtitle {
-//         position: relative;
-//         width: 70%;
-//         transform: translateY(60%);
-//         text-align: center;
-//     }
+    .stage-section--gallery .gallery-layout {
+        display: block;
+        padding: 0 4vw;
+    }
 
-//     .featuredClientsBox,
-//     .featuredLogos {
-//         width: 90%;
-//     }
+    .stage-section--gallery .gallery-sidebar {
+        display: none;
+        position: relative;
+        top: auto;
+        width: 100%;
+        margin: 0 auto 2rem;
+    }
 
-//     /* footer-specific rules moved to `src/components/footer/footer.scss` */
-// }
+    .stage-section--gallery .gallery-right {
+        width: 100%;
+    }
+
+    .stage-section--gallery .gallery-step {
+        min-height: auto;
+        justify-content: center;
+        padding: 1rem 0;
+    }
+
+    .gallery-orbs,
+    .tabs-rectangles,
+    .tabs-all-lines,
+    .scroll {
+        display: none;
+    }
+
+    .gallery-cards {
+        transform: translate(0, 0);
+        justify-content: center;
+    }
+
+    .stage-6__Devis-imgs,
+    .Envelope,
+    .Envelope-emptyOrb,
+    .contactBox,
+    .about-cards {
+        display: none;
+    }
+
+    .stage-7__main-text {
+        transform: none;
+    }
+
+    .stage-8__subtitle {
+        position: relative;
+        width: min(90vw, 680px);
+        transform: none;
+        text-align: center;
+    }
+
+    .featuredClientsBox,
+    .featuredLogos {
+        width: 90%;
+    }
+
+    /* footer-specific rules moved to `src/components/footer/footer.scss` */
+}
