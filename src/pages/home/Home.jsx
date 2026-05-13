@@ -579,8 +579,8 @@ export default function Home({ setHeaderVisible }) {
             <div className="stage-content__stage stage-content__stage-7">
               <div className="stage-7__orb-content">
                 {/* <div className="stage-7__envelope-wrap"> */}
-                  <div className="stage-orb stage-orb--s5" aria-hidden="true" />
-                  <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
+                <div className="stage-orb stage-orb--s5" aria-hidden="true" />
+                <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
                 {/* </div> */}
                 <img className="Envelope-emptyOrb" src={emptyOrb} alt="" />
 
@@ -607,23 +607,25 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-8">
               <div className="stage-8__orb-content">
-                <div className="personal-img-bubble">
-                  <div className="stage-orb stage-orb--s6" aria-hidden="true" />
-                  <img {...lazyImgProps} className="personalImg" src={personalImg} alt="profile img" />
-                  <img className="personalBubble" src={galleryBubble} alt="the orb around the profile img" />
+                <div className="stage-8__orb-content-top">
+                  <div className="personal-img-bubble">
+                    <div className="stage-orb stage-orb--s6" aria-hidden="true" />
+                    <img {...lazyImgProps} className="personalImg" src={personalImg} alt="profile img" />
+                    <img className="personalBubble" src={galleryBubble} alt="the orb around the profile img" />
+                  </div>
+
+                  <div className="stage-8__subtitle">
+                    <p>Muhanad ALTOUKHI, Syrian graphic designer and illustrator.</p>
+                    <p>Originally from Douma, on the outskirts of Damascus, I began
+                      learning graphic design in 2014 during the military siege of Eastern
+                      Ghouta. In 2024, I completed my DNMADE in Graphic Design in Paris.</p>
+                    <p>Living between these two worlds has shaped my creative vision,
+                      allowing me to develop hybrid, multicultural projects enriched by a
+                      unique perspective one that I’m excited to share and work with you.</p>
+                  </div>
                 </div>
 
                 <img {...lazyImgProps} className="aboutBox" src={aboutBox} alt="about box" />
-
-                <div className="stage-8__subtitle">
-                  <p>Muhanad ALTOUKHI, Syrian graphic designer and illustrator.</p>
-                  <p>Originally from Douma, on the outskirts of Damascus, I began
-                    learning graphic design in 2014 during the military siege of Eastern
-                    Ghouta. In 2024, I completed my DNMADE in Graphic Design in Paris.</p>
-                  <p>Living between these two worlds has shaped my creative vision,
-                    allowing me to develop hybrid, multicultural projects enriched by a
-                    unique perspective one that I’m excited to share and work with you.</p>
-                </div>
 
                 <div className="about-cards">
                   <div className="about-card">
