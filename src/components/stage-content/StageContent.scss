@@ -1940,7 +1940,25 @@ html.home-stage-snap #stage-content .gallery-step {
         padding: 10rem 0;
     }
 
-    .gallery-orbs,
+    .gallery-orbs {
+        display: flex;
+    }
+
+    .gallery1 {
+        translate: 15% 50%;
+    }
+    .gallery2 {
+        translate: 130% -250%;
+    }
+
+    .gallery3 {
+        translate: -130% -250%;
+    }
+
+    .gallery4 {
+        translate: -250% 50%;
+    }
+
     .tabs-rectangles,
     .tabs-all-lines,
     .scroll {
@@ -1967,6 +1985,10 @@ html.home-stage-snap #stage-content .gallery-step {
         height: 500px;
     }
 
+    .stage-section--gallery {
+        display: none;
+    }
+
     // .gallery-content {
     //     margin-top: 10rem;
     //     width: 100%;
@@ -1974,7 +1996,7 @@ html.home-stage-snap #stage-content .gallery-step {
 
 
     .letterhead-mockup {
-        translate: 0% 140%;
+        translate: 0 300px;
     }
 
     .the-mask {
