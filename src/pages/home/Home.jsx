@@ -468,7 +468,7 @@ export default function Home({ setHeaderVisible }) {
                   Postcards, stickers, posters, BUY THEM ALL!, chose between a wide selection of original art
                   projects and get them delevered.
                 </div>
-                <a className="shop-now">Shop NOW!</a>
+                <NavLink className="shop-now" to="/store">Shop NOW!</NavLink>
               </div>
 
               <div className="stage-1__posters-section">
@@ -502,7 +502,7 @@ export default function Home({ setHeaderVisible }) {
                   <img className="gallery4 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                 </div>
 
-                <a className="explore-now">Explore NOW!</a>
+                <NavLink className="explore-now" to="/gallery">Explore NOW!</NavLink>
               </div>
             </div>
           </section>
@@ -521,7 +521,7 @@ export default function Home({ setHeaderVisible }) {
                         <div className="stage-3__title-fr">Galerie</div>
                       </div>
                     </div>
-                    <a className="explore-now-tabs">Explore NOW!</a>
+                    <NavLink className="explore-now-tabs" to="/gallery">Explore NOW!</NavLink>
                   </div>
 
                   <div className="gallery-tabs-container">

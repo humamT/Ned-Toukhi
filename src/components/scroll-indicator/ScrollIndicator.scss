@@ -58,19 +58,16 @@
 
 @media (max-width: 768px) {
   .scroll-indicator {
-    right: 16px;
-    bottom: 16px;
-    width: 96px;
-    height: 96px;
+    display: none;
   }
 
-  .scroll-indicator__text {
-    width: 120px;
-    height: 120px;
-  }
+  // .scroll-indicator__text {
+  //   width: 120px;
+  //   height: 120px;
+  // }
 
-  .scroll-indicator__mouse {
-    width: 36px;
-    height: 52px;
-  }
+  // .scroll-indicator__mouse {
+  //   width: 36px;
+  //   height: 52px;
+  // }
 }
