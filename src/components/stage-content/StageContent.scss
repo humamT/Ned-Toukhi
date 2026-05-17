@@ -1357,8 +1357,9 @@ $design-height: 1440px;
     // line-height: 100%;
     // letter-spacing: 0.4px;
 
+    font-size: var(--stage-subtitle-size);
     color: white;
-    font-size: 20px;
+    // font-size: 20px;
     font-family: "Diodrum Arabic";
     text-wrap-style: balance;
     line-height: 100%;
@@ -1913,6 +1914,14 @@ html.home-stage-snap #stage-content .gallery-step {
         display: none;
     }
 
+    .stage-1__subtitle,
+    .stage-2__subtitle,
+    .stage-6__subtitle,
+    .stage-7__subtitle {
+        margin-top: 1.5rem;
+    }
+
+
     .stage-2__subtitle {
         width: 80%;
     }
@@ -2023,7 +2032,7 @@ html.home-stage-snap #stage-content .gallery-step {
 
     .Envelope {
         width: 80%;
-        transform: translate(-55%, 60%);
+        transform: translate(0%, -60%);
     }
 
     // .contactBox {
@@ -2035,19 +2044,24 @@ html.home-stage-snap #stage-content .gallery-step {
     // .Envelope,
     .aboutBox,
     .Envelope-emptyOrb,
-    .contactBox,
-    .about-cards {
+    .contactBox {
         display: none;
     }
 
+    .about-cards {
+        transform: translateY(260%);
+    }
+
     .stage-7__main-text {
-        transform: translateY(-15%);
+        transform: translateY(40%);
     }
 
     .stage-8__orb-content-top {
         flex-direction: column;
         width: 100%;
-        transform: none;
+        transform: translateY(-10%);
+        align-items: center;
+        gap: 1.5rem;
     }
 
     .personal-img-bubble {
