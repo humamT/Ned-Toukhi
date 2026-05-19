@@ -2,6 +2,7 @@
   position: relative;
   z-index: 100;
   overflow: clip;
+  overscroll-behavior-y: contain;
   /* Blur band height at landing ↔ stage boundary (Home only) */
   --landing-stage-seam: clamp(56px, 12vh, 160px);
 }
@@ -40,20 +41,18 @@
   );
 }
 
-/* iOS/WebKit: heavy live blur is costly; keep a light blend without backdrop */
+/* iOS/WebKit: keep edge seam visible with lightweight blend + masked fade */
 @supports (-webkit-touch-callout: none) {
   .home-scroll__landing-stage-seam::before {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
+    -webkit-backdrop-filter: blur(7px) saturate(1.08);
+    backdrop-filter: blur(7px) saturate(1.08);
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgb(52 78 93 / 0.22) 45%,
-      rgb(52 78 93 / 0.18) 55%,
+      rgb(52 78 93 / 0.20) 45%,
+      rgb(52 78 93 / 0.15) 55%,
       transparent 100%
     );
-    -webkit-mask-image: none;
-    mask-image: none;
   }
 }
 

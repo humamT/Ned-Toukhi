@@ -71,27 +71,29 @@
     );
 }
 
-/* WebKit/Safari: `backdrop-filter` is a frequent perf cliff (fans + jank).
-   Keep the premium gradient tint, but avoid live background blur. */
+/* WebKit/iOS Safari: keep frost effect while staying lightweight. */
 @supports (-webkit-touch-callout: none) {
     .site-header {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        background: linear-gradient(
-            180deg,
-            rgb(52 78 93 / 0.82) 0%,
-            rgb(52 78 93 / 0.58) 60%,
-            rgb(52 78 93 / 0.32) 100%
-        );
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        backdrop-filter: blur(16px) saturate(140%);
+        background: rgb(255 255 255 / 0.35);
     }
 
     .site-header::before {
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        backdrop-filter: blur(16px) saturate(140%);
         background: linear-gradient(
             180deg,
-            rgb(52 78 93 / 0.32) 0%,
-            rgb(52 78 93 / 0.16) 55%,
+            rgb(52 78 93 / 0.24) 0%,
+            rgb(52 78 93 / 0.12) 55%,
             transparent 100%
         );
+    }
+
+    .site-header__inner {
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        backdrop-filter: blur(16px) saturate(140%);
+        background: rgb(255 255 255 / 0.08);
     }
 }
 
