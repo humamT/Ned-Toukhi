@@ -21,7 +21,8 @@
     visibility: hidden;
     pointer-events: none;
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translate3d(0, -100%, 0);
+    isolation: isolate;
 
     transition:
         transform 0.4s ease,
@@ -29,21 +30,16 @@
         visibility 0s linear 0.4s;
 
     will-change: transform, opacity;
-    -webkit-backdrop-filter: blur(18px) saturate(1.12);
-    backdrop-filter: blur(18px) saturate(1.12);
-    background: linear-gradient(
-        180deg,
-        rgb(52 78 93 / 0.52) 0%,
-        rgb(52 78 93 / 0.38) 60%,
-        rgba(52, 78, 93, 0) 100%
-    );
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    background: rgb(255 255 255 / 0.18);
 }
 
 .site-header.is-visible {
     visibility: visible;
     pointer-events: auto;
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
 
     transition:
         transform 0.4s ease,
@@ -63,6 +59,8 @@
     transform: none;
     z-index: 0;
     pointer-events: none;
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
     background: linear-gradient(
         180deg,
         rgb(52 78 93 / 0.26) 0%,
@@ -74,14 +72,15 @@
 /* WebKit/iOS Safari: keep frost effect while staying lightweight. */
 @supports (-webkit-touch-callout: none) {
     .site-header {
-        -webkit-backdrop-filter: blur(16px) saturate(140%);
-        backdrop-filter: blur(16px) saturate(140%);
-        background: rgb(255 255 255 / 0.35);
+        background: rgb(255 255 255 / 0.14) !important;
+        -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+        backdrop-filter: blur(18px) saturate(160%) !important;
+        isolation: isolate;
     }
 
     .site-header::before {
-        -webkit-backdrop-filter: blur(16px) saturate(140%);
-        backdrop-filter: blur(16px) saturate(140%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+        backdrop-filter: blur(18px) saturate(160%) !important;
         background: linear-gradient(
             180deg,
             rgb(52 78 93 / 0.24) 0%,
@@ -91,9 +90,7 @@
     }
 
     .site-header__inner {
-        -webkit-backdrop-filter: blur(16px) saturate(140%);
-        backdrop-filter: blur(16px) saturate(140%);
-        background: rgb(255 255 255 / 0.08);
+        background: transparent !important;
     }
 }
 
@@ -101,6 +98,7 @@
     position: relative;
     z-index: 1;
     height: 56px;
+    background: transparent;
     // padding: 0 2%;
 
     display: grid;
@@ -287,7 +285,7 @@
     /* transform: translateX(-50%); */
     width: 150%;
     height: 240px;
-    background: white;
+    background: rgb(255 255 255 / 0.65);
     border-radius: 50%;
     filter: blur(55px);
     opacity: 0.8;
