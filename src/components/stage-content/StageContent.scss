@@ -47,9 +47,10 @@ $design-height: 1440px;
     top: var(--orb-top);
     width: calc(var(--orb-size) * var(--stage-scale));
     height: calc(var(--orb-size) * var(--stage-scale));
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate3d(-50%, -50%, 0) scale(1);
     pointer-events: none;
     z-index: -1; // behind its local content (anchor must isolate)
+    contain: layout paint size;
 
     animation: stageOrbPulse var(--orb-pulse-duration) ease-in-out infinite;
     will-change: transform;
@@ -1313,9 +1314,9 @@ $design-height: 1440px;
     display: flex;
     width: 45%;
     flex-direction: row;
-    gap: 25%;
+    gap: 5%;
     align-items: flex-start;
-    transform: translateY(-30%);
+    transform: translateY(-20%);
     z-index: 20;
 }
 
@@ -1364,6 +1365,7 @@ $design-height: 1440px;
     text-wrap-style: balance;
     line-height: 100%;
     letter-spacing: 0.4px;
+    line-height: 1.4;
     z-index: 1;
 }
 
@@ -1448,6 +1450,46 @@ $design-height: 1440px;
     width: 70%;
 }
 
+/* Reserve stable geometry for key decorative assets to avoid late image decode shifts. */
+.stage-1__sticker,
+.stage-1__posters,
+.gallery-orbs,
+.illustration-img,
+.featured-img,
+.identities-img,
+.Envelope,
+.contactBox,
+.personalImg,
+.personalBubble,
+.about-img,
+.featuredLogos {
+    height: auto;
+    object-fit: contain;
+}
+
+.stage-1__sticker,
+.gallery-orbs,
+.personalBubble {
+    aspect-ratio: 1 / 1;
+}
+
+.stage-1__posters {
+    aspect-ratio: 1 / 1;
+}
+
+.illustration-img,
+.featured-img,
+.identities-img,
+.about-img {
+    aspect-ratio: 4 / 5;
+}
+
+.Envelope,
+.contactBox,
+.featuredLogos {
+    aspect-ratio: 16 / 9;
+}
+
 // ---------------------------------------------------------------------------
 // Home — scroll snap on stage sections (`home-stage-snap` on `<html>` from Home.jsx).
 // Both `html` and `body` get `scroll-snap-type`: index.scss sets overflow-y on both, so
@@ -1456,6 +1498,23 @@ $design-height: 1440px;
 html.home-stage-snap,
 html.home-stage-snap body {
     scroll-snap-type: y proximity;
+}
+
+@media (max-width: 768px) {
+    html {
+        scroll-snap-type: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    html.home-stage-snap,
+    html.home-stage-snap body,
+    html.home-stage-snap #stage-content>.stage-section,
+    html.home-stage-snap #stage-content .gallery-step {
+        scroll-snap-type: none !important;
+        scroll-snap-align: none !important;
+        scroll-snap-stop: normal !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 html.home-stage-snap .home-scroll__spacer {
@@ -1550,12 +1609,25 @@ html.home-stage-snap #stage-content .gallery-step {
 
     0%,
     100% {
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate3d(-50%, -50%, 0) scale(1);
     }
 
     50% {
-        transform: translate(-50%, -50%) scale(1.04);
+        transform: translate3d(-50%, -50%, 0) scale(1.04);
     }
+}
+
+/* Pause expensive perpetual animations when sections are offscreen. */
+.stage-section:not(.is-onscreen) .stage-orb,
+.stage-section:not(.is-onscreen) .stage-orb::before,
+.stage-section:not(.is-onscreen) .stage-1__sticker,
+.stage-section:not(.is-onscreen) .stage-1__posters,
+.stage-section:not(.is-onscreen) .gallery-orbs,
+.stage-section:not(.is-onscreen) .letterhead-mockup,
+.stage-section:not(.is-onscreen) .Envelope-emptyOrb,
+.stage-section:not(.is-onscreen) .personalBubble,
+.stage-section:not(.is-onscreen) .click-txt {
+    animation-play-state: paused !important;
 }
 
 @keyframes stageContentFadeOut {
@@ -2049,7 +2121,7 @@ html.home-stage-snap #stage-content .gallery-step {
     }
 
     .about-cards {
-        transform: translateY(260%);
+        transform: translate(0, 300%);
     }
 
     .stage-7__main-text {

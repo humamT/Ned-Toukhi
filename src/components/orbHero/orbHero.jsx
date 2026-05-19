@@ -30,7 +30,14 @@ export default function OrbHero({
       <div className="orb-hero-spotlight" aria-hidden="true" />
 
       {logoVisible && (
-        <img src={logo} alt="Logo" className="orb-hero-logo" />
+        <img
+          src={logo}
+          alt="Logo"
+          className="orb-hero-logo"
+          loading="eager"
+          decoding="sync"
+          fetchPriority="high"
+        />
       )}
 
       <div className="orb-hero-intro" aria-hidden={!introVisible}>

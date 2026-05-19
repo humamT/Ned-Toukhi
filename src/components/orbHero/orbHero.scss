@@ -14,6 +14,7 @@
   pointer-events: none;
   opacity: 1;
   will-change: transform, opacity; // keep compositing hints limited (left is layout)
+  contain: layout paint;
 
   transition:
     opacity var(--orb-fade-duration) ease, // fades
@@ -184,7 +185,9 @@
 .orb-hero-logo {
   position: absolute;
   // width: 15%;
+  width: auto;
   height: 20%;
+  aspect-ratio: 1 / 1;
   /* Above `.orb-hero::before` ring; parent `.home-landing-orb` stacks above the loader */
   z-index: 2;
   transform: translateY(0) scale(1.15);
@@ -317,8 +320,12 @@
     width: calc(var(--orb-frame-size) * 0.44);
     height: calc(var(--orb-frame-size) * 0.44);
     transform: translate(-50%, -54%);
-    filter: blur(22px);
+    filter: blur(16px);
     opacity: 0.92;
+  }
+
+  .orb-hero.is-staged {
+    filter: blur(10px);
   }
 
   .orb-hero-intro__name {
@@ -331,5 +338,11 @@
 
   .orb-hero-intro__location {
     font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-hero::before {
+    animation: none;
   }
 }

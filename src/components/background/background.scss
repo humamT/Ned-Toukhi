@@ -104,12 +104,14 @@ body {
 
 .gradient-bg {
   width: 100%;
-  height: 100vh;
+  height: 100svh;
+  min-height: 100svh;
   position: relative;
   overflow: hidden;
   background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2), var(--color-bg3), var(--color-bg4), var(--color-bg5));
   top: 0;
   left: 0;
+  contain: layout paint size;
   // Keep painted surfaces bounded on large viewports.
   --circle-size: clamp(900px, 110vmax, 1400px);
 
@@ -126,7 +128,6 @@ body {
     filter: url(#goo) blur(clamp(18px, 2.2vw, 32px));
     width: 100%;
     height: 100%;
-    will-change: filter;
   }
 
   .g1 {
@@ -138,7 +139,6 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
-    will-change: transform;
   }
 
   .g2 {
@@ -150,7 +150,6 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
-    will-change: transform;
   }
 
   .g3 {
@@ -162,7 +161,6 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
-    will-change: transform;
   }
 
   .g4 {
@@ -174,7 +172,6 @@ body {
     height: var(--circle-size);
 
     opacity: 1;
-    will-change: transform;
   }
 
   .g5 {
@@ -186,7 +183,6 @@ body {
     height: calc(var(--circle-size));
 
     opacity: 1;
-    will-change: transform;
   }
 
   .g6 {
@@ -216,7 +212,6 @@ body {
     left: -18%;
 
     opacity: 0.4;
-    will-change: transform;
   }
 
   .noise-overlay {
@@ -236,8 +231,7 @@ body {
 .gradient-bg[data-perf="low"] {
   .gradients-container {
     // SVG goo + big blur + blend modes are a common WebKit bottleneck.
-    filter: blur(clamp(8px, 1vw, 12px));
-    will-change: filter;
+    filter: blur(clamp(7px, 1vw, 10px));
   }
 
   .g1,
@@ -259,5 +253,37 @@ body {
 .gradient-bg[data-webkit="true"] {
   .gradients-container {
     filter: blur(clamp(8px, 1vw, 12px));
+  }
+}
+
+.gradient-bg[data-mobile="true"] {
+  .gradients-container {
+    filter: blur(12px);
+  }
+
+  .g1,
+  .g2,
+  .g3,
+  .g4,
+  .g5 {
+    opacity: 0.55;
+  }
+
+  .g6 {
+    opacity: 0.7;
+  }
+
+  .noise-overlay {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .gradient-bg {
+    --circle-size: clamp(520px, 95vmax, 920px);
+  }
+
+  .gradient-bg .gradients-container {
+    filter: blur(10px) !important;
   }
 }

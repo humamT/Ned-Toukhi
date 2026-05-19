@@ -63,9 +63,16 @@
   inset: 0;
   z-index: 99;
   pointer-events: none;
+  contain: layout paint;
 }
 
 .home-scroll__spacer {
-  height: 100vh;
   height: 100svh;
+}
+
+@media (max-width: 768px) {
+  .home-scroll__landing-stage-seam::before {
+    -webkit-backdrop-filter: blur(6px) saturate(1.08);
+    backdrop-filter: blur(6px) saturate(1.08);
+  }
 }

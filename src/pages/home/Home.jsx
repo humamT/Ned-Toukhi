@@ -97,6 +97,11 @@ export default function Home({ setHeaderVisible }) {
   }, [activeGalleryId]);
 
   const scrollToGalleryStep = (id) => {
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+    const isMobileWebKit = /AppleWebKit/i.test(ua) && /iPhone|iPad|iPod|Mobile/i.test(ua);
+    const isSmallViewport = document.documentElement.clientWidth <= 768;
+    const scrollBehavior = isMobileWebKit || isSmallViewport ? "auto" : "smooth";
+
     // Treat clicks like a controlled transition too.
     galleryAnimatingRef.current = true;
     if (galleryAnimTimeoutRef.current) window.clearTimeout(galleryAnimTimeoutRef.current);
@@ -105,7 +110,7 @@ export default function Home({ setHeaderVisible }) {
     }, 480);
 
     setActiveGalleryId(id);
-    document.getElementById(`gallery-step-${id}`)?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(`gallery-step-${id}`)?.scrollIntoView({ behavior: scrollBehavior });
   };
 
   const galleryTabs = useMemo(
@@ -279,6 +284,12 @@ export default function Home({ setHeaderVisible }) {
     </div>
   );
 
+  const eagerImgProps = {
+    loading: "eager",
+    decoding: "sync",
+    fetchPriority: "high",
+  };
+
   const lazyImgProps = {
     loading: "lazy",
     decoding: "async",
@@ -288,6 +299,7 @@ export default function Home({ setHeaderVisible }) {
   // Stage 3: observe internal steps to switch right gallery content.
   useEffect(() => {
     if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
+    if (document.documentElement.clientWidth <= 768) return;
 
     const ids = [3, 4, 5];
     const els = ids
@@ -326,6 +338,25 @@ export default function Home({ setHeaderVisible }) {
       if (galleryDebounceRef.current) window.clearTimeout(galleryDebounceRef.current);
       if (galleryAnimTimeoutRef.current) window.clearTimeout(galleryAnimTimeoutRef.current);
     };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
+
+    const sections = Array.from(document.querySelectorAll("#stage-content > .stage-section"));
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-onscreen", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.08, rootMargin: "20% 0px 20% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   /* Loader */
@@ -461,18 +492,18 @@ export default function Home({ setHeaderVisible }) {
                     <div className="stage-1__title-ar">المتجر</div>
                     <div className="stage-1__title-fr">Boutique</div>
                   </div>
-                  <img src={stickerImg} alt="Sticker" className="stage-1__sticker" />
+                  <img {...eagerImgProps} src={stickerImg} alt="Sticker" className="stage-1__sticker" />
                 </div>
 
                 <div className="stage-1__subtitle">
-                  Postcards, stickers, posters, BUY THEM ALL!, chose between a wide selection of original art
-                  projects and get them delevered.
+                  Postcards, stickers, posters, BUY THEM ALL!, choose between a wide selection of original art
+                  projects and get them delivered.
                 </div>
                 <NavLink className="shop-now" to="/store">Shop NOW!</NavLink>
               </div>
 
               <div className="stage-1__posters-section">
-                <img {...lazyImgProps} src={postersCluster} alt="Posters cluster" className="stage-1__posters" />
+                <img {...eagerImgProps} src={postersCluster} alt="Posters cluster" className="stage-1__posters" />
               </div>
             </div>
           </section>
@@ -491,15 +522,15 @@ export default function Home({ setHeaderVisible }) {
                 </div>
 
                 <div className="stage-2__subtitle">
-                  Discover 3 categories of %100 human-made art, from illustrations and logo designs to standout
+                  Discover 3 categories of 100% human-made art, from illustrations and logo designs to standout
                   featured projects.
                 </div>
 
                 <div>
-                  <img className="gallery1 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
-                  <img className="gallery2 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
-                  <img className="gallery3 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
-                  <img className="gallery4 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+                  <img {...eagerImgProps} className="gallery1 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+                  <img {...eagerImgProps} className="gallery2 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+                  <img {...eagerImgProps} className="gallery3 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
+                  <img {...eagerImgProps} className="gallery4 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                 </div>
 
                 <NavLink className="explore-now" to="/gallery">Explore NOW!</NavLink>

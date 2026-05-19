@@ -122,6 +122,7 @@ export default function Orb({ quality = "auto" }) {
     let rafId = null;
     let isVisible = true;
     let lastTs = 0;
+    let resizeRaf = null;
 
     const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
     const isWebKit =
@@ -139,6 +140,7 @@ export default function Orb({ quality = "auto" }) {
       const dprRaw = window.devicePixelRatio || 1;
       const w = container.clientWidth;
       const h = container.clientHeight;
+      if (!w || !h) return;
 
       // Clamp DPR to avoid huge fragment workloads (esp. WebKit + large windows).
       const dprCap =
@@ -157,8 +159,19 @@ export default function Orb({ quality = "auto" }) {
       );
     }
 
-    window.addEventListener("resize", resize);
-    resize();
+    const scheduleResize = () => {
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(resize);
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      scheduleResize();
+    });
+    resizeObserver.observe(container);
+
+    window.addEventListener("resize", scheduleResize, { passive: true });
+    window.addEventListener("orientationchange", scheduleResize, { passive: true });
+    scheduleResize();
 
     let start = performance.now();
 
@@ -195,7 +208,10 @@ export default function Orb({ quality = "auto" }) {
 
     return () => {
       running = false;
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", scheduleResize);
+      window.removeEventListener("orientationchange", scheduleResize);
+      resizeObserver.disconnect();
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
       if (rafId) cancelAnimationFrame(rafId);
       io.disconnect();
       if (gl?.canvas && gl.canvas.parentNode === container) {

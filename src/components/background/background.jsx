@@ -9,11 +9,22 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
     const interBubble = interactiveRef.current;
     const rootEl = rootRef.current;
     if (!rootEl) return;
+    const getViewport = () => {
+      const docEl = document.documentElement;
+      return {
+        width: docEl?.clientWidth || 1,
+        height: docEl?.clientHeight || 1,
+      };
+    };
 
     const prefersReducedMotion =
       typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isCoarsePointer =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches;
 
     const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
     const isWebKit =
@@ -25,14 +36,19 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
     const computePerfMode = () => {
       // Larger viewports = exponentially more pixels to blend/blur/filter.
       // Switch to cheaper mode when the window is "big enough" to hurt WebKit.
-      const area = window.innerWidth * window.innerHeight;
+      const viewport = getViewport();
+      const area = viewport.width * viewport.height;
       const isHugeViewport = area >= 2_000_000; // ~1080p and above
-      const low = prefersReducedMotion || isWebKit || isHugeViewport;
+      const isMobileViewport = viewport.width <= 900;
+      const low = prefersReducedMotion || isWebKit || isHugeViewport || isMobileViewport || isCoarsePointer;
       rootEl.dataset.perf = low ? "low" : "high";
+      rootEl.dataset.mobile = isMobileViewport || isCoarsePointer ? "true" : "false";
     };
 
     computePerfMode();
     rootEl.dataset.webkit = isWebKit ? "true" : "false";
+    const initialViewport = getViewport();
+    const isMobileViewport = initialViewport.width <= 900;
 
     let curX = 0;
     let curY = 0;
@@ -41,8 +57,11 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
     let rafId = null;
     let lastFrameTs = 0;
     let running = true;
+    let isInViewport = true;
 
-    const targetFps = isWebKit ? 30 : 60;
+    const targetFps = prefersReducedMotion
+      ? 24
+      : (isWebKit || isMobileViewport || isCoarsePointer ? 30 : 60);
     const minFrameMs = 1000 / targetFps;
 
     // If the component is used as a decorative layer (e.g. Footer),
@@ -60,24 +79,50 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
 
     // Bubble physics setup (use smaller viewport dimension for sizing)
     // In low-perf mode: fewer bubbles + no collisions (big CPU saver on WebKit).
-    const base = Math.min(window.innerWidth, window.innerHeight);
+    let viewport = getViewport();
+    let base = Math.min(viewport.width, viewport.height);
     const bubbleDefs = [
-      { sel: ".g1", x: window.innerWidth * 0.85, y: window.innerHeight * 0.1, vx: 1.2, vy: 0.8, r: base * 0.15 },
-      { sel: ".g2", x: window.innerWidth * 0.15, y: window.innerHeight * 0.8, vx: -0.9, vy: -1.1, r: base * 0.15 },
-      { sel: ".g3", x: window.innerWidth * 0.85, y: window.innerHeight * 0.8, vx: -1.1, vy: 0.7, r: base * 0.15 },
-      { sel: ".g4", x: window.innerWidth * 0.5, y: window.innerHeight * 0.1, vx: 0.7, vy: 1.3, r: base * 0.15 },
-      { sel: ".g5", x: window.innerWidth * 0.15, y: window.innerHeight * 0.1, vx: 1.0, vy: 1.0, r: base * 0.3 },
+      { sel: ".g1", nx: 0.85, ny: 0.1, vx: 1.2, vy: 0.8, rr: 0.15 },
+      { sel: ".g2", nx: 0.15, ny: 0.8, vx: -0.9, vy: -1.1, rr: 0.15 },
+      { sel: ".g3", nx: 0.85, ny: 0.8, vx: -1.1, vy: 0.7, rr: 0.15 },
+      { sel: ".g4", nx: 0.5, ny: 0.1, vx: 0.7, vy: 1.3, rr: 0.15 },
+      { sel: ".g5", nx: 0.15, ny: 0.1, vx: 1.0, vy: 1.0, rr: 0.3 },
     ];
 
     const bubbleCount = isLowPerf ? 2 : bubbleDefs.length;
-    const bubbles = bubbleDefs.slice(0, bubbleCount).map((b) => ({
-      el: document.querySelector(b.sel),
-      x: b.x,
-      y: b.y,
-      vx: b.vx,
-      vy: b.vy,
-      radius: b.r,
-    }));
+    const bubbles = bubbleDefs.slice(0, bubbleCount).map((b) => {
+      const radius = base * b.rr;
+      return {
+        el: rootEl.querySelector(b.sel),
+        x: viewport.width * b.nx,
+        y: viewport.height * b.ny,
+        vx: b.vx,
+        vy: b.vy,
+        radius,
+      };
+    });
+
+    const clampBubble = (bubble) => {
+      const edgeX = bubble.radius * 0.3;
+      const edgeY = bubble.radius * 0.3;
+      bubble.x = Math.max(edgeX, Math.min(viewport.width - edgeX, bubble.x));
+      bubble.y = Math.max(edgeY, Math.min(viewport.height - edgeY, bubble.y));
+    };
+
+    const resetBubbleLayout = ({ resetToDefaults = false } = {}) => {
+      viewport = getViewport();
+      base = Math.min(viewport.width, viewport.height);
+
+      bubbles.forEach((bubble, i) => {
+        const def = bubbleDefs[i];
+        bubble.radius = base * def.rr;
+        if (resetToDefaults) {
+          bubble.x = viewport.width * def.nx;
+          bubble.y = viewport.height * def.ny;
+        }
+        clampBubble(bubble);
+      });
+    };
 
     function checkCollision(b1, b2) {
       const dx = b2.x - b1.x;
@@ -121,13 +166,13 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
         bubble.y += bubble.vy;
 
         // Bounce off walls
-        if (bubble.x < bubble.radius * 0.3 || bubble.x > window.innerWidth - bubble.radius * 0.3) {
+        if (bubble.x < bubble.radius * 0.3 || bubble.x > viewport.width - bubble.radius * 0.3) {
           bubble.vx *= -1;
-          bubble.x = Math.max(bubble.radius * 0.3, Math.min(window.innerWidth - bubble.radius * 0.3, bubble.x));
+          bubble.x = Math.max(bubble.radius * 0.3, Math.min(viewport.width - bubble.radius * 0.3, bubble.x));
         }
-        if (bubble.y < bubble.radius * 0.3 || bubble.y > window.innerHeight - bubble.radius * 0.3) {
+        if (bubble.y < bubble.radius * 0.3 || bubble.y > viewport.height - bubble.radius * 0.3) {
           bubble.vy *= -1;
-          bubble.y = Math.max(bubble.radius * 0.3, Math.min(window.innerHeight - bubble.radius * 0.3, bubble.y));
+          bubble.y = Math.max(bubble.radius * 0.3, Math.min(viewport.height - bubble.radius * 0.3, bubble.y));
         }
 
         // Check collisions with other bubbles (disabled in low-perf mode)
@@ -146,7 +191,7 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
 
     function tick(ts) {
       if (!running) return;
-      if (document.hidden) {
+      if (document.hidden || !isInViewport) {
         rafId = requestAnimationFrame(tick);
         return;
       }
@@ -179,19 +224,37 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
     };
 
     let resizeRaf = null;
+    let settleRaf = null;
     const handleResize = () => {
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       resizeRaf = requestAnimationFrame(() => {
+        if (settleRaf) cancelAnimationFrame(settleRaf);
+        settleRaf = requestAnimationFrame(() => {
+          resetBubbleLayout({ resetToDefaults: false });
+          updateBubbles();
+        });
         computePerfMode();
       });
     };
 
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isInViewport = Boolean(entry?.isIntersecting);
+      },
+      { root: null, threshold: 0.01 }
+    );
+    io.observe(rootEl);
+
     // Skip global mouse tracking in low-perf mode; it wakes the main thread constantly.
-    if (!isLowPerf) {
+    if (!isLowPerf && !isCoarsePointer) {
       window.addEventListener("mousemove", handleMouseMove, { passive: true });
     }
     document.addEventListener("visibilitychange", handleVisibility, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("orientationchange", handleResize, { passive: true });
+
+    resetBubbleLayout({ resetToDefaults: true });
 
     rafId = requestAnimationFrame(tick);
 
@@ -199,9 +262,12 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
       running = false;
       if (rafId) cancelAnimationFrame(rafId);
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      if (settleRaf) cancelAnimationFrame(settleRaf);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+      io.disconnect();
     };
   }, [hideInteractive, hideG6]);
 
