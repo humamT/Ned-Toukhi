@@ -253,7 +253,10 @@
 // Mobile overrides for footer
 @media (max-width: 768px) {
   .footer-alien {
-    display: none;
+    // display: none;
+    bottom: 51%;
+    width: 80%;
+    right: 10%;
   }
 
   .stage-10__footer-content {
@@ -272,6 +275,7 @@
 
   .footer-left {
     justify-content: center;
+    align-self: flex-start;
   }
 
   .footer-right {
@@ -285,12 +289,23 @@
   }
 
   .footer-middle {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    /* gap: 3.65rem; */
+    margin-top: 0;
+    width: 100%;
   }
 
   .hr {
-    width: 70%;
-    top: 52%;
+    display: none;
+  }
+
+  .footer-ai-badge {
+    font-size: 15px;
+    line-height: 20px;
+    padding: 5px;
+  }
+
+  .footer-ai-badge img {
+    width: 15%;
   }
 }

@@ -38,8 +38,8 @@ function Footer() {
               <h3 className="footer-column-title">Gallery</h3>
               <ul className="footer-gallery-links">
                 <li><NavLink to="/gallery/illustrations">Illustrations</NavLink></li>
-                <li><NavLink to="/gallery/identities">Visual Identities</NavLink></li>
-                <li><NavLink to="/gallery/featured">Featured Projects</NavLink></li>
+                <li><NavLink to="/gallery/featured">Featured</NavLink></li>
+                <li><NavLink to="/gallery/identities">Identities</NavLink></li>
               </ul>
             </div>
 
