@@ -14,10 +14,12 @@
   --font-lg: clamp(2rem, 4vw, 4rem);
   --font-xl: clamp(3rem, 6vw, 7rem);
 
+  --app-vh: 1vh;
+
   /* s = min(1, 100vw/2560, 100vh/1440), clamped to avoid getting too tiny */
   --stage-scale: clamp(
     0.18,
-    min(1, calc(100vw / 2560px), calc(100vh / 1440px)),
+    min(1, calc(100vw / 2560px), calc((var(--app-vh, 1vh) * 100) / 1440px)),
     1
   );
 

@@ -4,6 +4,15 @@ import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 
+function setAppHeight() {
+  const vh = document.documentElement.clientHeight * 0.01;
+  document.documentElement.style.setProperty("--app-vh", `${vh}px`);
+}
+
+setAppHeight();
+window.addEventListener("resize", setAppHeight, { passive: true });
+window.addEventListener("orientationchange", setAppHeight, { passive: true });
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

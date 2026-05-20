@@ -2,8 +2,8 @@
   position: fixed;
   inset: 0;
   z-index: 0;
-  height: 100svh;
-  min-height: 100svh;
+  min-height: calc(var(--app-vh, 1vh) * 100);
+  height: auto;
   width: 100%;
   overflow: hidden;
 }
