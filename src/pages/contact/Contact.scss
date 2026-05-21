@@ -94,11 +94,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transform: translateX(-50px);
   // gap: clamp(2rem, 5vw, 5.5rem);
 }
 
 .contact-stage0__orb-panel {
-  width: 500px;
+  width: 600px;
   transform: translateX(clamp(24px, 4vw, 80px));
   // display: flex;
   // align-items: center;
@@ -159,7 +160,7 @@
 .contact-stage__title-en,
 .contact-stage__title-ar,
 .contact-stage__title-fr {
-  font-size: var(--stage-title-size);
+  font-size: calc(var(--stage-title-size) * 1.2);
   font-family: "Diodrum Arabic";
   font-weight: 500;
   color: white;
