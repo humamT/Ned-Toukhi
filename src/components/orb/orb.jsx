@@ -164,10 +164,13 @@ export default function Orb({ quality = "auto" }) {
       resizeRaf = requestAnimationFrame(resize);
     };
 
-    const resizeObserver = new ResizeObserver(() => {
-      scheduleResize();
-    });
-    resizeObserver.observe(container);
+    let resizeObserver = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        scheduleResize();
+      });
+      resizeObserver.observe(container);
+    }
 
     window.addEventListener("resize", scheduleResize, { passive: true });
     window.addEventListener("orientationchange", scheduleResize, { passive: true });
@@ -195,14 +198,17 @@ export default function Orb({ quality = "auto" }) {
       rafId = requestAnimationFrame(tick);
     };
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        isVisible = Boolean(entry?.isIntersecting);
-      },
-      { root: null, threshold: 0.05 }
-    );
-    io.observe(container);
+    let io = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          isVisible = Boolean(entry?.isIntersecting);
+        },
+        { root: null, threshold: 0.05 }
+      );
+      io.observe(container);
+    }
 
     rafId = requestAnimationFrame(tick);
 
@@ -210,10 +216,10 @@ export default function Orb({ quality = "auto" }) {
       running = false;
       window.removeEventListener("resize", scheduleResize);
       window.removeEventListener("orientationchange", scheduleResize);
-      resizeObserver.disconnect();
+      resizeObserver?.disconnect();
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       if (rafId) cancelAnimationFrame(rafId);
-      io.disconnect();
+      io?.disconnect();
       if (gl?.canvas && gl.canvas.parentNode === container) {
         container.removeChild(gl.canvas);
       }
