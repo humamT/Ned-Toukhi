@@ -46,23 +46,27 @@ export default function ContactPage() {
     event.preventDefault();
     if (!canSubmit) return;
     setStatus("Sending...");
-    const formData = new FormData(event.target);
-    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-    const response = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
-    const data = await response.json();
-    if (data.success) {
-      setStatus("Message sent successfully.");
-      event.target.reset();
-      setFormValues({
-        name: "",
-        organization: "",
-        subject: "",
-        email: "",
-        message: "",
-      });
-      return;
+    try {
+      const formData = new FormData(event.target);
+      formData.set("access_key", WEB3FORMS_ACCESS_KEY);
+      const response = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { Accept: "application/json" }, body: formData });
+      const data = await response.json();
+      if (response.ok && data.success) {
+        setStatus("Message sent successfully.");
+        event.target.reset();
+        setFormValues({
+          name: "",
+          organization: "",
+          subject: "",
+          email: "",
+          message: "",
+        });
+        return;
+      }
+      setStatus(data.message || "Something went wrong. Please try again.");
+    } catch {
+      setStatus("Network error. Please try again.");
     }
-    setStatus("Something went wrong. Please try again.");
   };
 
   return (
