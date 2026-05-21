@@ -4,6 +4,8 @@ import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.j
 import contactImage from "../../assets/PNGS+SVGs/Contact/contact.png";
 // import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
 import "./Contact.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function ContactPage() {
   const [status, setStatus] = useState("");
@@ -85,9 +87,9 @@ export default function ContactPage() {
 
                 <div className="contact-stage0__copy">
                   <div className="contact-stage__titles">
-                      <div className="contact-stage__title-en">Contact</div>
-                      <div className="contact-stage__title-ar">تواصل</div>
-                      <div className="contact-stage__title-fr">Écris-moi</div>
+                    <div className="contact-stage__title-en">Contact</div>
+                    <div className="contact-stage__title-ar">تواصل</div>
+                    <div className="contact-stage__title-fr">Écris-moi</div>
                   </div>
 
                 </div>
@@ -106,13 +108,21 @@ export default function ContactPage() {
       <section className="contact-form-section">
         <div className="contact-form-card">
           <div className="contact-form-banner">
-            <div className="contact-form-banner__plane" aria-hidden="true">✈</div>
+            <img className="contact-stage0__envelope__banner-1" src={contactImage} alt="" />
+            <img className="contact-stage0__envelope__banner-2" src={contactImage} alt="" />
+
             <div className="contact-form-banner__text">
               <p>
                 Please note that you also have the option to complete
                 a form to receive an estimate for your project.
               </p>
-              <span>Yes please</span>
+              <a href="/quotations" className="contact-form-banner__link contact-form-banner__cta">
+                Yes please
+                <div className="arrows-right">
+                  <FontAwesomeIcon icon={faCaretRight} aria-hidden="true" />
+                  <FontAwesomeIcon icon={faCaretRight} aria-hidden="true" />
+                </div>
+              </a>
             </div>
           </div>
 

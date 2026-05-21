@@ -548,17 +548,17 @@ $primary-font: 'Diodrum Arabic';
 
 .gallery-tool-icons {
   display: flex;
-  gap: 0.5rem;
+  // gap: 0.5rem;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .gallery-tool-icon img {
-  width: 28px;
-  height: 28px;
+  width: 45px;
+  height: 45px;
   object-fit: contain;
   display: block;
-  filter: invert(1);
+  // filter: invert(1);
 }
 
 .gallery-error {
