@@ -53,7 +53,7 @@
   left: 50%;
   bottom: 20%;
   transform: translateX(-50%);
-  border-radius: 50px;
+  border-radius: 30px;
   z-index: 22;
   display: flex;
   justify-content: space-evenly;
@@ -208,7 +208,7 @@
   font-family: "Diodrum Arabic";
   align-items: center;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 1.5;
   padding-left: 10px;
   padding-bottom: 10px;
@@ -305,7 +305,7 @@
   }
 
   .footer-ai-badge {
-    font-size: 15px;
+    font-size: 10px;
     line-height: 20px;
     padding: 5px;
   }

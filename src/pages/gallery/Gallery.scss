@@ -3,7 +3,7 @@ $primary-font: 'Diodrum Arabic';
 .gallery-page {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) 0;
   color: white;
   gap: 10vh;
 }
