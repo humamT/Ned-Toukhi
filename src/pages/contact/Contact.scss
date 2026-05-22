@@ -74,7 +74,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../../assets/images/Circle-empty.svg") no-repeat center;
+  background: url("../../assets/images/Circle-full.svg") no-repeat center;
   background-size: 100% 100%;
   animation: orbSpin 40s linear infinite;
   z-index: 0;
@@ -284,80 +284,6 @@
   transform: scale(1.2);
 }
 
-@media (max-width: 960px) {
-  .contact-stage__inner {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .contact-stage__titles {
-    gap: 0.75rem;
-  }
-
-  .contact-stage--0 .contact-stage__inner {
-    justify-content: center;
-    transform: translateY(clamp(-90px, -8vh, -24px));
-  }
-
-  .contact-stage0__scene {
-    min-height: auto;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .contact-stage0__content {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .contact-stage0__orb-panel {
-    flex: 0 0 auto;
-    width: 100%;
-    transform: none;
-  }
-
-  .contact-stage0__copy {
-    align-items: center;
-    text-align: center;
-  }
-
-  .contact-stage--0 .contact-stage__titles {
-    align-items: center;
-  }
-
-  .contact-stage--0 .contact-stage__description {
-    text-align: center;
-  }
-
-  .contact-stage0__copy-container {
-    transform: translateY(clamp(80px, 12vh, 160px));
-  }
-}
-
-@media (max-width: 720px) {
-  .contact-page {
-    padding: 4.5rem 1rem 2rem;
-  }
-
-  .contact-stage {
-    padding: 1.5rem;
-  }
-
-  .contact-stage__titles h1 {
-    font-size: clamp(2.5rem, 11vw, 3.8rem);
-  }
-
-  .contact-stage__description {
-    font-size: 1rem;
-  }
-
-  .contact-stage__accent {
-    width: 180px;
-    top: 1rem;
-    right: 1rem;
-  }
-}
-
 /* Temporary Web3Forms layout (based on provided reference). */
 .contact-form-section {
   position: relative;
@@ -401,7 +327,7 @@
 
 }
 
-.arrows-right .svg-inline--fa{
+.arrows-right .svg-inline--fa {
   width: 100%;
 }
 
@@ -443,7 +369,7 @@
   text-decoration: none;
 }
 
-.arrows-right{
+.arrows-right {
   display: flex;
 }
 
@@ -483,7 +409,7 @@
   margin-top: 0.1rem;
 
   button {
-    min-width: 132px;
+    min-width: 200px;
     height: 44px;
     border: 0;
     border-radius: 999px;
@@ -503,4 +429,120 @@
 .contact-web3-form__status {
   color: rgb(255 255 255 / 78%);
   font-size: 0.92rem;
+}
+
+@media (max-width: 960px) {
+  .contact-stage__inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-stage__titles {
+    gap: 0.75rem;
+  }
+
+  .contact-stage--0 .contact-stage__inner {
+    justify-content: center;
+    transform: translateY(clamp(-90px, 5vh, -10px));
+  }
+
+  .contact-stage0__scene {
+    min-height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .contact-stage0__content {
+    flex-direction: column;
+    justify-content: center;
+    transform: translate(0);
+  }
+
+  .contact-stage0__orb-panel {
+    flex: 0 0 auto;
+    width: 100%;
+    transform: none;
+  }
+
+  .contact-stage0__copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-stage--0 .contact-stage__titles {
+    align-items: center;
+  }
+
+  .contact-stage--0 .contact-stage__description {
+    text-align: center;
+    margin: 20px 0px clamp(1.25rem, 2vw, 2rem);
+    max-width: 100%;
+  }
+
+  .contact-stage0__copy-container {
+    transform: none;
+  }
+
+  .contact-stage0__orb-shell {
+    width: calc(var(--contact-orb-size) * 1.8);
+    height: calc(var(--contact-orb-size) * 1.8);
+  }
+
+  .contact-stage__title-en,
+  .contact-stage__title-ar,
+  .contact-stage__title-fr {
+    translate: 0;
+  }
+
+  .contact-stage0__envelope__banner-1 {
+    transform: translate(-70px, 110px);
+    width: 200px;
+  }
+
+  .contact-stage0__envelope__banner-2 {
+    transform: translate(90px, -60px);
+    width: 350px
+  }
+
+  .contact-form-banner__text p {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .contact-form-banner__cta {
+    font-size: 0.9rem;
+  }
+
+  .contact-web3-form textarea {
+    min-height: 160px;
+  }
+
+  .contact-web3-form__footer button {
+    min-width: 100px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 720px) {
+  .contact-page {
+    padding: 4.5rem 1rem 2rem;
+  }
+
+  .contact-stage {
+    padding: 1.5rem;
+  }
+
+  .contact-stage__titles h1 {
+    font-size: clamp(2.5rem, 11vw, 3.8rem);
+  }
+
+  .contact-stage__description {
+    font-size: 1rem;
+  }
+
+  .contact-stage__accent {
+    width: 180px;
+    top: 1rem;
+    right: 1rem;
+  }
 }

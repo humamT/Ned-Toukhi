@@ -286,6 +286,11 @@
   .footer-logo,
   .footer-logo-line {
     height: 120px;
+    translate: -5px;
+  }
+
+  .footer-logo-line {
+    transform: translate(-50px, 60px) rotate(90deg);
   }
 
   .footer-middle {

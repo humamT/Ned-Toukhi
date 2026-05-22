@@ -128,11 +128,11 @@ export default function ContactPage() {
 
           <form className="contact-web3-form" onSubmit={onSubmit}>
             <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-            <input type="text" name="name" placeholder="Name" value={formValues.name} onChange={onInputChange} required />
+            <input type="text" name="name" placeholder="Name*" value={formValues.name} onChange={onInputChange} required />
             <input type="text" name="organization" placeholder="Organization (if available)" value={formValues.organization} onChange={onInputChange} />
-            <input type="text" name="subject" placeholder="Subject" value={formValues.subject} onChange={onInputChange} required />
-            <input type="email" name="email" placeholder="Email" value={formValues.email} onChange={onInputChange} required />
-            <textarea name="message" placeholder="Message..." value={formValues.message} onChange={onInputChange} required />
+            <input type="text" name="subject" placeholder="Subject*" value={formValues.subject} onChange={onInputChange} required />
+            <input type="email" name="email" placeholder="Email*" value={formValues.email} onChange={onInputChange} required />
+            <textarea name="message" placeholder="Message...*" value={formValues.message} onChange={onInputChange} required />
             <div className="contact-web3-form__footer">
               <span className="contact-web3-form__status" role="status" aria-live="polite">{status}</span>
               <button type="submit" disabled={!canSubmit}>Send</button>
