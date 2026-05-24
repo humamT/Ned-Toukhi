@@ -195,14 +195,18 @@ export default function Orb({ quality = "auto" }) {
       rafId = requestAnimationFrame(tick);
     };
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        isVisible = Boolean(entry?.isIntersecting);
-      },
-      { root: null, threshold: 0.05 }
-    );
-    io.observe(container);
+    const supportsIntersectionObserver =
+      typeof window !== "undefined" && typeof window.IntersectionObserver === "function";
+    const io = supportsIntersectionObserver
+      ? new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            isVisible = Boolean(entry?.isIntersecting);
+          },
+          { root: null, threshold: 0.05 }
+        )
+      : null;
+    io?.observe(container);
 
     rafId = requestAnimationFrame(tick);
 
@@ -213,7 +217,7 @@ export default function Orb({ quality = "auto" }) {
       resizeObserver.disconnect();
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       if (rafId) cancelAnimationFrame(rafId);
-      io.disconnect();
+      io?.disconnect();
       if (gl?.canvas && gl.canvas.parentNode === container) {
         container.removeChild(gl.canvas);
       }
