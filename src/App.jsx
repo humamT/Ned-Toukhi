@@ -17,8 +17,24 @@ function AppContent({ headerVisible, setHeaderVisible }) {
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname, location.search]);
+    if (typeof window === "undefined") return;
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    // Some browsers/layout combinations apply the new route layout one frame later.
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+  }, [location.pathname, location.search, location.hash, location.key]);
 
   // Show header on all non-home pages by default
   useEffect(() => {

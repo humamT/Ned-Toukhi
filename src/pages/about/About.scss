@@ -1,4 +1,195 @@
 .about-page {
-  padding: 2rem;
+  padding: clamp(3.5rem, 6vh, 4rem) 1rem 2rem;
+  color: #2f4356;
+  position: relative;
+  min-height: calc(var(--app-vh, 1vh) * 100);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-stage {
+  position: relative;
+  width: 100%;
+  min-height: calc(var(--app-vh, 1vh) * 100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-stage0__orb-shell {
+  --about-orb-size: clamp(460px, 100vw, 2560px);
+  width: calc(var(--about-orb-size) * 1.1);
+  height: calc(var(--about-orb-size) * 1.1);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -70%);
+  display: grid;
+  place-items: center;
+  opacity: 0.95;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(30px) saturate(1.5);
+}
+
+.about-stage0__orb-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../../assets/images/Circle-full.svg") no-repeat center;
+  background-size: 100% 100%;
+  animation: orbSpin 40s linear infinite;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.about-stage0__orb-shell .orb-wrapper {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.about-intro {
+  position: relative;
+  isolation: isolate;
+  z-index: 2;
+    width: min(700px, 94%);
+    text-align: center;
+    pointer-events: auto;
+  transform: scale(1.2);
+}
+
+.about-intro::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(500px, 50vw, 600px);
+  height: clamp(500px, 50vw, 600px);
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: radial-gradient(circle at center, rgb(255 255 255) 0%, rgb(255 255 255 / 65%) 42%, rgba(255, 255, 255, 0) 78%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.about-logo {
+  width: clamp(140px, 28vw, 435px);
+  height: auto;
+  margin: 0 auto 0;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.16));
+}
+
+.about__name {
+  margin: 0;
+  font: 600 clamp(2rem, 4.4vw, 3rem) / 1.08 "Diodrum Arabic";
+  color: #2f4356;
+  letter-spacing: 0.01em;
+}
+
+.about__tagline {
+  margin: clamp(0.45rem, 1.2vh, 0.7rem) 0 0;
+  font: 600 clamp(1.05rem, 2.3vw, 1.9rem) / 1.25 "Diodrum Arabic";
+  color: #2f4356;
+}
+
+.about__location {
+  margin: 0;
+  font: 400 clamp(1.35rem, 2.6vw, 2.1rem) / 1.2 "Diodrum Arabic";
+  color: #2f4356;
+}
+
+.about__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(120px, 20vw, 170px);
+  height: 8px;
+  margin: clamp(1rem, 2.2vh, 1.4rem) auto 0;
+}
+
+.about__divider i {
+  flex: 1;
+  border-radius: 4px;
+}
+
+.about__divider .c1 {
+  background: #344e5d;
+  height: 4px;
+}
+
+.about__divider .c2 {
+  background: #45b29d;
+  height: 6px;
+}
+
+.about__divider .c3 {
+  background: #efca4d;
+  height: 6px;
+}
+
+.about__divider .c4 {
+  background: #f79226;
+  height: 6px;
+}
+
+.about__divider .c5 {
+  background: #df5b49;
+  height: 4px;
+}
+
+.about-stage--1{
+  flex-direction: column;
+  transform: translateY(-100px);
+}
+
+.about-text{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
   color: white;
+  font-size: var(--stage-subtitle-size);
+  transform: translateY(-50px);
+  line-height: 1.5;
+}
+
+.about-text p{
+  margin: 10px 0 10px 0;
+}
+
+.about-text :first-child {
+  font-weight: 600;
+}
+
+.personalImg-bubble-container{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.personalImg-photo{
+  display: inline;
+  position: absolute;
+}
+
+.personalImg-bubble{
+  display: inline;
+  position: absolute;
+}
+
+@media (max-width: 960px) {
+  .about-stage0__orb-shell {
+    width: calc(var(--about-orb-size) * 1.4);
+    height: calc(var(--about-orb-size) * 1.4);
+    transform: translate(-50%, -56%);
+  }
+
+  .about-intro {
+    transform: scale(1.05);
+  }
 }
