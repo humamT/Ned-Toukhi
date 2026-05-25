@@ -1229,7 +1229,7 @@ $design-height: 1440px;
 
 .Envelope {
     position: absolute;
-    width: 75%;
+    width: 65%;
     transform: translateX(-35%);
     height: auto;
     z-index: 22;
@@ -1267,7 +1267,7 @@ $design-height: 1440px;
     flex-direction: column;
     justify-content: center;
     text-shadow: $text-shadow-base;
-    transform: translateX(27%);
+    transform: translateX(25%);
     z-index: 22;
 }
 
@@ -1508,11 +1508,11 @@ $design-height: 1440px;
     aspect-ratio: 4 / 5;
 }
 
-.Envelope,
-.contactBox,
-.featuredLogos {
-    aspect-ratio: 16 / 9;
-}
+// .Envelope,
+// .contactBox,
+// .featuredLogos {
+//     aspect-ratio: 16 / 9;
+// }
 
 // ---------------------------------------------------------------------------
 // Home — scroll snap on stage sections (`home-stage-snap` on `<html>` from Home.jsx).

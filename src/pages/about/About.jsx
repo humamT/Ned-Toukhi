@@ -5,10 +5,130 @@ import aboutBox from "../../assets/PNGS+SVGs/About/about-page-box.svg";
 import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
 import galleryBubble from "../../assets/PNGS+SVGs/photo-pubble.svg";
 
+import aboutCard1 from "../../assets/PNGS+SVGs/About/p1.png";
+import aboutCard2 from "../../assets/PNGS+SVGs/About/p2.png";
+import aboutCard3 from "../../assets/PNGS+SVGs/About/p3.png";
+import aboutCard4 from "../../assets/PNGS+SVGs/About/p4.png";
+import galleryborder from "../../assets/PNGS+SVGs/gallery-border-1.svg";
+import aboutCard5 from "../../assets/PNGS+SVGs/About/1.png";
+import aboutCard6 from "../../assets/PNGS+SVGs/About/2.png";
+import aboutCard7 from "../../assets/PNGS+SVGs/About/3.png";
+import aboutCard8 from "../../assets/PNGS+SVGs/About/4.png";
+
+import featuredClientsBoxLogo from "../../assets/PNGS+SVGs/Footer/muhanad-logo.svg";
+import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-logos.svg";
+
+import contactEnvelope from "../../assets/PNGS+SVGs/Contact/contact.png";
+import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
+import emptyOrb from "../../assets/images/Circle-empty.svg";
+
 const ABOUT_NAME = "MUHANAD ALTOUKHI";
 const ABOUT_TAGLINE = "Graphic Designer, Illustration Artist";
 const ABOUT_LOCATION = "Based in Paris";
 const DIVIDER_COLORS = ["c1", "c2", "c3", "c4", "c5"];
+const EDUCATION_ITEMS = [
+  {
+    period: "2021 - 2024",
+    title: "DN-MADE (Diplôme National des Métiers d'Art et du Design)",
+    school: "DESIGN GRAPHIQUE",
+    details: "Campus Fonderie de l'Image",
+    extra: "Graduated with honorary degree, top of the class",
+    place: "Paris, France",
+  },
+  {
+    period: "2021",
+    title: 'DELF B2 "French Language"',
+    school: "Université de Caen",
+    place: "Caen, France",
+  },
+  {
+    period: "2019",
+    title: 'DELF A2 "French Language"',
+    school: "Université de Caen",
+    details: "DELF A2 certification (after 5 months in France)",
+    place: "Caen, France",
+  },
+  {
+    period: "2016-2018",
+    title: "English Literature",
+    school: "Aleppo University",
+    details: "One-year certification in France due to forcible displacement from Syria",
+    place: "Douma, Syria",
+  },
+  {
+    period: "2014",
+    title: "Scientific Baccalaureate Degree",
+    school: "The Temporary Syrian Government",
+    place: "Douma, Syria",
+  },
+  {
+    period: "2013",
+    title: "Graphic Design, Illustration",
+    school: "Self-Taught",
+    place: "Online",
+  },
+];
+
+const EXPERIENCE_ITEMS = [
+  {
+    period: "Sep 2022-Present",
+    company: "Groupe SPMI",
+    role: "Graphic Designer",
+    place: "Paris",
+  },
+  {
+    period: "Sep 2021-Feb 2022",
+    company: "Agence Inedit",
+    role: "Graphic Designer",
+    place: "Paris",
+  },
+  {
+    period: "2021-Present",
+    company: "Gulf Digital Marketing",
+    role: "Graphic Designer",
+    place: "Online",
+  },
+  {
+    period: "2018-2020",
+    company: "KACST King Abdulaziz City for Science and Technology",
+    role: "Graphic Designer",
+    place: "Online",
+  },
+  {
+    period: "2018",
+    company: "Safaraq Travel Agency",
+    role: "Graphic Designer & Video Editor",
+    place: "Istanbul, Turkey",
+  },
+  {
+    period: "2017-2019",
+    company: "Team Deviser",
+    role: "Founder, Manager & Senior Graphic Designer",
+    details:
+      "Collaboration and personal design servicing companies and high-profile clients including The Free Syrian Embassy in Qatar",
+    place: "Online",
+  },
+  {
+    period: "2016-2019",
+    company: "Ufuk International for Relief & Development",
+    role: "Senior Graphic Designer & Design department official",
+    place: "Douma, Syria & Istanbul, Turkey",
+  },
+  {
+    period: "2016-Present",
+    company: "Freelance Graphic Designer",
+    details:
+      "Serviced international companies, corporations, and individual clients, including from Syria, Saudi Arabia, Qatar, Egypt, Turkey, and France",
+    place: "Online",
+  },
+  {
+    period: "2014-2018",
+    company: "Douma Charity Health Society",
+    role: "Senior Graphic Designer",
+    details: "Instructor: Beginning Adobe Photoshop in 2017",
+    place: "Douma, Syria",
+  },
+];
 
 export default function AboutPage() {
 
@@ -39,7 +159,7 @@ export default function AboutPage() {
       </section>
 
       <section className="about-stage about-stage--1">
-        <img {...lazyImgProps} className="aboutBox" src={aboutBox} alt="about box" />
+        {/* <img {...lazyImgProps} className="aboutBox" src={aboutBox} alt="about box" /> */}
         <div className='about-text'>
           <p>Muhanad ALTOUKHI, Syrian graphic designer and illustrator.</p>
           <p>
@@ -69,7 +189,103 @@ export default function AboutPage() {
           <img {...lazyImgProps} className="personalImg-photo" src={personalImg} alt="profile img" />
           <img className="personalImg-bubble" src={galleryBubble} alt="the orb around the profile img" />
         </div>
+
+        <div className="about-cards-about-page">
+          <img {...lazyImgProps} className="about-img-about-page higher-card-about-page" src={aboutCard1} alt="" />
+          <img {...lazyImgProps} className="about-img-about-page" src={aboutCard2} alt="" />
+          <img {...lazyImgProps} className="about-img-about-page higher-card-about-page" src={aboutCard3} alt="" />
+          <img {...lazyImgProps} className="about-img-about-page" src={aboutCard4} alt="" />
+        </div>
+
       </section>
+
+      <section className="about-stage education-and-experiences">
+        <div className="ee-column education">
+          <div className="ee-title-pill">Education</div>
+          <div className="ee-title-underline" aria-hidden="true" />
+          <div className="ee-card">
+            {EDUCATION_ITEMS.map((item) => (
+              <article key={`${item.period}-${item.title}`} className="ee-item">
+                <p className="ee-period">{item.period}</p>
+                <h4 className="ee-primary">{item.title}</h4>
+                <p className="ee-secondary">{item.school}</p>
+                {item.details && <p className="ee-details">{item.details}</p>}
+                {item.extra && <p className="ee-details">{item.extra}</p>}
+                <p className="ee-place">{item.place}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="ee-column experiences">
+          <div className="ee-title-pill">Experiences</div>
+          <div className="ee-title-underline" aria-hidden="true" />
+          <div className="ee-card">
+            {EXPERIENCE_ITEMS.map((item) => (
+              <article key={`${item.period}-${item.company}`} className="ee-item">
+                <p className="ee-period">{item.period}</p>
+                <h4 className="ee-primary">{item.company}</h4>
+                {item.role && <p className="ee-secondary">{item.role}</p>}
+                {item.details && <p className="ee-details">{item.details}</p>}
+                <p className="ee-place">{item.place}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="about-stage featured-clients-about-page">
+        <div className="featured-clients-about-page-content">
+          <div className="featured-clients-about-page-MT-logo">
+            <img src={featuredClientsBoxLogo} className="featured-clients-about-page-MT-logo-img" alt="featured clients box logo" />
+            <div className="featured-clients-about-page-MT-logo-img-spotlight" aria-hidden="true"></div>
+          </div>
+          <h1>Featured Clients</h1>
+          <img src={featuredLogos} className="featured-clients-about-page-content-logos" alt="featured logos" />
+          <p className="featured-clients-about-page-content-text">
+            Text about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text
+            about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text about
+            expos and presentaions Text about expos and presentaions Text about expos and presentaions Text about expos
+            and presentaions Text about expos and presentaions Text about expos and presentaions Text about expos and
+            presentaions Text about expos and presentaions Text about expos and presentaions Text about expos and
+            presentaions Text about expos and presentaions Text about expos and presentaions Text about expos and
+            presentaions Text about expos and presentaions Text about expos and presentaions
+          </p>
+        </div>
+        <div className="about-cards-about-page">
+          <img {...lazyImgProps} className="about-img-about-page higher-card-about-page" src={aboutCard5} alt="" />
+          <img {...lazyImgProps} className="about-img-about-page" src={aboutCard6} alt="" />
+          <img {...lazyImgProps} className="about-img-about-page higher-card-about-page" src={aboutCard7} alt="" />
+          <img {...lazyImgProps} className="about-img-about-page" src={aboutCard8} alt="" />
+        </div>
+      </section>
+
+      <section className="about-stage contact-form-about-page">
+        <div className="stage-7__orb-content">
+          {/* <div className="stage-7__envelope-wrap"> */}
+          <div className="stage-orb stage-orb--s5" aria-hidden="true" />
+          <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
+          {/* </div> */}
+          <img className="Envelope-emptyOrb" src={emptyOrb} alt="" />
+
+          <img {...lazyImgProps} className="contactBox" src={contactBox} alt="contact box" />
+
+          <div className="stage-7__main-text">
+            <div className="stage-7__title">
+              <div className="stage-7__title-en">Contact</div>
+              <div className="stage-7__title-ar">تواصل</div>
+              <div className="stage-7__title-fr">Écris-moi</div>
+            </div>
+            <div className="stage-7__subtitle">
+              If you have a question, need an estimate, or
+              simply want to say hello, feel free to email
+              me and I’ll get back to you as soon as possible!
+            </div>
+            <a className="contact-btn">Contact</a>
+          </div>
+        </div>
+      </section>
+
 
     </main>
   );
