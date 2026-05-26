@@ -24,31 +24,30 @@ const Wrapper = styled.div`
 `;
 
 const ButtonBase = styled.button`
-  position: relative;
-  display: block;
-  width: 100%;
-  padding: 10px 20px;
-  border-radius: 7px;
-  border: 1px solid rgb(61, 106, 255);
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-  background: transparent;
-  color: #fff;
-  overflow: hidden;
-  box-shadow: 0 0 0 0 transparent;
-  transition: all 0.2s ease-in;
-  text-decoration: none;
-  cursor: pointer;
-  text-align: center;
-  font-family: "Diodrum Arabic";
-  line-height: 1.1;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 12px 40px;
+    border-radius: 40px;
+    border: 2px solid rgb(255 255 255);
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    background: transparent;
+    color: rgb(255 255 255);
+    overflow: hidden;
+    box-shadow: #ffffff00 0px 0px 0px 0px;
+    transition: 0.2s ease-in;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    font-family: "Diodrum Arabic";
+    line-height: 1;
 
   &:hover {
-    background: rgb(61, 106, 255);
-    box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
-    transition: all 0.2s ease-out;
+    background: #344e5d;
+    box-shadow: #efca4d 0px 0px 50px 0px;
+    transition: 0.2s ease-out;
   }
 
   &:hover::before {
@@ -58,14 +57,14 @@ const ButtonBase = styled.button`
   &::before {
     content: "";
     display: block;
-    width: 0;
+    width: 0px;
     height: 86%;
     position: absolute;
     top: 7%;
-    left: 0;
+    left: 0px;
     opacity: 0;
-    background: #fff;
-    box-shadow: 0 0 50px 30px #fff;
+    background: rgb(255 255 255);
+    box-shadow: #45b29d 0px 0px 50px 30px;
     transform: skewX(-20deg);
   }
 
