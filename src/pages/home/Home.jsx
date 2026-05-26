@@ -3,6 +3,7 @@ import "./Home.scss";
 import Loading from "../../components/loading/loading.jsx";
 import Landing from "../../components/landing/landing.jsx";
 import OrbHero from "../../components/orbHero/orbHero.jsx";
+import HomeActionButton from "../../components/ui/HomeActionButton.jsx";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 import Footer from "../../components/footer/footer.jsx";
 import "../../components/stage-content/StageContent.scss";
@@ -392,14 +393,35 @@ export default function Home({ setHeaderVisible }) {
     };
   }, []);
 
-  /* Ensure native page scrolling is enabled on Home */
+  /* Lock page scrolling while loader is visible, then restore automatically. */
   useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body;
+
+    const prevRootOverflow = root.style.overflow;
     const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "auto";
+    const prevRootTouchAction = root.style.touchAction;
+    const prevBodyTouchAction = body.style.touchAction;
+
+    if (showLoader) {
+      root.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      root.style.touchAction = "none";
+      body.style.touchAction = "none";
+    } else {
+      root.style.overflow = "";
+      body.style.overflow = "auto";
+      root.style.touchAction = "";
+      body.style.touchAction = "";
+    }
+
     return () => {
+      root.style.overflow = prevRootOverflow;
       document.body.style.overflow = prevOverflow;
+      root.style.touchAction = prevRootTouchAction;
+      body.style.touchAction = prevBodyTouchAction;
     };
-  }, []);
+  }, [showLoader]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -499,7 +521,7 @@ export default function Home({ setHeaderVisible }) {
                   Postcards, stickers, posters, BUY THEM ALL!, choose between a wide selection of original art
                   projects and get them delivered.
                 </div>
-                <NavLink className="shop-now" to="/store">Shop NOW!</NavLink>
+                <HomeActionButton className="shop-now" to="/store">Shop NOW!</HomeActionButton>
               </div>
 
               <div className="stage-1__posters-section">
@@ -533,7 +555,7 @@ export default function Home({ setHeaderVisible }) {
                   <img {...eagerImgProps} className="gallery4 gallery-orbs" src={galleryBubble} alt="Bubble with a photo inside" />
                 </div>
 
-                <NavLink className="explore-now" to="/gallery">Explore NOW!</NavLink>
+                <HomeActionButton className="explore-now" to="/gallery">Explore NOW!</HomeActionButton>
               </div>
             </div>
           </section>
@@ -552,7 +574,7 @@ export default function Home({ setHeaderVisible }) {
                         <div className="stage-3__title-fr">Galerie</div>
                       </div>
                     </div>
-                    <NavLink className="explore-now-tabs" to="/gallery">Explore NOW!</NavLink>
+                    <HomeActionButton className="explore-now-tabs" to="/gallery">Explore NOW!</HomeActionButton>
                   </div>
 
                   <div className="gallery-tabs-container">
@@ -594,7 +616,7 @@ export default function Home({ setHeaderVisible }) {
                     for your project depending on your location
                     and business in just a few clicks...
                   </div>
-                  <a className="first-click">First click ;)</a>
+                  <HomeActionButton className="first-click">First click ;)</HomeActionButton>
                 </div>
 
                 <div className="stage-6__Devis-imgs">
@@ -628,7 +650,7 @@ export default function Home({ setHeaderVisible }) {
                     simply want to say hello, feel free to email
                     me and I’ll get back to you as soon as possible!
                   </div>
-                  <a className="contact-btn">Contact</a>
+                  <HomeActionButton className="contact-btn">Contact</HomeActionButton>
                 </div>
               </div>
             </div>

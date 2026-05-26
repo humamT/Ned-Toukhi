@@ -2,7 +2,7 @@ import "./header.scss";
 import logo from "../../assets/images/Logo-icon-2.svg";
 import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import {
     faSquareFacebook,
     faInstagram,
@@ -12,17 +12,50 @@ import {
 
 function Header({ visible }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [galleryDropdownOpen, setGalleryDropdownOpen] = useState(false);
     const location = useLocation();
+    const galleryDropdownRef = useRef(null);
 
     useEffect(() => {
         setMobileMenuOpen(false);
+        setGalleryDropdownOpen(false);
     }, [location.pathname, location.search]);
 
     useEffect(() => {
-        if (!visible) setMobileMenuOpen(false);
+        if (!visible) {
+            setMobileMenuOpen(false);
+            setGalleryDropdownOpen(false);
+        }
     }, [visible]);
 
     const closeMobileMenu = () => setMobileMenuOpen(false);
+    const closeGalleryDropdown = () => setGalleryDropdownOpen(false);
+
+    useEffect(() => {
+        if (!galleryDropdownOpen) return undefined;
+
+        const onPointerDown = (event) => {
+            if (!galleryDropdownRef.current?.contains(event.target)) {
+                closeGalleryDropdown();
+            }
+        };
+
+        const onEscape = (event) => {
+            if (event.key === "Escape") {
+                closeGalleryDropdown();
+            }
+        };
+
+        document.addEventListener("mousedown", onPointerDown);
+        document.addEventListener("touchstart", onPointerDown);
+        document.addEventListener("keydown", onEscape);
+
+        return () => {
+            document.removeEventListener("mousedown", onPointerDown);
+            document.removeEventListener("touchstart", onPointerDown);
+            document.removeEventListener("keydown", onEscape);
+        };
+    }, [galleryDropdownOpen]);
 
     return (
         <header className={`site-header ${visible ? "is-visible" : ""}`}>
@@ -55,20 +88,51 @@ function Header({ visible }) {
                     </NavLink>
 
                     {/* Gallery dropdown comes in Step 2 */}
-                    <div className="nav-dropdown">
+                    <div
+                        ref={galleryDropdownRef}
+                        className={`nav-dropdown ${galleryDropdownOpen ? "is-open" : ""}`}
+                    >
                         <button
                             className="nav-link nav-link--dropdown"
                             type="button"
                             aria-haspopup="true"
-                            aria-expanded="false"
+                            aria-expanded={galleryDropdownOpen}
+                            onClick={() => setGalleryDropdownOpen((prev) => !prev)}
                         >
                             Gallery <span className="chev">▾</span>
                         </button>
 
                         <div className="dropdown-menu" role="menu">
-                            <NavLink to="/gallery/illustrations" role="menuitem" onClick={closeMobileMenu}>Illustrations</NavLink>
-                            <NavLink to="/gallery/featured" role="menuitem" onClick={closeMobileMenu}>Featured</NavLink>
-                            <NavLink to="/gallery/identities" role="menuitem" onClick={closeMobileMenu}>Identities</NavLink>
+                            <NavLink
+                                to="/gallery/illustrations"
+                                role="menuitem"
+                                onClick={() => {
+                                    closeMobileMenu();
+                                    closeGalleryDropdown();
+                                }}
+                            >
+                                Illustrations
+                            </NavLink>
+                            <NavLink
+                                to="/gallery/featured"
+                                role="menuitem"
+                                onClick={() => {
+                                    closeMobileMenu();
+                                    closeGalleryDropdown();
+                                }}
+                            >
+                                Featured
+                            </NavLink>
+                            <NavLink
+                                to="/gallery/identities"
+                                role="menuitem"
+                                onClick={() => {
+                                    closeMobileMenu();
+                                    closeGalleryDropdown();
+                                }}
+                            >
+                                Identities
+                            </NavLink>
                         </div>
                     </div>
 

@@ -1,10 +1,10 @@
 import './Store.scss';
+import ComingSoon from "../../assets/PNGS+SVGs/coming-soon.png";
 
 export default function StorePage() {
   return (
     <div className="store-page">
-      <h1>Store</h1>
-      <p>Store page content coming soon...</p>
+      <img src={ComingSoon} alt="Coming Soon" className="coming-soon-image" />
     </div>
   );
 }

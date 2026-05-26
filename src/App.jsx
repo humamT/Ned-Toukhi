@@ -1,6 +1,6 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import HomePage from "./pages/home/Home.jsx";
 import AboutPage from "./pages/about/About.jsx";
@@ -15,6 +15,7 @@ import Header from "./components/header/header.jsx";
 function AppContent({ headerVisible, setHeaderVisible }) {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const prevPathnameRef = useRef(location.pathname);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -24,6 +25,16 @@ function AppContent({ headerVisible, setHeaderVisible }) {
   }, []);
 
   useEffect(() => {
+    const prevPathname = prevPathnameRef.current;
+    const isGalleryInternalNavigation =
+      prevPathname.startsWith("/gallery") && location.pathname.startsWith("/gallery");
+
+    // Keep current scroll position when only switching gallery filters/categories.
+    if (isGalleryInternalNavigation) {
+      prevPathnameRef.current = location.pathname;
+      return;
+    }
+
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -34,6 +45,7 @@ function AppContent({ headerVisible, setHeaderVisible }) {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     });
+    prevPathnameRef.current = location.pathname;
   }, [location.pathname, location.search, location.hash, location.key]);
 
   // Show header on all non-home pages by default
