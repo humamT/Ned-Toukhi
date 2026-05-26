@@ -1,4 +1,5 @@
 import './About.scss';
+import { NavLink } from "react-router-dom";
 import Orb from '../../components/orb/orb.jsx';
 import aboutLogo from "../../assets/PNGS+SVGs/About/muhanad-logo-animate.gif";
 import aboutBox from "../../assets/PNGS+SVGs/About/about-page-box.svg";
@@ -281,7 +282,7 @@ export default function AboutPage() {
               simply want to say hello, feel free to email
               me and I’ll get back to you as soon as possible!
             </div>
-            <a className="contact-btn">Contact</a>
+            <NavLink className="contact-btn about-contact-btn" to="/contact">Contact</NavLink>
           </div>
         </div>
       </section>
