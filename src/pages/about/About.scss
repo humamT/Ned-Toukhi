@@ -431,6 +431,12 @@
   width: 50%;
 }
 
+.contact-form-about-page .about-contact-btn {
+  pointer-events: auto;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @media (max-width: 960px) {
   .about-stage0__orb-shell {
     width: calc(var(--about-orb-size) * 1.4);
