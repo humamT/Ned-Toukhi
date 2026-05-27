@@ -650,7 +650,7 @@ export default function Home({ setHeaderVisible }) {
                     simply want to say hello, feel free to email
                     me and I’ll get back to you as soon as possible!
                   </div>
-                  <HomeActionButton className="contact-btn">Contact</HomeActionButton>
+                  <HomeActionButton className="contact-btn" to="/contact">Contact</HomeActionButton>
                 </div>
               </div>
             </div>
