@@ -7,3 +7,27 @@ test("renders the header navigation", () => {
   expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
 });
 
+test("home contact call to action links to the contact page", () => {
+  window.history.pushState({}, "", "/");
+
+  const { container } = render(<App />);
+  const contactLink = container.querySelector(
+    '.stage-content__stage-7 .contact-btn a[href="/contact"]'
+  );
+
+  expect(contactLink).toBeInTheDocument();
+  expect(contactLink).toHaveTextContent("Contact");
+});
+
+test("about contact call to action links to the contact page", () => {
+  window.history.pushState({}, "", "/about");
+
+  const { container } = render(<App />);
+  const contactLink = container.querySelector(
+    '.contact-form-about-page .contact-btn a[href="/contact"]'
+  );
+
+  expect(contactLink).toBeInTheDocument();
+  expect(contactLink).toHaveTextContent("Contact");
+});
+

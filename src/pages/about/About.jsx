@@ -1,5 +1,6 @@
 import './About.scss';
 import Orb from '../../components/orb/orb.jsx';
+import HomeActionButton from "../../components/ui/HomeActionButton.jsx";
 import aboutLogo from "../../assets/PNGS+SVGs/About/muhanad-logo-animate.gif";
 import aboutBox from "../../assets/PNGS+SVGs/About/about-page-box.svg";
 import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
@@ -281,7 +282,7 @@ export default function AboutPage() {
               simply want to say hello, feel free to email
               me and I’ll get back to you as soon as possible!
             </div>
-            <a className="contact-btn">Contact</a>
+            <HomeActionButton className="contact-btn" to="/contact">Contact</HomeActionButton>
           </div>
         </div>
       </section>
