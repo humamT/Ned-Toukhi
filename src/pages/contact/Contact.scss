@@ -54,34 +54,31 @@
 }
 
 .contact-stage0__orb-shell {
-  --contact-orb-size: clamp(460px, 100vw, 2560px);
-  width: calc(var(--contact-orb-size) * 1.2);
-  height: calc(var(--contact-orb-size) * 1.2);
+  width: clamp(900px, 95vw, 1800px);
+  height: clamp(900px, 95vw, 1800px);
   position: absolute;
+  scale: 1.7;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -62%);
+  transform: translate3d(-30%, -45%, 0);
   display: grid;
   place-items: center;
-  opacity: 0.95;
+  opacity: 1;
   z-index: 0;
   pointer-events: none;
-  filter: blur(50px) saturate(1.5);
+  filter: blur(50px) saturate(1.2);
 }
 
-/* Spinning circle background (Home-like) */
-.contact-stage0__orb-shell::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("../../assets/images/Circle-full.svg") no-repeat center;
-  background-size: 100% 100%;
-  animation: orbSpin 40s linear infinite;
-  z-index: 0;
-  opacity: 0.9;
+.contact-stage0__orb-shell .orb-hero.is-landing,
+.about-stage0__orb-shell .orb-hero.is-landing {
+  --orb-frame-size: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-.contact-stage0__orb-shell .orb-wrapper {
+.contact-stage0__orb-shell .orb-hero .orb-wrapper,
+.about-stage0__orb-shell .orb-hero .orb-wrapper {
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -161,10 +158,10 @@
 .contact-stage__title-ar,
 .contact-stage__title-fr {
   font-size: calc(var(--stage-title-size) * 1.2);
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-weight: 500;
   color: white;
-  line-height: 1;
+  line-height: 1.15;
 }
 
 .contact-stage__description {
@@ -484,8 +481,9 @@
   }
 
   .contact-stage0__orb-shell {
-    width: calc(var(--contact-orb-size) * 1.8);
-    height: calc(var(--contact-orb-size) * 1.8);
+    width: clamp(420px, 120vw, 720px);
+    height: clamp(420px, 120vw, 720px);
+    transform: translate3d(-50%, -58%, 0);
   }
 
   .contact-stage__title-en,

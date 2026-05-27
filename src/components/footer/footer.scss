@@ -120,7 +120,7 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-size: 18px;
   font-weight: 600;
   color: #ffffff;
@@ -131,7 +131,7 @@
 .footer-store-links,
 .footer-gallery-links,
 .footer-info-links {
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -145,7 +145,7 @@
   }
 
   a {
-    font-family: "Diodrum Arabic";
+    font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
     font-size: 15px;
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
@@ -188,7 +188,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: #ffffff;
@@ -206,7 +206,7 @@
   background-color: #e54b3e;
   display: flex;
   color: white;
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   align-items: center;
   font-weight: 600;
   font-size: 15px;
@@ -222,12 +222,12 @@
 }
 
 .footer-copyright {
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-size: 13px;
   color: rgb(255 255 255);
   text-align: right;
   font-weight: 600;
-  line-height: 100%;
+  line-height: 1.35;
 }
 
 .footer-alien {

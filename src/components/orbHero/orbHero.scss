@@ -6,7 +6,7 @@
   --orb-fade-duration: 0.7s; // general opacity fades
   --orb-transition-duration: 0.9s; // fade-out/in between landing and scroll content
   /* Must match `.orb-wrapper` size so the background circle fits exactly */
-  --orb-frame-size: calc(1200px * var(--stage-scale));
+  --orb-frame-size: clamp(620px, 48vw, 1200px);
   --orb-bg: none; // set per mode
   --orb-bg-size: 100% 100%;
 
@@ -230,7 +230,7 @@
 
 .orb-hero-intro__name {
   margin: 0;
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-size: clamp(1.35rem, calc(50px * var(--stage-scale)), 3.125rem);
   font-weight: 600;
   line-height: 1.15;
@@ -241,7 +241,7 @@
 
 .orb-hero-intro__tagline {
   margin: clamp(0.35rem, 0.75vw, 0.625rem) 0 0;
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-size: clamp(0.95rem, calc(30px * var(--stage-scale)), 1.875rem);
   font-weight: 600;
   line-height: 1.08;
@@ -251,7 +251,7 @@
 
 .orb-hero-intro__location {
   margin: clamp(0.35rem, 0.75vw, 0.625rem) 0 0;
-  font-family: "Diodrum Arabic";
+  font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-size: clamp(0.9rem, calc(25px * var(--stage-scale)), 1.5625rem);
   font-weight: 500;
   line-height: 1.08;
@@ -302,6 +302,9 @@
 }
 
 @media (max-width: 768px) {
+  .orb-hero {
+    --orb-frame-size: clamp(360px, 92vw, 620px);
+  }
 
   .orb-hero--right,
   .orb-hero--left,

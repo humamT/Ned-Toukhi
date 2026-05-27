@@ -1,5 +1,5 @@
 import './About.scss';
-import Orb from '../../components/orb/orb.jsx';
+import OrbHero from "../../components/orbHero/orbHero.jsx";
 import aboutLogo from "../../assets/PNGS+SVGs/About/muhanad-logo-animate.gif";
 import aboutBox from "../../assets/PNGS+SVGs/About/about-page-box.svg";
 import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
@@ -142,7 +142,7 @@ export default function AboutPage() {
     <main className="about-page">
       <section className="about-stage">
         <div className="about-stage0__orb-shell" aria-hidden="true">
-          <Orb quality="auto" />
+          <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} />
         </div>
 
         <div className="about-intro">

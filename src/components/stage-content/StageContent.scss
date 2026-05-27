@@ -276,7 +276,7 @@ $design-height: 1440px;
     font-family: $primary-font;
     font-weight: 500;
     color: white;
-    line-height: 1;
+    line-height: 1.15;
 }
 
 .stage-1__title-en {
@@ -365,7 +365,7 @@ $design-height: 1440px;
     font-family: $primary-font;
     font-weight: 500;
     color: white;
-    line-height: 1;
+    line-height: 1.15;
 }
 
 .stage-2__title-ar {
@@ -511,7 +511,7 @@ $design-height: 1440px;
     font-family: $primary-font;
     font-weight: 500;
     color: white;
-    line-height: 1;
+    line-height: 1.15;
 }
 
 .gallery-sidebar .stage-3__title-fr {
@@ -1121,7 +1121,7 @@ $design-height: 1440px;
     font-family: $primary-font;
     font-weight: 500;
     color: white;
-    line-height: 1;
+    line-height: 1.15;
 }
 
 .stage-6__title-en {
@@ -1141,7 +1141,7 @@ $design-height: 1440px;
     color: white;
     margin-top: 2rem;
     line-height: 1.4;
-    font-family: "Diodrum Arabic";
+    font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
     text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
 }
 
@@ -1255,7 +1255,7 @@ $design-height: 1440px;
     font-family: $primary-font;
     font-weight: 500;
     color: white;
-    line-height: 1;
+    line-height: 1.15;
 }
 
 .stage-7__subtitle {
@@ -1267,7 +1267,7 @@ $design-height: 1440px;
     color: white;
     margin-top: 2rem;
     line-height: 1.4;
-    font-family: "Diodrum Arabic";
+    font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
     text-shadow: 0 0px 50px rgba(0, 0, 0, 0.5);
 }
 
@@ -1351,10 +1351,8 @@ $design-height: 1440px;
 
     font-size: var(--stage-subtitle-size);
     color: white;
-    // font-size: 20px;
-    font-family: "Diodrum Arabic";
+    font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
     text-wrap-style: balance;
-    line-height: 100%;
     letter-spacing: 0.4px;
     line-height: 1.4;
     z-index: 1;
@@ -1416,7 +1414,7 @@ $design-height: 1440px;
 
 .stage-9__main-text {
     position: absolute;
-    font-family: "Diodrum Arabic";
+    font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
     color: white;
     align-self: baseline;
     font-weight: 500;

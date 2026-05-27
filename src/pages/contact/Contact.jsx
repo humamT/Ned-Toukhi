@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Orb from "../../components/orb/orb.jsx";
+import OrbHero from "../../components/orbHero/orbHero.jsx";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 import contactImage from "../../assets/PNGS+SVGs/Contact/contact.png";
 // import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
@@ -77,7 +77,7 @@ export default function ContactPage() {
         <div className="contact-stage__inner">
           <div className="contact-stage0__scene">
             <div className="contact-stage0__orb-shell" aria-hidden="true">
-              <Orb quality="auto" />
+              <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} />
             </div>
             <div className="contact-stage0__copy-container">
               <div className="contact-stage0__content">

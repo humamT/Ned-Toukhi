@@ -2,7 +2,7 @@
   padding: clamp(3.5rem, 6vh, 4rem) 1rem 2rem;
   color: #2f4356;
   position: relative;
-  min-height: calc(var(--app-vh, 1vh) * 100);
+  min-height: var(--app-safe-height);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -14,43 +14,27 @@
 .about-stage {
   position: relative;
   width: 100%;
-  min-height: calc(var(--app-vh, 1vh) * 100);
+  min-height: var(--app-safe-height);
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateY(-150px);
 }
 
 .about-stage0__orb-shell {
-  --about-orb-size: clamp(460px, 100vw, 2560px);
-  width: calc(var(--about-orb-size) * 1.1);
-  height: calc(var(--about-orb-size) * 1.1);
+  width: clamp(900px, 95vw, 1800px);
+  height: clamp(900px, 95vw, 1800px);
   position: absolute;
+  scale: 1.7;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate3d(-30%, -45%, 0);
   display: grid;
   place-items: center;
-  opacity: 0.95;
+  opacity: 1;
   z-index: 0;
   pointer-events: none;
-  filter: blur(30px) saturate(1.5);
-}
-
-.about-stage0__orb-shell::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("../../assets/images/Circle-full.svg") no-repeat center;
-  background-size: 100% 100%;
-  animation: orbSpin 40s linear infinite;
-  z-index: 0;
-  opacity: 0.9;
-}
-
-.about-stage0__orb-shell .orb-wrapper {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  filter: blur(50px) saturate(1.2);
 }
 
 .about-intro {
@@ -433,9 +417,9 @@
 
 @media (max-width: 960px) {
   .about-stage0__orb-shell {
-    width: calc(var(--about-orb-size) * 1.4);
-    height: calc(var(--about-orb-size) * 1.4);
-    transform: translate(-50%, -56%);
+    width: clamp(420px, 120vw, 720px);
+    height: clamp(420px, 120vw, 720px);
+    transform: translate3d(-50%, -58%, 0);
   }
 
   .about-intro {

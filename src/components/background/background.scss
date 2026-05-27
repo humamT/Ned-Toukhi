@@ -1,7 +1,7 @@
 html,
 body {
-  font-family: 'Diodrum Arabic';
-  line-height: 1;
+  font-family: 'Diodrum Arabic', 'Noto Sans Arabic', 'Arial', sans-serif;
+  line-height: 1.35;
   margin: 0;
   padding: 0;
 }
@@ -9,7 +9,7 @@ body {
 .text-container {
   z-index: 100;
   width: 100%;
-  min-height: calc(var(--app-vh, 1vh) * 100);
+  min-height: var(--app-safe-height);
   height: auto;
   display: flex;
   position: absolute;
@@ -105,7 +105,7 @@ body {
 
 .gradient-bg {
   width: 100%;
-  min-height: calc(var(--app-vh, 1vh) * 100);
+  min-height: var(--app-safe-height);
   height: auto;
   position: relative;
   overflow: hidden;

@@ -172,6 +172,8 @@ export default function Orb({ quality = "auto" }) {
     window.addEventListener("resize", scheduleResize, { passive: true });
     window.addEventListener("orientationchange", scheduleResize, { passive: true });
     scheduleResize();
+    const delayedResize1 = window.setTimeout(scheduleResize, 250);
+    const delayedResize2 = window.setTimeout(scheduleResize, 1000);
 
     let start = performance.now();
 
@@ -211,6 +213,8 @@ export default function Orb({ quality = "auto" }) {
       window.removeEventListener("resize", scheduleResize);
       window.removeEventListener("orientationchange", scheduleResize);
       resizeObserver.disconnect();
+      window.clearTimeout(delayedResize1);
+      window.clearTimeout(delayedResize2);
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       if (rafId) cancelAnimationFrame(rafId);
       io.disconnect();
