@@ -2,8 +2,9 @@
   position: fixed;
   inset: 0;
   z-index: 0;
-  min-height: calc(var(--app-vh, 1vh) * 100);
+  min-height: var(--app-safe-height);
   height: auto;
   width: 100%;
   overflow: hidden;
+  padding-bottom: var(--safe-area-bottom);
 }

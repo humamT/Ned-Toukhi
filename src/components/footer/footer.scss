@@ -3,6 +3,7 @@
   width: 100%;
   overflow: hidden;
   z-index: 101;
+  padding-bottom: var(--safe-area-bottom);
 }
 
 /* On Home, the footer is rendered inside the stage-10 container. */

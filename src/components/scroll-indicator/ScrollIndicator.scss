@@ -1,7 +1,7 @@
 .scroll-indicator {
   position: fixed;
-  right: 3%;
-  bottom: 5%;
+  right: calc(3% + var(--safe-area-right));
+  bottom: calc(5% + var(--safe-area-bottom));
   width: 5%;
   // height: 120px;
   display: grid;

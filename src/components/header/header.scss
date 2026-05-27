@@ -15,7 +15,7 @@
     left: 0;
     right: 0;
     z-index: 110;
-    padding: 0 2%;
+    padding: var(--safe-area-top) calc(2% + var(--safe-area-right)) 0 calc(2% + var(--safe-area-left));
     /* Note: fading the whole bar can make `backdrop-filter` on `::before` look softer in Chromium
        during the transition; we still keep visibility delayed so the slide+fade finish first. */
     visibility: hidden;
@@ -411,7 +411,7 @@
 
 @media (max-width: 768px) {
     .site-header {
-        padding: 0 4%;
+        padding: var(--safe-area-top) calc(4% + var(--safe-area-right)) 0 calc(4% + var(--safe-area-left));
     }
 
     .site-header__inner {
