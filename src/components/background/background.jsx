@@ -237,14 +237,20 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
       });
     };
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        isInViewport = Boolean(entry?.isIntersecting);
-      },
-      { root: null, threshold: 0.01 }
-    );
-    io.observe(rootEl);
+    const canObserveVisibility =
+      typeof window !== "undefined" && typeof window.IntersectionObserver === "function";
+    let io = null;
+
+    if (canObserveVisibility) {
+      io = new window.IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          isInViewport = Boolean(entry?.isIntersecting);
+        },
+        { root: null, threshold: 0.01 }
+      );
+      io.observe(rootEl);
+    }
 
     // Skip global mouse tracking in low-perf mode; it wakes the main thread constantly.
     if (!isLowPerf && !isCoarsePointer) {
@@ -267,7 +273,7 @@ export default function Background({ hideInteractive = false, hideG6 = false }) 
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
-      io.disconnect();
+      io?.disconnect();
     };
   }, [hideInteractive, hideG6]);
 
