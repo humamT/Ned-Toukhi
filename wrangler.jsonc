@@ -8,18 +8,24 @@
  * In Cloudflare dashboard (Workers build): set build command to `npm run build` and
  * deploy command to `npx wrangler deploy`, root directory to the repository root.
  *
+ * Set API_UPSTREAM_ORIGIN in the dashboard if the gallery API origin changes.
  * Secrets belong in the dashboard / `wrangler secret`, not in this file.
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "ned-toukhi",
+	"main": "worker/index.js",
 	"compatibility_date": "2025-12-05",
 	"observability": {
 		"enabled": true
 	},
 	"assets": {
+		"binding": "ASSETS",
 		"directory": "./dist",
 		"html_handling": "auto-trailing-slash",
-		"not_found_handling": "single-page-application"
+		"not_found_handling": "single-page-application",
+		"run_worker_first": [
+			"/api/*"
+		]
 	}
 }
