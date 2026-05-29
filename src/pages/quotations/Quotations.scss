@@ -1,4 +1,11 @@
 .quotations-page {
-  padding: 2rem;
-  color: white;
+  display: flex;
+  color: #fff;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coming-soon-image {
+  width: 70%;
+  object-fit: cover;
 }

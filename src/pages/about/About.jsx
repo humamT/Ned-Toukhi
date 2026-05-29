@@ -21,6 +21,7 @@ import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clie
 import contactEnvelope from "../../assets/PNGS+SVGs/Contact/contact.png";
 import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
 import emptyOrb from "../../assets/images/Circle-empty.svg";
+import HomeActionButton from "../../components/ui/HomeActionButton.jsx";
 
 const ABOUT_NAME = "MUHANAD ALTOUKHI";
 const ABOUT_TAGLINE = "Graphic Designer, Illustration Artist";
@@ -281,7 +282,7 @@ export default function AboutPage() {
               simply want to say hello, feel free to email
               me and I’ll get back to you as soon as possible!
             </div>
-            <a className="contact-btn">Contact</a>
+            <HomeActionButton className="contact-btn">Contact</HomeActionButton>
           </div>
         </div>
       </section>

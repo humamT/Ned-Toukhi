@@ -219,19 +219,19 @@ export default function Home({ setHeaderVisible }) {
             <div className="gallery-illustrations">
               <div className="spotlight-yellow"></div>
               <div className="illustration1">
-                <img className="illustration-border" src={galleryborder} alt="" />
+                {/* <img className="illustration-border" src={galleryborder} alt="" /> */}
                 <img className="illustration-img" src={illustration1} alt="" />
               </div>
               <div className="illustration2">
-                <img className="illustration-border" src={galleryborder} alt="" />
+                {/* <img className="illustration-border" src={galleryborder} alt="" /> */}
                 <img className="illustration-img" src={illustration2} alt="" />
               </div>
               <div className="illustration3">
-                <img className="illustration-border" src={galleryborder} alt="" />
+                {/* <img className="illustration-border" src={galleryborder} alt="" /> */}
                 <img className="illustration-img" src={illustration3} alt="" />
               </div>
               <div className="illustration4">
-                <img className="illustration-border" src={galleryborder} alt="" />
+                {/* <img className="illustration-border" src={galleryborder} alt="" /> */}
                 <img className="illustration-img" src={illustration4} alt="" />
               </div>
             </div>
@@ -241,19 +241,19 @@ export default function Home({ setHeaderVisible }) {
             <div className="gallery-featured">
               <div className="spotlight-red"></div>
               <div className="featured1">
-                <img className="featured-border" src={galleryborder} alt="" />
+                {/* <img className="featured-border" src={galleryborder} alt="" /> */}
                 <img className="featured-img" src={featured1} alt="" />
               </div>
               <div className="featured2">
-                <img className="featured-border" src={galleryborder} alt="" />
+                {/* <img className="featured-border" src={galleryborder} alt="" /> */}
                 <img className="featured-img" src={featured2} alt="" />
               </div>
               <div className="featured3">
-                <img className="featured-border" src={galleryborder} alt="" />
+                {/* <img className="featured-border" src={galleryborder} alt="" /> */}
                 <img className="featured-img" src={featured3} alt="" />
               </div>
               <div className="featured4">
-                <img className="featured-border" src={galleryborder} alt="" />
+                {/* <img className="featured-border" src={galleryborder} alt="" /> */}
                 <img className="featured-img" src={featured4} alt="" />
               </div>
             </div>
@@ -263,19 +263,19 @@ export default function Home({ setHeaderVisible }) {
             <div className="gallery-identities">
               <div className="spotlight-teal"></div>
               <div className="identities1">
-                <img className="identities-border" src={galleryborder} alt="" />
+                {/* <img className="identities-border" src={galleryborder} alt="" /> */}
                 <img className="identities-img" src={identities1} alt="" />
               </div>
               <div className="identities2">
-                <img className="identities-border" src={galleryborder} alt="" />
+                {/* <img className="identities-border" src={galleryborder} alt="" /> */}
                 <img className="identities-img" src={identities2} alt="" />
               </div>
               <div className="identities3">
-                <img className="identities-border" src={galleryborder} alt="" />
+                {/* <img className="identities-border" src={galleryborder} alt="" /> */}
                 <img className="identities-img" src={identities3} alt="" />
               </div>
               <div className="identities4">
-                <img className="identities-border" src={galleryborder} alt="" />
+                {/* <img className="identities-border" src={galleryborder} alt="" /> */}
                 <img className="identities-img" src={identities4} alt="" />
               </div>
             </div>
@@ -681,22 +681,10 @@ export default function Home({ setHeaderVisible }) {
                 <img {...lazyImgProps} className="aboutBox" src={aboutBox} alt="about box" />
 
                 <div className="about-cards">
-                  <div className="about-card">
-                    <img className="about-border" src={galleryborder} alt="" />
-                    <img {...lazyImgProps} className="about-img" src={aboutCard1} alt="" />
-                  </div>
-                  <div className="about-card higher-card">
-                    <img className="about-border" src={galleryborder} alt="" />
-                    <img {...lazyImgProps} className="about-img" src={aboutCard2} alt="" />
-                  </div>
-                  <div className="about-card">
-                    <img className="about-border" src={galleryborder} alt="" />
-                    <img {...lazyImgProps} className="about-img" src={aboutCard3} alt="" />
-                  </div>
-                  <div className="about-card higher-card">
-                    <img className="about-border" src={galleryborder} alt="" />
-                    <img {...lazyImgProps} className="about-img" src={aboutCard4} alt="" />
-                  </div>
+                  <img {...lazyImgProps} className="about-card higher-card-about-page" src={aboutCard1} alt="" />
+                  <img {...lazyImgProps} className="about-card" src={aboutCard2} alt="" />
+                  <img {...lazyImgProps} className="about-card higher-card-about-page" src={aboutCard3} alt="" />
+                  <img {...lazyImgProps} className="about-card" src={aboutCard4} alt="" />
                 </div>
               </div>
             </div>

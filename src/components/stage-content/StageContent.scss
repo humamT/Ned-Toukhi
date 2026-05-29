@@ -927,7 +927,7 @@ $design-height: 1440px;
 .identities4 {
     position: relative;
     width: 100%;
-    aspect-ratio: 8 / 10;
+    aspect-ratio: 8 / 11;
     border-radius: $border-radius-card;
     overflow: hidden;
 }
@@ -970,6 +970,8 @@ $design-height: 1440px;
 .identities-img {
     object-fit: cover;
     z-index: 1;
+    border: solid 2px white;
+    border-radius: 50px;
 }
 
 .illustration-border,
@@ -1297,9 +1299,9 @@ $design-height: 1440px;
     pointer-events: none;
 }
 
-.stage-content__stage-8{
-    transform: scale(var(--stage-scale));
-}
+// .stage-content__stage-8{
+//     transform: scale(var(--stage-scale));
+// }
 
 .stage-8__orb-content-top {
     display: flex;
@@ -1363,13 +1365,19 @@ $design-height: 1440px;
 }
 
 .about-cards {
+    // display: flex;
+    // justify-content: center;
+    // flex-direction: row;
+    // position: absolute;
+    transform: translateY(100%);
+    // gap: 2%;
+    // z-index: 22;
     display: flex;
     justify-content: center;
     flex-direction: row;
     position: absolute;
-    transform: translateY(75%);
-    gap: 2%;
     z-index: 22;
+    width: 65%;
 }
 
 .higher-card {
@@ -1377,10 +1385,14 @@ $design-height: 1440px;
 }
 
 .about-card {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
+    // width: 20%;
+    // height: auto;
+    border: solid 2px white;
+    border-radius: 50px;
     width: 20%;
-    height: auto;
+    margin: 0 25px;
 }
 
 .about-border {
@@ -1470,7 +1482,7 @@ $design-height: 1440px;
 .featured-img,
 .identities-img,
 .about-img {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 6 / 8;
 }
 
 // .Envelope,

@@ -1,5 +1,5 @@
 .about-page {
-  padding: clamp(3.5rem, 6vh, 4rem) 1rem 2rem;
+  // padding: clamp(3.5rem, 6vh, 4rem) 1rem 2rem;
   color: #2f4356;
   position: relative;
   min-height: var(--app-safe-height);
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-150px);
+  transform: translateY(-200px);
 }
 
 .about-stage0__orb-shell {
@@ -142,10 +142,10 @@
   transform: translateY(-50px);
   line-height: 1.5;
   padding: 100px 100px 200px 100px;
-  border-radius: 25px;
+  border-radius: 50px;
   position: relative;
   background: none;
-  border: solid;
+  border: solid 2px;
 }
 
 .about-text::before {
@@ -206,15 +206,14 @@
   flex-direction: row;
   position: absolute;
   position: unset;
-  /* transform: translateY(75%); */
-  // gap: 2%;
   z-index: 22;
+  width: 65%;
 }
 
 .about-img-about-page {
-  border: solid white;
+  border: solid 2px white;
   border-radius: 50px;
-  width: 400px;
+  width: 25%;
   margin: 0 25px;
 }
 

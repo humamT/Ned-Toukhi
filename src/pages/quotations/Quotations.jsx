@@ -1,10 +1,10 @@
 import './Quotations.scss';
+import ComingSoon from "../../assets/PNGS+SVGs/coming-soon.png";
 
 export default function QuotationsPage() {
   return (
     <div className="quotations-page">
-      <h1>Quotations</h1>
-      <p>Quotations page content coming soon...</p>
+      <img src={ComingSoon} alt="Coming Soon" className="coming-soon-image" />
     </div>
   );
 }
