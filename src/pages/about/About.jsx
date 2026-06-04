@@ -16,7 +16,7 @@ import aboutCard7 from "../../assets/PNGS+SVGs/About/3.png";
 import aboutCard8 from "../../assets/PNGS+SVGs/About/4.png";
 
 import featuredClientsBoxLogo from "../../assets/PNGS+SVGs/Footer/muhanad-logo.svg";
-import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-logos.svg";
+import FeaturedClientsLogos from "../../components/featured-clients/FeaturedClientsLogos.jsx";
 
 import contactEnvelope from "../../assets/PNGS+SVGs/Contact/contact.png";
 import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
@@ -24,6 +24,7 @@ import emptyOrb from "../../assets/images/Circle-empty.svg";
 import HomeActionButton from "../../components/ui/HomeActionButton.jsx";
 
 const ABOUT_NAME = "MUHANAD ALTOUKHI";
+const ABOUT_NAME_LT_INDEX = ABOUT_NAME.indexOf("LT");
 const ABOUT_TAGLINE = "Graphic Designer, Illustration Artist";
 const ABOUT_LOCATION = "Based in Paris";
 const DIVIDER_COLORS = ["c1", "c2", "c3", "c4", "c5"];
@@ -148,7 +149,17 @@ export default function AboutPage() {
 
         <div className="about-intro">
           <img className="about-logo" src={aboutLogo} alt="Muhanad Altoukhi logo" />
-          <h1 className="about__name">{ABOUT_NAME}</h1>
+          <h1 className="about__name">
+            {ABOUT_NAME_LT_INDEX >= 0 ? (
+              <>
+                {ABOUT_NAME.slice(0, ABOUT_NAME_LT_INDEX + 1)}
+                <span className="about__name-lt-kern">{ABOUT_NAME[ABOUT_NAME_LT_INDEX + 1]}</span>
+                {ABOUT_NAME.slice(ABOUT_NAME_LT_INDEX + 2)}
+              </>
+            ) : (
+              ABOUT_NAME
+            )}
+          </h1>
           <h2 className="about__tagline">{ABOUT_TAGLINE}</h2>
           <h3 className="about__location">{ABOUT_LOCATION}</h3>
           <span className="about__divider">
@@ -242,7 +253,7 @@ export default function AboutPage() {
             <div className="featured-clients-about-page-MT-logo-img-spotlight" aria-hidden="true"></div>
           </div>
           <h1>Featured Clients</h1>
-          <img src={featuredLogos} className="featured-clients-about-page-content-logos" alt="featured logos" />
+          <FeaturedClientsLogos className="featured-clients-about-page-content-logos" alt="featured logos" />
           <p className="featured-clients-about-page-content-text">
             Text about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text
             about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text about

@@ -46,8 +46,8 @@ $design-height: 1440px;
     position: absolute;
     left: var(--orb-left);
     top: var(--orb-top);
-    width: calc(var(--orb-size) * var(--stage-scale));
-    height: calc(var(--orb-size) * var(--stage-scale));
+    width: calc(var(--orb-size) * var(--orb-scale, var(--stage-scale)));
+    height: calc(var(--orb-size) * var(--orb-scale, var(--stage-scale)));
     transform: translate3d(-50%, -50%, 0) scale(1);
     pointer-events: none;
     z-index: -1; // behind its local content (anchor must isolate)
@@ -107,15 +107,15 @@ $design-height: 1440px;
 }
 
 .stage-orb--s5 {
-    --orb-size: 275%;
-    --orb-left: 22%;
+    --orb-size: 115%;
+    --orb-left: 35%;
     --orb-opacity: 1;
 }
 
 .stage-orb--s6 {
-    --orb-size: 500%;
-    --orb-left: 80%;
-    --orb-top: 80%;
+    --orb-size: 250%;
+    --orb-left: 35%;
+    --orb-top: 30%;
     --orb-opacity: 1;
 }
 
@@ -1198,6 +1198,31 @@ $design-height: 1440px;
     transform: translate(-50%, -50%);
     z-index: 21;
     pointer-events: none;
+    border: 2px solid white;
+    padding: 25px;
+    border-radius: 50px;
+}
+
+.stage-7__orb-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 20px;
+    z-index: -2;
+    background: linear-gradient(45deg, #344e5d, #45b29d, #f79226, #fff176, #df5b49);
+    filter: blur(10px);
+    margin: 10px;
+}
+
+.stage-7__orb-content::after {
+    content: "";
+    position: absolute;
+    inset: 50px;
+    border-radius: 10px;
+    z-index: -1;
+    background: #3c8780;
+    filter: blur(20px);
 }
 
 .Envelope {
@@ -1274,7 +1299,7 @@ $design-height: 1440px;
 }
 
 .contact-btn {
-    margin-top: 1.5rem;
+    margin: 1.5rem;
     align-self: center;
     width: 25%;
     display: inline-block;
@@ -1305,12 +1330,37 @@ $design-height: 1440px;
 
 .stage-8__orb-content-top {
     display: flex;
-    width: 45%;
+    width: 50%;
     flex-direction: row;
     gap: 5%;
     align-items: flex-start;
     transform: translateY(-20%);
     z-index: 20;
+    border: solid 2px white;
+    border-radius: 50px;
+    padding: 50px 0px 150px;
+}
+
+.stage-8__orb-content-top::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 20px;
+    z-index: -2;
+    background: linear-gradient(45deg, #344e5d, #45b29d, #f79226, #fff176, #df5b49);
+    filter: blur(10px);
+    margin: 10px;
+}
+
+.stage-8__orb-content-top::after {
+    content: "";
+    position: absolute;
+    inset: 50px;
+    border-radius: 10px;
+    z-index: -1;
+    background: #3c8780;
+    filter: blur(20px);
 }
 
 .aboutBox {
@@ -1369,7 +1419,7 @@ $design-height: 1440px;
     // justify-content: center;
     // flex-direction: row;
     // position: absolute;
-    transform: translateY(100%);
+    transform: translateY(80%);
     // gap: 2%;
     // z-index: 22;
     display: flex;
@@ -2126,7 +2176,15 @@ html.home-stage-snap #stage-content .gallery-step {
     }
 
     .about-cards {
-        transform: translate(0, 300%);
+        transform: translate(0, 29npm   0%);
+        width: 60%;
+    }
+
+    .about-card {
+        border: solid 2px white;
+        border-radius: 20px;
+        width: 35%;
+        margin: 0 5px;
     }
 
     .stage-7__main-text {

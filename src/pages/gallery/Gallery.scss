@@ -23,6 +23,7 @@ $primary-font: 'Diodrum Arabic';
 
 .gallery-head-orb {
   --gallery-orb-scale: 2.5;
+  --orb-frame-size: calc(var(--orb-frame-size) * var(--gallery-orb-scale));
   translate: 0 -100%;
   filter: blur(50px); // CAREFULL MIGHT MAKE THE WEBSITE SLOWER ON MAC DEVICES
   position: absolute;
@@ -39,12 +40,11 @@ $primary-font: 'Diodrum Arabic';
 /* OrbHero's landing mode defaults to z-index: 100; override for background usage here */
 .gallery-head-orb .orb-hero.is-landing {
   z-index: 0;
-  --orb-frame-size: calc(clamp(620px, 48vw, 1200px) * var(--gallery-orb-scale));
 }
 
 .gallery-head-orb .orb-wrapper {
-  width: calc(clamp(620px, 48vw, 1200px) * var(--gallery-orb-scale));
-  height: calc(clamp(620px, 48vw, 1200px) * var(--gallery-orb-scale));
+  width: var(--orb-frame-size);
+  height: var(--orb-frame-size);
 }
 
 @media (max-width: 768px) {

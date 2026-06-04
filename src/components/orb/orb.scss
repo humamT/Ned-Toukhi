@@ -17,8 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--orb-frame-size, clamp(620px, 48vw, 1200px));
-  height: var(--orb-frame-size, clamp(620px, 48vw, 1200px));
+  width: var(--orb-frame-size, clamp(680px, min(56vw, 92vmin), 1200px));
+  height: var(--orb-frame-size, clamp(680px, min(56vw, 92vmin), 1200px));
   animation: orbBreathe 10s ease-in-out infinite;
   contain: layout paint size;
 }

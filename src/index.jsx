@@ -9,8 +9,15 @@ function setAppHeight() {
     window.visualViewport?.height ||
     window.innerHeight ||
     document.documentElement.clientHeight;
+  const layoutHeight = Math.max(
+    window.innerHeight || 0,
+    document.documentElement.clientHeight || 0,
+    window.visualViewport?.height || 0
+  );
   const vh = viewportHeight * 0.01;
+  const layoutVh = layoutHeight * 0.01;
   document.documentElement.style.setProperty("--app-vh", `${vh}px`);
+  document.documentElement.style.setProperty("--orb-layout-vh", `${layoutVh}px`);
 }
 
 setAppHeight();

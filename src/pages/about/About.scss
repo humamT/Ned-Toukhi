@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-200px);
+  transform: translateY(-15%);
 }
 
 .about-stage0__orb-shell {
@@ -74,6 +74,10 @@
   font: 600 clamp(2rem, 4.4vw, 3rem) / 1.08 "Diodrum Arabic";
   color: #2f4356;
   letter-spacing: 0.01em;
+}
+
+.about__name-lt-kern {
+  margin-left: -0.3rem;
 }
 
 .about__tagline {

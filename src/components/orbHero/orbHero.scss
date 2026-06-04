@@ -5,8 +5,7 @@
   --orb-move-delay: 0.4s; // delay orb movement to start after content fade-out
   --orb-fade-duration: 0.7s; // general opacity fades
   --orb-transition-duration: 0.9s; // fade-out/in between landing and scroll content
-  /* Must match `.orb-wrapper` size so the background circle fits exactly */
-  --orb-frame-size: clamp(620px, 48vw, 1200px);
+  /* `--orb-frame-size` from `index.scss` — must match `.orb-wrapper` */
   --orb-bg: none; // set per mode
   --orb-bg-size: 100% 100%;
 
@@ -303,7 +302,7 @@
 
 @media (max-width: 768px) {
   .orb-hero {
-    --orb-frame-size: clamp(360px, 92vw, 620px);
+    --orb-frame-size: clamp(380px, min(92vw, 94vmin), 640px);
   }
 
   .orb-hero--right,

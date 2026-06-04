@@ -50,7 +50,7 @@ import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
 import aboutBox from "../../assets/PNGS+SVGs/About/about-box.svg";
 
 import featuredClientsBox from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-box.svg";
-import featuredLogos from "../../assets/PNGS+SVGs/Featured-Clients/Featured-Clients-logos.svg";
+import FeaturedClientsLogos from "../../components/featured-clients/FeaturedClientsLogos.jsx";
 
 import galleryborder from "../../assets/PNGS+SVGs/gallery-border-1.svg";
 import scrollBar from "../../assets/PNGS+SVGs/scroll-bar.svg";
@@ -630,14 +630,10 @@ export default function Home({ setHeaderVisible }) {
           {/* Contact */}
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-7">
+              <div className="stage-orb stage-orb--s5" aria-hidden="true" />
               <div className="stage-7__orb-content">
-                {/* <div className="stage-7__envelope-wrap"> */}
-                <div className="stage-orb stage-orb--s5" aria-hidden="true" />
-                <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
-                {/* </div> */}
-                <img className="Envelope-emptyOrb" src={emptyOrb} alt="" />
 
-                <img {...lazyImgProps} className="contactBox" src={contactBox} alt="contact box" />
+                <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
 
                 <div className="stage-7__main-text">
                   <div className="stage-7__title">
@@ -660,9 +656,10 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-8">
               <div className="stage-8__orb-content">
+                <div className="stage-orb stage-orb--s6" aria-hidden="true" />
                 <div className="stage-8__orb-content-top">
                   <div className="personal-img-bubble">
-                    <div className="stage-orb stage-orb--s6" aria-hidden="true" />
+                    {/* <div className="stage-orb stage-orb--s6" aria-hidden="true" /> */}
                     <img {...lazyImgProps} className="personalImg" src={personalImg} alt="profile img" />
                     <img className="personalBubble" src={galleryBubble} alt="the orb around the profile img" />
                   </div>
@@ -678,7 +675,7 @@ export default function Home({ setHeaderVisible }) {
                   </div>
                 </div>
 
-                <img {...lazyImgProps} className="aboutBox" src={aboutBox} alt="about box" />
+                {/* <img {...lazyImgProps} className="aboutBox" src={aboutBox} alt="about box" /> */}
 
                 <div className="about-cards">
                   <img {...lazyImgProps} className="about-card higher-card-about-page" src={aboutCard1} alt="" />
@@ -697,17 +694,10 @@ export default function Home({ setHeaderVisible }) {
                 <div className="stage-orb stage-orb--s7" aria-hidden="true" />
                 <div className="stage-9__main-text">Featured Clients</div>
                 <img {...lazyImgProps} className="featuredClientsBox" src={featuredClientsBox} alt="featured Box" />
-                <img {...lazyImgProps} className="featuredLogos" src={featuredLogos} alt="featured Logos" />
+                <FeaturedClientsLogos className="featuredLogos" alt="featured Logos" imgProps={lazyImgProps} />
               </div>
             </div>
           </section>
-
-          {/* Footer */}
-          {/* <section className="stage-section stage-section--footer">
-            <div className="stage-content__stage stage-content__stage-10">
-              <Footer />
-            </div>
-          </section> */}
         </div>
       </div>
 

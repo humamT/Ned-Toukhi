@@ -21,12 +21,25 @@
   --safe-area-left: env(safe-area-inset-left, 0px);
   --app-safe-height: calc((var(--app-vh, 1vh) * 100) + var(--safe-area-bottom));
 
+  --stage-scale-w: min(1, calc(100vw / 2560px));
+  --stage-scale-h: min(1, calc((var(--app-vh, 1vh) * 100) / 1440px));
+
   /* s = min(1, 100vw/2560, 100vh/1440), clamped to avoid getting too tiny */
-  --stage-scale: clamp(
-    0.32,
-    min(1, calc(100vw / 2560px), calc((var(--app-vh, 1vh) * 100) / 1440px)),
+  --stage-scale: clamp(0.32, min(var(--stage-scale-w), var(--stage-scale-h)), 1);
+
+  /*
+   * Orb sizing: average width + height scale (not min) so MacBook / short viewports
+   * are not undersized vs Windows. Height uses layout viewport when set in index.jsx.
+   */
+  --orb-scale-h: min(1, calc((var(--orb-layout-vh, var(--app-vh, 1vh)) * 100) / 1440px));
+  --orb-scale: clamp(
+    0.48,
+    min(1, calc((var(--stage-scale-w) + var(--orb-scale-h)) / 2)),
     1
   );
+
+  /* Shared WebGL / OrbHero frame — vmin keeps size stable across aspect ratios */
+  --orb-frame-size: clamp(680px, min(56vw, 92vmin), 1200px);
 
   /* Fluid type tokens for the staged (Home) design system */
   --stage-title-size: clamp(44px, 3.4vw, 100px);
