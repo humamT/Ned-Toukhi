@@ -8,6 +8,21 @@ $primary-font: 'Diodrum Arabic';
   gap: 20vh;
 }
 
+.gallery-head-orb-img {
+  position: absolute;
+  pointer-events: none;
+  bottom: -120%;
+  height: auto;
+  object-fit: contain;
+  --orb-rotate: 0deg;
+  --orb-spin-duration: 35s;
+  animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
+  filter: blur(15px);
+  will-change: transform;
+  width: 125%;
+  max-width: 200%;
+}
+
 .gallery-head {
   display: flex;
   margin-top: 8vh;

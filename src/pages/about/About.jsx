@@ -4,6 +4,7 @@ import aboutLogo from "../../assets/PNGS+SVGs/About/muhanad-logo-animate.gif";
 import aboutBox from "../../assets/PNGS+SVGs/About/about-page-box.svg";
 import personalImg from "../../assets/PNGS+SVGs/About/p0.png";
 import galleryBubble from "../../assets/PNGS+SVGs/photo-pubble.svg";
+import CircleFull from "../../assets/images/Circle-full.svg";
 
 import aboutCard1 from "../../assets/PNGS+SVGs/About/p1.png";
 import aboutCard2 from "../../assets/PNGS+SVGs/About/p2.png";
@@ -143,9 +144,7 @@ export default function AboutPage() {
   return (
     <main className="about-page">
       <section className="about-stage">
-        <div className="about-stage0__orb-shell" aria-hidden="true">
-          <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} />
-        </div>
+      <img src={CircleFull} alt="Circle Full" className="about-stage0-orb-img" aria-hidden="true" />
 
         <div className="about-intro">
           <img className="about-logo" src={aboutLogo} alt="Muhanad Altoukhi logo" />
@@ -273,14 +272,16 @@ export default function AboutPage() {
       </section>
 
       <section className="about-stage contact-form-about-page">
+      <img src={CircleFull} alt="Circle Full" className="contact-form-about-page-orb" aria-hidden="true" />
         <div className="stage-7__orb-content">
           {/* <div className="stage-7__envelope-wrap"> */}
-          <div className="stage-orb stage-orb--s5" aria-hidden="true" />
+          {/* <div className="stage-orb stage-orb--s5" aria-hidden="true" /> */}
+          
           <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
           {/* </div> */}
-          <img className="Envelope-emptyOrb" src={emptyOrb} alt="" />
+          {/* <img className="Envelope-emptyOrb" src={emptyOrb} alt="" /> */}
 
-          <img {...lazyImgProps} className="contactBox" src={contactBox} alt="contact box" />
+          {/* <img {...lazyImgProps} className="contactBox" src={contactBox} alt="contact box" /> */}
 
           <div className="stage-7__main-text">
             <div className="stage-7__title">

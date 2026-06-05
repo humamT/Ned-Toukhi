@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./Gallery.scss";
 
 // import emptyOrb from "../../assets/images/Circle-empty.svg";
+import CircleFull from "../../assets/images/Circle-full.svg";
 
 import galleryBubble from "../../assets/PNGS+SVGs/photo-pubble.svg";
 
@@ -90,9 +91,10 @@ export default function GalleryPage() {
     <div className="gallery-page">
       <section className="gallery-head">
 
-        <div className="gallery-head-orb" aria-hidden="true">
-          <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} />
-        </div>
+        {/* <div className="gallery-head-orb" aria-hidden="true"> */}
+          {/* <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} /> */}
+          <img src={CircleFull} alt="Circle Full" className="gallery-head-orb-img" aria-hidden="true" />
+        {/* </div> */}
         {/* <img className="Envelope-emptyOrb" src={emptyOrb} alt="" /> */}
 
         <div className="gallery-head-text">

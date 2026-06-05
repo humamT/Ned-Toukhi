@@ -53,6 +53,21 @@
   place-items: center;
 }
 
+.contact-stage0-orb-img {
+  position: absolute;
+  pointer-events: none;
+  bottom: -45%;
+  height: auto;
+  object-fit: contain;
+  --orb-rotate: 0deg;
+  --orb-spin-duration: 35s;
+  animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
+  filter: blur(15px);
+  will-change: transform;
+  width: 135%;
+  max-width: 200%;
+}
+
 .contact-stage0__orb-shell {
   width: clamp(900px, 95vw, 1800px);
   height: clamp(900px, 95vw, 1800px);

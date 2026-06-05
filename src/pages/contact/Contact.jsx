@@ -2,6 +2,7 @@ import { useState } from "react";
 import OrbHero from "../../components/orbHero/orbHero.jsx";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 import contactImage from "../../assets/PNGS+SVGs/Contact/contact.png";
+import CircleFull from "../../assets/images/Circle-full.svg";
 // import contactBox from "../../assets/PNGS+SVGs/Contact/contact-box.svg";
 import "./Contact.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -74,11 +75,10 @@ export default function ContactPage() {
   return (
     <main className="contact-page">
       <section className="contact-stage contact-stage--0 is-active">
+      <img src={CircleFull} alt="Circle Full" className="contact-stage0-orb-img" aria-hidden="true" />
         <div className="contact-stage__inner">
           <div className="contact-stage0__scene">
-            <div className="contact-stage0__orb-shell" aria-hidden="true">
-              <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} />
-            </div>
+
             <div className="contact-stage0__copy-container">
               <div className="contact-stage0__content">
                 <div className="contact-stage0__orb-panel" aria-hidden="true">

@@ -8,6 +8,7 @@ import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.j
 import Footer from "../../components/footer/footer.jsx";
 import "../../components/stage-content/StageContent.scss";
 import { NavLink } from "react-router-dom";
+import CircleFull from "../../assets/images/Circle-full.svg";
 
 import stickerImg from "../../assets/images/sticker-op.png";
 import postersCluster from "../../assets/images/posters-cluster.png";
@@ -22,8 +23,6 @@ import whiteLine from "../../assets/PNGS+SVGs/Circle-white-line.svg";
 import yellowLine from "../../assets/PNGS+SVGs/yellow-line.svg";
 import redLine from "../../assets/PNGS+SVGs/red-line.svg";
 import tealLine from "../../assets/PNGS+SVGs/teal-line.svg";
-
-import emptyOrb from "../../assets/images/Circle-empty.svg";
 
 import illustration1 from "../../assets/PNGS+SVGs/Illustrations/y1.png";
 import illustration2 from "../../assets/PNGS+SVGs/Illustrations/y2.png";
@@ -507,7 +506,8 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-1">
               <div className="stage-1__orb-content">
-                <div className="stage-orb stage-orb--s1" aria-hidden="true" />
+                {/* <div className="stage-orb stage-orb--s1" aria-hidden="true" /> */}
+                <img src={CircleFull} alt="Circle Full" className="stage-orb--s1" aria-hidden="true" />
                 <div className="stage-1__main-text">
                   <div className="stage-1__title">
                     <div className="stage-1__title-en">Store</div>
@@ -533,7 +533,7 @@ export default function Home({ setHeaderVisible }) {
           {/* Gallery intro */}
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-2">
-              <div className="stage-orb stage-orb--s2" aria-hidden="true" />
+              <img src={CircleFull} alt="Circle Full" className="stage-orb--s2" aria-hidden="true" />
               <div className="stage-2__orb-content">
                 <div className="stage-2__main-text">
                   <div className="stage-2__title">
@@ -564,7 +564,7 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section stage-section--gallery">
             <div className="gallery-layout">
               <div className="gallery-sidebar">
-                <div className="stage-orb stage-orb--s3" aria-hidden="true" />
+                <img src={CircleFull} alt="Circle Full" className="stage-orb--s3" aria-hidden="true" />
                 <div className="stage-3__orb-content">
                   <div className="stage-3__orb-content-top">
                     <div className="stage-3__main-text">
@@ -604,7 +604,7 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-6">
               <div className="stage-6__orb-content">
-                <div className="stage-orb stage-orb--s4" aria-hidden="true" />
+                <img src={CircleFull} alt="Circle Full" className="stage-orb--s4" aria-hidden="true" />
                 <div className="stage-6__main-text">
                   <div className="stage-6__title">
                     <div className="stage-6__title-en">Quotations</div>
@@ -630,7 +630,7 @@ export default function Home({ setHeaderVisible }) {
           {/* Contact */}
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-7">
-              <div className="stage-orb stage-orb--s5" aria-hidden="true" />
+              <img src={CircleFull} alt="Circle Full" className="stage-orb--s5" aria-hidden="true" />
               <div className="stage-7__orb-content">
 
                 <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
@@ -656,10 +656,9 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section">
             <div className="stage-content__stage stage-content__stage-8">
               <div className="stage-8__orb-content">
-                <div className="stage-orb stage-orb--s6" aria-hidden="true" />
+                <img src={CircleFull} alt="Circle Full" className="stage-orb--s6" aria-hidden="true" />
                 <div className="stage-8__orb-content-top">
                   <div className="personal-img-bubble">
-                    {/* <div className="stage-orb stage-orb--s6" aria-hidden="true" /> */}
                     <img {...lazyImgProps} className="personalImg" src={personalImg} alt="profile img" />
                     <img className="personalBubble" src={galleryBubble} alt="the orb around the profile img" />
                   </div>
@@ -689,11 +688,11 @@ export default function Home({ setHeaderVisible }) {
 
           {/* Featured clients */}
           <section className="stage-section">
+            <img src={CircleFull} alt="Circle Full" className="stage-orb--s7" aria-hidden="true" />
             <div className="stage-content__stage stage-content__stage-9">
               <div className="stage-9__orb-content">
-                <div className="stage-orb stage-orb--s7" aria-hidden="true" />
                 <div className="stage-9__main-text">Featured Clients</div>
-                <img {...lazyImgProps} className="featuredClientsBox" src={featuredClientsBox} alt="featured Box" />
+                {/* <img {...lazyImgProps} className="featuredClientsBox" src={featuredClientsBox} alt="featured Box" /> */}
                 <FeaturedClientsLogos className="featuredLogos" alt="featured Logos" imgProps={lazyImgProps} />
               </div>
             </div>

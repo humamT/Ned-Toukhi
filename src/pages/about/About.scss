@@ -21,6 +21,21 @@
   transform: translateY(-15%);
 }
 
+.about-stage0-orb-img {
+  position: absolute;
+  pointer-events: none;
+  bottom: -30%;
+  height: auto;
+  object-fit: contain;
+  --orb-rotate: 0deg;
+  --orb-spin-duration: 35s;
+  animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
+  filter: blur(15px);
+  will-change: transform;
+  width: 130%;
+  max-width: 200%;
+}
+
 .about-stage0__orb-shell {
   width: clamp(900px, 95vw, 1800px);
   height: clamp(900px, 95vw, 1800px);
@@ -325,6 +340,21 @@
   margin: 0;
   color: rgb(226 244 248 / 88%);
   font: 500 clamp(0.9rem, 0.95vw, 1rem) / 1.25 "Diodrum Arabic";
+}
+
+.contact-form-about-page-orb {
+  position: absolute;
+  pointer-events: none;
+  height: auto;
+  right: 35%;
+  object-fit: contain;
+  --orb-rotate: 0deg;
+  --orb-spin-duration: 35s;
+  animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
+  filter: blur(15px);
+  will-change: transform;
+  width: 60%;
+  max-width: 100%;
 }
 
 .featured-clients-about-page {
