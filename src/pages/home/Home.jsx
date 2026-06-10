@@ -703,13 +703,14 @@ export default function Home({ setHeaderVisible }) {
       {showLoader && <Loading isLoading={isLoading} />}
 
       {/* Own stacking layer so orb/logo sit above `.loader` (z-index 99); gradient stays in `.landing` (0) */}
-      <div className="home-landing-orb">
+      <div className={`home-landing-orb${logoVisible ? "" : " is-offscreen"}`}>
         <OrbHero
           orbState={orbState}
           mode="landing"
           position="center"
           scale="normal"
           logoVisible={logoVisible}
+          animationPaused={!logoVisible}
           transitioning={orbTransitioning}
           isLoading={isLoading}
           introVisible={!showLoader}

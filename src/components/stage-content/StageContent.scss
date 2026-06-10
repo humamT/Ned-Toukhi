@@ -34,13 +34,14 @@ $design-height: 1440px;
 // Edit per-orb size + position by changing the CSS vars below.
 // ========================================
 
-.stage-content__stage-8{
+.stage-content__stage-8 {
     z-index: 2;
 }
 
-.stage-content__stage-9{
+.stage-content__stage-9 {
     z-index: 1;
 }
+
 .stage-orb {
     --orb-size: 900px;
     --orb-left: 50%;
@@ -125,7 +126,7 @@ $design-height: 1440px;
     @extend %stage-orb-img;
     left: -45%;
     top: 50%;
-    width: min(1000px, 95vw);
+    width: 110%;
     max-width: 1000px;
     translate: 0 -50%;
     filter: none;
@@ -264,6 +265,7 @@ $design-height: 1440px;
 /* iPhone-safe stage edge soft fade: static gradient overlays (no expensive filters). */
 @supports (-webkit-touch-callout: none) {
     @media (max-width: 768px) {
+
         .stage-content__stage-1::before,
         .stage-content__stage-1::after {
             content: "";
@@ -305,6 +307,8 @@ $design-height: 1440px;
     flex-direction: row;
     justify-content: center;
     text-shadow: $text-shadow-base;
+    margin-bottom: 2.6rem;
+    align-items: center;
 }
 
 .stage-1__title {
@@ -510,7 +514,7 @@ $design-height: 1440px;
     width: 100%;
     //--------
     position: absolute;
-    left: 25%;
+    left: 30%;
 }
 
 /* Stay position: static so .tabs-rectangles / .tabs-all-lines (position: absolute) still use .stage-3__orb-content as containing block, like when tabs were direct children. */
@@ -563,7 +567,7 @@ $design-height: 1440px;
 }
 
 .gallery-sidebar .explore-now-tabs {
-    translate: 20%;
+    translate: 26%;
     margin-top: 1.5rem;
     /* color: white; */
     /* font-size: var(--stage-button-size); */
@@ -1273,7 +1277,7 @@ $design-height: 1440px;
 
 .Envelope {
     position: absolute;
-    width: 65%;
+    width: 70%;
     transform: translateX(-35%);
     height: auto;
     z-index: 22;

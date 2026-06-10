@@ -51,6 +51,10 @@
   }
 }
 
+.orb-hero.is-animation-paused .orb-wrapper {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .orb-wrapper {
     animation: none;

@@ -30,7 +30,7 @@ const ButtonBase = styled.button`
     padding: 12px 40px;
     border-radius: 40px;
     border: 2px solid rgb(255 255 255);
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
     letter-spacing: 2px;
     background: transparent;

@@ -1,10 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 import "./orb.scss";
 import whiteOrb from "../../assets/images/white-orb.svg";
 
-export default function Orb({ quality = "auto" }) {
+export default function Orb({ quality = "auto", paused = false }) {
   const containerRef = useRef(null);
+  const pausedRef = useRef(paused);
+
+  useLayoutEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
 
   const vertex = `
     precision highp float;
@@ -182,7 +187,7 @@ export default function Orb({ quality = "auto" }) {
 
     const tick = (t) => {
       if (!running) return;
-      if (document.hidden || !isVisible) {
+      if (document.hidden || !isVisible || pausedRef.current) {
         rafId = requestAnimationFrame(tick);
         return;
       }

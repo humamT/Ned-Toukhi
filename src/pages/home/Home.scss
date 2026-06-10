@@ -65,6 +65,16 @@
   contain: layout paint;
 }
 
+/* Past landing spacer — stop compositing + CSS animations (WebGL paused via Orb `paused`) */
+.home-landing-orb.is-offscreen {
+  visibility: hidden;
+}
+
+.home-landing-orb.is-offscreen .orb-hero::before,
+.home-landing-orb.is-offscreen .orb-wrapper {
+  animation-play-state: paused !important;
+}
+
 .home-scroll__spacer {
   min-height: var(--app-safe-height);
   height: auto;

@@ -11,11 +11,13 @@ export default function OrbHero({
   transitioning = false,
   isLoading = false,
   introVisible = false,
+  animationPaused = false,
 }) {
   return (
     <div
       className={[
         "orb-hero",
+        animationPaused ? "is-animation-paused" : "",
         orbState,
         isLoading ? "is-loading" : "is-loaded",
         introVisible ? "is-intro-visible" : "",
@@ -25,7 +27,7 @@ export default function OrbHero({
         transitioning ? "is-transitioning" : "",
       ].join(" ")}
     >
-      <Orb />
+      <Orb paused={animationPaused} />
 
       <div className="orb-hero-spotlight" aria-hidden="true" />
 
