@@ -223,6 +223,7 @@ $primary-font: 'Diodrum Arabic';
   gap: 0.75rem;
   row-gap: 1.15rem;
   flex-wrap: wrap;
+  z-index: 5;
 }
 
 .gallery-filter {
@@ -262,7 +263,7 @@ $primary-font: 'Diodrum Arabic';
   position: absolute;
   left: 50%;
   bottom: -16px;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(20px);
   width: min(30rem, 90vw);
   height: 3px;
   border-radius: 999px;
@@ -283,7 +284,7 @@ $primary-font: 'Diodrum Arabic';
   position: absolute;
   left: 50%;
   bottom: -20px;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(20px);
   width: min(68%, 11rem);
   height: 10px;
   border-radius: 999px;
@@ -331,13 +332,97 @@ $primary-font: 'Diodrum Arabic';
   width: 100%;
   align-self: stretch;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-top: 2%;
   padding-right: 6%;
   padding-left: 6%;
   gap: 6%;
-  // gap: 6rem;
   justify-items: center;
   position: relative;
   border-radius: 35px;
+}
+
+.gallery-projects-banner {
+  grid-column: 1 / -1;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 9rem;
+  /* margin-top: 1.5rem; */
+  /* margin-bottom: -4%; */
+  border-radius: 18px;
+  padding: 0.8rem 1.2rem;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.gallery-projects-banner--illustrations {
+  background: linear-gradient(90deg, rgba(52, 78, 93, 1) 0%, rgba(239, 202, 77, 1) 30%, rgba(239, 202, 77, 1) 70%, rgba(247, 146, 38, 1) 100%);
+}
+
+.gallery-projects-banner--featured {
+  background: linear-gradient(90deg, rgba(52, 78, 93, 1) 0%, rgba(223, 91, 73, 1) 30%, rgba(223, 91, 73, 1) 70%, rgba(247, 146, 38, 1) 100%);
+}
+
+.gallery-projects-banner--identities {
+  background: linear-gradient(90deg, rgba(52, 78, 93, 1) 0%, rgba(69, 178, 157, 1) 20%, rgba(69, 178, 157, 1) 80%, rgba(247, 146, 38, 1) 100%);
+}
+
+.gallery-projects-banner__text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 24%;
+  text-align: center;
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  font-weight: 500;
+  width: min(600px, 100%);
+}
+
+.gallery-projects-banner__img {
+  position: absolute;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gallery-projects-banner__img--left {
+  left: 0;
+  top: 0;
+  width: 300px;
+  /* transform: translate(-85px, 100px); */
+}
+
+.gallery-projects-banner__img--right {
+  bottom: -10px;
+  right: 0;
+  width: 450px;
+  /* transform: translate(130px, 15px); */
+}
+
+.gallery-projects-banner--featured .gallery-projects-banner__img--right {
+  width: 350px;
+  top: -85px;
+}
+
+.gallery-projects-banner--featured .gallery-projects-banner__img--left {
+  width: 350px;
+  top: -135%;
+}
+
+.gallery-projects-banner--identities .gallery-projects-banner__img--left {
+  left: 5%;
+  top: -50%;
+}
+
+.gallery-projects-banner--identities .gallery-projects-banner__img--right {
+  right: -1%;
+  top: -50%;
 }
 
 /* Faded category-colored orb behind the grid (filter via data-active-filter on .gallery-projects). */
@@ -377,16 +462,12 @@ $primary-font: 'Diodrum Arabic';
   pointer-events: none;
   /* Same vignette values; absolute overlay so it reliably paints over the grid (spanning ::before was easy to miss). */
   background-image:
-    radial-gradient(
-      ellipse 98% 82% at 50% 0%,
+    radial-gradient(ellipse 98% 82% at 50% 0%,
       rgba(#45b29d, 0.42) 50%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 98% 82% at 50% 100%,
+      transparent 70%),
+    radial-gradient(ellipse 98% 82% at 50% 100%,
       rgba(#45b29d, 0.42) 50%,
-      transparent 70%
-    );
+      transparent 70%);
   /* normal so the vignette stays visible on dark backgrounds; multiply often read as “nothing changed” */
   mix-blend-mode: normal;
   border-radius: 35px;
@@ -402,27 +483,45 @@ $primary-font: 'Diodrum Arabic';
   .gallery-projects {
     grid-template-columns: 1fr;
   }
+
+  .gallery-projects-banner__img--left {
+    transform: translate(-70px, 110px);
+    width: 200px;
+  }
+
+  .gallery-projects-banner__img--right {
+    transform: translate(90px, -60px);
+    width: 350px;
+  }
+
+  .gallery-projects-banner--identities .gallery-projects-banner__img--center {
+    width: min(200px, 50vw);
+    translate: -50% -45%;
+  }
+
+  .gallery-projects-banner__text {
+    width: 100%;
+    font-size: 0.9rem;
+  }
 }
 
 .gallery-project-card {
-    position: relative;
-    z-index: 5;
-    /* background: rgba(0, 0, 0, 0.2); */
-    gap: 1rem;
-    /* border: 1px solid rgba(255, 255, 255, 0.18); */
-    /* border-radius: 18px; */
-    overflow: visible;
-    display: flex;
-    flex-direction: column;
-    transform-origin: center center;
-    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-
-    /* Perf: skip rendering work for offscreen cards. */
-    content-visibility: auto;
-    contain: layout paint style;
-    contain-intrinsic-size: 680px;
+  position: relative;
+  z-index: 5;
+  /* background: rgba(0, 0, 0, 0.2); */
+  gap: 1rem;
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+  /* border-radius: 18px; */
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  transform-origin: center center;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  /* margin-top: 5rem; */
+  margin-bottom: 6rem;
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 680px;
 }
 
 .gallery-project-card:hover {
@@ -484,12 +583,10 @@ $primary-font: 'Diodrum Arabic';
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.22s ease;
-  background: radial-gradient(
-    circle 350px at var(--glow-x) var(--glow-y),
-    rgba(255, 255, 255, 0.452) 0%,
-    rgba(255, 255, 255, 0.08) 38%,
-    transparent 62%
-  );
+  background: radial-gradient(circle 350px at var(--glow-x) var(--glow-y),
+      rgba(255, 255, 255, 0.452) 0%,
+      rgba(255, 255, 255, 0.08) 38%,
+      transparent 62%);
   mix-blend-mode: soft-light;
 }
 

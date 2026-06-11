@@ -2,6 +2,9 @@ import "./orbHero.scss";
 import Orb from "../orb/orb.jsx";
 import logo from "../../assets/images/Logo-icon-2.svg";
 
+const INTRO_NAME = "MUHANAD ALTOUKHI";
+const INTRO_NAME_LT_INDEX = INTRO_NAME.indexOf("LT");
+
 export default function OrbHero({
   orbState,
   mode = "landing",          // "landing" | "staged"
@@ -43,7 +46,17 @@ export default function OrbHero({
       )}
 
       <div className="orb-hero-intro" aria-hidden={!introVisible}>
-        <h1 className="orb-hero-intro__name">MUHANAD ALTOUKHI</h1>
+        <h1 className="orb-hero-intro__name">
+          {INTRO_NAME_LT_INDEX >= 0 ? (
+            <>
+              {INTRO_NAME.slice(0, INTRO_NAME_LT_INDEX + 1)}
+              <span className="orb-hero-intro__name-lt-kern">{INTRO_NAME[INTRO_NAME_LT_INDEX + 1]}</span>
+              {INTRO_NAME.slice(INTRO_NAME_LT_INDEX + 2)}
+            </>
+          ) : (
+            INTRO_NAME
+          )}
+        </h1>
         <h2 className="orb-hero-intro__tagline">Graphic Designer, Illustration Artist</h2>
         <h3 className="orb-hero-intro__location">Based in Paris</h3>
 

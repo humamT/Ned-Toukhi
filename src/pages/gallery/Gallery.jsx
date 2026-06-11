@@ -14,6 +14,14 @@ import OrbHero from "../../components/orbHero/orbHero.jsx";
 
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 
+import YellowLeft from "../../assets/PNGS+SVGs/Gallery/Y/space-1-left.png";
+import YellowRight from "../../assets/PNGS+SVGs/Gallery/Y/space-2-right.png";
+import RedLeft from "../../assets/PNGS+SVGs/Gallery/R/v-1-left.png";
+import RedRight from "../../assets/PNGS+SVGs/Gallery/R/v-2-right.png";
+import GreenLeft from "../../assets/PNGS+SVGs/Gallery/G/Green-banner-1-left.svg";
+import GreenRight from "../../assets/PNGS+SVGs/Gallery/G/Green-banner-2-right.svg";
+import GreenCenter from "../../assets/PNGS+SVGs/Gallery/G/Green-banner-3-center.svg";
+
 const CATEGORIES = ["Illustrations", "Featured", "Identities"];
 
 const SLUG_TO_CATEGORY = {
@@ -26,6 +34,29 @@ const CATEGORY_TO_SLUG = {
   Illustrations: "illustrations",
   Featured: "featured",
   Identities: "identities",
+};
+
+/** Per-filter banner config — swap `imageLeft` / `imageRight` when assets are ready */
+const GALLERY_BANNER_BY_CATEGORY = {
+  Illustrations: {
+    slug: "illustrations",
+    text: "View the illustrations I've been working on, from concepts to finished pieces.",
+    imageLeft: YellowLeft,
+    imageRight: YellowRight,
+  },
+  Featured: {
+    slug: "featured",
+    text: "Browse a selection of featured projects highlighting my recent work.",
+    imageLeft: RedRight,
+    imageRight: RedLeft,
+  },
+  Identities: {
+    slug: "identities",
+    text: "Take a closer look at the logos and visual identities I've developed.",
+    imageLeft: GreenLeft,
+    imageCenter: GreenCenter,
+    imageRight: GreenRight,
+  },
 };
 
 export default function GalleryPage() {
@@ -87,6 +118,8 @@ export default function GalleryPage() {
     return projects.filter((p) => p?.category === category);
   }, [projects, category]);
 
+  const activeBanner = GALLERY_BANNER_BY_CATEGORY[category] ?? GALLERY_BANNER_BY_CATEGORY[CATEGORIES[0]];
+
   return (
     <div className="gallery-page">
       <section className="gallery-head">
@@ -142,6 +175,34 @@ export default function GalleryPage() {
           className="gallery-projects"
           data-active-filter={CATEGORY_TO_SLUG[category]}
         >
+          <div
+            className={`gallery-projects-banner gallery-projects-banner--${activeBanner.slug}`}
+            key={activeBanner.slug}
+          >
+            <img
+              className="gallery-projects-banner__img gallery-projects-banner__img--left"
+              src={activeBanner.imageLeft}
+              alt=""
+              aria-hidden="true"
+            />
+            <img
+              className="gallery-projects-banner__img gallery-projects-banner__img--right"
+              src={activeBanner.imageRight}
+              alt=""
+              aria-hidden="true"
+            />
+            {activeBanner.imageCenter ? (
+              <img
+                className="gallery-projects-banner__img gallery-projects-banner__img--center"
+                src={activeBanner.imageCenter}
+                alt=""
+                aria-hidden="true"
+              />
+            ) : null}
+
+            <p className="gallery-projects-banner__text">{activeBanner.text}</p>
+          </div>
+
           {filteredProjects.map((p) => (
             <ProjectCard
               key={p.id}
