@@ -514,7 +514,7 @@ $design-height: 1440px;
     width: 100%;
     //--------
     position: absolute;
-    left: 30%;
+    left: 35%;
 }
 
 /* Stay position: static so .tabs-rectangles / .tabs-all-lines (position: absolute) still use .stage-3__orb-content as containing block, like when tabs were direct children. */
@@ -543,7 +543,7 @@ $design-height: 1440px;
     flex-direction: row;
     justify-content: flex-start;
     text-shadow: $text-shadow-base;
-    translate: 20%;
+    // translate: 20%;
 }
 
 .gallery-sidebar .stage-3__title {
@@ -567,7 +567,7 @@ $design-height: 1440px;
 }
 
 .gallery-sidebar .explore-now-tabs {
-    translate: 26%;
+    // translate: 26%;
     margin-top: 1.5rem;
     /* color: white; */
     /* font-size: var(--stage-button-size); */

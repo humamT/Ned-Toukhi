@@ -17,7 +17,16 @@ function Footer() {
     <footer className="site-footer">
       <GradientBackground hideInteractive={true} hideG6={true} />
 
+      {/* <div className="footer-content-container"> */}
+
+
       <div className="stage-10__footer-content">
+
+        <div className="footer-alien">
+          <img src={Alien} alt="" className="footer-alien-body" />
+          <img src={alienHand} alt="" className="footer-alien-hand" />
+        </div>
+
         <div className="footer-main">
           <div className="footer-left">
             <img src={footerLogo} alt="Muhamad Aldoukhi" className="footer-logo" />
@@ -25,7 +34,7 @@ function Footer() {
           </div>
 
           <div className="footer-middle">
-            <hr className="hr" />
+            {/* <hr className="hr" /> */}
             <div className="footer-column">
               <h3 className="footer-column-title">Store</h3>
               <ul className="footer-store-links">
@@ -106,10 +115,8 @@ function Footer() {
         </div>
       </div>
 
-      <div className="footer-alien">
-        <img src={Alien} alt="" className="footer-alien-body" />
-        <img src={alienHand} alt="" className="footer-alien-hand" />
-      </div>
+      {/* </div> */}
+
     </footer>
   );
 }
