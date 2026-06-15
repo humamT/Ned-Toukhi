@@ -14,10 +14,11 @@
 
 .contact-stage {
   position: relative;
+  margin-top: 6vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  /* padding: 2rem; */
   opacity: 1;
   transform: none;
   pointer-events: auto;
@@ -64,7 +65,7 @@
   animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
   filter: blur(15px);
   will-change: transform;
-  width: 135%;
+  width: 125%;
   max-width: 200%;
 }
 
@@ -158,7 +159,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 2rem;
+  gap: 16px;
 }
 
 .contact-stage__title-en {
@@ -172,7 +173,7 @@
 .contact-stage__title-en,
 .contact-stage__title-ar,
 .contact-stage__title-fr {
-  font-size: calc(var(--stage-title-size) * 1.2);
+  font-size: var(--stage-title-size);
   font-family: "Diodrum Arabic", "Noto Sans Arabic", "Arial", sans-serif;
   font-weight: 500;
   color: white;

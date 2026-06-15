@@ -110,11 +110,11 @@ $primary-font: 'Diodrum Arabic';
   right: auto;
   top: auto;
   bottom: auto;
-  width: 100px;
+  width: 140px;
   transform: translateY(12px);
 
   &.is-visible {
-    transform: translateY(0);
+    // transform: translateY(0);
   }
 }
 

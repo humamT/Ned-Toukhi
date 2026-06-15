@@ -74,7 +74,7 @@ export default function ContactPage() {
 
   return (
     <main className="contact-page">
-      <section className="contact-stage contact-stage--0 is-active">
+      <section className="contact-stage contact-stage--0">
       <img src={CircleFull} alt="Circle Full" className="contact-stage0-orb-img" aria-hidden="true" />
         <div className="contact-stage__inner">
           <div className="contact-stage0__scene">
