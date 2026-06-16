@@ -450,6 +450,10 @@
   width: 50%;
 }
 
+.contact-form-about-page {
+  min-height: var(--app-safe-height);
+}
+
 @media (max-width: 960px) {
   .about-stage0__orb-shell {
     width: clamp(420px, 120vw, 720px);
