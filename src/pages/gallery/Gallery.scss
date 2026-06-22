@@ -1,207 +1,13 @@
 $primary-font: 'Diodrum Arabic';
 
+@import "../../styles/page-head.scss";
+
 .gallery-page {
   display: flex;
   flex-direction: column;
   padding: var(--spacing-md) 0;
   color: white;
   gap: 20vh;
-}
-
-.gallery-head-orb-img {
-  position: absolute;
-  pointer-events: none;
-  bottom: -120%;
-  height: auto;
-  object-fit: contain;
-  --orb-rotate: 0deg;
-  --orb-spin-duration: 35s;
-  animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
-  filter: blur(15px);
-  will-change: transform;
-  width: 125%;
-  max-width: 200%;
-}
-
-.gallery-head {
-  display: flex;
-  margin-top: 8vh;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  /* Allow cinematic vertical bleed, but never widen the page. */
-  overflow-x: clip;
-  overflow-y: visible;
-}
-
-.gallery-head-orb {
-  --gallery-orb-scale: 2.5;
-  --orb-frame-size: calc(var(--orb-frame-size) * var(--gallery-orb-scale));
-  translate: 0 -100%;
-  filter: blur(50px); // CAREFULL MIGHT MAKE THE WEBSITE SLOWER ON MAC DEVICES
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  z-index: 0;
-  pointer-events: none;
-  /* The orb is huge + blurred; clip only horizontally to prevent sideways scroll. */
-  overflow-x: clip;
-  overflow-y: visible;
-}
-
-/* OrbHero's landing mode defaults to z-index: 100; override for background usage here */
-.gallery-head-orb .orb-hero.is-landing {
-  z-index: 0;
-}
-
-.gallery-head-orb .orb-wrapper {
-  width: var(--orb-frame-size);
-  height: var(--orb-frame-size);
-}
-
-@media (max-width: 768px) {
-  .gallery-head-orb {
-    --gallery-orb-scale: 1.2;
-  }
-}
-
-.gallery-head-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.gallery-head-title {
-  margin: 8px 0px;
-}
-
-.gallery-head-text h2 {
-  translate: 25%;
-}
-
-.gallery-head-text h3 {
-  translate: 30px 15px;
-}
-
-.gallery-head-subtitle {
-  max-width: 1015px;
-}
-
-.gallery-head-scroll-indicator {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  margin-top: 1rem;
-}
-
-/* In document flow (scrolls with page); unlike Home's fixed bottom-right indicator */
-.gallery-head-scroll-indicator .scroll-indicator {
-  position: relative;
-  inset: auto;
-  left: auto;
-  right: auto;
-  top: auto;
-  bottom: auto;
-  width: 140px;
-  transform: translateY(12px);
-
-  &.is-visible {
-    // transform: translateY(0);
-  }
-}
-
-.gallery-head-scroll-indicator .scroll-indicator__mouse {
-  width: 32%;
-}
-
-@media (max-width: 768px) {
-  .gallery-head-scroll-indicator .scroll-indicator {
-    width: 88px;
-    height: auto;
-  }
-
-  .gallery-head-scroll-indicator .scroll-indicator__text {
-    width: 110px;
-    height: 110px;
-  }
-
-  .gallery-head-scroll-indicator .scroll-indicator__mouse {
-    width: 34px;
-    height: auto;
-  }
-}
-
-// .gallery-head-bubbles {
-//   width: 72px;
-//   height: auto;
-//   margin-right: 6px;
-//   opacity: 0.95;
-// }
-
-// .gallery-head-bubbles img {
-//   width: 15%;
-// }
-
-.gallery-head-bubbles img.gallery1 {
-  translate: -220% -210%;
-  width: 200px;
-}
-
-.gallery-head-bubbles img.gallery2 {
-  translate: 350% -180%;
-  width: 200px;
-}
-
-.gallery-head-bubbles img.gallery3 {
-  translate: 80% -65%;
-  width: 350px;
-}
-
-.gallery-head-bubbles img.gallery4 {
-  translate: -250% -140%;
-  width: 380px;
-}
-
-.gallery-head-bubbles img.gallery5 {
-  translate: 115% -230%;
-  width: 250px;
-  background-image: url(/src/assets/PNGS+SVGs/3.png);
-  animation: float 7s ease-in-out infinite;
-}
-
-.gallery-head-bubbles img.gallery6 {
-  translate: -280% -70%;
-  width: 230px;
-  background-image: url(/src/assets/PNGS+SVGs/6.png);
-  animation: float 3s ease-in-out infinite;
-}
-
-.gallery-head-bubbles {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  align-self: flex-end;
-}
-
-.gallery-head-bubbles img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: auto;
-  max-width: min(92vw, 420px);
-}
-
-.gallery-head-scroll-indicator {
-  display: flex;
 }
 
 .gallery-content {
@@ -211,7 +17,7 @@ $primary-font: 'Diodrum Arabic';
   gap: 1rem;
   align-items: center;
   align-self: center;
-  width: 90%;
+  width: 80%;
 }
 
 .gallery-filters {
@@ -332,11 +138,11 @@ $primary-font: 'Diodrum Arabic';
   width: 100%;
   align-self: stretch;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding-top: 75px;
+  padding-top: 2rem;
   padding-bottom: 75px;
-  padding-right: 140px;
-  padding-left: 140px;
-  gap: 75px;
+  padding-right: 100px;
+  padding-left: 100px;
+  gap: 2rem;
   justify-items: center;
   position: relative;
   border-radius: 35px;

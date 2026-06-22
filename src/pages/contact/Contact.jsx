@@ -1,5 +1,4 @@
 import { useState } from "react";
-import OrbHero from "../../components/orbHero/orbHero.jsx";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 import contactImage from "../../assets/PNGS+SVGs/Contact/contact.png";
 import CircleFull from "../../assets/images/Circle-full.svg";
@@ -75,10 +74,10 @@ export default function ContactPage() {
   return (
     <main className="contact-page">
       <section className="contact-stage contact-stage--0">
-      <img src={CircleFull} alt="Circle Full" className="contact-stage0-orb-img" aria-hidden="true" />
+        <img src={CircleFull} alt="Circle Full" className="contact-stage0-orb-img" aria-hidden="true" />
+
         <div className="contact-stage__inner">
           <div className="contact-stage0__scene">
-
             <div className="contact-stage0__copy-container">
               <div className="contact-stage0__content">
                 <div className="contact-stage0__orb-panel" aria-hidden="true">
@@ -91,18 +90,17 @@ export default function ContactPage() {
                     <div className="contact-stage__title-ar">تواصل</div>
                     <div className="contact-stage__title-fr">Écris-moi</div>
                   </div>
-
                 </div>
               </div>
+
               <p className="contact-stage__description">{description}</p>
+
               <div className="contact-stage__scroll-hint" aria-hidden="true">
                 <ScrollIndicator visible={true} />
               </div>
             </div>
           </div>
         </div>
-
-        {/* <img className="contact-stage__accent" src={contactBox} alt="Accent" /> */}
       </section>
 
       <section className="contact-form-section">
