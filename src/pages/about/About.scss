@@ -72,7 +72,7 @@
   height: clamp(500px, 50vw, 600px);
   transform: translate(-50%, -50%);
   border-radius: 999px;
-  background: radial-gradient(circle at center, rgb(255 255 255) 0%, rgb(255 255 255 / 65%) 42%, rgba(255, 255, 255, 0) 78%);
+  background: radial-gradient(circle at center, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80%);
   filter: blur(50px);
   pointer-events: none;
   z-index: -1;
