@@ -122,11 +122,14 @@ export default function GalleryPage() {
 
   return (
     <div className="gallery-page">
+      <div className="gallery-head-orb-img-container">
+        <img src={CircleFull} alt="Circle Full" className="gallery-head-orb-img" aria-hidden="true" />
+      </div>
       <section className="gallery-head">
 
         {/* <div className="gallery-head-orb" aria-hidden="true"> */}
-          {/* <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} /> */}
-          <img src={CircleFull} alt="Circle Full" className="gallery-head-orb-img" aria-hidden="true" />
+        {/* <OrbHero orbState="idle" mode="landing" position="center" scale="normal" logoVisible={false} /> */}
+        {/* <img src={CircleFull} alt="Circle Full" className="gallery-head-orb-img" aria-hidden="true" /> */}
         {/* </div> */}
         {/* <img className="Envelope-emptyOrb" src={emptyOrb} alt="" /> */}
 
