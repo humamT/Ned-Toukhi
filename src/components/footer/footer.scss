@@ -261,8 +261,8 @@
 
   position: absolute;
   /* left: 50%; */
-  /* bottom: 48%; */
-  transform: translateY(-38%);
+  bottom: 100%;
+  /* transform: translateY(-38%); */
   width: clamp(220px, 30vw, 520px);
   pointer-events: none;
   z-index: 23;
@@ -286,7 +286,10 @@
 
 .footer-alien-hand {
   position: absolute;
-  inset: 0;
+  /* inset: 0; */
+  width: 20%;
+  right: 10%;
+  bottom: -9.5%;
 }
 
 // Mobile overrides for footer

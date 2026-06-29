@@ -1,7 +1,7 @@
 .contact-page {
   position: relative;
   min-height: 100vh;
-  padding: 6rem 1.5rem 3rem;
+  padding: 6rem 0rem;
   overflow: hidden;
   color: #ffffff;
 }
@@ -67,28 +67,46 @@
   // will-change: transform;
   // width: 125%;
   // max-width: 200%;
-  position: absolute;
-  pointer-events: none;
-  // bottom: 35%;
-  height: auto;
-  object-fit: contain;
+
+
+  // position: absolute;
+  // pointer-events: none;
+  // // bottom: 35%;
+  // height: auto;
+  // object-fit: contain;
   --orb-rotate: 0deg;
   --orb-spin-duration: 35s;
   animation: stageOrbSpin var(--orb-spin-duration) linear infinite;
-  filter: blur(15px);
-  will-change: transform;
+  // filter: blur(15px);
+  // will-change: transform;
+  // width: 100%;
+  // /* max-width: 200%; */
+  // scale: 1.2;
+
+  display: block;
   width: 100%;
-  /* max-width: 200%; */
-  scale: 1.2;
+  height: auto;
+  filter: blur(15px);
+  // animation: stageOrbSpin 35s linear infinite;
+  will-change: transform;
 }
 
 .contact-stage0-orb-img-container {
+  // position: absolute;
+  // /* bottom: 35%; */
+  // /* left: 50%; */
+  // transform: translateY(-1400px);
+  // width: 100%;
+  // height: auto;
+
   position: absolute;
-  /* bottom: 35%; */
-  /* left: 50%; */
-  transform: translateY(-1400px);
-  width: 100%;
-  height: auto;
+  left: 50%;
+  top: 50%;
+  width: 120%;
+  /* max-width: 1800px; */
+  transform: translate(-50%, -70%);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .contact-stage0__orb-shell {
@@ -124,18 +142,19 @@
 
 .contact-stage0__content {
   position: relative;
+  margin-top: 8vh;
   z-index: 2;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transform: translateX(-50px);
+  transform: translateX(-35px);
   // gap: clamp(2rem, 5vw, 5.5rem);
 }
 
 .contact-stage0__orb-panel {
-  width: 600px;
-  transform: translateX(clamp(24px, 4vw, 80px));
+  width: 30%;
+  transform: translateX(clamp(180px, 12vw, 210px));
   // display: flex;
   // align-items: center;
   // justify-content: center;
@@ -147,7 +166,7 @@
   z-index: 3;
   filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
   pointer-events: none;
-  scale: 0.8;
+  // scale: 0.8;
 }
 
 .contact-stage0__copy {
@@ -155,7 +174,7 @@
   min-width: 320px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .contact-stage0__copy-container {
@@ -184,13 +203,13 @@
   gap: 16px;
 }
 
-.contact-stage__title-en {
-  translate: -35px;
-}
+// .contact-stage__title-en {
+//   translate: -35px;
+// }
 
-.contact-stage__title-fr {
-  translate: -15px;
-}
+// .contact-stage__title-fr {
+//   translate: -15px;
+// }
 
 .contact-stage__title-en,
 .contact-stage__title-ar,
@@ -323,14 +342,21 @@
 .contact-form-section {
   position: relative;
   z-index: 2;
-  width: min(1400px, 95%);
+  width: 100%;
   margin: 2rem auto 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .contact-form-card {
-  border-radius: 35px;
-  padding: clamp(1.25rem, 2.2vw, 2rem);
+  border-radius: 30px;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  padding-right: 100px;
+  padding-left: 100px;
   background-image: radial-gradient(ellipse 98% 82% at 50% 0%, #ffffff14 50%, transparent 70%), radial-gradient(ellipse 98% 82% at 50% 100%, #ffffff14 50%, transparent 70%);
+  width: 80%;
 }
 
 .contact-form-banner {
@@ -338,7 +364,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 84px;
+  height: 110px;
   border-radius: 18px;
   padding: 0.8rem 1.2rem;
   background: linear-gradient(90deg, #efca4d 0%, #df5b49 40%, #344e5d 100%);
@@ -409,9 +435,9 @@
 }
 
 .contact-web3-form {
-  margin-top: 1.3rem;
+  margin-top: 2rem;
   display: grid;
-  gap: 0.65rem;
+  gap: 1rem;
 
   input,
   textarea {

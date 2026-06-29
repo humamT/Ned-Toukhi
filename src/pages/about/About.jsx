@@ -144,7 +144,10 @@ export default function AboutPage() {
   return (
     <main className="about-page">
       <section className="about-stage">
-      <img src={CircleFull} alt="Circle Full" className="about-stage0-orb-img" aria-hidden="true" />
+      {/* <img src={CircleFull} alt="Circle Full" className="about-stage0-orb-img" aria-hidden="true" /> */}
+      <div className="about-stage0-orb-img-container">
+          <img src={CircleFull} alt="Circle Full" className="contact-stage0-orb-img" aria-hidden="true" />
+        </div>
 
         <div className="about-intro">
           <img className="about-logo" src={aboutLogo} alt="Muhanad Altoukhi logo" />
@@ -251,7 +254,8 @@ export default function AboutPage() {
             <img src={featuredClientsBoxLogo} className="featured-clients-about-page-MT-logo-img" alt="featured clients box logo" />
             <div className="featured-clients-about-page-MT-logo-img-spotlight" aria-hidden="true"></div>
           </div>
-          <h1>Featured Clients</h1>
+          {/* <h1>Featured Clients</h1> */}
+          <div className="ee-title-pill">Featured Clients</div>
           <FeaturedClientsLogos className="featured-clients-about-page-content-logos" alt="featured logos" />
           <p className="featured-clients-about-page-content-text">
             Text about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text

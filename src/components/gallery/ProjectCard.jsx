@@ -60,10 +60,11 @@ export default function ProjectCard({ project, onOpenBehance }) {
         {type || tools ? (
           <div className="gallery-project-card__meta-row">
             {type ? <span className="gallery-project-card__type">{type}</span> : null}
-            <ToolIcons tools={tools} />
+
           </div>
         ) : null}
         {date ? <div className="gallery-project-card__date">{date}</div> : null}
+        <ToolIcons tools={tools} />
       </div>
     </article>
   );

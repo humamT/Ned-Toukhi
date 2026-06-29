@@ -22,8 +22,21 @@ function ScrollIndicator({ visible = false }) {
           />
         </defs>
         <text textAnchor="middle" dominantBaseline="middle">
-          <textPath xlinkHref="#scroll-circle-path" startOffset="50%">
-          Scroll down · Faire défiler · اسحب إلى الأسفل ·
+          <textPath xlinkHref="#scroll-circle-path" startOffset="14%">
+            Scroll down ·
+          </textPath>
+
+          <textPath xlinkHref="#scroll-circle-path" startOffset="45%">
+            Faire défiler ·
+          </textPath>
+
+          <textPath
+            xlinkHref="#scroll-circle-path"
+            startOffset="79%"
+            lang="ar"
+            dir="rtl"
+          >
+            · اسحب إلى الأسفل
           </textPath>
         </text>
       </svg>

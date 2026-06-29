@@ -163,10 +163,10 @@
   transform: translateY(-50px);
   line-height: 1.5;
   padding: 100px 100px 200px 100px;
-  border-radius: 50px;
+  border-radius: 30px;
   position: relative;
   background: none;
-  border: solid 2px;
+  border: solid 1px;
 }
 
 .about-text::before {
@@ -232,8 +232,8 @@
 }
 
 .about-img-about-page {
-  border: solid 2px white;
-  border-radius: 50px;
+  border: solid 1px white;
+  border-radius: 30px;
   width: 25%;
   margin: 0 25px;
 }
@@ -251,21 +251,22 @@
 }
 
 .ee-column {
-  width: min(48%, 760px);
+  // width: min(48%, 760px);
+  width: calc(40% - clamp(1.4rem, 3vw, 2.6rem) / 2);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .ee-title-pill {
-  width: min(200px, 100%);
+  /* width: min(200px, 100%); */
   border-radius: 999px;
-  border: 1px solid rgb(227 246 255 / 95%);
-  background: linear-gradient(180deg, rgb(68 94 118 / 96%) 0%, rgb(55 79 101 / 96%) 100%);
+  border: 1px solid rgba(227, 246, 255, 0.95);
+  background: linear-gradient(180deg, rgba(68, 94, 118, 0.96) 0%, rgba(55, 79, 101, 0.96) 100%);
   color: #fff;
   text-align: center;
   font: 600 clamp(1.15rem, 1.4vw, 1.5rem) / 1 "Diodrum Arabic";
-  padding: 0.58rem 1rem 0.64rem;
+  padding: 0.7rem 2rem;
 }
 
 .ee-title-underline {
@@ -301,8 +302,8 @@
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  border-top: 2px solid rgba(255, 255, 255, 0.7);
-  border-left: 2px solid rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
   mask-image: linear-gradient(to left, #00000000 50%, black 100%), linear-gradient(to top, #00000000 50%, black 100%);
   mask-composite: intersect;
   -webkit-mask-image: linear-gradient(to left, #00000000 50%, black 100%), linear-gradient(to top, #00000000 50%, black 100%);
@@ -386,15 +387,15 @@
 
 .featured-clients-about-page-content h1 {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 500;
   color: white;
   margin-bottom: -5rem;
   background: #344e5d;
-  padding: 1rem;
-  width: 15%;
+  padding: 1rem 2rem;
+  /* width: 15%; */
   text-align: center;
   border-radius: 50px;
-  border: solid 2px;
+  border: solid 1px;
 }
 
 .featured-clients-about-page-MT-logo {

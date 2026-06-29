@@ -18,18 +18,28 @@ const shine = keyframes`
 `;
 
 const Wrapper = styled.div`
-  display: inline-block;
-  width: auto;
+  // display: inline-block;
+  // width: auto;
+  // pointer-events: auto;
+  display: inline-flex;
+  width: fit-content;
   pointer-events: auto;
 `;
 
 const ButtonBase = styled.button`
-    position: relative;
-    display: block;
-    width: 100%;
-    padding: 12px 40px;
+    // position: relative;
+      position: relative;
+    // display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    // width: 100%;
+      width: auto;
+      white-space: nowrap;
+      padding: 12px 40px;
+      box-sizing: border-box;
     border-radius: 40px;
-    border: 2px solid rgb(255 255 255);
+    border: 1px solid rgb(255 255 255);
     font-size: 25px;
     font-weight: 600;
     background: transparent;
@@ -42,6 +52,7 @@ const ButtonBase = styled.button`
     text-align: center;
     font-family: "Diodrum Arabic";
     line-height: 1;
+    
 
   &:hover {
     background: #344e5d;

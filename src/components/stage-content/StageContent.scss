@@ -1019,8 +1019,8 @@ $design-height: 1440px;
 .identities-img {
     object-fit: cover;
     z-index: 1;
-    border: solid 2px white;
-    border-radius: 50px;
+    border: solid 1px white;
+    border-radius: 30px;
 }
 
 .illustration-border,
@@ -1247,9 +1247,9 @@ $design-height: 1440px;
     transform: translate(-50%, -50%);
     z-index: 21;
     pointer-events: none;
-    border: 2px solid white;
+    border: 1px solid white;
     padding: 3% 0;
-    border-radius: 50px;
+    border-radius: 30px;
     width: 55%;
 }
 
@@ -1386,8 +1386,8 @@ $design-height: 1440px;
     align-items: flex-start;
     transform: translateY(-20%);
     z-index: 20;
-    border: solid 2px white;
-    border-radius: 50px;
+    border: solid 1px white;
+    border-radius: 30px;
     padding: 3% 3% 8%;
 }
 
@@ -1489,8 +1489,8 @@ $design-height: 1440px;
     // flex-direction: column;
     // width: 20%;
     // height: auto;
-    border: solid 2px white;
-    border-radius: 50px;
+    border: solid 1px white;
+    border-radius: 30px;
     width: 20%;
     margin: 0 25px;
 }
@@ -1548,8 +1548,8 @@ $design-height: 1440px;
 
 .featuredLogos {
     width: 70%;
-    border: solid 2px white;
-    border-radius: 50px;
+    border: solid 1px white;
+    border-radius: 30px;
 }
 
 /* Reserve stable geometry for key decorative assets to avoid late image decode shifts. */
@@ -1638,6 +1638,15 @@ html.home-stage-snap #stage-content .gallery-step {
     scroll-snap-stop: normal;
 }
 
+.first-click,
+.contact-btn,
+.shop-now,
+.explore-now,
+.explore-now-tabs {
+  width: fit-content !important; 
+  max-width: max-content !important;
+}
+
 /* Home FHD (~1440–2200px): smaller gallery grid + synced tab / line scale */
 @media (min-width: 1440px) and (max-width: 2200px) {
     html.home-stage-snap .gallery-stack {
@@ -1689,8 +1698,8 @@ html.home-stage-snap #stage-content .gallery-step {
     }
 
     .stage-8__orb-content-top {
-        transform: translateY(-15%);
-        width: 50%;
+        /* transform: translateY(-15%); */
+        width: 55%;
     }
 
     .stage-8__subtitle {
