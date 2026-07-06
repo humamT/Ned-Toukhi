@@ -144,8 +144,8 @@ export default function AboutPage() {
   return (
     <main className="about-page">
       <section className="about-stage">
-      {/* <img src={CircleFull} alt="Circle Full" className="about-stage0-orb-img" aria-hidden="true" /> */}
-      <div className="about-stage0-orb-img-container">
+        {/* <img src={CircleFull} alt="Circle Full" className="about-stage0-orb-img" aria-hidden="true" /> */}
+        <div className="about-stage0-orb-img-container">
           <img src={CircleFull} alt="Circle Full" className="contact-stage0-orb-img" aria-hidden="true" />
         </div>
 
@@ -215,8 +215,12 @@ export default function AboutPage() {
 
       <section className="about-stage education-and-experiences">
         <div className="ee-column education">
-          <div className="ee-title-pill">Education</div>
-          <div className="ee-title-underline" aria-hidden="true" />
+          <div className="ee-title-pill">
+            {/* Education */}
+            <p>Education</p>
+            <div className="ee-title-underline" aria-hidden="true" />
+          </div>
+          {/* <div className="ee-title-underline" aria-hidden="true" /> */}
           <div className="ee-card">
             {EDUCATION_ITEMS.map((item) => (
               <article key={`${item.period}-${item.title}`} className="ee-item">
@@ -232,8 +236,12 @@ export default function AboutPage() {
         </div>
 
         <div className="ee-column experiences">
-          <div className="ee-title-pill">Experiences</div>
-          <div className="ee-title-underline" aria-hidden="true" />
+          <div className="ee-title-pill">
+            {/* Experiences */}
+            <p>Experiences</p>
+            <div className="ee-title-underline" aria-hidden="true" />
+          </div>
+          {/* <div className="ee-title-underline" aria-hidden="true" /> */}
           <div className="ee-card">
             {EXPERIENCE_ITEMS.map((item) => (
               <article key={`${item.period}-${item.company}`} className="ee-item">
@@ -255,7 +263,7 @@ export default function AboutPage() {
             <div className="featured-clients-about-page-MT-logo-img-spotlight" aria-hidden="true"></div>
           </div>
           {/* <h1>Featured Clients</h1> */}
-          <div className="ee-title-pill">Featured Clients</div>
+          <div className="fc-title-pill">Featured Clients</div>
           <FeaturedClientsLogos className="featured-clients-about-page-content-logos" alt="featured logos" />
           <p className="featured-clients-about-page-content-text">
             Text about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text
@@ -276,11 +284,11 @@ export default function AboutPage() {
       </section>
 
       <section className="about-stage contact-form-about-page">
-      <img src={CircleFull} alt="Circle Full" className="contact-form-about-page-orb" aria-hidden="true" />
+        <img src={CircleFull} alt="Circle Full" className="contact-form-about-page-orb" aria-hidden="true" />
         <div className="stage-7__orb-content">
           {/* <div className="stage-7__envelope-wrap"> */}
           {/* <div className="stage-orb stage-orb--s5" aria-hidden="true" /> */}
-          
+
           <img {...lazyImgProps} className="Envelope" src={contactEnvelope} alt="Envelope illustration" />
           {/* </div> */}
           {/* <img className="Envelope-emptyOrb" src={emptyOrb} alt="" /> */}

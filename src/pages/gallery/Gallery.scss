@@ -476,31 +476,31 @@ $primary-font: 'Diodrum Arabic';
 .gallery-projects-banner--identities .gallery-projects-banner__img--left {
   // left: 5%;
   top: -50%;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .gallery-projects-banner--identities .gallery-projects-banner__img--right {
   right: -5%;
   top: -85%;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* Faded category-colored orb behind the grid (filter via data-active-filter on .gallery-projects). */
-.gallery-projects::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  left: 50%;
-  top: 45%;
-  translate: -50% -50%;
-  width: min(140vw, 1100px);
-  height: min(140vw, 500px);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.3;
-  filter: blur(72px);
-  transition: background-color 0.45s ease;
-}
+// .gallery-projects::after {
+//   content: "";
+//   position: absolute;
+//   z-index: 0;
+//   left: 50%;
+//   top: 45%;
+//   translate: -50% -50%;
+//   width: min(140vw, 1100px);
+//   height: min(140vw, 500px);
+//   border-radius: 50%;
+//   pointer-events: none;
+//   opacity: 0.3;
+//   filter: blur(72px);
+//   transition: background-color 0.45s ease;
+// }
 
 .gallery-projects[data-active-filter="illustrations"]::after {
   background: #efca4d;

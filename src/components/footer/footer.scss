@@ -66,7 +66,7 @@
 .stage-10__footer-content {
   position: absolute;
   /* left: 50%; */
-  /* bottom: 30%; */
+  bottom: 25%;
   /* transform: translateX(-50%); */
   // position: relative;
   margin-top: 160px; // creates space for the alien above the box
@@ -83,6 +83,7 @@
   align-items: center;
   flex-direction: row;
 }
+
 
 .footer-main {
   display: flex;
@@ -290,6 +291,12 @@
   width: 20%;
   right: 10%;
   bottom: -9.5%;
+}
+
+@media (min-width: 1440px) and (max-width: 2200px) {
+  .stage-10__footer-content {
+    scale: 0.8;
+  }
 }
 
 // Mobile overrides for footer

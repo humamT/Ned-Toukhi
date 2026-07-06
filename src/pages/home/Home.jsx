@@ -71,6 +71,118 @@ const HOME_STAGE_SNAP_CLASS = "home-stage-snap";
 /** Pixels from viewport top: show header once stage / landing spacer has passed this band */
 const STAGE_HEADER_REVEAL_PX = 96;
 
+const GALLERY_TAB_LINKS = {
+  3: { slug: "illustrations", pathId: "scroll-circle-path-illustrations" },
+  4: { slug: "featured", pathId: "scroll-circle-path-featured" },
+  5: { slug: "identities", pathId: "scroll-circle-path-identities" },
+};
+
+function GalleryTabClickBracket({ activeId, tabId, clickImg, clickImgClass }) {
+  const { slug, pathId } = GALLERY_TAB_LINKS[tabId];
+  const isActive = activeId === tabId;
+
+  const clickTextSvg = (
+    <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+      <defs>
+        <path id={pathId} d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
+      </defs>
+      <text textAnchor="middle" dominantBaseline="middle">
+        <textPath xlinkHref={`#${pathId}`} startOffset="14%" lang="en">
+         Go to gallery •
+        </textPath>
+        <textPath xlinkHref={`#${pathId}`} startOffset="45%" lang="fr">
+          Voir la gallerie •
+        </textPath>
+        <textPath xlinkHref={`#${pathId}`} startOffset="79%" lang="ar" dir="rtl">
+        • إذهب إلى المعرض
+        </textPath>
+      </text>
+    </svg>
+  );
+
+  return (
+    <div
+      className={`click-bracket ${!isActive ? "not-stage-txt" : ""}`}
+      aria-hidden={!isActive}
+    >
+      <img className={clickImgClass} src={clickImg} alt="" aria-hidden="true" />
+      {isActive ? (
+        <NavLink
+          to={`/gallery/${slug}`}
+          className="click-txt"
+          aria-label="Go to gallery"
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
+        >
+          {clickTextSvg}
+        </NavLink>
+      ) : (
+        <div className="click-txt">{clickTextSvg}</div>
+      )}
+    </div>
+  );
+}
+
+function GalleryTabs({ activeId, onStepClick }) {
+  return (
+    <div className="tabs-rectangles">
+      <div
+        className={`tab-rectangle1 ${activeId !== 3 ? "not-stage" : ""}`}
+        onClick={() => onStepClick(3)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") onStepClick(3);
+        }}
+      >
+        <img className="illustrationsBox" src={illustrationsBox} alt="illustrations Box" />
+        <div className="illustrations-txt">
+          <div className="illustrations-en">Illustrations</div>
+          <div className="illustrations-ar">رسومات</div>
+          <div className="illustrations-fr">Dessins</div>
+        </div>
+        <GalleryTabClickBracket activeId={activeId} tabId={3} clickImg={click1} clickImgClass="click1" />
+      </div>
+
+      <div
+        className={`tab-rectangle2 ${activeId !== 4 ? "not-stage" : ""}`}
+        onClick={() => onStepClick(4)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") onStepClick(4);
+        }}
+      >
+        <img className="featuredBox" src={featuredBox} alt="featured Box" />
+        <div className="featured-txt">
+          <div className="featured-en">Featured</div>
+          <div className="featured-ar">أعمال خاصة</div>
+          <div className="featured-fr">Sélectionnés</div>
+        </div>
+        <GalleryTabClickBracket activeId={activeId} tabId={4} clickImg={click2} clickImgClass="click2" />
+      </div>
+
+      <div
+        className={`tab-rectangle3 ${activeId !== 5 ? "not-stage" : ""}`}
+        onClick={() => onStepClick(5)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") onStepClick(5);
+        }}
+      >
+        <img className="identitiesBox" src={identitiesBox} alt="identities Box" />
+        <div className="identities-txt">
+          <div className="identities-en">Identities</div>
+          <div className="identities-ar">هويات بصرية</div>
+          <div className="identities-fr">Charts graphiques</div>
+        </div>
+        <GalleryTabClickBracket activeId={activeId} tabId={5} clickImg={click3} clickImgClass="click3" />
+      </div>
+    </div>
+  );
+}
+
 
 
 export default function Home({ setHeaderVisible }) {
@@ -90,6 +202,10 @@ export default function Home({ setHeaderVisible }) {
   const lastGallerySetAtRef = useRef(0);
   const galleryAnimatingRef = useRef(false);
   const galleryAnimTimeoutRef = useRef(null);
+  const galleryRafRef = useRef(0);
+  const galleryRatiosRef = useRef(new Map());
+  const galleryScrollYRef = useRef(0);
+  const galleryScrollDirRef = useRef(0);
   // No "swap-in-place" animation state needed when cards scroll as real sections.
 
   useEffect(() => {
@@ -120,94 +236,6 @@ export default function Home({ setHeaderVisible }) {
       { id: 5, key: "identities", labelEn: "Identities", labelAr: "هويات بصرية", labelFr: "Charts graphiques" },
     ],
     []
-  );
-
-  const GalleryTabs = ({ activeId }) => (
-    <div className="tabs-rectangles">
-      <div
-        className={`tab-rectangle1 ${activeId !== 3 ? "not-stage" : ""}`}
-        onClick={() => scrollToGalleryStep(3)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") scrollToGalleryStep(3);
-        }}
-      >
-        <img className="illustrationsBox" src={illustrationsBox} alt="illustrations Box" />
-        <div className="illustrations-txt">
-          <div className="illustrations-en">Illustrations</div>
-          <div className="illustrations-ar">رسومات</div>
-          <div className="illustrations-fr">Dessins</div>
-        </div>
-        <svg className={`click-txt ${activeId !== 3 ? "not-stage-txt" : ""}`} viewBox="0 0 200 200" aria-hidden="true" role="img">
-          <defs>
-            <path id="scroll-circle-path-illustrations" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
-          </defs>
-          <text textAnchor="middle" dominantBaseline="middle">
-            <textPath xlinkHref="#scroll-circle-path-illustrations" startOffset="50%">
-              - Go to gallery - Voir la gallerie - إذهب إلى المعرض
-            </textPath>
-          </text>
-        </svg>
-        <img className={`click1 ${activeId !== 3 ? "not-stage-txt" : ""}`} src={click1} alt="illustrations Box clickable circle" />
-      </div>
-
-      <div
-        className={`tab-rectangle2 ${activeId !== 4 ? "not-stage" : ""}`}
-        onClick={() => scrollToGalleryStep(4)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") scrollToGalleryStep(4);
-        }}
-      >
-        <img className="featuredBox" src={featuredBox} alt="featured Box" />
-        <div className="featured-txt">
-          <div className="featured-en">Featured</div>
-          <div className="featured-ar">أعمال خاصة</div>
-          <div className="featured-fr">Sélectionnés</div>
-        </div>
-        <svg className={`click-txt ${activeId !== 4 ? "not-stage-txt" : ""}`} viewBox="0 0 200 200" aria-hidden="true" role="img">
-          <defs>
-            <path id="scroll-circle-path-featured" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
-          </defs>
-          <text textAnchor="middle" dominantBaseline="middle">
-            <textPath xlinkHref="#scroll-circle-path-featured" startOffset="50%">
-              - Go to gallery - Voir la gallerie - إذهب إلى المعرض
-            </textPath>
-          </text>
-        </svg>
-        <img className={`click2 ${activeId !== 4 ? "not-stage-txt" : ""}`} src={click2} alt="featured Box clickable circle" />
-      </div>
-
-      <div
-        className={`tab-rectangle3 ${activeId !== 5 ? "not-stage" : ""}`}
-        onClick={() => scrollToGalleryStep(5)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") scrollToGalleryStep(5);
-        }}
-      >
-        <img className="identitiesBox" src={identitiesBox} alt="identities Box" />
-        <div className="identities-txt">
-          <div className="identities-en">Identities</div>
-          <div className="identities-ar">هويات بصرية</div>
-          <div className="identities-fr">Charts graphiques</div>
-        </div>
-        <svg className={`click-txt ${activeId !== 5 ? "not-stage-txt" : ""}`} viewBox="0 0 200 200" aria-hidden="true" role="img">
-          <defs>
-            <path id="scroll-circle-path-identities" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
-          </defs>
-          <text textAnchor="middle" dominantBaseline="middle">
-            <textPath xlinkHref="#scroll-circle-path-identities" startOffset="50%">
-              - Go to gallery - Voir la gallerie - إذهب إلى المعرض
-            </textPath>
-          </text>
-        </svg>
-        <img className={`click3 ${activeId !== 5 ? "not-stage-txt" : ""}`} src={click3} alt="identities Box clickable circle" />
-      </div>
-    </div>
   );
 
   const GalleryCards = ({ id }) => (
@@ -296,45 +324,128 @@ export default function Home({ setHeaderVisible }) {
     fetchPriority: "low",
   };
 
-  // Stage 3: observe internal steps to switch right gallery content.
+  // Stage 3: switch active tab while scrolling (IO ratios + adjacent-step guard).
   useEffect(() => {
     if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
     if (document.documentElement.clientWidth <= 768) return;
 
     const ids = [3, 4, 5];
+    const ratios = galleryRatiosRef.current;
+
     const els = ids
       .map((id) => document.getElementById(`gallery-step-${id}`))
       .filter(Boolean);
     if (!els.length) return;
 
+    const pickFromGeometry = () => {
+      const focusY = window.innerHeight * 0.35;
+      let bestId = ids[0];
+      let bestDistance = Infinity;
+
+      for (const id of ids) {
+        const el = document.getElementById(`gallery-step-${id}`);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = Math.abs(center - focusY);
+
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestId = id;
+        }
+      }
+
+      return bestId;
+    };
+
+    const applyActiveStep = () => {
+      if (galleryAnimatingRef.current) return;
+
+      const current = activeGalleryIdRef.current;
+      const dir = galleryScrollDirRef.current;
+      let bestId = null;
+      let bestRatio = 0;
+
+      for (const id of ids) {
+        const ratio = ratios.get(id) ?? 0;
+        if (ratio <= 0) continue;
+        if (Math.abs(id - current) > 1) continue;
+        if (dir > 0 && id < current) continue;
+        if (dir < 0 && id > current) continue;
+
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
+        }
+      }
+
+      if (!bestId || bestRatio < 0.12) {
+        bestId = pickFromGeometry();
+      }
+
+      const nextId =
+        bestId === current
+          ? current
+          : bestId > current + 1
+            ? current + 1
+            : bestId < current - 1
+              ? current - 1
+              : bestId;
+
+      if (nextId === current) return;
+
+      const now = Date.now();
+      if (now - lastGallerySetAtRef.current < 180) return;
+
+      lastGallerySetAtRef.current = now;
+      setActiveGalleryId(nextId);
+    };
+
     const obs = new IntersectionObserver(
       (entries) => {
-        if (galleryAnimatingRef.current) return;
-
-        const best = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0))[0];
-        if (!best?.target?.id) return;
-        const id = Number(best.target.id.replace("gallery-step-", ""));
-        if (!ids.includes(id)) return;
-        if (id === activeGalleryIdRef.current) return;
-
-        // Hysteresis: avoid flip/flop while slowly scrolling near boundaries.
-        const now = Date.now();
-        if (now - lastGallerySetAtRef.current < 260) return;
-
-        if (galleryDebounceRef.current) window.clearTimeout(galleryDebounceRef.current);
-        galleryDebounceRef.current = window.setTimeout(() => {
-          lastGallerySetAtRef.current = Date.now();
-          setActiveGalleryId(id);
-        }, 110);
+        entries.forEach((entry) => {
+          const id = Number(entry.target.id.replace("gallery-step-", ""));
+          if (!ids.includes(id)) return;
+          ratios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+        applyActiveStep();
       },
-      { threshold: 0.25, rootMargin: "-10% 0px -40% 0px" }
+      { threshold: [0, 0.12, 0.25, 0.5, 0.75, 1], rootMargin: "-10% 0px -40% 0px" }
     );
 
     els.forEach((el) => obs.observe(el));
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > galleryScrollYRef.current) galleryScrollDirRef.current = 1;
+      else if (y < galleryScrollYRef.current) galleryScrollDirRef.current = -1;
+      galleryScrollYRef.current = y;
+
+      if (galleryRafRef.current) return;
+      galleryRafRef.current = window.requestAnimationFrame(() => {
+        galleryRafRef.current = 0;
+        applyActiveStep();
+      });
+    };
+
+    const scrollOpts = { passive: true, capture: true };
+    document.addEventListener("scroll", onScroll, scrollOpts);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.documentElement.addEventListener("scrollend", applyActiveStep);
+    window.addEventListener("scrollend", applyActiveStep);
+
+    galleryScrollYRef.current = window.scrollY;
+    applyActiveStep();
+
     return () => {
       obs.disconnect();
+      ratios.clear();
+      document.removeEventListener("scroll", onScroll, scrollOpts);
+      window.removeEventListener("scroll", onScroll);
+      document.documentElement.removeEventListener("scrollend", applyActiveStep);
+      window.removeEventListener("scrollend", applyActiveStep);
+      if (galleryRafRef.current) window.cancelAnimationFrame(galleryRafRef.current);
       if (galleryDebounceRef.current) window.clearTimeout(galleryDebounceRef.current);
       if (galleryAnimTimeoutRef.current) window.clearTimeout(galleryAnimTimeoutRef.current);
     };
@@ -578,7 +689,7 @@ export default function Home({ setHeaderVisible }) {
                   </div>
 
                   <div className="gallery-tabs-container">
-                    <GalleryTabs activeId={activeGalleryId} />
+                    <GalleryTabs activeId={activeGalleryId} onStepClick={scrollToGalleryStep} />
 
                     <div className="tabs-all-lines">
                       <img className="white-line lines" src={whiteLine} alt="" />
@@ -665,12 +776,14 @@ export default function Home({ setHeaderVisible }) {
 
                   <div className="stage-8__subtitle">
                     <p>Muhanad ALTOUKHI, Syrian graphic designer and illustrator.</p>
-                    <p>Originally from Douma, on the outskirts of Damascus, I began
-                      learning graphic design in 2014 during the military siege of Eastern
-                      Ghouta. In 2024, I completed my DNMADE in Graphic Design in Paris.</p>
-                    <p>Living between these two worlds has shaped my creative vision,
+                    <p>Originally from Douma, near Damascus,
+                      I began learning graphic design in 2014 during the siege of Eastern Ghouta.
+                      After completing my DNMADE in Graphic Design in Paris in 2024,
+                      I developed a creative vision shaped by living between these two worlds,
+                      leading to hybrid, multicultural projects enriched by a unique perspective.</p>
+                    {/* <p>Living between these two worlds has shaped my creative vision,
                       allowing me to develop hybrid, multicultural projects enriched by a
-                      unique perspective one that I’m excited to share and work with you.</p>
+                      unique perspective one that I’m excited to share and work with you.</p> */}
                   </div>
                 </div>
 
