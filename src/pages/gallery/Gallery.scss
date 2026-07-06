@@ -166,7 +166,7 @@ $primary-font: 'Diodrum Arabic';
   right: auto;
   top: auto;
   bottom: auto;
-  width: 140px;
+  width: 150px;
   transform: translateY(12px);
 
   &.is-visible {
@@ -175,7 +175,7 @@ $primary-font: 'Diodrum Arabic';
 }
 
 .gallery-head-scroll-indicator .scroll-indicator__mouse {
-  width: 32%;
+  width: 25%;
 }
 
 @media (max-width: 768px) {

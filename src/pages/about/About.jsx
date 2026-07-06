@@ -31,6 +31,14 @@ const ABOUT_LOCATION = "Based in Paris";
 const DIVIDER_COLORS = ["c1", "c2", "c3", "c4", "c5"];
 const EDUCATION_ITEMS = [
   {
+    period: "2024 - 2025",
+    title: "DArabic Calligraphy",
+    school: "FSIP “Faculté des Sciences Islamiques de Paris”",
+    // details: "Campus Fonderie de l'Image",
+    extra: "Learned the basics of Arabic calligraphy focusing on ALNASKH typography.",
+    place: "Paris, France",
+  },
+  {
     period: "2021 - 2024",
     title: "DN-MADE (Diplôme National des Métiers d'Art et du Design)",
     school: "DESIGN GRAPHIQUE",
@@ -54,8 +62,8 @@ const EDUCATION_ITEMS = [
   {
     period: "2016-2018",
     title: "English Literature",
-    school: "Aleppo University",
-    details: "One-year certification in France due to forcible displacement from Syria",
+    school: "Aleppo University “branch in Douma city”",
+    details: "2 year program cut to one year due to forced displacement from the region",
     place: "Douma, Syria",
   },
   {
@@ -265,15 +273,10 @@ export default function AboutPage() {
           {/* <h1>Featured Clients</h1> */}
           <div className="fc-title-pill">Featured Clients</div>
           <FeaturedClientsLogos className="featured-clients-about-page-content-logos" alt="featured logos" />
-          <p className="featured-clients-about-page-content-text">
-            Text about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text
-            about expos and presentaions Text about expos and presentaions Text about expos and presentaions Text about
-            expos and presentaions Text about expos and presentaions Text about expos and presentaions Text about expos
-            and presentaions Text about expos and presentaions Text about expos and presentaions Text about expos and
-            presentaions Text about expos and presentaions Text about expos and presentaions Text about expos and
-            presentaions Text about expos and presentaions Text about expos and presentaions Text about expos and
-            presentaions Text about expos and presentaions Text about expos and presentaions
-          </p>
+          <div className="featured-clients-about-page-content-text">
+           <p> Over the past few years in France, I have participated in several art exhibitions in Paris and Lyon, where I presented my recent work, including OLIVA, a project exploring hybrid typography, alongside a selection of illustrations. I also offered a range of merchandise, which visitors enthusiastically purchased as souvenirs of the exhibitions.</p>
+           <p>The exhibition in Paris focused exclusively on typography, where OLIVA stood out among the featured projects. In contrast, the exhibition in Lyon celebrated multicultural work, and visitors showed great interest in the diverse range of projects I presented. I am always looking forward to participating in new exhibitions and sharing my work with wider audiences and I would be very happy to meet you all!</p>
+          </div>
         </div>
         <div className="about-cards-about-page">
           <img {...lazyImgProps} className="about-img-about-page higher-card-about-page" src={aboutCard5} alt="" />
