@@ -82,7 +82,13 @@ const EDUCATION_ITEMS = [
 
 const EXPERIENCE_ITEMS = [
   {
-    period: "Sep 2022-Present",
+    period: "Jul 2026-Present",
+    company: "Groupe SPMI",
+    role: "Art Director / Graphic Designer",
+    place: "Paris",
+  },
+  {
+    period: "Sep 2022-Jul 2026",
     company: "Groupe SPMI",
     role: "Graphic Designer",
     place: "Paris",
