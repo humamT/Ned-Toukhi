@@ -13,13 +13,16 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "ned-toukhi",
+	"main": "worker/index.js",
 	"compatibility_date": "2025-12-05",
 	"observability": {
 		"enabled": true
 	},
 	"assets": {
+		"binding": "ASSETS",
 		"directory": "./dist",
 		"html_handling": "auto-trailing-slash",
-		"not_found_handling": "single-page-application"
+		"not_found_handling": "single-page-application",
+		"run_worker_first": ["/api/*"]
 	}
 }
