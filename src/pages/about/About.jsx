@@ -32,7 +32,7 @@ const DIVIDER_COLORS = ["c1", "c2", "c3", "c4", "c5"];
 const EDUCATION_ITEMS = [
   {
     period: "2024 - 2025",
-    title: "DArabic Calligraphy",
+    title: "Arabic Calligraphy",
     school: "FSIP “Faculté des Sciences Islamiques de Paris”",
     // details: "Campus Fonderie de l'Image",
     extra: "Learned the basics of Arabic calligraphy focusing on ALNASKH typography.",
@@ -41,8 +41,8 @@ const EDUCATION_ITEMS = [
   {
     period: "2021 - 2024",
     title: "DN-MADE (Diplôme National des Métiers d'Art et du Design)",
-    school: "DESIGN GRAPHIQUE",
-    details: "Campus Fonderie de l'Image",
+    school: "Campus Fonderie de l'Image",
+    details: "DESIGN GRAPHIQUE",
     extra: "Graduated with honorary degree, top of the class",
     place: "Paris, France",
   },
