@@ -384,6 +384,9 @@
   background: transparent;
   color: #fff;
   // border: 1px solid rgba(255, 255, 255, 0.35);
+  &:not(:disabled):hover {
+    transform: translateX(-3px);
+  }
 }
 
 .quotations-nav__btn--prev .arrows-left {
@@ -400,7 +403,7 @@
   }
 
   &:not(:disabled):hover {
-    transform: translateY(-1px);
+    transform: translateX(-3px);
   }
 }
 
@@ -408,11 +411,12 @@
   margin-left: auto;
   background: none;
   border: 1px solid white;
-  color: white;
-  padding: 0rem 15rem;
+  color: #fff;
+  padding: 0rem 15%;
 
   &:not(:disabled):hover {
-    transform: translateY(-1px);
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -450,7 +454,7 @@
   justify-content: center;
   position: absolute;
   right: 49%;
-  top: 10px;
+  top: 7px;
 
   svg {
     display: block;
@@ -483,6 +487,7 @@
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.55;
   color: #344e5d;
+  font-weight: 600;
 }
 
 .quotations-result__prompt {
@@ -515,7 +520,7 @@
 
   &:hover {
     background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-1px);
+    transform: translateY(-3px);
   }
 }
 
@@ -568,18 +573,27 @@
 }
 
 .quotations-form__submit {
-  margin-left: auto;
+  // margin-left: auto;
+  // border: 0;
+  // border-radius: 999px;
+  // padding: 0.85rem 1.6rem;
+  // background: linear-gradient(90deg, #efca4d 0%, #f79226 100%);
+  // color: #344e5d;
+  // font-family: "Diodrum Arabic", "Noto Sans Arabic", Arial, sans-serif;
+  // font-size: 1rem;
+  // font-weight: 700;
+  // cursor: pointer;
+  // transition: transform 0.2s ease, box-shadow 0.2s ease;
+  // white-space: nowrap;
+
+  min-width: 12%;
+  height: 44px;
   border: 0;
   border-radius: 999px;
-  padding: 0.85rem 1.6rem;
-  background: linear-gradient(90deg, #efca4d 0%, #f79226 100%);
-  color: #344e5d;
-  font-family: "Diodrum Arabic", "Noto Sans Arabic", Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
+  background: #efca4d;
+  color: #fff;
+  font: 700 1.15rem / 1 Diodrum Arabic;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  white-space: nowrap;
 
   &:hover {
     transform: translateY(-1px);

@@ -462,7 +462,7 @@ export default function QuotationsPage() {
               className="quotations-form__submit"
               disabled={!canSubmitForm}
             >
-              Send with the estimation attached
+              Send
             </button>
           </div>
         ) : null}
