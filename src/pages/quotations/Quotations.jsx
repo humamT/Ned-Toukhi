@@ -4,10 +4,16 @@ import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.j
 import CircleFull from "../../assets/images/Circle-full.svg";
 import theMask from "../../assets/PNGS+SVGs/Quotations/devis.png";
 import Letterhead from "../../assets/PNGS+SVGs/Quotations/Letterhead-Mockup.png";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   QUESTIONNAIRE,
+  TIMELINE_QUESTION,
   buildQuotationSummary,
+  getQuestionStep,
   getQuotationResult,
+  isTimelineValidForService,
 } from "./quotationLogic.js";
 
 const lazyImgProps = {
@@ -21,17 +27,43 @@ const WEB3FORMS_ACCESS_KEY = "605a40af-f0d4-4fce-b1d5-c179cfa63898";
 const EXPLANATION =
   "To get a price range that fits your project, please fill out this short form based on a few key questions. It only takes about 5 minutes. Please keep in mind that this range is approximate, and the final quote may vary.";
 
-const CONTACT_PROMPT = "Would you like to send this quotation by email?";
+const RESULT_SHARE_PROMPT =
+  "Would you like to share the information you provided, along with a message describing your organization and the project you have in mind?";
 
 const VIEWS = {
   QUESTION: "question",
   RESULT: "result",
-  CONTACT_PROMPT: "contact-prompt",
   CONTACT_FORM: "contact-form",
   DONE: "done",
 };
 
 const TRANSITION_MS = 240;
+
+function formatPriceForDisplay(price) {
+  if (!price) return "";
+  return price.replace(/\s*-\s*/, " and ");
+}
+
+function NavArrows() {
+  return (
+    <span className="arrows-left" aria-hidden="true">
+      <FontAwesomeIcon icon={faCaretLeft} />
+      <FontAwesomeIcon icon={faCaretLeft} />
+    </span>
+  );
+}
+
+function OptionCheckbox() {
+  return (
+    <span className="quotations-option__checkbox" aria-hidden="true">
+      <span className="quotations-option__checkbox-wrapper">
+        <span className="quotations-option__checkmark" />
+        <span className="quotations-option__nebula" />
+        <span className="quotations-option__sparkle" />
+      </span>
+    </span>
+  );
+}
 
 export default function QuotationsPage() {
   const [view, setView] = useState(VIEWS.QUESTION);
@@ -39,7 +71,6 @@ export default function QuotationsPage() {
   const [answers, setAnswers] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [panelVisible, setPanelVisible] = useState(true);
-  const [contactChoice, setContactChoice] = useState("");
   const [submitStatus, setSubmitStatus] = useState("");
   const [formValues, setFormValues] = useState({
     name: "",
@@ -48,7 +79,10 @@ export default function QuotationsPage() {
     message: "",
   });
 
-  const currentQuestion = QUESTIONNAIRE[questionIndex];
+  const currentQuestion = useMemo(
+    () => getQuestionStep(questionIndex, answers),
+    [questionIndex, answers]
+  );
   const result = useMemo(() => getQuotationResult(answers), [answers]);
   const quotationSummary = useMemo(
     () => buildQuotationSummary(answers, result),
@@ -60,25 +94,15 @@ export default function QuotationsPage() {
       ? ((questionIndex + 1) / QUESTIONNAIRE.length) * 100
       : 100;
 
-  const canGoNext =
-    view === VIEWS.QUESTION
-      ? Boolean(selectedOption)
-      : view === VIEWS.CONTACT_PROMPT
-        ? Boolean(contactChoice)
-        : false;
+  const canGoNext = view === VIEWS.QUESTION ? Boolean(selectedOption) : false;
 
-  const canGoPrevious =
-    view === VIEWS.QUESTION
-      ? questionIndex > 0
-      : view === VIEWS.RESULT ||
-      view === VIEWS.CONTACT_PROMPT ||
-      view === VIEWS.CONTACT_FORM;
+  const canGoPrevious = view === VIEWS.QUESTION && questionIndex > 0;
 
   useEffect(() => {
-    if (view !== VIEWS.QUESTION) return;
+    if (view !== VIEWS.QUESTION || !currentQuestion) return;
     const existing = answers.find((entry) => entry.question === currentQuestion.question);
     setSelectedOption(existing?.answer ?? "");
-  }, [view, questionIndex, currentQuestion.question, answers]);
+  }, [view, questionIndex, currentQuestion, answers]);
 
   const transitionTo = (nextView, updater) => {
     setPanelVisible(false);
@@ -90,11 +114,30 @@ export default function QuotationsPage() {
   };
 
   const saveCurrentAnswer = (option = selectedOption) => {
-    if (!option) return answers;
-    const next = answers.filter((entry) => entry.question !== currentQuestion.question);
+    if (!option || !currentQuestion) return answers;
+
+    let next = answers.filter((entry) => entry.question !== currentQuestion.question);
     next.push({ question: currentQuestion.question, answer: option });
+
+    if (currentQuestion.id === "service") {
+      const timelineAnswer = next.find((entry) => entry.question === TIMELINE_QUESTION)?.answer;
+      if (timelineAnswer && !isTimelineValidForService(option, timelineAnswer)) {
+        next = next.filter((entry) => entry.question !== TIMELINE_QUESTION);
+      }
+    }
+
     setAnswers(next);
     return next;
+  };
+
+  const resetQuotation = () => {
+    setAnswers([]);
+    setQuestionIndex(0);
+    setSelectedOption("");
+    setSubmitStatus("");
+    setFormValues({ name: "", email: "", organization: "", message: "" });
+    setView(VIEWS.QUESTION);
+    setPanelVisible(true);
   };
 
   const handleNext = () => {
@@ -109,36 +152,10 @@ export default function QuotationsPage() {
 
       saveCurrentAnswer();
       transitionTo(VIEWS.RESULT);
-      return;
-    }
-
-    if (view === VIEWS.CONTACT_PROMPT) {
-      if (contactChoice === "yes") {
-        transitionTo(VIEWS.CONTACT_FORM);
-        return;
-      }
-      if (contactChoice === "no") {
-        transitionTo(VIEWS.DONE);
-      }
     }
   };
 
   const handlePrevious = () => {
-    if (view === VIEWS.CONTACT_FORM) {
-      transitionTo(VIEWS.CONTACT_PROMPT);
-      return;
-    }
-
-    if (view === VIEWS.CONTACT_PROMPT) {
-      transitionTo(VIEWS.RESULT);
-      return;
-    }
-
-    if (view === VIEWS.RESULT) {
-      transitionTo(VIEWS.QUESTION, () => setQuestionIndex(QUESTIONNAIRE.length - 1));
-      return;
-    }
-
     if (view === VIEWS.QUESTION && questionIndex > 0) {
       transitionTo(VIEWS.QUESTION, () => setQuestionIndex((index) => index - 1));
     }
@@ -185,167 +202,162 @@ export default function QuotationsPage() {
   const panelKey =
     view === VIEWS.QUESTION ? `question-${questionIndex}` : view;
 
-  const renderQuestionPanel = () => (
-    <>
-      <h2 className="quotations-card__question">{currentQuestion.question}</h2>
-      <ul className="quotations-options" role="listbox" aria-label={currentQuestion.question}>
-        {currentQuestion.options.map((option) => {
-          const isSelected = selectedOption === option;
-          return (
-            <li key={option}>
-              <button
-                type="button"
-                className={`quotations-option ${isSelected ? "is-selected" : ""}`}
-                role="option"
-                aria-selected={isSelected}
-                onClick={() => setSelectedOption(option)}
-              >
-                <span className="quotations-option__indicator" aria-hidden="true" />
-                <span className="quotations-option__label">{option}</span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </>
+  const renderQuestionPanel = () => {
+    if (!currentQuestion) return null;
+
+    return (
+      <>
+        <h2 className="quotations-card__question">{currentQuestion.question}</h2>
+        <ul className="quotations-options" role="listbox" aria-label={currentQuestion.question}>
+          {currentQuestion.options.map((option) => {
+            const isSelected = selectedOption === option;
+            return (
+              <li key={option}>
+                <button
+                  type="button"
+                  className={`quotations-option ${isSelected ? "is-selected" : ""}`}
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={() => setSelectedOption(option)}
+                >
+                  <OptionCheckbox />
+                  <span className="quotations-option__label">{option}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </>
+    );
+  };
+
+  const renderEstimateCard = () => (
+    <div className="quotations-result-estimate">
+      <div className="quotations-result-estimate__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false">
+          <circle cx="12" cy="12" r="11" fill="#fff" />
+          <path
+            d="M7 12.5l3 3 7-7"
+            fill="none"
+            stroke="#45b29d"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+
+      {result.price ? (
+        <>
+          <p className="quotations-result-estimate__label">Your estimated range is between</p>
+          <p className="quotations-result-estimate__price">{formatPriceForDisplay(result.price)}</p>
+        </>
+      ) : (
+        <p className="quotations-result-estimate__message">{result.message}</p>
+      )}
+    </div>
   );
 
   const renderResultPanel = () => (
     <div className="quotations-result">
-      <h2 className="quotations-card__question">Your estimated quotation</h2>
-      {result.price ? (
-        <p className="quotations-result__price">{result.price}</p>
-      ) : (
-        <p className="quotations-result__message">{result.message}</p>
-      )}
-      <p className="quotations-result__note">
-        This range is approximate. The final quote may vary after reviewing your project details.
-      </p>
-      <button
-        type="button"
-        className="quotations-result__continue"
-        onClick={() => transitionTo(VIEWS.CONTACT_PROMPT)}
-      >
-        Continue
-      </button>
+      {renderEstimateCard()}
+
+      <p className="quotations-result__prompt">{RESULT_SHARE_PROMPT}</p>
+
+      <div className="quotations-result__actions">
+        <button
+          type="button"
+          className="quotations-result__yes"
+          onClick={() => transitionTo(VIEWS.CONTACT_FORM)}
+        >
+          Yes, I would like to write a message
+        </button>
+
+        <button type="button" className="quotations-result__restart" onClick={resetQuotation}>
+          <NavArrows />
+          Start from the beginning
+        </button>
+      </div>
     </div>
   );
 
-  const renderContactPrompt = () => (
-    <>
-      <h2 className="quotations-card__question">{CONTACT_PROMPT}</h2>
-      <ul className="quotations-options" role="listbox" aria-label={CONTACT_PROMPT}>
-        {[
-          { id: "yes", label: "Yes, send by email" },
-          { id: "no", label: "No, thank you" },
-        ].map((option) => {
-          const isSelected = contactChoice === option.id;
-          return (
-            <li key={option.id}>
-              <button
-                type="button"
-                className={`quotations-option ${isSelected ? "is-selected" : ""}`}
-                role="option"
-                aria-selected={isSelected}
-                onClick={() => setContactChoice(option.id)}
-              >
-                <span className="quotations-option__indicator" aria-hidden="true" />
-                <span className="quotations-option__label">{option.label}</span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </>
-  );
-
   const renderContactForm = () => (
-    <form className="quotations-form" onSubmit={onSubmit}>
-      <h2 className="quotations-card__question">Send your quotation</h2>
-      <p className="quotations-form__intro">
-        Share your details and I will get back to you with a tailored follow-up.
-      </p>
+    <div className="quotations-result quotations-result--form">
+      {renderEstimateCard()}
 
-      <label className="quotations-form__field">
-        <span>Name</span>
+      <form id="quotations-contact-form" className="quotations-form" onSubmit={onSubmit}>
         <input
           type="text"
           name="name"
+          placeholder="Name*"
           value={formValues.name}
           onChange={onInputChange}
           required
         />
-      </label>
-
-      <label className="quotations-form__field">
-        <span>Email</span>
+        <input
+          type="text"
+          name="organization"
+          placeholder="Organization (if available)"
+          value={formValues.organization}
+          onChange={onInputChange}
+        />
         <input
           type="email"
           name="email"
+          placeholder="Email*"
           value={formValues.email}
           onChange={onInputChange}
           required
         />
-      </label>
-
-      <label className="quotations-form__field">
-        <span>Organization</span>
-        <input
-          type="text"
-          name="organization"
-          value={formValues.organization}
-          onChange={onInputChange}
-        />
-      </label>
-
-      <label className="quotations-form__field">
-        <span>Message</span>
         <textarea
           name="message"
-          rows={4}
+          placeholder="Message...*"
           value={formValues.message}
           onChange={onInputChange}
           required
         />
-      </label>
 
-      <input type="hidden" name="quotation_summary" value={quotationSummary} readOnly />
-      <input
-        type="hidden"
-        name="quotation_result"
-        value={result.price ?? result.message ?? ""}
-        readOnly
-      />
+        <input type="hidden" name="quotation_summary" value={quotationSummary} readOnly />
+        <input
+          type="hidden"
+          name="quotation_result"
+          value={result.price ?? result.message ?? ""}
+          readOnly
+        />
 
-      {submitStatus ? <p className="quotations-form__status">{submitStatus}</p> : null}
-
-      <button type="submit" className="quotations-form__submit" disabled={!canSubmitForm}>
-        Send quotation
-      </button>
-    </form>
+        {submitStatus ? (
+          <p className="quotations-form__status" role="status" aria-live="polite">
+            {submitStatus}
+          </p>
+        ) : null}
+      </form>
+    </div>
   );
 
   const renderDonePanel = () => (
     <div className="quotations-result">
-      <h2 className="quotations-card__question">Thank you</h2>
-      <p className="quotations-result__message">
-        {submitStatus || "Your responses have been recorded. Feel free to reach out anytime."}
-      </p>
-      <button
-        type="button"
-        className="quotations-result__continue"
-        onClick={() => {
-          setAnswers([]);
-          setQuestionIndex(0);
-          setSelectedOption("");
-          setContactChoice("");
-          setSubmitStatus("");
-          setFormValues({ name: "", email: "", organization: "", message: "" });
-          setView(VIEWS.QUESTION);
-          setPanelVisible(true);
-        }}
-      >
-        Start over
+      <div className="quotations-result-estimate">
+        <div className="quotations-result-estimate__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <circle cx="12" cy="12" r="11" fill="#fff" />
+            <path
+              d="M7 12.5l3 3 7-7"
+              fill="none"
+              stroke="#45b29d"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        <p className="quotations-result-estimate__message">
+          {submitStatus || "Your quotation has been sent successfully."}
+        </p>
+      </div>
+
+      <button type="button" className="quotations-result__restart" onClick={resetQuotation}>
+        <NavArrows />
+        Start from the beginning
       </button>
     </div>
   );
@@ -353,12 +365,12 @@ export default function QuotationsPage() {
   const renderPanelContent = () => {
     if (view === VIEWS.QUESTION) return renderQuestionPanel();
     if (view === VIEWS.RESULT) return renderResultPanel();
-    if (view === VIEWS.CONTACT_PROMPT) return renderContactPrompt();
     if (view === VIEWS.CONTACT_FORM) return renderContactForm();
     return renderDonePanel();
   };
 
-  const showNav = view === VIEWS.QUESTION || view === VIEWS.CONTACT_PROMPT;
+  const showNav = view === VIEWS.QUESTION;
+  const showQuestionChrome = view === VIEWS.QUESTION;
 
   const nextLabel =
     view === VIEWS.QUESTION && questionIndex === QUESTIONNAIRE.length - 1
@@ -394,18 +406,22 @@ export default function QuotationsPage() {
       </section>
 
 
-      <section className="quotations-card">
-        <div className="quotations-card__intro">
-          <p>{EXPLANATION}</p>
-        </div>
+      <section className={`quotations-card ${!showQuestionChrome ? "quotations-card--outcome" : ""}`}>
+        {showQuestionChrome ? (
+          <>
+            <div className="quotations-card__intro">
+              <p>{EXPLANATION}</p>
+            </div>
 
-        <div className="quotations-progress" aria-hidden="true">
-          <div className="quotations-progress__bar" style={{ width: `${progress}%` }} />
-        </div>
+            <div className="quotations-progress" aria-hidden="true">
+              <div className="quotations-progress__bar" style={{ width: `${progress}%` }} />
+            </div>
+          </>
+        ) : null}
 
         <div
           key={panelKey}
-          className={`quotations-panel ${panelVisible ? "is-visible" : "is-hidden"}`}
+          className={`quotations-panel ${panelVisible ? "is-visible" : "is-hidden"} ${!showQuestionChrome ? "quotations-panel--outcome" : ""}`}
         >
           {renderPanelContent()}
         </div>
@@ -418,6 +434,7 @@ export default function QuotationsPage() {
               onClick={handlePrevious}
               disabled={!canGoPrevious}
             >
+              <NavArrows />
               Previous question
             </button>
             <button
@@ -430,26 +447,23 @@ export default function QuotationsPage() {
             </button>
           </div>
         ) : view === VIEWS.CONTACT_FORM ? (
-          <div className="quotations-nav quotations-nav--single">
+          <div className="quotations-nav">
             <button
               type="button"
               className="quotations-nav__btn quotations-nav__btn--prev"
-              onClick={handlePrevious}
+              onClick={resetQuotation}
             >
-              Previous question
+              <NavArrows />
+              Start from the beginning
             </button>
-          </div>
-        ) : view === VIEWS.RESULT || view === VIEWS.DONE ? (
-          <div className="quotations-nav quotations-nav--single">
-            {view === VIEWS.RESULT ? (
-              <button
-                type="button"
-                className="quotations-nav__btn quotations-nav__btn--prev"
-                onClick={handlePrevious}
-              >
-                Previous question
-              </button>
-            ) : null}
+            <button
+              type="submit"
+              form="quotations-contact-form"
+              className="quotations-form__submit"
+              disabled={!canSubmitForm}
+            >
+              Send with the estimation attached
+            </button>
           </div>
         ) : null}
       </section>
