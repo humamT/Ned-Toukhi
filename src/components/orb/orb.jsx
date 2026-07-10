@@ -169,10 +169,13 @@ export default function Orb({ quality = "auto", paused = false }) {
       resizeRaf = requestAnimationFrame(resize);
     };
 
-    const resizeObserver = new ResizeObserver(() => {
-      scheduleResize();
-    });
-    resizeObserver.observe(container);
+    const resizeObserver =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver(() => {
+            scheduleResize();
+          });
+    resizeObserver?.observe(container);
 
     window.addEventListener("resize", scheduleResize, { passive: true });
     window.addEventListener("orientationchange", scheduleResize, { passive: true });
@@ -202,14 +205,17 @@ export default function Orb({ quality = "auto", paused = false }) {
       rafId = requestAnimationFrame(tick);
     };
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        isVisible = Boolean(entry?.isIntersecting);
-      },
-      { root: null, threshold: 0.05 }
-    );
-    io.observe(container);
+    const io =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver(
+            (entries) => {
+              const entry = entries[0];
+              isVisible = Boolean(entry?.isIntersecting);
+            },
+            { root: null, threshold: 0.05 }
+          );
+    io?.observe(container);
 
     rafId = requestAnimationFrame(tick);
 
@@ -217,12 +223,12 @@ export default function Orb({ quality = "auto", paused = false }) {
       running = false;
       window.removeEventListener("resize", scheduleResize);
       window.removeEventListener("orientationchange", scheduleResize);
-      resizeObserver.disconnect();
+      resizeObserver?.disconnect();
       window.clearTimeout(delayedResize1);
       window.clearTimeout(delayedResize2);
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       if (rafId) cancelAnimationFrame(rafId);
-      io.disconnect();
+      io?.disconnect();
       if (gl?.canvas && gl.canvas.parentNode === container) {
         container.removeChild(gl.canvas);
       }
