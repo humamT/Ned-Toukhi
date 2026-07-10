@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./Quotations.scss";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 import CircleFull from "../../assets/images/Circle-full.svg";
@@ -71,6 +71,7 @@ export default function QuotationsPage() {
   const [answers, setAnswers] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [panelVisible, setPanelVisible] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
   const [formValues, setFormValues] = useState({
     name: "",
@@ -78,6 +79,8 @@ export default function QuotationsPage() {
     organization: "",
     message: "",
   });
+  const transitionTimeoutRef = useRef(null);
+  const isTransitioningRef = useRef(false);
 
   const currentQuestion = useMemo(
     () => getQuestionStep(questionIndex, answers),
@@ -104,13 +107,29 @@ export default function QuotationsPage() {
     setSelectedOption(existing?.answer ?? "");
   }, [view, questionIndex, currentQuestion, answers]);
 
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const transitionTo = (nextView, updater) => {
+    if (isTransitioningRef.current) return false;
+
+    isTransitioningRef.current = true;
+    setIsTransitioning(true);
     setPanelVisible(false);
-    window.setTimeout(() => {
+    transitionTimeoutRef.current = window.setTimeout(() => {
       if (updater) updater();
       setView(nextView);
       setPanelVisible(true);
+      setIsTransitioning(false);
+      isTransitioningRef.current = false;
+      transitionTimeoutRef.current = null;
     }, TRANSITION_MS);
+    return true;
   };
 
   const saveCurrentAnswer = (option = selectedOption) => {
@@ -131,6 +150,12 @@ export default function QuotationsPage() {
   };
 
   const resetQuotation = () => {
+    if (transitionTimeoutRef.current) {
+      window.clearTimeout(transitionTimeoutRef.current);
+      transitionTimeoutRef.current = null;
+    }
+    isTransitioningRef.current = false;
+    setIsTransitioning(false);
     setAnswers([]);
     setQuestionIndex(0);
     setSelectedOption("");
@@ -141,6 +166,8 @@ export default function QuotationsPage() {
   };
 
   const handleNext = () => {
+    if (isTransitioningRef.current) return;
+
     if (view === VIEWS.QUESTION) {
       if (!selectedOption) return;
 
@@ -156,6 +183,8 @@ export default function QuotationsPage() {
   };
 
   const handlePrevious = () => {
+    if (isTransitioningRef.current) return;
+
     if (view === VIEWS.QUESTION && questionIndex > 0) {
       transitionTo(VIEWS.QUESTION, () => setQuestionIndex((index) => index - 1));
     }
@@ -432,7 +461,7 @@ export default function QuotationsPage() {
               type="button"
               className="quotations-nav__btn quotations-nav__btn--prev"
               onClick={handlePrevious}
-              disabled={!canGoPrevious}
+              disabled={!canGoPrevious || isTransitioning}
             >
               <NavArrows />
               Previous question
@@ -441,7 +470,7 @@ export default function QuotationsPage() {
               type="button"
               className="quotations-nav__btn quotations-nav__btn--next"
               onClick={handleNext}
-              disabled={!canGoNext}
+              disabled={!canGoNext || isTransitioning}
             >
               {nextLabel}
             </button>
