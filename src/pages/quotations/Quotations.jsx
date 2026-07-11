@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./Quotations.scss";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 import CircleFull from "../../assets/images/Circle-full.svg";
@@ -71,6 +71,7 @@ export default function QuotationsPage() {
   const [answers, setAnswers] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [panelVisible, setPanelVisible] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
   const [formValues, setFormValues] = useState({
     name: "",
@@ -78,6 +79,8 @@ export default function QuotationsPage() {
     organization: "",
     message: "",
   });
+  const transitionInProgressRef = useRef(false);
+  const transitionTimeoutRef = useRef(null);
 
   const currentQuestion = useMemo(
     () => getQuestionStep(questionIndex, answers),
@@ -104,12 +107,27 @@ export default function QuotationsPage() {
     setSelectedOption(existing?.answer ?? "");
   }, [view, questionIndex, currentQuestion, answers]);
 
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const transitionTo = (nextView, updater) => {
+    if (transitionInProgressRef.current) return;
+
+    transitionInProgressRef.current = true;
+    setIsTransitioning(true);
     setPanelVisible(false);
-    window.setTimeout(() => {
+    transitionTimeoutRef.current = window.setTimeout(() => {
       if (updater) updater();
       setView(nextView);
       setPanelVisible(true);
+      transitionInProgressRef.current = false;
+      transitionTimeoutRef.current = null;
+      setIsTransitioning(false);
     }, TRANSITION_MS);
   };
 
@@ -131,6 +149,12 @@ export default function QuotationsPage() {
   };
 
   const resetQuotation = () => {
+    if (transitionTimeoutRef.current) {
+      window.clearTimeout(transitionTimeoutRef.current);
+      transitionTimeoutRef.current = null;
+    }
+    transitionInProgressRef.current = false;
+    setIsTransitioning(false);
     setAnswers([]);
     setQuestionIndex(0);
     setSelectedOption("");
@@ -268,6 +292,7 @@ export default function QuotationsPage() {
         <button
           type="button"
           className="quotations-result__yes"
+          disabled={isTransitioning}
           onClick={() => transitionTo(VIEWS.CONTACT_FORM)}
         >
           Yes, I would like to write a message
@@ -432,7 +457,7 @@ export default function QuotationsPage() {
               type="button"
               className="quotations-nav__btn quotations-nav__btn--prev"
               onClick={handlePrevious}
-              disabled={!canGoPrevious}
+              disabled={!canGoPrevious || isTransitioning}
             >
               <NavArrows />
               Previous question
@@ -441,7 +466,7 @@ export default function QuotationsPage() {
               type="button"
               className="quotations-nav__btn quotations-nav__btn--next"
               onClick={handleNext}
-              disabled={!canGoNext}
+              disabled={!canGoNext || isTransitioning}
             >
               {nextLabel}
             </button>
@@ -460,7 +485,7 @@ export default function QuotationsPage() {
               type="submit"
               form="quotations-contact-form"
               className="quotations-form__submit"
-              disabled={!canSubmitForm}
+              disabled={!canSubmitForm || isTransitioning}
             >
               Send
             </button>
