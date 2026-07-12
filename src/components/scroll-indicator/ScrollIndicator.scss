@@ -19,7 +19,7 @@
 }
 
 .scroll-indicator__mouse {
-  width: 25%;
+  width: 100% !important;
   // height: 64px;
 
   img {
@@ -33,24 +33,11 @@
 .scroll-indicator__text {
   position: absolute;
   width: 100%;
-  /* height: 140px; */
+  height: auto;
+  object-fit: contain;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
   animation: scrollTextRotate 20s linear infinite;
-
-  text {
-    font-family: "Diodrum Arabic", "Noto Sans Arabic", Arial, sans-serif;
-    font-size: 20px;
-    fill: #fff;
-  }
-
-  textPath {
-    letter-spacing: 0.8px;
-  }
-
-  textPath[lang="ar"] {
-    letter-spacing: 0;
-  }
 }
 
 @keyframes scrollTextRotate {

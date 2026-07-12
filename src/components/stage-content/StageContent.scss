@@ -210,6 +210,32 @@ $design-height: 1440px;
     min-width: 0;
 }
 
+.gallery-sidebar .gallery-orb-stack {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.gallery-sidebar .gallery-orb-overlay {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    width: 52%;
+    max-width: 420px;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    object-fit: contain;
+    pointer-events: none;
+
+    &.is-active {
+        opacity: 1;
+    }
+}
+
 .gallery-right {
     flex: 1;
     min-width: 0;
@@ -486,22 +512,13 @@ $design-height: 1440px;
 // STAGE 3/4/5: Gallery Tabs
 // ========================================
 .gallery-sidebar .stage-3__orb-content {
-    // display: flex;
-    // flex-direction: column;
-    // align-items: flex-start;
-    // position: absolute;
-    // left: 9.5%;
-    // top: 50%;
-    // transform: translate(-50%, -50%);
-    // z-index: 21;
-    // pointer-events: none;
     display: flex;
     flex-direction: row;
     align-items: center;
     position: relative;
-    left: 9.5%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: -40%;
+    /* top: 50%; */
+    /* transform: translate(-50%, -50%); */
     z-index: 21;
     pointer-events: none;
 }
@@ -586,32 +603,19 @@ $design-height: 1440px;
 
 // Tab Rectangles
 .gallery-sidebar .tabs-rectangles {
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
-    // // position: absolute;
-    // gap: 4rem;
-    // top: 54%;
-    // left: 50%;
-    // // transform: translate(100%, -50%);
-    // width: 100%;
-    // height: auto;
-    // pointer-events: none;
-    // filter: brightness(0.95);
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4rem;
-    top: 54%;
+    /* gap: 4rem; */
+    /* top: 54%; */
     left: 50%;
     width: 100%;
     height: auto;
     pointer-events: none;
     filter: brightness(0.95);
-    transform: translateX(60px) scale(1.09);
+    /* transform: translateX(60px); */
+    position: absolute;
 }
 
 .gallery-sidebar .tab-rectangle1,
@@ -634,15 +638,17 @@ $design-height: 1440px;
 }
 
 .gallery-sidebar .tab-rectangle1 {
-    left: -20%;
+    left: -6%;
+    transform: translateY(10%);
 }
 
-.gallery-sidebar .tab-rectangle2 {
-    left: -2.3%;
-}
+// .gallery-sidebar .tab-rectangle2 {
+//     left: -2.3%;
+// }
 
 .gallery-sidebar .tab-rectangle3 {
-    left: -20%;
+    left: -6%;
+    transform: translateY(-10%);
 }
 
 // Tab Box Images
@@ -650,9 +656,9 @@ $design-height: 1440px;
 .gallery-sidebar .featuredBox,
 .gallery-sidebar .identitiesBox {
     width: 100%;
-    height: auto;
+    // height: auto;
     // margin-bottom: 2rem;
-    position: absolute;
+    // position: absolute;
     z-index: 22;
 }
 
@@ -764,11 +770,6 @@ $design-height: 1440px;
     width: 100%;
     height: auto;
     overflow: visible;
-    font-size: 123%;
-    font-family: $primary-font;
-    font-weight: 400;
-    color: rgb(0, 0, 0);
-    fill: rgb(0, 0, 0);
     position: absolute;
     inset: 0;
     transform: rotate(0deg);
@@ -780,25 +781,12 @@ $design-height: 1440px;
     pointer-events: auto;
     cursor: pointer;
 
-    svg {
+    .click-txt__ring {
         display: block;
         width: 100%;
         height: auto;
         overflow: visible;
         pointer-events: none;
-        fill: rgb(0, 0, 0);
-
-        text {
-            font-family: "Diodrum Arabic", "Noto Sans Arabic", Arial, sans-serif;
-        }
-
-        textPath {
-            letter-spacing: 0.8px;
-        }
-
-        textPath[lang="ar"] {
-            letter-spacing: 0;
-        }
     }
 }
 
@@ -1615,12 +1603,40 @@ $design-height: 1440px;
 // }
 
 // ---------------------------------------------------------------------------
-// Home — scroll snap on stage sections (`home-stage-snap` on `<html>` from Home.jsx).
-// Both `html` and `body` get `scroll-snap-type`: index.scss sets overflow-y on both, so
-// the scrollport can be either; snapping on one alone often does nothing.
+// DISABLED — full stage scroll-snap (`home-stage-snap` on `<html>`).
+// Snapped every `#stage-content > .stage-section` and `.gallery-step`.
 // ---------------------------------------------------------------------------
-html.home-stage-snap,
-html.home-stage-snap body {
+// html.home-stage-snap,
+// html.home-stage-snap body {
+//     scroll-snap-type: y proximity;
+// }
+
+// html.home-stage-snap .home-scroll__spacer {
+//     scroll-snap-align: unset;
+//     scroll-snap-stop: normal;
+// }
+
+// html.home-stage-snap #stage-content>.stage-section {
+//     scroll-snap-align: start;
+//     scroll-snap-stop: normal;
+// }
+
+// html.home-stage-snap #stage-content>.stage-section.stage-section--gallery {
+//     scroll-snap-align: none;
+// }
+
+// html.home-stage-snap #stage-content .gallery-step {
+//     scroll-snap-align: start;
+//     scroll-snap-stop: normal;
+// }
+
+// ---------------------------------------------------------------------------
+// ENABLED — landing-only snap (`home-landing-snap` on `<html>` from Home.jsx).
+// Only when crossing `.home-scroll__landing-stage-seam` into `#stage-content`.
+// Both `html` and `body` need `scroll-snap-type` (overflow-y on both in index.scss).
+// ---------------------------------------------------------------------------
+html.home-landing-snap,
+html.home-landing-snap body {
     scroll-snap-type: y proximity;
 }
 
@@ -1630,10 +1646,9 @@ html.home-stage-snap body {
         scroll-behavior: auto !important;
     }
 
-    html.home-stage-snap,
-    html.home-stage-snap body,
-    html.home-stage-snap #stage-content>.stage-section,
-    html.home-stage-snap #stage-content .gallery-step {
+    html.home-landing-snap,
+    html.home-landing-snap body,
+    html.home-landing-snap #stage-content {
         scroll-snap-type: none !important;
         scroll-snap-align: none !important;
         scroll-snap-stop: normal !important;
@@ -1641,21 +1656,14 @@ html.home-stage-snap body {
     }
 }
 
-html.home-stage-snap .home-scroll__spacer {
-    scroll-snap-align: unset;
-    scroll-snap-stop: normal;
-}
-
-html.home-stage-snap #stage-content>.stage-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-}
-
-html.home-stage-snap #stage-content>.stage-section.stage-section--gallery {
+html.home-landing-snap .home-scroll__spacer,
+html.home-landing-snap .home-scroll__landing-stage-seam {
     scroll-snap-align: none;
+    scroll-snap-stop: normal;
 }
 
-html.home-stage-snap #stage-content .gallery-step {
+/* Single snap target: entering `#stage-content` from the landing seam. */
+html.home-landing-snap #stage-content {
     scroll-snap-align: start;
     scroll-snap-stop: normal;
 }
@@ -1671,51 +1679,51 @@ html.home-stage-snap #stage-content .gallery-step {
 
 /* Home FHD (~1440–2200px): smaller gallery grid + synced tab / line scale */
 @media (min-width: 1440px) and (max-width: 2200px) {
-    html.home-stage-snap .gallery-stack {
-        --gW: min(480px, 28vw);
-    }
+    // html.home-stage-snap .gallery-stack {
+    //     --gW: min(480px, 28vw);
+    // }
 
-    html.home-stage-snap .gallery-illustrations,
-    html.home-stage-snap .gallery-featured,
-    html.home-stage-snap .gallery-identities {
+    .home-scroll .gallery-illustrations,
+    .home-scroll .gallery-featured,
+    .home-scroll .gallery-identities {
         gap: 18px;
     }
 
-    html.home-stage-snap .illustration1,
-    html.home-stage-snap .illustration3,
-    html.home-stage-snap .featured1,
-    html.home-stage-snap .featured3,
-    html.home-stage-snap .identities1,
-    html.home-stage-snap .identities3 {
+    .home-scroll .illustration1,
+    .home-scroll .illustration3,
+    .home-scroll .featured1,
+    .home-scroll .featured3,
+    .home-scroll .identities1,
+    .home-scroll .identities3 {
         transform: translateY(52px);
     }
 
-    html.home-stage-snap .illustration2,
-    html.home-stage-snap .illustration4,
-    html.home-stage-snap .featured2,
-    html.home-stage-snap .featured4,
-    html.home-stage-snap .identities2,
-    html.home-stage-snap .identities4 {
+    .home-scroll .illustration2,
+    .home-scroll .illustration4,
+    .home-scroll .featured2,
+    .home-scroll .featured4,
+    .home-scroll .identities2,
+    .home-scroll .identities4 {
         transform: translateY(-52px);
     }
 
-    html.home-stage-snap .gallery-tabs-container {
-        --tab-rect-w: 237px;
-        --tab-rect-h: 111px;
-    }
+    // html.home-stage-snap .gallery-tabs-container {
+    //     --tab-rect-w: 237px;
+    //     --tab-rect-h: 111px;
+    // }
 
-    html.home-stage-snap .tabs-all-lines {
+    .home-scroll .tabs-all-lines {
         --tab-scale: calc(var(--tab-rect-w) / 170px);
     }
 
-    html.home-stage-snap .tabs-rectangles {
-        gap: 3rem;
-        transform: translateX(80px) scale(1.12);
-    }
+    // html.home-stage-snap .tabs-rectangles {
+    //     gap: 3rem;
+    //     transform: translateX(80px) scale(1.12);
+    // }
 
-    html.home-stage-snap .illustrations-txt,
-    html.home-stage-snap .featured-txt,
-    html.home-stage-snap .identities-txt {
+    .home-scroll .illustrations-txt,
+    .home-scroll .featured-txt,
+    .home-scroll .identities-txt {
         font-size: 18px;
     }
 
@@ -2111,6 +2119,12 @@ html.home-stage-snap #stage-content .gallery-step {
         max-width: 720px;
         left: 50%;
         translate: -50% -50%;
+    }
+
+    .gallery-sidebar .gallery-orb-overlay {
+        left: 50%;
+        width: min(58vw, 360px);
+        max-width: 360px;
     }
 
     .stage-orb--s7 {

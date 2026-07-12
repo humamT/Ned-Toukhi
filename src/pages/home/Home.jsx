@@ -19,6 +19,10 @@ import identitiesBox from "../../assets/PNGS+SVGs/tab3.svg";
 import click1 from "../../assets/PNGS+SVGs/click1.svg";
 import click2 from "../../assets/PNGS+SVGs/click2.svg";
 import click3 from "../../assets/PNGS+SVGs/click3.svg";
+import goToGalleryText from "../../assets/PNGS+SVGs/go-to-gallery-txt.svg";
+import galleryYellow from "../../assets/PNGS+SVGs/gallery-yellow.png";
+import galleryRed from "../../assets/PNGS+SVGs/gallery-red.png";
+import galleryGreen from "../../assets/PNGS+SVGs/gallery-green.png";
 import whiteLine from "../../assets/PNGS+SVGs/Circle-white-line.svg";
 import yellowLine from "../../assets/PNGS+SVGs/yellow-line.svg";
 import redLine from "../../assets/PNGS+SVGs/red-line.svg";
@@ -66,38 +70,37 @@ const LOADER_MIN_SHOW_MS = 450;  // avoid flash on fast loads
 const LOADER_MAX_SHOW_MS = 12000; // safety: never block forever
 const LOADER_EXIT_MS = 2000;     // loader exit animation
 
-/** Toggled on `<html>` for scroll-snap rules in `StageContent.scss` */
-const HOME_STAGE_SNAP_CLASS = "home-stage-snap";
+/** Full stage snap (disabled) — was toggled on `<html>` to snap every `.stage-section`. */
+// const HOME_STAGE_SNAP_CLASS = "home-stage-snap";
+
+/** Landing-only snap — seam → `#stage-content` boundary (see StageContent.scss). */
+const HOME_LANDING_SNAP_CLASS = "home-landing-snap";
 /** Pixels from viewport top: show header once stage / landing spacer has passed this band */
 const STAGE_HEADER_REVEAL_PX = 96;
 
+const GALLERY_ORB_IMAGES = {
+  3: galleryYellow,
+  4: galleryRed,
+  5: galleryGreen,
+};
+
 const GALLERY_TAB_LINKS = {
-  3: { slug: "illustrations", pathId: "scroll-circle-path-illustrations" },
-  4: { slug: "featured", pathId: "scroll-circle-path-featured" },
-  5: { slug: "identities", pathId: "scroll-circle-path-identities" },
+  3: { slug: "illustrations" },
+  4: { slug: "featured" },
+  5: { slug: "identities" },
 };
 
 function GalleryTabClickBracket({ activeId, tabId, clickImg, clickImgClass }) {
-  const { slug, pathId } = GALLERY_TAB_LINKS[tabId];
+  const { slug } = GALLERY_TAB_LINKS[tabId];
   const isActive = activeId === tabId;
 
-  const clickTextSvg = (
-    <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-      <defs>
-        <path id={pathId} d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
-      </defs>
-      <text textAnchor="middle" dominantBaseline="middle">
-        <textPath xlinkHref={`#${pathId}`} startOffset="14%" lang="en">
-         Go to gallery •
-        </textPath>
-        <textPath xlinkHref={`#${pathId}`} startOffset="45%" lang="fr">
-          Voir la gallerie •
-        </textPath>
-        <textPath xlinkHref={`#${pathId}`} startOffset="79%" lang="ar" dir="rtl">
-        • إذهب إلى المعرض
-        </textPath>
-      </text>
-    </svg>
+  const clickText = (
+    <img
+      className="click-txt__ring"
+      src={goToGalleryText}
+      alt=""
+      aria-hidden="true"
+    />
   );
 
   return (
@@ -114,10 +117,10 @@ function GalleryTabClickBracket({ activeId, tabId, clickImg, clickImgClass }) {
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => e.stopPropagation()}
         >
-          {clickTextSvg}
+          {clickText}
         </NavLink>
       ) : (
-        <div className="click-txt">{clickTextSvg}</div>
+        <div className="click-txt">{clickText}</div>
       )}
     </div>
   );
@@ -533,11 +536,19 @@ export default function Home({ setHeaderVisible }) {
     };
   }, [showLoader]);
 
+  // Landing-only scroll-snap at `.home-scroll__landing-stage-seam` → `#stage-content`.
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add(HOME_STAGE_SNAP_CLASS);
-    return () => root.classList.remove(HOME_STAGE_SNAP_CLASS);
+    root.classList.add(HOME_LANDING_SNAP_CLASS);
+    return () => root.classList.remove(HOME_LANDING_SNAP_CLASS);
   }, []);
+
+  // Full stage scroll-snap (disabled — snapped every `.stage-section` / `.gallery-step`).
+  // useEffect(() => {
+  //   const root = document.documentElement;
+  //   root.classList.add(HOME_STAGE_SNAP_CLASS);
+  //   return () => root.classList.remove(HOME_STAGE_SNAP_CLASS);
+  // }, []);
 
   useEffect(() => {
     if (!isLoading) {
@@ -675,29 +686,19 @@ export default function Home({ setHeaderVisible }) {
           <section className="stage-section stage-section--gallery">
             <div className="gallery-layout">
               <div className="gallery-sidebar">
-                <img src={CircleFull} alt="Circle Full" className="stage-orb--s3" aria-hidden="true" />
+                <div className="gallery-orb-stack" aria-hidden="true">
+                  <img src={CircleFull} alt="" className="stage-orb--s3" />
+                  {galleryTabs.map((tab) => (
+                    <img
+                      key={tab.id}
+                      className={`gallery-orb-overlay${activeGalleryId === tab.id ? " is-active" : ""}`}
+                      src={GALLERY_ORB_IMAGES[tab.id]}
+                      alt=""
+                    />
+                  ))}
+                </div>
                 <div className="stage-3__orb-content">
-                  <div className="stage-3__orb-content-top">
-                    <div className="stage-3__main-text">
-                      <div className="stage-3__title">
-                        <div className="stage-3__title-en">Gallery</div>
-                        <div className="stage-3__title-ar">المعرض</div>
-                        <div className="stage-3__title-fr">Galerie</div>
-                      </div>
-                    </div>
-                    <HomeActionButton className="explore-now-tabs" to="/gallery">Explore NOW!</HomeActionButton>
-                  </div>
-
-                  <div className="gallery-tabs-container">
-                    <GalleryTabs activeId={activeGalleryId} onStepClick={scrollToGalleryStep} />
-
-                    <div className="tabs-all-lines">
-                      <img className="white-line lines" src={whiteLine} alt="" />
-                      <img className={`tab-yellow-line lines ${activeGalleryId !== 3 ? "not-stage-line" : ""}`} src={yellowLine} alt="" />
-                      <img className={`tab-red-line lines ${activeGalleryId !== 4 ? "not-stage-line" : ""}`} src={redLine} alt="" />
-                      <img className={`tab-teal-line lines ${activeGalleryId !== 5 ? "not-stage-line" : ""}`} src={tealLine} alt="" />
-                    </div>
-                  </div>
+                  <GalleryTabs activeId={activeGalleryId} onStepClick={scrollToGalleryStep} />
                 </div>
               </div>
 

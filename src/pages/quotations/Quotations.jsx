@@ -25,7 +25,7 @@ const lazyImgProps = {
 const WEB3FORMS_ACCESS_KEY = "605a40af-f0d4-4fce-b1d5-c179cfa63898";
 
 const EXPLANATION =
-  "To get a price range that fits your project, please fill out this short form based on a few key questions. It only takes about 5 minutes. Please keep in mind that this range is approximate, and the final quote may vary.";
+  "Complete this 5 minute form to get an estimated price range for your project. The final quote may differ based on your requirements.";
 
 const RESULT_SHARE_PROMPT =
   "Would you like to share the information you provided, along with a message describing your organization and the project you have in mind?";

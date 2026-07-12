@@ -1,45 +1,25 @@
 import "./ScrollIndicator.scss";
-import mouseIcon from "../../assets/images/mouse.svg";
+import mouseIcon from "../../assets/PNGS+SVGs/mouse.svg";
+import mouseTextIcon from "../../assets/PNGS+SVGs/mouse-text.svg";
 import { memo } from "react";
 
 function ScrollIndicator({ visible = false }) {
   return (
-    <div className={`scroll-indicator ${visible ? "is-visible" : ""}`}>
-      <div className="scroll-indicator__mouse">
-        <img src={mouseIcon} alt="Scroll indicator" />
-      </div>
+    <div
+      className={`scroll-indicator ${visible ? "is-visible" : ""}`}
+      role="img"
+      aria-label="Scroll down"
+    >
+      {/* <div className="scroll-indicator__mouse"> */}
+        <img className="scroll-indicator__mouse" src={mouseIcon} alt="" aria-hidden="true" />
+      {/* </div> */}
 
-      <svg
+      <img
         className="scroll-indicator__text"
-        viewBox="0 0 200 200"
+        src={mouseTextIcon}
+        alt=""
         aria-hidden="true"
-        role="img"
-      >
-        <defs>
-          <path
-            id="scroll-circle-path"
-            d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
-          />
-        </defs>
-        <text textAnchor="middle" dominantBaseline="middle">
-          <textPath xlinkHref="#scroll-circle-path" startOffset="14%">
-            Scroll down ·
-          </textPath>
-
-          <textPath xlinkHref="#scroll-circle-path" startOffset="45%">
-            Faire défiler ·
-          </textPath>
-
-          <textPath
-            xlinkHref="#scroll-circle-path"
-            startOffset="79%"
-            lang="ar"
-            dir="rtl"
-          >
-            · اسحب إلى الأسفل
-          </textPath>
-        </text>
-      </svg>
+      />
     </div>
   );
 }

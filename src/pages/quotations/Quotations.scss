@@ -383,6 +383,7 @@
   gap: 0.4rem;
   background: transparent;
   color: #fff;
+
   // border: 1px solid rgba(255, 255, 255, 0.35);
   &:not(:disabled):hover {
     transform: translateX(-3px);
@@ -442,7 +443,7 @@
   width: 100%;
   padding: 1.5% 0%;
   border-radius: 22px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.09) 100%);
+  background: linear-gradient(90deg, #f79226, #efca4d, #f79226);
 }
 
 .quotations-result-estimate__icon {
@@ -454,7 +455,7 @@
   justify-content: center;
   position: absolute;
   right: 49%;
-  top: 7px;
+  top: -12.5%;
 
   svg {
     display: block;
@@ -536,7 +537,7 @@
   font-weight: 500;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease,;
 
   .arrows-left .svg-inline--fa {
     display: inline-block;
@@ -545,7 +546,7 @@
   }
 
   &:hover {
-    opacity: 0.85;
+    transform: translateX(-3px);
   }
 }
 
