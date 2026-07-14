@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./Quotations.scss";
 import ScrollIndicator from "../../components/scroll-indicator/ScrollIndicator.jsx";
 import CircleFull from "../../assets/images/Circle-full.svg";
@@ -72,6 +72,8 @@ export default function QuotationsPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [panelVisible, setPanelVisible] = useState(true);
   const [submitStatus, setSubmitStatus] = useState("");
+  const transitionTimerRef = useRef(null);
+  const isTransitioningRef = useRef(false);
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -104,12 +106,26 @@ export default function QuotationsPage() {
     setSelectedOption(existing?.answer ?? "");
   }, [view, questionIndex, currentQuestion, answers]);
 
+  useEffect(
+    () => () => {
+      if (transitionTimerRef.current !== null) {
+        window.clearTimeout(transitionTimerRef.current);
+      }
+    },
+    []
+  );
+
   const transitionTo = (nextView, updater) => {
+    if (isTransitioningRef.current) return;
+
+    isTransitioningRef.current = true;
     setPanelVisible(false);
-    window.setTimeout(() => {
+    transitionTimerRef.current = window.setTimeout(() => {
       if (updater) updater();
       setView(nextView);
       setPanelVisible(true);
+      transitionTimerRef.current = null;
+      isTransitioningRef.current = false;
     }, TRANSITION_MS);
   };
 
@@ -131,6 +147,11 @@ export default function QuotationsPage() {
   };
 
   const resetQuotation = () => {
+    if (transitionTimerRef.current !== null) {
+      window.clearTimeout(transitionTimerRef.current);
+      transitionTimerRef.current = null;
+    }
+    isTransitioningRef.current = false;
     setAnswers([]);
     setQuestionIndex(0);
     setSelectedOption("");
@@ -432,7 +453,7 @@ export default function QuotationsPage() {
               type="button"
               className="quotations-nav__btn quotations-nav__btn--prev"
               onClick={handlePrevious}
-              disabled={!canGoPrevious}
+              disabled={!canGoPrevious || !panelVisible}
             >
               <NavArrows />
               Previous question
@@ -441,7 +462,7 @@ export default function QuotationsPage() {
               type="button"
               className="quotations-nav__btn quotations-nav__btn--next"
               onClick={handleNext}
-              disabled={!canGoNext}
+              disabled={!canGoNext || !panelVisible}
             >
               {nextLabel}
             </button>
