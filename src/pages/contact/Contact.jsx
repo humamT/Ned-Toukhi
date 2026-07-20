@@ -75,7 +75,30 @@ export default function ContactPage() {
   return (
     <main className="contact-page">
 
-      <section className="contact-stage contact-stage--0">
+      <section className="gallery-head">
+
+        <div className="gallery-head-orb-img-container">
+          <img src={CircleFull} alt="Circle Full" className="gallery-head-orb-img" aria-hidden="true" />
+        </div>
+
+        <div className="gallery-head-text">
+          <h1 className="stage-2__title-en contact-stage__title-en">Contact</h1>
+          <h2 className="stage-2__title-ar contact-stage__title-ar">تواصل</h2>
+          <h3 className="stage-2__title-fr contact-stage__title-fr">Écris-moi</h3>
+          <p className="stage-2__subtitle gallery-head-subtitle">
+            Send a quick note, ask a question, or start the first sketch of your next project. I’m here to turn ideas into visual stories.
+          </p>
+          <div className="contact-stage0__orb-panel">
+            <img className="contact-stage0__envelope" src={contactImage} alt="" />
+          </div>
+          <div className="gallery-head-scroll-indicator">
+            <ScrollIndicator visible={true} />
+          </div>
+        </div>
+
+      </section>
+
+      {/* <section className="contact-stage contact-stage--0">
         <div className="contact-stage0-orb-img-container">
           <img src={CircleFull} alt="Circle Full" className="contact-stage0-orb-img" aria-hidden="true" />
         </div>
@@ -105,8 +128,8 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* <img className="contact-stage__accent" src={contactBox} alt="Accent" /> */}
-      </section>
+        {/* <img className="contact-stage__accent" src={contactBox} alt="Accent" /> 
+      </section> */}
 
       <section className="contact-form-section">
         <div className="contact-form-card">

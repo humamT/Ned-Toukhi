@@ -109,7 +109,11 @@ export default function QuotationsPage() {
     window.setTimeout(() => {
       if (updater) updater();
       setView(nextView);
-      setPanelVisible(true);
+      // Fade-in: render the next panel while still hidden,
+      // then flip visibility on the next frame.
+      window.requestAnimationFrame(() => {
+        setPanelVisible(true);
+      });
     }, TRANSITION_MS);
   };
 

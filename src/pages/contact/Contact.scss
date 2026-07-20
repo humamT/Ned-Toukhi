@@ -153,11 +153,13 @@
 }
 
 .contact-stage0__orb-panel {
-  width: 30%;
-  transform: translateX(clamp(180px, 12vw, 210px));
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(30%, -32%);
+  width: 40%;
+  z-index: 12;
+  display: flex;
 }
 
 .contact-stage0__envelope {
@@ -219,6 +221,10 @@
   font-weight: 500;
   color: white;
   line-height: 1.15;
+  margin: 0;
+  translate: none !important;
+  align-self: end;
+  transform: translateX(-45%);
 }
 
 .contact-stage__description {
@@ -413,7 +419,7 @@
   width: 450px;
   object-fit: contain;
   display: block;
-  transform: translate(130px, 15px);
+  transform: translate(130px, 10px);
   pointer-events: none;
   z-index: 0;
 }
@@ -448,7 +454,7 @@
     border-radius: 14px;
     background: rgb(52 93 102 / 88%);
     color: #fff;
-    font: 500 0.95rem/1.2 "Diodrum Arabic";
+    font: 600 0.95rem/1.2 "Diodrum Arabic";
     padding: 0.8rem 1rem;
     outline: none;
   }
@@ -469,7 +475,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 0.1rem;
 
   button {
     min-width: 200px;
@@ -480,6 +485,11 @@
     color: #fff;
     font: 700 1.15rem/1 "Diodrum Arabic";
     cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-3px);
+    }
 
     &:disabled {
       opacity: 0.5;
