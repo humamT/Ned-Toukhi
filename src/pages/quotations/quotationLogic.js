@@ -41,6 +41,25 @@ export const QUESTIONNAIRE = [
   },
 ];
 
+/** Placeholder copy for “learn more” popups — replace each value as needed. */
+export const OPTION_LEARN_MORE = {
+  "Charity, a startup or an individual":
+    `Small startups and nonprofit organizations are eligible for discounted pricing. 
+    Please get in touch with the details of your project to receive a personalized quote.`,
+  "Full visual identity service":
+    `This includes multiple meetings with the client and the development of tailored research related to the
+project and its logo, resulting in:
+- A complete visual identity with several logo concepts and multiple variations and refinements of the chosen logo. It also includes color palettes and distinctive gradients derived from the initial research, as well as identityspecific patterns.
+- The deliverables further include an official typeface for the brand and a comprehensive brand guidelines document explaining how to apply the identity across all platforms and print materials, along with additional assets tailored to the organization’s needs.
+- The timeline for a full visual identity project typically ranges from 45 to 60 working days.`,
+  "Simple logo and visual identity":
+    `This option does not require a big research and includes a logo, a color palette, and a simple matching pattern.
+     It is well suited for small startups and businesses with limited budgets. 
+     The timeline for a simple identity project ranges from 10 to 15 working days.`,
+  "Various print materials":
+    `Such as posters, flyers, magazine/book covers, and other printed media.`,
+};
+
 export const TIMELINE_VERY_URGENT = "Very urgent";
 
 export const TIMELINES_BY_SERVICE = {

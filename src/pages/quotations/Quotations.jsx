@@ -10,6 +10,7 @@ import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   QUESTIONNAIRE,
   TIMELINE_QUESTION,
+  OPTION_LEARN_MORE,
   buildQuotationSummary,
   getQuestionStep,
   getQuotationResult,
@@ -72,6 +73,7 @@ export default function QuotationsPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [panelVisible, setPanelVisible] = useState(true);
   const [submitStatus, setSubmitStatus] = useState("");
+  const [learnMoreOption, setLearnMoreOption] = useState(null);
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -103,6 +105,15 @@ export default function QuotationsPage() {
     const existing = answers.find((entry) => entry.question === currentQuestion.question);
     setSelectedOption(existing?.answer ?? "");
   }, [view, questionIndex, currentQuestion, answers]);
+
+  useEffect(() => {
+    if (!learnMoreOption) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setLearnMoreOption(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [learnMoreOption]);
 
   const transitionTo = (nextView, updater) => {
     setPanelVisible(false);
@@ -139,6 +150,7 @@ export default function QuotationsPage() {
     setQuestionIndex(0);
     setSelectedOption("");
     setSubmitStatus("");
+    setLearnMoreOption(null);
     setFormValues({ name: "", email: "", organization: "", message: "" });
     setView(VIEWS.QUESTION);
     setPanelVisible(true);
@@ -206,6 +218,14 @@ export default function QuotationsPage() {
   const panelKey =
     view === VIEWS.QUESTION ? `question-${questionIndex}` : view;
 
+  const openLearnMore = (event, option) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setLearnMoreOption(option);
+  };
+
+  const closeLearnMore = () => setLearnMoreOption(null);
+
   const renderQuestionPanel = () => {
     if (!currentQuestion) return null;
 
@@ -215,6 +235,7 @@ export default function QuotationsPage() {
         <ul className="quotations-options" role="listbox" aria-label={currentQuestion.question}>
           {currentQuestion.options.map((option) => {
             const isSelected = selectedOption === option;
+            const learnMoreText = OPTION_LEARN_MORE[option];
             return (
               <li key={option}>
                 <button
@@ -225,7 +246,27 @@ export default function QuotationsPage() {
                   onClick={() => setSelectedOption(option)}
                 >
                   <OptionCheckbox />
-                  <span className="quotations-option__label">{option}</span>
+                  <span className="quotations-option__label">
+                    {option}
+                    {learnMoreText ? (
+                      <>
+                        {" - "}
+                        <span
+                          className="quotations-option__learn-more"
+                          role="link"
+                          tabIndex={0}
+                          onClick={(event) => openLearnMore(event, option)}
+                          onKeyDown={(event) => {
+                            if (event.key === "Enter" || event.key === " ") {
+                              openLearnMore(event, option);
+                            }
+                          }}
+                        >
+                          learn more
+                        </span>
+                      </>
+                    ) : null}
+                  </span>
                 </button>
               </li>
             );
@@ -471,6 +512,31 @@ export default function QuotationsPage() {
           </div>
         ) : null}
       </section>
+
+      {learnMoreOption && OPTION_LEARN_MORE[learnMoreOption] ? (
+        <div
+          className="quotations-learn-more"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quotations-learn-more-title"
+        >
+          <button
+            type="button"
+            className="quotations-learn-more__backdrop"
+            aria-label="Close"
+            onClick={closeLearnMore}
+          />
+          <div className="quotations-learn-more__window">
+            <h3 id="quotations-learn-more-title" className="quotations-learn-more__title">
+              {learnMoreOption}
+            </h3>
+            <p className="quotations-learn-more__body">{OPTION_LEARN_MORE[learnMoreOption]}</p>
+            <button type="button" className="quotations-learn-more__ok" onClick={closeLearnMore}>
+              OK
+            </button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
