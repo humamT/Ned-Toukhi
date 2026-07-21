@@ -57,7 +57,7 @@ describe("quotation navigation", () => {
 
     answerAndContinue("Europe");
     answerAndContinue("Above 50 employees");
-    answerAndContinue("Full visual identity service");
+    answerAndContinue(/^Full visual identity service/);
     answerAndContinue("About 40 working days");
 
     fireEvent.click(
