@@ -87,7 +87,7 @@ export const TIMELINES_BY_SERVICE = {
 };
 
 export const URGENT_MESSAGE =
-  "Unfortunately, giving a price range for urgent services needs further discussion. I'd be happy to do so — please get in touch.";
+  "Unfortunately, giving a price range for urgent services needs further discussion. I'd be happy to do so, please get in touch";
 
 const MENA_LOCATION = "Syria, Lebanon, Turkey, Jordan or Iraq";
 

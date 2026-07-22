@@ -359,10 +359,7 @@
 
 .contact-form-card {
   border-radius: 30px;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-  padding-right: 100px;
-  padding-left: 100px;
+  padding: 2rem;
   background-image: radial-gradient(ellipse 98% 82% at 50% 0%, #ffffff14 50%, transparent 70%), radial-gradient(ellipse 98% 82% at 50% 100%, #ffffff14 50%, transparent 70%);
   width: 80%;
 }
@@ -436,6 +433,11 @@
 .contact-form-banner__link {
   color: #fff;
   text-decoration: none;
+  transition: transform 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateX(3px);
+  }
 }
 
 .arrows-right {
@@ -457,6 +459,12 @@
     font: 600 0.95rem/1.2 "Diodrum Arabic";
     padding: 0.8rem 1rem;
     outline: none;
+
+    &:focus {
+      outline: 2px solid rgba(239, 202, 77, 0.55);
+      outline-offset: 1px;
+    }
+
   }
 
   input::placeholder,
@@ -475,9 +483,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  margin-top: 3.5rem;
 
   button {
-    min-width: 200px;
+    min-width: 12%;
     height: 44px;
     border: 0;
     border-radius: 999px;
@@ -487,15 +496,17 @@
     cursor: pointer;
     transition: transform 0.2s ease;
 
-    &:hover:not(:disabled) {
-      transform: translateY(-3px);
-    }
+  &:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(247, 146, 38, 0.28);
+  }
 
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      filter: grayscale(0.2);
-    }
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
   }
 }
 

@@ -245,7 +245,7 @@
   border-radius: 999px;
   background: transparent;
   color: #fff;
-  padding: 0.45rem 2.4rem;
+  padding: 0rem 15%;
   font-family: "Diodrum Arabic", "Noto Sans Arabic", Arial, sans-serif;
   font-size: 1rem;
   font-weight: 600;
@@ -486,9 +486,6 @@
     vertical-align: -0.125em;
   }
 
-  &:not(:disabled):hover {
-    transform: translateX(-3px);
-  }
 }
 
 .quotations-nav__btn--next {
@@ -679,9 +676,10 @@
   color: #fff;
   font: 700 1.15rem / 1 Diodrum Arabic;
   cursor: pointer;
+  transition: transform 0.2s ease;
 
-  &:hover {
-    transform: translateY(-1px);
+  &:hover:not(:disabled) {
+    transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(247, 146, 38, 0.28);
   }
 
