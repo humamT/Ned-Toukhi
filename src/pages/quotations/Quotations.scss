@@ -730,14 +730,170 @@
 }
 
 @media (max-width: 960px) {
+  .quotations-page {
+    padding: 4.5rem 0 2.5rem;
+    overflow-x: clip;
+  }
+
+  .quotations-page .gallery-head {
+    margin-top: 4vh;
+    padding-inline: 1rem;
+    gap: 1rem;
+  }
+
+  .quotations-page .gallery-head-text {
+    width: min(92vw, 36rem);
+    text-align: center;
+  }
+
+  .quotations-page .gallery-head-text h1,
+  .quotations-page .gallery-head-text h2,
+  .quotations-page .gallery-head-text h3 {
+    translate: 0;
+  }
+
+  .quotations-page .gallery-head-subtitle {
+    max-width: 100%;
+    padding-inline: 0.25rem;
+    font-size: clamp(0.95rem, 3.6vw, 1.1rem);
+    line-height: 1.45;
+  }
+
+  .quotations-head-title {
+    translate: 0 !important;
+  }
+
+  .quotations-page .gallery-head-orb-img-container {
+    width: 160%;
+    transform: translate(-50%, -60%);
+  }
+
+  .quotations-page .stage-6__Devis-imgs {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(0.75rem, 4vw, 1.5rem);
+    margin: 1rem 0 0.25rem;
+    min-height: 0;
+  }
+
+  .letterhead-mockup-q-page {
+    display: none;
+  }
+
+  .the-mask-q-page {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    translate: none;
+    width: clamp(7.5rem, 30vw, 11rem);
+  }
+
+  .quotations-card {
+    width: min(100%, 92%);
+    margin: 4rem 0 2rem;
+    padding: 1.15rem 1rem;
+    border-radius: 24px;
+  }
+
+  .quotations-card::before {
+    border-radius: 24px;
+  }
+
+  .quotations-card__intro {
+    min-height: 5.5rem;
+    height: auto;
+    padding: 0.9rem 0.85rem;
+    border-radius: 14px;
+  }
+
+  .quotations-card__intro p {
+    width: 100%;
+    font-size: clamp(0.9rem, 3.4vw, 1.05rem);
+    line-height: 1.35;
+  }
+
+  .quotations-card__question {
+    font-size: clamp(1.05rem, 4vw, 1.3rem);
+    padding: 0.65rem 0.75rem;
+  }
+
+  .quotations-option {
+    gap: 0.65rem;
+    padding: 0.35rem 0.75rem;
+    font-size: clamp(0.8rem, 3.4vw, 1rem);
+  }
+
+  .quotations-nav__btn--next {
+    padding: 0.65rem 1.5rem;
+  }
+
+  .quotations-result {
+    gap: 1.25rem;
+    padding: 0.75rem 0;
+  }
+
+  .quotations-result-estimate {
+    padding: 1rem 0.75rem;
+    border-radius: 16px;
+  }
+
+  .quotations-result-estimate__label,
+  .quotations-result-estimate__price {
+    font-size: clamp(1.2rem, 5vw, 1.7rem);
+  }
+
+  .quotations-result__prompt {
+    width: 100%;
+    font-size: clamp(0.92rem, 3.5vw, 1.05rem);
+  }
+
+  .quotations-result__yes {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.7rem 1rem;
+    white-space: normal;
+  }
+
   .quotations-form textarea {
     min-height: 160px;
+  }
+
+  .quotations-form__submit {
+    min-width: 100px;
+  }
+
+  .quotations-learn-more__window {
+    width: min(420px, 94vw);
+    padding: 1.25rem 1rem 1.1rem;
+    max-height: min(80vh, 36rem);
+    overflow-y: auto;
   }
 }
 
 @media (max-width: 640px) {
+  .quotations-page {
+    padding: 4rem 0 2rem;
+  }
+
   .quotations-card {
-    border-radius: 22px;
+        /* width: 90%; */
+        margin: 2.5rem 0 1.5rem;
+        padding: 1rem 0.85rem;
+        border-radius: 22px;
+        /* align-self: stretch; */
+  }
+
+  .quotations-page .gallery-head {
+    padding-inline: 0.85rem;
+  }
+
+  .the-mask-q-page {
+            width: clamp(10rem, 60vw, 15rem);
   }
 
   .quotations-nav {
@@ -748,9 +904,39 @@
   .quotations-nav__btn--next {
     margin-left: 0;
     width: 100%;
+    padding: 0.2rem 1rem;
   }
 
   .quotations-nav__btn--prev {
     width: 100%;
+    justify-content: center;
+  }
+
+  .quotations-result-estimate__icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .quotations-form__submit {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .quotations-page .gallery-head-scroll-indicator .scroll-indicator {
+    width: 88px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quotations-card__intro {
+    min-height: 4.75rem;
+  }
+
+  .quotations-option__learn-more {
+    white-space: normal;
+  }
+
+  .quotations-learn-more__body {
+    font-size: 0.9rem;
   }
 }

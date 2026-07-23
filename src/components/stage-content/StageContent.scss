@@ -2162,6 +2162,7 @@ html.home-landing-snap #stage-content {
         text-align: center;
         width: min(92vw, 680px);
         margin-inline: auto;
+        border: none;
     }
 
     .stage-orb--s1 {
@@ -2343,6 +2344,11 @@ html.home-landing-snap #stage-content {
         transform: translate(0%, -60%);
     }
 
+    .stage-7__orb-content::before,
+    .stage-7__orb-content::after {
+        display: none;
+    }
+
     // .contactBox {
     //     width: 100%;
     //     transform: rotate(90deg);
@@ -2357,7 +2363,8 @@ html.home-landing-snap #stage-content {
     }
 
     .about-cards {
-        transform: translate(0, 225%);
+        // transform: translate(0, 225%); 
+        bottom: 0;
         width: 60%;
     }
 
@@ -2378,6 +2385,12 @@ html.home-landing-snap #stage-content {
         transform: translateY(-10%);
         align-items: center;
         gap: 1.5rem;
+        border: none;
+    }
+
+    .stage-8__orb-content-top::before,
+    .stage-8__orb-content-top::after {
+        display: none;
     }
 
     .personal-img-bubble {

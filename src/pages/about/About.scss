@@ -490,6 +490,21 @@
 }
 
 @media (max-width: 960px) {
+
+  .about-stage {
+    transform: translateY(50px);
+  }
+
+  .about-intro::before {
+    width: clamp(350px, 50vw, 600px);
+    height: clamp(350px, 50vw, 600px);
+  }
+
+  .about-stage0-orb-img-container {
+    width: 190%;
+    transform: translate(-50%, -60%);
+  }
+
   .about-stage0__orb-shell {
     width: clamp(420px, 120vw, 720px);
     height: clamp(420px, 120vw, 720px);
@@ -498,6 +513,27 @@
 
   .about-intro {
     transform: scale(1.05);
+  }
+
+  .about-text {
+    width: 90%;
+    padding: 5%;
+  }
+
+  .about-text::before,
+  .about-text::after {
+    display: none;
+  }
+
+  .personalImg-bubble-container {
+    transform: none;
+  }
+
+  .about-img-about-page {
+    margin: 0.5rem;
+    width: 30%;
+    border-radius: 15px;
+    transform: translateY(50%);
   }
 
   .education-and-experiences {
@@ -514,7 +550,31 @@
     width: 180px;
   }
 
-  .ee-title-underline {
-    margin-left: 1.8rem;
+  .featured-clients-about-page {
+    margin-top: 0rem;
   }
+
+  .featured-clients-about-page-MT-logo {
+    width: 40%;
+  }
+
+  .featured-clients-about-page-content-text {
+    width: 90%;
+    margin: 0;
+  }
+
+  .contact-form-about-page {
+    margin: 0;
+  }
+
+  .contact-form-about-page-orb {
+    width: 200%;
+    max-width: 260%;
+    right: -20%;
+    top: -15%;
+  }
+
+  // .ee-title-underline {
+  //   margin-left: 1.8rem;
+  // }
 }

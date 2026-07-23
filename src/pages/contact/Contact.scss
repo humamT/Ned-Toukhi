@@ -586,7 +586,7 @@
 
   .contact-stage0__envelope__banner-2 {
     transform: translate(90px, -60px);
-    width: 350px
+    width: 350px;
   }
 
   .contact-form-banner__text p {
@@ -606,11 +606,90 @@
     min-width: 100px;
     height: 40px;
   }
+
+  /* Active contact page hero (gallery-head) — mobile only */
+  .contact-page .gallery-head {
+    margin-top: 4vh;
+    padding-inline: 1rem;
+    gap: 1rem;
+  }
+
+  .contact-page .gallery-head-text {
+    width: min(92vw, 36rem);
+    text-align: center;
+    align-items: center;
+  }
+
+  .contact-page .gallery-head .contact-stage__title-en,
+  .contact-page .gallery-head .contact-stage__title-ar,
+  .contact-page .gallery-head .contact-stage__title-fr {
+    transform: none;
+    align-self: center;
+    text-align: center;
+  }
+
+  .contact-page .gallery-head .gallery-head-subtitle {
+    max-width: 100%;
+    padding-inline: 0.25rem;
+    font-size: clamp(0.95rem, 3.6vw, 1.1rem);
+    line-height: 1.45;
+  }
+
+  .contact-page .gallery-head .contact-stage0__orb-panel {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: min(220px, 58vw);
+    margin: 1rem auto 0.25rem;
+    transform: none;
+  }
+
+  .contact-page .gallery-head .contact-stage0__envelope {
+    width: 100%;
+  }
+
+  .contact-page .gallery-head-orb-img-container {
+    width: 160%;
+    transform: translate(-50%, -60%);
+  }
+
+  .contact-form-section {
+    margin: 4rem auto 2.5rem;
+    padding-inline: 1rem;
+  }
+
+  .contact-form-card {
+    width: 100%;
+    padding: 1.25rem 1rem 1.5rem;
+    border-radius: 22px;
+  }
+
+  .contact-form-banner {
+    height: auto;
+    min-height: 5.5rem;
+    padding: 1rem 0.9rem;
+    border-radius: 14px;
+  }
+
+  .contact-stage0__envelope__banner-1,
+  .contact-stage0__envelope__banner-2 {
+    opacity: 0.45;
+  }
+
+  .contact-web3-form {
+    margin-top: 1.25rem;
+  }
+
+  .contact-web3-form__footer {
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 720px) {
   .contact-page {
-    padding: 4.5rem 1rem 2rem;
+    padding: 4.5rem 0 2rem;
+    overflow-x: clip;
   }
 
   .contact-stage {
@@ -629,5 +708,63 @@
     width: 180px;
     top: 1rem;
     right: 1rem;
+  }
+
+  .contact-form-section {
+    margin-top: 2.5rem;
+  }
+
+  .contact-form-card {
+    padding: 1rem 0.85rem 1.25rem;
+  }
+
+  .contact-form-banner__text p {
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+
+  .contact-stage0__envelope__banner-1,
+  .contact-stage0__envelope__banner-2 {
+    display: none;
+  }
+
+  .contact-web3-form__footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .contact-web3-form__footer button {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+  }
+
+  .contact-web3-form__status {
+    text-align: center;
+    width: 100%;
+  }
+
+  .contact-page .gallery-head-scroll-indicator .scroll-indicator {
+    width: 88px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page .gallery-head .contact-stage0__orb-panel {
+    width: min(180px, 62vw);
+  }
+
+  .contact-form-banner {
+    min-height: 4.75rem;
+    padding: 0.85rem 0.75rem;
+  }
+
+  .contact-web3-form {
+    gap: 0.75rem;
+  }
+
+  .contact-web3-form textarea {
+    min-height: 140px;
   }
 }
