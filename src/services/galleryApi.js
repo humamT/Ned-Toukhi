@@ -2,7 +2,7 @@
 // Local/dev: Vite proxies `/api` → https://dev.nedtoukhi.com (see vite.config.js).
 // Production: reverse-proxy `/api` to the API host the same way.
 // Override with VITE_API_BASE_URL only if you intentionally want a different base.
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1";
+const API_BASE_URL = "https://dev.nedtoukhi.com/api/v1";
 
 function normalizeJsonBody(value) {
   // Some endpoints may return `{ success, data }`; others return raw arrays.
