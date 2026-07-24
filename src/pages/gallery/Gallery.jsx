@@ -115,7 +115,16 @@ export default function GalleryPage() {
   }, [categorySlug, navigate]);
 
   const filteredProjects = useMemo(() => {
-    return projects.filter((p) => p?.category === category);
+    return projects
+      .filter((p) => p?.category === category)
+      .sort((a, b) => {
+        const aOrder = Number(a?.sort_order);
+        const bOrder = Number(b?.sort_order);
+        const aSafe = Number.isFinite(aOrder) ? aOrder : Number.POSITIVE_INFINITY;
+        const bSafe = Number.isFinite(bOrder) ? bOrder : Number.POSITIVE_INFINITY;
+        if (aSafe !== bSafe) return aSafe - bSafe;
+        return Number(a?.id ?? 0) - Number(b?.id ?? 0);
+      });
   }, [projects, category]);
 
   const activeBanner = GALLERY_BANNER_BY_CATEGORY[category] ?? GALLERY_BANNER_BY_CATEGORY[CATEGORIES[0]];
